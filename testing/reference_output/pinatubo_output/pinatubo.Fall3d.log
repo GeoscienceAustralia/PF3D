@@ -1,0 +1,1916 @@
+---------------------------------------------------
+                                                   
+               FALL3D SERIAL VERISON               
+                                                   
+---------------------------------------------------
+  Code version        :  5.0
+  Starting date       : 12-23-2009 at time: 12:11:13
+
+  FALL3D input  file  : pinatubo_output/pinatubo.inp
+  Source        file  : pinatubo_output/pinatubo.src
+  Granulometry  file  : pinatubo_output/pinatubo.grn
+  Meteo         file  : pinatubo_output/pinatubo.dbs
+  LST           file  : pinatubo_output/pinatubo.Fall3d.log
+  Results       file  : pinatubo_output/pinatubo.res
+
+----------------------------------------------------
+                                                    
+               METEO AND GRID DATA                  
+                                                    
+----------------------------------------------------
+
+METEO DATA TIME RANGE
+  Initial time       :   15 JUN 1991 at 00 h 0000 s
+  Final   time       :   15 JUN 1991 at 11 h 0000 s
+  Meteo coverage     :   11.0 h (    39600 sec)
+
+MESH
+  Bottom-left corner : ( 163686.8  1581592.4)
+  Top-right   corner : ( 292686.8  1719592.4)
+  Number points x    :       129
+  Number points y    :       138
+  X  grid spacing    :    1000.0
+  Y  grid spacing    :    1000.0
+  Min. topography    :      -8.4
+  Max. topography    :    1754.4
+  Max. z domain      :   41754.4
+  Number z-levels    :         5
+    z-layer  1       :       0.0 (dz=******)
+    z-layer  2       :   10000.0 (dz=******)
+    z-layer  3       :   20000.0 (dz=******)
+    z-layer  4       :   30000.0 (dz=******)
+    z-layer  5       :   40000.0 (dz=******)
+
+----------------------------------------------------
+                                                    
+               FALL3D INPUT DATA                    
+                                                    
+----------------------------------------------------
+
+FALL3D TIME RANGE
+  Initial time    :   15 JUN 1991 at 00 h 0000 s
+  Final   time    :   15 JUN 1991 at 11 h 0000 s
+  Time increment  :   11.0 h (     39600.0 s)
+  Safety factor   : 0.900000E+00
+  Print time      :    1.0 h (      3600.0 s)
+
+NUMERICAL TREATMENT
+ Vertical turbulence      
+   Kv similarity theory   
+ Horizontal turbulence    
+   Kh RAMS                
+ Limiter method           : Minmod         
+ Apply Z-mapping          : No 
+ Settling velocity model        : Ganser 93      
+
+GRANULOMETRIC DISTRIBUTION            
+  NUMBER OF PARTICLE CLASSES        :    6
+  DIAMETER                  (mm   ) :  0.5000  0.2500  0.1250  0.0625  0.0313  0.0156
+  PHI                       (-    ) :    1.00    2.00    3.00    4.00    5.00    6.00
+  DENSITY                   (kg/m3) : 1000.00 1300.00 1600.00 1900.00 2200.00 2500.00
+  SPHERICITY                (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  MODEL FACTOR              (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  PERCENTAGE                (in % ) :    50.0    19.1    15.0     9.2     4.4     2.3
+  SUM                       (in % ) :   100.0
+
+
+----------------------------------------------------
+                                                    
+             MEMORY REQUIREMENTS                    
+                                                    
+----------------------------------------------------
+                                                    
+DYNAMIC MEMORY ALLOCATED :    17.02 MBy
+
+
+----------------------------------------------------
+                                                    
+               TIME INTEGRATION                     
+                                                    
+----------------------------------------------------
+
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  0: 0: 0
+  Time (sec after 00UTC)    :         0.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 00 h 0000 s
+  To   time                 :   15 JUN 1991 at 01 h 0000 s
+  Time interval (in sec)    :      3600
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4073E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :        1
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :       0 min   (   0.04%)
+   Current time              : 15 JUN 1991 at  0: 0:16
+   -------                     
+   (1) Approx. mass inside  domain :  0.158920E+11 (  99.99%)
+   (2) Approx. mass outside domain :  0.000000E+00 (   0.00%)
+   (3) Mass at the deposit         :  0.188791E+07 (   0.01%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.158939E+11
+   Erupted mass                    :  0.162411E+11
+
+-> Iteration                 :       37
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      10 min   (   1.52%)
+   Current time              : 15 JUN 1991 at  0:10: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.575353E+12 (  99.64%)
+   (2) Approx. mass outside domain :  0.881175E-20 (   0.00%)
+   (3) Mass at the deposit         :  0.207536E+10 (   0.36%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.577428E+12
+   Erupted mass                    :  0.600921E+12
+
+-> Iteration                 :       74
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      20 min   (   3.03%)
+   Current time              : 15 JUN 1991 at  0:20: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.112390E+13 (  99.03%)
+   (2) Approx. mass outside domain :  0.137226E+02 (   0.00%)
+   (3) Mass at the deposit         :  0.109855E+11 (   0.97%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.113489E+13
+   Erupted mass                    :  0.120184E+13
+
+-> Iteration                 :      111
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      30 min   (   4.55%)
+   Current time              : 15 JUN 1991 at  0:30: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.164461E+13 (  98.17%)
+   (2) Approx. mass outside domain :  0.315964E+09 (   0.02%)
+   (3) Mass at the deposit         :  0.303588E+11 (   1.81%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.167528E+13
+   Erupted mass                    :  0.180276E+13
+
+-> Iteration                 :      148
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      40 min   (   6.07%)
+   Current time              : 15 JUN 1991 at  0:40: 3
+   -------                     
+   (1) Approx. mass inside  domain :  0.199618E+13 (  91.12%)
+   (2) Approx. mass outside domain :  0.131381E+12 (   6.00%)
+   (3) Mass at the deposit         :  0.630440E+11 (   2.88%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.219061E+13
+   Erupted mass                    :  0.240368E+13
+
+-> Iteration                 :      185
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      50 min   (   7.59%)
+   Current time              : 15 JUN 1991 at  0:50: 4
+   -------                     
+   (1) Approx. mass inside  domain :  0.207672E+13 (  76.41%)
+   (2) Approx. mass outside domain :  0.531133E+12 (  19.54%)
+   (3) Mass at the deposit         :  0.109968E+12 (   4.05%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.271782E+13
+   Erupted mass                    :  0.300460E+13
+
+-> Iteration                 :      222
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      60 min   (   9.10%)
+   Current time              : 15 JUN 1991 at  1: 0: 5
+   -------                     
+   (1) Approx. mass inside  domain :  0.214117E+13 (  65.80%)
+   (2) Approx. mass outside domain :  0.942926E+12 (  28.98%)
+   (3) Mass at the deposit         :  0.169975E+12 (   5.22%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.325407E+13
+   Erupted mass                    :  0.360552E+13
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  1: 0: 5
+  Time (sec after 00UTC)    :      3606.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 01 h 0005 s
+  To   time                 :   15 JUN 1991 at 02 h 0000 s
+  Time interval (in sec)    :      3594
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :      259
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      70 min   (  10.62%)
+   Current time              : 15 JUN 1991 at  1:10: 6
+   -------                     
+   (1) Approx. mass inside  domain :  0.219972E+13 (  57.95%)
+   (2) Approx. mass outside domain :  0.135473E+13 (  35.69%)
+   (3) Mass at the deposit         :  0.241741E+12 (   6.37%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.379619E+13
+   Erupted mass                    :  0.420644E+13
+
+-> Iteration                 :      296
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      80 min   (  12.14%)
+   Current time              : 15 JUN 1991 at  1:20: 7
+   -------                     
+   (1) Approx. mass inside  domain :  0.225294E+13 (  51.87%)
+   (2) Approx. mass outside domain :  0.176654E+13 (  40.67%)
+   (3) Mass at the deposit         :  0.324078E+12 (   7.46%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.434356E+13
+   Erupted mass                    :  0.480737E+13
+
+-> Iteration                 :      333
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :      90 min   (  13.66%)
+   Current time              : 15 JUN 1991 at  1:30: 8
+   -------                     
+   (1) Approx. mass inside  domain :  0.230115E+13 (  47.01%)
+   (2) Approx. mass outside domain :  0.217836E+13 (  44.50%)
+   (3) Mass at the deposit         :  0.415950E+12 (   8.50%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.489545E+13
+   Erupted mass                    :  0.540829E+13
+
+-> Iteration                 :      370
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     100 min   (  15.17%)
+   Current time              : 15 JUN 1991 at  1:40: 9
+   -------                     
+   (1) Approx. mass inside  domain :  0.234433E+13 (  43.01%)
+   (2) Approx. mass outside domain :  0.259018E+13 (  47.52%)
+   (3) Mass at the deposit         :  0.516502E+12 (   9.48%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.545101E+13
+   Erupted mass                    :  0.600921E+13
+
+-> Iteration                 :      407
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     110 min   (  16.69%)
+   Current time              : 15 JUN 1991 at  1:50:10
+   -------                     
+   (1) Approx. mass inside  domain :  0.238246E+13 (  39.64%)
+   (2) Approx. mass outside domain :  0.300200E+13 (  49.95%)
+   (3) Mass at the deposit         :  0.625061E+12 (  10.40%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.600952E+13
+   Erupted mass                    :  0.661013E+13
+
+-> Iteration                 :      444
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     120 min   (  18.21%)
+   Current time              : 15 JUN 1991 at  2: 0:11
+   -------                     
+   (1) Approx. mass inside  domain :  0.241625E+13 (  36.77%)
+   (2) Approx. mass outside domain :  0.341317E+13 (  51.95%)
+   (3) Mass at the deposit         :  0.741090E+12 (  11.28%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.657052E+13
+   Erupted mass                    :  0.721105E+13
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  2: 0:11
+  Time (sec after 00UTC)    :      7211.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 02 h 0011 s
+  To   time                 :   15 JUN 1991 at 03 h 0000 s
+  Time interval (in sec)    :      3588
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :      481
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     130 min   (  19.73%)
+   Current time              : 15 JUN 1991 at  2:10:11
+   -------                     
+   (1) Approx. mass inside  domain :  0.244788E+13 (  34.31%)
+   (2) Approx. mass outside domain :  0.382170E+13 (  53.57%)
+   (3) Mass at the deposit         :  0.864144E+12 (  12.11%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.713372E+13
+   Erupted mass                    :  0.781197E+13
+
+-> Iteration                 :      518
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     140 min   (  21.24%)
+   Current time              : 15 JUN 1991 at  2:20:12
+   -------                     
+   (1) Approx. mass inside  domain :  0.247777E+13 (  32.18%)
+   (2) Approx. mass outside domain :  0.422735E+13 (  54.91%)
+   (3) Mass at the deposit         :  0.993812E+12 (  12.91%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.769893E+13
+   Erupted mass                    :  0.841289E+13
+
+-> Iteration                 :      555
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     150 min   (  22.76%)
+   Current time              : 15 JUN 1991 at  2:30:13
+   -------                     
+   (1) Approx. mass inside  domain :  0.250607E+13 (  30.32%)
+   (2) Approx. mass outside domain :  0.463028E+13 (  56.02%)
+   (3) Mass at the deposit         :  0.112971E+13 (  13.67%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.826606E+13
+   Erupted mass                    :  0.901381E+13
+
+-> Iteration                 :      592
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     160 min   (  24.28%)
+   Current time              : 15 JUN 1991 at  2:40:14
+   -------                     
+   (1) Approx. mass inside  domain :  0.253290E+13 (  28.67%)
+   (2) Approx. mass outside domain :  0.503064E+13 (  56.94%)
+   (3) Mass at the deposit         :  0.127146E+13 (  14.39%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.883500E+13
+   Erupted mass                    :  0.961473E+13
+
+-> Iteration                 :      629
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     170 min   (  25.80%)
+   Current time              : 15 JUN 1991 at  2:50:15
+   -------                     
+   (1) Approx. mass inside  domain :  0.255838E+13 (  27.20%)
+   (2) Approx. mass outside domain :  0.542858E+13 (  57.72%)
+   (3) Mass at the deposit         :  0.141871E+13 (  15.08%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.940567E+13
+   Erupted mass                    :  0.102157E+14
+
+-> Iteration                 :      665
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     180 min   (  27.27%)
+   Current time              : 15 JUN 1991 at  3: 0: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.258204E+13 (  25.92%)
+   (2) Approx. mass outside domain :  0.581353E+13 (  58.35%)
+   (3) Mass at the deposit         :  0.156693E+13 (  15.73%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.996251E+13
+   Erupted mass                    :  0.108003E+14
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  3: 0: 0
+  Time (sec after 00UTC)    :     10800.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 03 h 0000 s
+  To   time                 :   15 JUN 1991 at 04 h 0000 s
+  Time interval (in sec)    :      3599
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :      702
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     190 min   (  28.79%)
+   Current time              : 15 JUN 1991 at  3:10: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.260556E+13 (  24.73%)
+   (2) Approx. mass outside domain :  0.620681E+13 (  58.91%)
+   (3) Mass at the deposit         :  0.172403E+13 (  16.36%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.105364E+14
+   Erupted mass                    :  0.114013E+14
+
+-> Iteration                 :      739
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     200 min   (  30.31%)
+   Current time              : 15 JUN 1991 at  3:20: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.262841E+13 (  23.65%)
+   (2) Approx. mass outside domain :  0.659792E+13 (  59.38%)
+   (3) Mass at the deposit         :  0.188560E+13 (  16.97%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.111119E+14
+   Erupted mass                    :  0.120022E+14
+
+-> Iteration                 :      776
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     210 min   (  31.83%)
+   Current time              : 15 JUN 1991 at  3:30: 3
+   -------                     
+   (1) Approx. mass inside  domain :  0.265050E+13 (  22.68%)
+   (2) Approx. mass outside domain :  0.698724E+13 (  59.78%)
+   (3) Mass at the deposit         :  0.205132E+13 (  17.55%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.116891E+14
+   Erupted mass                    :  0.126031E+14
+
+-> Iteration                 :      813
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     220 min   (  33.34%)
+   Current time              : 15 JUN 1991 at  3:40: 4
+   -------                     
+   (1) Approx. mass inside  domain :  0.267143E+13 (  21.78%)
+   (2) Approx. mass outside domain :  0.737558E+13 (  60.12%)
+   (3) Mass at the deposit         :  0.222082E+13 (  18.10%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.122678E+14
+   Erupted mass                    :  0.132040E+14
+
+-> Iteration                 :      850
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     230 min   (  34.86%)
+   Current time              : 15 JUN 1991 at  3:50: 4
+   -------                     
+   (1) Approx. mass inside  domain :  0.269084E+13 (  20.94%)
+   (2) Approx. mass outside domain :  0.776351E+13 (  60.43%)
+   (3) Mass at the deposit         :  0.239379E+13 (  18.63%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.128481E+14
+   Erupted mass                    :  0.138049E+14
+
+-> Iteration                 :      887
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     240 min   (  36.38%)
+   Current time              : 15 JUN 1991 at  4: 0: 5
+   -------                     
+   (1) Approx. mass inside  domain :  0.270889E+13 (  20.17%)
+   (2) Approx. mass outside domain :  0.815105E+13 (  60.69%)
+   (3) Mass at the deposit         :  0.256990E+13 (  19.14%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.134298E+14
+   Erupted mass                    :  0.144059E+14
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  4: 0: 5
+  Time (sec after 00UTC)    :     14406.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 04 h 0005 s
+  To   time                 :   15 JUN 1991 at 05 h 0000 s
+  Time interval (in sec)    :      3594
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :      924
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     250 min   (  37.90%)
+   Current time              : 15 JUN 1991 at  4:10: 6
+   -------                     
+   (1) Approx. mass inside  domain :  0.272568E+13 (  19.45%)
+   (2) Approx. mass outside domain :  0.853822E+13 (  60.93%)
+   (3) Mass at the deposit         :  0.274888E+13 (  19.62%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.140128E+14
+   Erupted mass                    :  0.150068E+14
+
+-> Iteration                 :      961
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     260 min   (  39.41%)
+   Current time              : 15 JUN 1991 at  4:20: 7
+   -------                     
+   (1) Approx. mass inside  domain :  0.274136E+13 (  18.78%)
+   (2) Approx. mass outside domain :  0.892504E+13 (  61.14%)
+   (3) Mass at the deposit         :  0.293049E+13 (  20.08%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.145969E+14
+   Erupted mass                    :  0.156077E+14
+
+-> Iteration                 :      998
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     270 min   (  40.93%)
+   Current time              : 15 JUN 1991 at  4:30: 8
+   -------                     
+   (1) Approx. mass inside  domain :  0.275602E+13 (  18.15%)
+   (2) Approx. mass outside domain :  0.931150E+13 (  61.33%)
+   (3) Mass at the deposit         :  0.311452E+13 (  20.51%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.151820E+14
+   Erupted mass                    :  0.162086E+14
+
+-> Iteration                 :     1035
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     280 min   (  42.45%)
+   Current time              : 15 JUN 1991 at  4:40: 9
+   -------                     
+   (1) Approx. mass inside  domain :  0.276979E+13 (  17.57%)
+   (2) Approx. mass outside domain :  0.969763E+13 (  61.50%)
+   (3) Mass at the deposit         :  0.330074E+13 (  20.93%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.157682E+14
+   Erupted mass                    :  0.168095E+14
+
+-> Iteration                 :     1072
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     290 min   (  43.97%)
+   Current time              : 15 JUN 1991 at  4:50:10
+   -------                     
+   (1) Approx. mass inside  domain :  0.278275E+13 (  17.01%)
+   (2) Approx. mass outside domain :  0.100834E+14 (  61.65%)
+   (3) Mass at the deposit         :  0.348900E+13 (  21.33%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.163552E+14
+   Erupted mass                    :  0.174105E+14
+
+-> Iteration                 :     1109
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     300 min   (  45.48%)
+   Current time              : 15 JUN 1991 at  5: 0:11
+   -------                     
+   (1) Approx. mass inside  domain :  0.279499E+13 (  16.50%)
+   (2) Approx. mass outside domain :  0.104689E+14 (  61.79%)
+   (3) Mass at the deposit         :  0.367911E+13 (  21.71%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.169430E+14
+   Erupted mass                    :  0.180114E+14
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  5: 0:11
+  Time (sec after 00UTC)    :     18011.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 05 h 0011 s
+  To   time                 :   15 JUN 1991 at 06 h 0000 s
+  Time interval (in sec)    :      3588
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :     1146
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     310 min   (  47.00%)
+   Current time              : 15 JUN 1991 at  5:10:12
+   -------                     
+   (1) Approx. mass inside  domain :  0.280654E+13 (  16.01%)
+   (2) Approx. mass outside domain :  0.108542E+14 (  61.91%)
+   (3) Mass at the deposit         :  0.387092E+13 (  22.08%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.175316E+14
+   Erupted mass                    :  0.186123E+14
+
+-> Iteration                 :     1183
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     320 min   (  48.52%)
+   Current time              : 15 JUN 1991 at  5:20:13
+   -------                     
+   (1) Approx. mass inside  domain :  0.281747E+13 (  15.55%)
+   (2) Approx. mass outside domain :  0.112392E+14 (  62.02%)
+   (3) Mass at the deposit         :  0.406430E+13 (  22.43%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.181209E+14
+   Erupted mass                    :  0.192132E+14
+
+-> Iteration                 :     1220
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     330 min   (  50.04%)
+   Current time              : 15 JUN 1991 at  5:30:14
+   -------                     
+   (1) Approx. mass inside  domain :  0.282777E+13 (  15.11%)
+   (2) Approx. mass outside domain :  0.116240E+14 (  62.12%)
+   (3) Mass at the deposit         :  0.425913E+13 (  22.76%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.187109E+14
+   Erupted mass                    :  0.198141E+14
+
+-> Iteration                 :     1257
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     340 min   (  51.55%)
+   Current time              : 15 JUN 1991 at  5:40:15
+   -------                     
+   (1) Approx. mass inside  domain :  0.283746E+13 (  14.70%)
+   (2) Approx. mass outside domain :  0.120087E+14 (  62.22%)
+   (3) Mass at the deposit         :  0.445528E+13 (  23.08%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.193015E+14
+   Erupted mass                    :  0.204151E+14
+
+-> Iteration                 :     1294
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     350 min   (  53.07%)
+   Current time              : 15 JUN 1991 at  5:50:15
+   -------                     
+   (1) Approx. mass inside  domain :  0.284656E+13 (  14.31%)
+   (2) Approx. mass outside domain :  0.123934E+14 (  62.30%)
+   (3) Mass at the deposit         :  0.465264E+13 (  23.39%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.198926E+14
+   Erupted mass                    :  0.210160E+14
+
+-> Iteration                 :     1330
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     360 min   (  54.55%)
+   Current time              : 15 JUN 1991 at  6: 0: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.285491E+13 (  13.95%)
+   (2) Approx. mass outside domain :  0.127676E+14 (  62.38%)
+   (3) Mass at the deposit         :  0.484575E+13 (  23.67%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.204683E+14
+   Erupted mass                    :  0.216007E+14
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  6: 0: 0
+  Time (sec after 00UTC)    :     21601.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 06 h 0000 s
+  To   time                 :   15 JUN 1991 at 07 h 0000 s
+  Time interval (in sec)    :      3599
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :     1367
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     370 min   (  56.06%)
+   Current time              : 15 JUN 1991 at  6:10: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.286303E+13 (  13.59%)
+   (2) Approx. mass outside domain :  0.131521E+14 (  62.45%)
+   (3) Mass at the deposit         :  0.504524E+13 (  23.96%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.210604E+14
+   Erupted mass                    :  0.222016E+14
+
+-> Iteration                 :     1404
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     380 min   (  57.58%)
+   Current time              : 15 JUN 1991 at  6:20: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.287070E+13 (  13.26%)
+   (2) Approx. mass outside domain :  0.135366E+14 (  62.52%)
+   (3) Mass at the deposit         :  0.524569E+13 (  24.23%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.216530E+14
+   Erupted mass                    :  0.228025E+14
+
+-> Iteration                 :     1441
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     390 min   (  59.10%)
+   Current time              : 15 JUN 1991 at  6:30: 3
+   -------                     
+   (1) Approx. mass inside  domain :  0.287797E+13 (  12.94%)
+   (2) Approx. mass outside domain :  0.139209E+14 (  62.58%)
+   (3) Mass at the deposit         :  0.544702E+13 (  24.49%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.222459E+14
+   Erupted mass                    :  0.234034E+14
+
+-> Iteration                 :     1478
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     400 min   (  60.62%)
+   Current time              : 15 JUN 1991 at  6:40: 4
+   -------                     
+   (1) Approx. mass inside  domain :  0.288487E+13 (  12.63%)
+   (2) Approx. mass outside domain :  0.143052E+14 (  62.63%)
+   (3) Mass at the deposit         :  0.564916E+13 (  24.73%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.228393E+14
+   Erupted mass                    :  0.240043E+14
+
+-> Iteration                 :     1515
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     410 min   (  62.13%)
+   Current time              : 15 JUN 1991 at  6:50: 5
+   -------                     
+   (1) Approx. mass inside  domain :  0.289143E+13 (  12.34%)
+   (2) Approx. mass outside domain :  0.146895E+14 (  62.69%)
+   (3) Mass at the deposit         :  0.585205E+13 (  24.97%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.234329E+14
+   Erupted mass                    :  0.246053E+14
+
+-> Iteration                 :     1552
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     420 min   (  63.65%)
+   Current time              : 15 JUN 1991 at  7: 0: 6
+   -------                     
+   (1) Approx. mass inside  domain :  0.289768E+13 (  12.06%)
+   (2) Approx. mass outside domain :  0.150736E+14 (  62.74%)
+   (3) Mass at the deposit         :  0.605565E+13 (  25.20%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.240269E+14
+   Erupted mass                    :  0.252062E+14
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  7: 0: 6
+  Time (sec after 00UTC)    :     25206.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 07 h 0006 s
+  To   time                 :   15 JUN 1991 at 08 h 0000 s
+  Time interval (in sec)    :      3593
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :     1589
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     430 min   (  65.17%)
+   Current time              : 15 JUN 1991 at  7:10: 7
+   -------                     
+   (1) Approx. mass inside  domain :  0.290364E+13 (  11.79%)
+   (2) Approx. mass outside domain :  0.154577E+14 (  62.78%)
+   (3) Mass at the deposit         :  0.625989E+13 (  25.42%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.246212E+14
+   Erupted mass                    :  0.258071E+14
+
+-> Iteration                 :     1626
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     440 min   (  66.69%)
+   Current time              : 15 JUN 1991 at  7:20: 8
+   -------                     
+   (1) Approx. mass inside  domain :  0.290933E+13 (  11.54%)
+   (2) Approx. mass outside domain :  0.158417E+14 (  62.82%)
+   (3) Mass at the deposit         :  0.646474E+13 (  25.64%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.252158E+14
+   Erupted mass                    :  0.264080E+14
+
+-> Iteration                 :     1663
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     450 min   (  68.20%)
+   Current time              : 15 JUN 1991 at  7:30: 8
+   -------                     
+   (1) Approx. mass inside  domain :  0.291478E+13 (  11.29%)
+   (2) Approx. mass outside domain :  0.162256E+14 (  62.86%)
+   (3) Mass at the deposit         :  0.667015E+13 (  25.84%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.258105E+14
+   Erupted mass                    :  0.270089E+14
+
+-> Iteration                 :     1700
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     460 min   (  69.72%)
+   Current time              : 15 JUN 1991 at  7:40: 9
+   -------                     
+   (1) Approx. mass inside  domain :  0.291999E+13 (  11.06%)
+   (2) Approx. mass outside domain :  0.166095E+14 (  62.90%)
+   (3) Mass at the deposit         :  0.687609E+13 (  26.04%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.264056E+14
+   Erupted mass                    :  0.276099E+14
+
+-> Iteration                 :     1737
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     470 min   (  71.24%)
+   Current time              : 15 JUN 1991 at  7:50:10
+   -------                     
+   (1) Approx. mass inside  domain :  0.292500E+13 (  10.83%)
+   (2) Approx. mass outside domain :  0.169933E+14 (  62.94%)
+   (3) Mass at the deposit         :  0.708252E+13 (  26.23%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.270008E+14
+   Erupted mass                    :  0.282108E+14
+
+-> Iteration                 :     1774
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     480 min   (  72.76%)
+   Current time              : 15 JUN 1991 at  8: 0:11
+   -------                     
+   (1) Approx. mass inside  domain :  0.292981E+13 (  10.62%)
+   (2) Approx. mass outside domain :  0.173770E+14 (  62.97%)
+   (3) Mass at the deposit         :  0.728941E+13 (  26.41%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.275962E+14
+   Erupted mass                    :  0.288117E+14
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  8: 0:11
+  Time (sec after 00UTC)    :     28812.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 08 h 0011 s
+  To   time                 :   15 JUN 1991 at 09 h 0000 s
+  Time interval (in sec)    :      3588
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :     1811
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     490 min   (  74.27%)
+   Current time              : 15 JUN 1991 at  8:10:12
+   -------                     
+   (1) Approx. mass inside  domain :  0.293444E+13 (  10.41%)
+   (2) Approx. mass outside domain :  0.177607E+14 (  63.00%)
+   (3) Mass at the deposit         :  0.749673E+13 (  26.59%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.281918E+14
+   Erupted mass                    :  0.294126E+14
+
+-> Iteration                 :     1848
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     500 min   (  75.79%)
+   Current time              : 15 JUN 1991 at  8:20:13
+   -------                     
+   (1) Approx. mass inside  domain :  0.293890E+13 (  10.21%)
+   (2) Approx. mass outside domain :  0.181442E+14 (  63.03%)
+   (3) Mass at the deposit         :  0.770446E+13 (  26.76%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.287876E+14
+   Erupted mass                    :  0.300136E+14
+
+-> Iteration                 :     1885
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     510 min   (  77.31%)
+   Current time              : 15 JUN 1991 at  8:30:14
+   -------                     
+   (1) Approx. mass inside  domain :  0.294320E+13 (  10.02%)
+   (2) Approx. mass outside domain :  0.185278E+14 (  63.05%)
+   (3) Mass at the deposit         :  0.791257E+13 (  26.93%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.293835E+14
+   Erupted mass                    :  0.306145E+14
+
+-> Iteration                 :     1922
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     520 min   (  78.83%)
+   Current time              : 15 JUN 1991 at  8:40:15
+   -------                     
+   (1) Approx. mass inside  domain :  0.294735E+13 (   9.83%)
+   (2) Approx. mass outside domain :  0.189112E+14 (  63.08%)
+   (3) Mass at the deposit         :  0.812104E+13 (  27.09%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.299796E+14
+   Erupted mass                    :  0.312154E+14
+
+-> Iteration                 :     1958
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     530 min   (  80.30%)
+   Current time              : 15 JUN 1991 at  8:50: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.295126E+13 (   9.66%)
+   (2) Approx. mass outside domain :  0.192843E+14 (  63.10%)
+   (3) Mass at the deposit         :  0.832420E+13 (  27.24%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.305597E+14
+   Erupted mass                    :  0.318001E+14
+
+-> Iteration                 :     1995
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     540 min   (  81.82%)
+   Current time              : 15 JUN 1991 at  9: 0: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.295516E+13 (   9.49%)
+   (2) Approx. mass outside domain :  0.196676E+14 (  63.13%)
+   (3) Mass at the deposit         :  0.853332E+13 (  27.39%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.311561E+14
+   Erupted mass                    :  0.324010E+14
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at  9: 0: 0
+  Time (sec after 00UTC)    :     32401.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 09 h 0000 s
+  To   time                 :   15 JUN 1991 at 10 h 0000 s
+  Time interval (in sec)    :      3599
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :     2032
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     550 min   (  83.34%)
+   Current time              : 15 JUN 1991 at  9:10: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.295893E+13 (   9.32%)
+   (2) Approx. mass outside domain :  0.200509E+14 (  63.15%)
+   (3) Mass at the deposit         :  0.874275E+13 (  27.53%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.317525E+14
+   Erupted mass                    :  0.330019E+14
+
+-> Iteration                 :     2069
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     560 min   (  84.86%)
+   Current time              : 15 JUN 1991 at  9:20: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.296259E+13 (   9.16%)
+   (2) Approx. mass outside domain :  0.204341E+14 (  63.17%)
+   (3) Mass at the deposit         :  0.895246E+13 (  27.67%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.323491E+14
+   Erupted mass                    :  0.336028E+14
+
+-> Iteration                 :     2106
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     570 min   (  86.37%)
+   Current time              : 15 JUN 1991 at  9:30: 3
+   -------                     
+   (1) Approx. mass inside  domain :  0.296615E+13 (   9.00%)
+   (2) Approx. mass outside domain :  0.208172E+14 (  63.19%)
+   (3) Mass at the deposit         :  0.916245E+13 (  27.81%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.329458E+14
+   Erupted mass                    :  0.342038E+14
+
+-> Iteration                 :     2143
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     580 min   (  87.89%)
+   Current time              : 15 JUN 1991 at  9:40: 4
+   -------                     
+   (1) Approx. mass inside  domain :  0.296961E+13 (   8.85%)
+   (2) Approx. mass outside domain :  0.212003E+14 (  63.20%)
+   (3) Mass at the deposit         :  0.937270E+13 (  27.94%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.335426E+14
+   Erupted mass                    :  0.348047E+14
+
+-> Iteration                 :     2180
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     590 min   (  89.41%)
+   Current time              : 15 JUN 1991 at  9:50: 5
+   -------                     
+   (1) Approx. mass inside  domain :  0.297299E+13 (   8.71%)
+   (2) Approx. mass outside domain :  0.215833E+14 (  63.22%)
+   (3) Mass at the deposit         :  0.958320E+13 (  28.07%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.341395E+14
+   Erupted mass                    :  0.354056E+14
+
+-> Iteration                 :     2217
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     600 min   (  90.93%)
+   Current time              : 15 JUN 1991 at 10: 0: 6
+   -------                     
+   (1) Approx. mass inside  domain :  0.297628E+13 (   8.57%)
+   (2) Approx. mass outside domain :  0.219663E+14 (  63.24%)
+   (3) Mass at the deposit         :  0.979393E+13 (  28.19%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.347365E+14
+   Erupted mass                    :  0.360065E+14
+
+METEO FILE READ               
+  Current time              : 15 JUN 1991 at 10: 0: 6
+  Time (sec after 00UTC)    :     36007.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -22.6000
+    Average                 :     -18.0800
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      27.4500
+    Minimum                 :     -79.8500
+    Average                 :     -58.3900
+  Air Density                 
+    Maximum                 :       1.2260
+    Minimum                 :       0.0019
+    Average                 :       0.3441
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      62.1117
+    Minimum                 :       1.0000
+    Average                 :      16.2779
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -1.9112   -1.0754   -0.4967   -0.1854   -0.0588   -0.0169
+               min   -2.0251   -1.1247   -0.5110   -0.1878   -0.0591   -0.0170
+
+    2          max   -3.2420   -1.8106   -0.8286   -0.3071   -0.0974   -0.0286
+               min   -3.4916   -1.9169   -0.8585   -0.3119   -0.0980   -0.0289
+
+    3          max   -5.1979   -2.5508   -1.0046   -0.3322   -0.0999   -0.0290
+               min   -5.6437   -2.6908   -1.0306   -0.3353   -0.1002   -0.0290
+
+    4          max   -7.7798   -3.2345   -1.1132   -0.3438   -0.1010   -0.0291
+               min   -8.2138   -3.3220   -1.1242   -0.3449   -0.1011   -0.0291
+
+    5          max   -9.9071   -3.6041   -1.1559   -0.3478   -0.1013   -0.0291
+               min  -10.1816   -3.6417   -1.1598   -0.3482   -0.1014   -0.0291
+
+SOURCE FILE READ              
+  From time                 :   15 JUN 1991 at 10 h 0006 s
+  To   time                 :   15 JUN 1991 at 11 h 0000 s
+  Time interval (in sec)    :      3593
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    19
+
+  I: 51  J: 93  K:  1 (  870. m a.s.l.)  MFR:  0.1621E+06
+  I: 52  J: 93  K:  1 (  973. m a.s.l.)  MFR:  0.8508E+05
+  I: 51  J: 94  K:  1 (  982. m a.s.l.)  MFR:  0.1437E+08
+  I: 52  J: 94  K:  1 ( 1142. m a.s.l.)  MFR:  0.2406E+08
+  I: 51  J: 95  K:  1 ( 1056. m a.s.l.)  MFR:  0.7425E+06
+  I: 52  J: 95  K:  1 ( 1015. m a.s.l.)  MFR:  0.1283E+07
+  I: 50  J: 93  K:  2 (10799. m a.s.l.)  MFR:  0.7970E+08
+  I: 51  J: 93  K:  2 (10870. m a.s.l.)  MFR:  0.3829E+09
+  I: 52  J: 93  K:  2 (10973. m a.s.l.)  MFR:  0.1234E+06
+  I: 50  J: 94  K:  2 (10872. m a.s.l.)  MFR:  0.2569E+08
+  I: 51  J: 94  K:  2 (10982. m a.s.l.)  MFR:  0.1258E+09
+  I: 52  J: 94  K:  2 (11142. m a.s.l.)  MFR:  0.1897E+07
+  I: 51  J: 95  K:  2 (11056. m a.s.l.)  MFR:  0.4072E+05
+  I: 52  J: 95  K:  2 (11015. m a.s.l.)  MFR:  0.7404E+05
+  I: 50  J: 93  K:  3 (20799. m a.s.l.)  MFR:  0.4683E+08
+  I: 51  J: 93  K:  3 (20870. m a.s.l.)  MFR:  0.2141E+09
+  I: 50  J: 94  K:  3 (20872. m a.s.l.)  MFR:  0.1487E+08
+  I: 51  J: 94  K:  3 (20982. m a.s.l.)  MFR:  0.6721E+08
+  I: 52  J: 94  K:  3 (21142. m a.s.l.)  MFR:  0.1547E+01
+
+  Class    Diameter(mm)    Density        MFR  
+      1         0.500        1000.     0.5000E+09
+      2         0.250        1300.     0.1915E+09
+      3         0.125        1600.     0.1499E+09
+      4         0.063        1900.     0.9183E+08
+      5         0.031        2200.     0.4408E+08
+      6         0.016        2500.     0.2275E+08
+
+-> Iteration                 :     2254
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     610 min   (  92.44%)
+   Current time              : 15 JUN 1991 at 10:10: 7
+   -------                     
+   (1) Approx. mass inside  domain :  0.297950E+13 (   8.43%)
+   (2) Approx. mass outside domain :  0.223492E+14 (  63.25%)
+   (3) Mass at the deposit         :  0.100049E+14 (  28.32%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.353336E+14
+   Erupted mass                    :  0.366074E+14
+
+-> Iteration                 :     2291
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     620 min   (  93.96%)
+   Current time              : 15 JUN 1991 at 10:20: 8
+   -------                     
+   (1) Approx. mass inside  domain :  0.298263E+13 (   8.30%)
+   (2) Approx. mass outside domain :  0.227321E+14 (  63.27%)
+   (3) Mass at the deposit         :  0.102161E+14 (  28.43%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.359308E+14
+   Erupted mass                    :  0.372084E+14
+
+-> Iteration                 :     2328
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     630 min   (  95.48%)
+   Current time              : 15 JUN 1991 at 10:30: 9
+   -------                     
+   (1) Approx. mass inside  domain :  0.298568E+13 (   8.17%)
+   (2) Approx. mass outside domain :  0.231150E+14 (  63.28%)
+   (3) Mass at the deposit         :  0.104274E+14 (  28.55%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.365281E+14
+   Erupted mass                    :  0.378093E+14
+
+-> Iteration                 :     2365
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     640 min   (  97.00%)
+   Current time              : 15 JUN 1991 at 10:40:10
+   -------                     
+   (1) Approx. mass inside  domain :  0.298865E+13 (   8.05%)
+   (2) Approx. mass outside domain :  0.234978E+14 (  63.29%)
+   (3) Mass at the deposit         :  0.106390E+14 (  28.66%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.371255E+14
+   Erupted mass                    :  0.384102E+14
+
+-> Iteration                 :     2402
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     650 min   (  98.51%)
+   Current time              : 15 JUN 1991 at 10:50:11
+   -------                     
+   (1) Approx. mass inside  domain :  0.299152E+13 (   7.93%)
+   (2) Approx. mass outside domain :  0.238807E+14 (  63.31%)
+   (3) Mass at the deposit         :  0.108508E+14 (  28.76%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.377230E+14
+   Erupted mass                    :  0.390111E+14
+
+-> Iteration                 :     2439
+   Critical time step        :  0.180457E+02
+   Time step                 :  0.162411E+02
+   Ellapsed time             :     660 min   ( 100.03%)
+   Current time              : 15 JUN 1991 at 11: 0:12
+   -------                     
+   (1) Approx. mass inside  domain :  0.299432E+13 (   7.81%)
+   (2) Approx. mass outside domain :  0.242635E+14 (  63.32%)
+   (3) Mass at the deposit         :  0.110627E+14 (  28.87%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.383205E+14
+   Erupted mass                    :  0.396120E+14
+---------------------------------------------------
+                                                   
+             FALL3D : END OF SIMULATION            
+                                                   
+---------------------------------------------------
+
+  STATUS  :  NORMAL TERMINATION
+  CPU TIME:     640.0sec

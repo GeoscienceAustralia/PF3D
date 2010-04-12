@@ -1,0 +1,129 @@
+APOLLO DATABASE LST FILE       
+METEO_DATA                     
+  DATE               18150405
+  BEGIN_(HOURS)             0
+  END_(HOURS)               6
+  X-ORIGIN   555534.0
+  Y-ORIGIN  9032899.6
+  X-SPACE      1000.0
+  Y-SPACE      1000.0
+  NX              100
+  NY               89
+  NZ                4
+  Z-LAYERS     0. 10000. 30000. 40000.
+RECORD_DESCRIPTION
+rec     1 From_time      0 To_time  21600 At_height     0. TOPOGRAPHY
+rec     2 From_time      0 To_time   3600 At_height     0. VELOCITY-X
+rec     3 From_time      0 To_time   3600 At_height 10000. VELOCITY-X
+rec     4 From_time      0 To_time   3600 At_height 30000. VELOCITY-X
+rec     5 From_time      0 To_time   3600 At_height 40000. VELOCITY-X
+rec     6 From_time      0 To_time   3600 At_height     0. VELOCITY-Y
+rec     7 From_time      0 To_time   3600 At_height 10000. VELOCITY-Y
+rec     8 From_time      0 To_time   3600 At_height 30000. VELOCITY-Y
+rec     9 From_time      0 To_time   3600 At_height 40000. VELOCITY-Y
+rec    10 From_time      0 To_time   3600 At_height     0. VELOCITY-Z
+rec    11 From_time      0 To_time   3600 At_height 10000. VELOCITY-Z
+rec    12 From_time      0 To_time   3600 At_height 30000. VELOCITY-Z
+rec    13 From_time      0 To_time   3600 At_height 40000. VELOCITY-Z
+rec    14 From_time      0 To_time   3600 At_height     0. TEMPERATURE
+rec    15 From_time      0 To_time   3600 At_height 10000. TEMPERATURE
+rec    16 From_time      0 To_time   3600 At_height 30000. TEMPERATURE
+rec    17 From_time      0 To_time   3600 At_height 40000. TEMPERATURE
+rec    18 From_time      0 To_time   3600 At_height     0. CONVECTIVE-VELOCITY-SCALE
+rec    19 From_time      0 To_time   3600 At_height     0. MIXING-HEIGHT
+rec    20 From_time      0 To_time   3600 At_height     0. MONIN-OBUKHOV-LENGTH
+rec    21 From_time   3600 To_time   7200 At_height     0. VELOCITY-X
+rec    22 From_time   3600 To_time   7200 At_height 10000. VELOCITY-X
+rec    23 From_time   3600 To_time   7200 At_height 30000. VELOCITY-X
+rec    24 From_time   3600 To_time   7200 At_height 40000. VELOCITY-X
+rec    25 From_time   3600 To_time   7200 At_height     0. VELOCITY-Y
+rec    26 From_time   3600 To_time   7200 At_height 10000. VELOCITY-Y
+rec    27 From_time   3600 To_time   7200 At_height 30000. VELOCITY-Y
+rec    28 From_time   3600 To_time   7200 At_height 40000. VELOCITY-Y
+rec    29 From_time   3600 To_time   7200 At_height     0. VELOCITY-Z
+rec    30 From_time   3600 To_time   7200 At_height 10000. VELOCITY-Z
+rec    31 From_time   3600 To_time   7200 At_height 30000. VELOCITY-Z
+rec    32 From_time   3600 To_time   7200 At_height 40000. VELOCITY-Z
+rec    33 From_time   3600 To_time   7200 At_height     0. TEMPERATURE
+rec    34 From_time   3600 To_time   7200 At_height 10000. TEMPERATURE
+rec    35 From_time   3600 To_time   7200 At_height 30000. TEMPERATURE
+rec    36 From_time   3600 To_time   7200 At_height 40000. TEMPERATURE
+rec    37 From_time   3600 To_time   7200 At_height     0. CONVECTIVE-VELOCITY-SCALE
+rec    38 From_time   3600 To_time   7200 At_height     0. MIXING-HEIGHT
+rec    39 From_time   3600 To_time   7200 At_height     0. MONIN-OBUKHOV-LENGTH
+rec    40 From_time   7200 To_time  10800 At_height     0. VELOCITY-X
+rec    41 From_time   7200 To_time  10800 At_height 10000. VELOCITY-X
+rec    42 From_time   7200 To_time  10800 At_height 30000. VELOCITY-X
+rec    43 From_time   7200 To_time  10800 At_height 40000. VELOCITY-X
+rec    44 From_time   7200 To_time  10800 At_height     0. VELOCITY-Y
+rec    45 From_time   7200 To_time  10800 At_height 10000. VELOCITY-Y
+rec    46 From_time   7200 To_time  10800 At_height 30000. VELOCITY-Y
+rec    47 From_time   7200 To_time  10800 At_height 40000. VELOCITY-Y
+rec    48 From_time   7200 To_time  10800 At_height     0. VELOCITY-Z
+rec    49 From_time   7200 To_time  10800 At_height 10000. VELOCITY-Z
+rec    50 From_time   7200 To_time  10800 At_height 30000. VELOCITY-Z
+rec    51 From_time   7200 To_time  10800 At_height 40000. VELOCITY-Z
+rec    52 From_time   7200 To_time  10800 At_height     0. TEMPERATURE
+rec    53 From_time   7200 To_time  10800 At_height 10000. TEMPERATURE
+rec    54 From_time   7200 To_time  10800 At_height 30000. TEMPERATURE
+rec    55 From_time   7200 To_time  10800 At_height 40000. TEMPERATURE
+rec    56 From_time   7200 To_time  10800 At_height     0. CONVECTIVE-VELOCITY-SCALE
+rec    57 From_time   7200 To_time  10800 At_height     0. MIXING-HEIGHT
+rec    58 From_time   7200 To_time  10800 At_height     0. MONIN-OBUKHOV-LENGTH
+rec    59 From_time  10800 To_time  14400 At_height     0. VELOCITY-X
+rec    60 From_time  10800 To_time  14400 At_height 10000. VELOCITY-X
+rec    61 From_time  10800 To_time  14400 At_height 30000. VELOCITY-X
+rec    62 From_time  10800 To_time  14400 At_height 40000. VELOCITY-X
+rec    63 From_time  10800 To_time  14400 At_height     0. VELOCITY-Y
+rec    64 From_time  10800 To_time  14400 At_height 10000. VELOCITY-Y
+rec    65 From_time  10800 To_time  14400 At_height 30000. VELOCITY-Y
+rec    66 From_time  10800 To_time  14400 At_height 40000. VELOCITY-Y
+rec    67 From_time  10800 To_time  14400 At_height     0. VELOCITY-Z
+rec    68 From_time  10800 To_time  14400 At_height 10000. VELOCITY-Z
+rec    69 From_time  10800 To_time  14400 At_height 30000. VELOCITY-Z
+rec    70 From_time  10800 To_time  14400 At_height 40000. VELOCITY-Z
+rec    71 From_time  10800 To_time  14400 At_height     0. TEMPERATURE
+rec    72 From_time  10800 To_time  14400 At_height 10000. TEMPERATURE
+rec    73 From_time  10800 To_time  14400 At_height 30000. TEMPERATURE
+rec    74 From_time  10800 To_time  14400 At_height 40000. TEMPERATURE
+rec    75 From_time  10800 To_time  14400 At_height     0. CONVECTIVE-VELOCITY-SCALE
+rec    76 From_time  10800 To_time  14400 At_height     0. MIXING-HEIGHT
+rec    77 From_time  10800 To_time  14400 At_height     0. MONIN-OBUKHOV-LENGTH
+rec    78 From_time  14400 To_time  18000 At_height     0. VELOCITY-X
+rec    79 From_time  14400 To_time  18000 At_height 10000. VELOCITY-X
+rec    80 From_time  14400 To_time  18000 At_height 30000. VELOCITY-X
+rec    81 From_time  14400 To_time  18000 At_height 40000. VELOCITY-X
+rec    82 From_time  14400 To_time  18000 At_height     0. VELOCITY-Y
+rec    83 From_time  14400 To_time  18000 At_height 10000. VELOCITY-Y
+rec    84 From_time  14400 To_time  18000 At_height 30000. VELOCITY-Y
+rec    85 From_time  14400 To_time  18000 At_height 40000. VELOCITY-Y
+rec    86 From_time  14400 To_time  18000 At_height     0. VELOCITY-Z
+rec    87 From_time  14400 To_time  18000 At_height 10000. VELOCITY-Z
+rec    88 From_time  14400 To_time  18000 At_height 30000. VELOCITY-Z
+rec    89 From_time  14400 To_time  18000 At_height 40000. VELOCITY-Z
+rec    90 From_time  14400 To_time  18000 At_height     0. TEMPERATURE
+rec    91 From_time  14400 To_time  18000 At_height 10000. TEMPERATURE
+rec    92 From_time  14400 To_time  18000 At_height 30000. TEMPERATURE
+rec    93 From_time  14400 To_time  18000 At_height 40000. TEMPERATURE
+rec    94 From_time  14400 To_time  18000 At_height     0. CONVECTIVE-VELOCITY-SCALE
+rec    95 From_time  14400 To_time  18000 At_height     0. MIXING-HEIGHT
+rec    96 From_time  14400 To_time  18000 At_height     0. MONIN-OBUKHOV-LENGTH
+rec    97 From_time  18000 To_time  21600 At_height     0. VELOCITY-X
+rec    98 From_time  18000 To_time  21600 At_height 10000. VELOCITY-X
+rec    99 From_time  18000 To_time  21600 At_height 30000. VELOCITY-X
+rec   100 From_time  18000 To_time  21600 At_height 40000. VELOCITY-X
+rec   101 From_time  18000 To_time  21600 At_height     0. VELOCITY-Y
+rec   102 From_time  18000 To_time  21600 At_height 10000. VELOCITY-Y
+rec   103 From_time  18000 To_time  21600 At_height 30000. VELOCITY-Y
+rec   104 From_time  18000 To_time  21600 At_height 40000. VELOCITY-Y
+rec   105 From_time  18000 To_time  21600 At_height     0. VELOCITY-Z
+rec   106 From_time  18000 To_time  21600 At_height 10000. VELOCITY-Z
+rec   107 From_time  18000 To_time  21600 At_height 30000. VELOCITY-Z
+rec   108 From_time  18000 To_time  21600 At_height 40000. VELOCITY-Z
+rec   109 From_time  18000 To_time  21600 At_height     0. TEMPERATURE
+rec   110 From_time  18000 To_time  21600 At_height 10000. TEMPERATURE
+rec   111 From_time  18000 To_time  21600 At_height 30000. TEMPERATURE
+rec   112 From_time  18000 To_time  21600 At_height 40000. TEMPERATURE
+rec   113 From_time  18000 To_time  21600 At_height     0. CONVECTIVE-VELOCITY-SCALE
+rec   114 From_time  18000 To_time  21600 At_height     0. MIXING-HEIGHT
+rec   115 From_time  18000 To_time  21600 At_height     0. MONIN-OBUKHOV-LENGTH

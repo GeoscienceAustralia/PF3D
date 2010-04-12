@@ -1,0 +1,15 @@
+---------------------------------------------
+              PROGRAM SETSRC                 
+---------------------------------------------
+  Starting date    : 12-23-2009 at time: 12:23:57
+  Input file       : galunggung_output/galunggung.inp
+  Source file      : galunggung_output/galunggung.src
+  Plume result file: galunggung_output/galunggung.Plume.res
+  Plume mass file  : galunggung_output/galunggung.Plume.mass
+  Plume height file: galunggung_output/galunggung.Plume.height
+  Plume computed for time interval:      0   3600
+  Plume computed for time interval:   3600   7200
+  Plume computed for time interval:   7200  10800
+  Plume computed for time interval:  10800  14400
+  Plume computed for time interval:  14400  18000
+  Program SETSRC ends normally

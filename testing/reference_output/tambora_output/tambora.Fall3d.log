@@ -1,0 +1,999 @@
+---------------------------------------------------
+                                                   
+               FALL3D SERIAL VERISON               
+                                                   
+---------------------------------------------------
+  Code version        :  5.0
+  Starting date       : 12-23-2009 at time: 12:30:16
+
+  FALL3D input  file  : tambora_output/tambora.inp
+  Source        file  : tambora_output/tambora.src
+  Granulometry  file  : tambora_output/tambora.grn
+  Meteo         file  : tambora_output/tambora.dbs
+  LST           file  : tambora_output/tambora.Fall3d.log
+  Results       file  : tambora_output/tambora.res
+
+----------------------------------------------------
+                                                    
+               METEO AND GRID DATA                  
+                                                    
+----------------------------------------------------
+
+METEO DATA TIME RANGE
+  Initial time       :   05 APR 1815 at 00 h 0000 s
+  Final   time       :   05 APR 1815 at 06 h 0000 s
+  Meteo coverage     :    6.0 h (    21600 sec)
+
+MESH
+  Bottom-left corner : ( 555534.0  9032899.6)
+  Top-right   corner : ( 655534.0  9121899.6)
+  Number points x    :       100
+  Number points y    :        89
+  X  grid spacing    :    1000.0
+  Y  grid spacing    :    1000.0
+  Min. topography    :     -84.0
+  Max. topography    :    2507.3
+  Max. z domain      :   42507.3
+  Number z-levels    :         5
+    z-layer  1       :       0.0 (dz=******)
+    z-layer  2       :   10000.0 (dz=******)
+    z-layer  3       :   20000.0 (dz=******)
+    z-layer  4       :   30000.0 (dz=******)
+    z-layer  5       :   40000.0 (dz=******)
+
+----------------------------------------------------
+                                                    
+               FALL3D INPUT DATA                    
+                                                    
+----------------------------------------------------
+
+FALL3D TIME RANGE
+  Initial time    :   05 APR 1815 at 00 h 0000 s
+  Final   time    :   05 APR 1815 at 06 h 0000 s
+  Time increment  :    6.0 h (     21600.0 s)
+  Safety factor   : 0.900000E+00
+  Print time      :    1.0 h (      3600.0 s)
+
+NUMERICAL TREATMENT
+ Vertical turbulence      
+   Kv similarity theory   
+ Horizontal turbulence    
+   Kh RAMS                
+ Limiter method           : Minmod         
+ Apply Z-mapping          : No 
+ Settling velocity model        : Ganser 93      
+
+GRANULOMETRIC DISTRIBUTION            
+  NUMBER OF PARTICLE CLASSES        :    6
+  DIAMETER                  (mm   ) :  1.0000  0.5000  0.2500  0.1250  0.0625  0.0313
+  PHI                       (-    ) :   -0.00    1.00    2.00    3.00    4.00    5.00
+  DENSITY                   (kg/m3) : 1200.00 1420.00 1640.00 1860.00 2080.00 2300.00
+  SPHERICITY                (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  MODEL FACTOR              (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  PERCENTAGE                (in % ) :     9.1    16.1    24.8    24.8    16.1     9.1
+  SUM                       (in % ) :   100.0
+
+
+----------------------------------------------------
+                                                    
+             MEMORY REQUIREMENTS                    
+                                                    
+----------------------------------------------------
+                                                    
+DYNAMIC MEMORY ALLOCATED :     8.54 MBy
+
+
+----------------------------------------------------
+                                                    
+               TIME INTEGRATION                     
+                                                    
+----------------------------------------------------
+
+
+METEO FILE READ               
+  Current time              :  5 APR 1815 at  0: 0: 0
+  Time (sec after 00UTC)    :         0.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.5000
+    Average                 :      -6.7000
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      34.1500
+    Minimum                 :      -8.8500
+    Average                 :       8.1500
+  Air Density                 
+    Maximum                 :       1.2349
+    Minimum                 :       0.0060
+    Average                 :       0.3520
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      26.4784
+    Minimum                 :      19.1911
+    Average                 :      21.5592
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8551   -2.3989   -1.2720   -0.5620   -0.2015   -0.0612
+               min   -4.2964   -2.6218   -1.3626   -0.5870   -0.2055   -0.0618
+
+    2          max   -6.0919   -3.5321   -1.7350   -0.6974   -0.2307   -0.0680
+               min   -6.9218   -3.9160   -1.8680   -0.7257   -0.2343   -0.0684
+
+    3          max   -9.8352   -5.2070   -2.2850   -0.8149   -0.2498   -0.0712
+               min  -10.9454   -5.6506   -2.4022   -0.8327   -0.2516   -0.0714
+
+    4          max  -15.0279   -7.1834   -2.7894   -0.9031   -0.2643   -0.0743
+               min  -16.5189   -7.6597   -2.8800   -0.9137   -0.2652   -0.0744
+
+    5          max  -21.6111   -9.1239   -3.1504   -0.9549   -0.2726   -0.0761
+               min  -23.3225   -9.5221   -3.2050   -0.9599   -0.2731   -0.0761
+
+SOURCE FILE READ              
+  From time                 :   05 APR 1815 at 00 h 0000 s
+  To   time                 :   05 APR 1815 at 01 h 0000 s
+  Time interval (in sec)    :      3600
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    16
+
+  I: 50  J: 51  K:  1 ( 1397. m a.s.l.)  MFR:  0.1103E+08
+  I: 51  J: 51  K:  1 ( 1490. m a.s.l.)  MFR:  0.2476E+08
+  I: 52  J: 51  K:  1 ( 1558. m a.s.l.)  MFR:  0.5106E+07
+  I: 50  J: 52  K:  1 ( 1608. m a.s.l.)  MFR:  0.2626E+07
+  I: 51  J: 52  K:  1 ( 1754. m a.s.l.)  MFR:  0.5919E+07
+  I: 52  J: 52  K:  1 ( 1814. m a.s.l.)  MFR:  0.1217E+07
+  I: 50  J: 51  K:  2 (11397. m a.s.l.)  MFR:  0.4112E+09
+  I: 51  J: 51  K:  2 (11490. m a.s.l.)  MFR:  0.1365E+09
+  I: 52  J: 51  K:  2 (11558. m a.s.l.)  MFR:  0.2748E+06
+  I: 50  J: 52  K:  2 (11608. m a.s.l.)  MFR:  0.9823E+08
+  I: 51  J: 52  K:  2 (11754. m a.s.l.)  MFR:  0.3267E+08
+  I: 52  J: 52  K:  2 (11814. m a.s.l.)  MFR:  0.3180E+05
+  I: 50  J: 51  K:  3 (21397. m a.s.l.)  MFR:  0.1697E+09
+  I: 51  J: 51  K:  3 (21490. m a.s.l.)  MFR:  0.5293E+08
+  I: 50  J: 52  K:  3 (21608. m a.s.l.)  MFR:  0.3656E+08
+  I: 51  J: 52  K:  3 (21754. m a.s.l.)  MFR:  0.1115E+08
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.9121E+08
+      2         0.500        1420.     0.1613E+09
+      3         0.250        1640.     0.2475E+09
+      4         0.125        1860.     0.2475E+09
+      5         0.063        2080.     0.1613E+09
+      6         0.031        2300.     0.9121E+08
+
+-> Iteration                 :        1
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :       0 min   (   0.19%)
+   Current time              :  5 APR 1815 at  0: 0:41
+   -------                     
+   (1) Approx. mass inside  domain :  0.406586E+11 (  99.95%)
+   (2) Approx. mass outside domain :  0.000000E+00 (   0.00%)
+   (3) Mass at the deposit         :  0.217475E+08 (   0.05%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.406804E+11
+   Erupted mass                    :  0.418352E+11
+
+-> Iteration                 :       15
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      10 min   (   2.91%)
+   Current time              :  5 APR 1815 at  0:10:27
+   -------                     
+   (1) Approx. mass inside  domain :  0.597307E+12 (  99.40%)
+   (2) Approx. mass outside domain :  0.000000E+00 (   0.00%)
+   (3) Mass at the deposit         :  0.361434E+10 (   0.60%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.600921E+12
+   Erupted mass                    :  0.627528E+12
+
+-> Iteration                 :       29
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      20 min   (   5.62%)
+   Current time              :  5 APR 1815 at  0:20:13
+   -------                     
+   (1) Approx. mass inside  domain :  0.113052E+13 (  98.59%)
+   (2) Approx. mass outside domain :  0.354867E-23 (   0.00%)
+   (3) Mass at the deposit         :  0.161655E+11 (   1.41%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.114668E+13
+   Erupted mass                    :  0.121322E+13
+
+-> Iteration                 :       44
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      30 min   (   8.52%)
+   Current time              :  5 APR 1815 at  0:30:40
+   -------                     
+   (1) Approx. mass inside  domain :  0.167674E+13 (  97.51%)
+   (2) Approx. mass outside domain :  0.153070E-08 (   0.00%)
+   (3) Mass at the deposit         :  0.428706E+11 (   2.49%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.171961E+13
+   Erupted mass                    :  0.184075E+13
+
+-> Iteration                 :       58
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      40 min   (  11.23%)
+   Current time              :  5 APR 1815 at  0:40:26
+   -------                     
+   (1) Approx. mass inside  domain :  0.216456E+13 (  96.35%)
+   (2) Approx. mass outside domain :  0.803528E-02 (   0.00%)
+   (3) Mass at the deposit         :  0.819729E+11 (   3.65%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.224653E+13
+   Erupted mass                    :  0.242644E+13
+
+-> Iteration                 :       72
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      50 min   (  13.95%)
+   Current time              :  5 APR 1815 at  0:50:12
+   -------                     
+   (1) Approx. mass inside  domain :  0.263261E+13 (  95.10%)
+   (2) Approx. mass outside domain :  0.149653E+03 (   0.00%)
+   (3) Mass at the deposit         :  0.135595E+12 (   4.90%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.276820E+13
+   Erupted mass                    :  0.301213E+13
+
+-> Iteration                 :       87
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      60 min   (  16.85%)
+   Current time              :  5 APR 1815 at  1: 0:39
+   -------                     
+   (1) Approx. mass inside  domain :  0.311360E+13 (  93.70%)
+   (2) Approx. mass outside domain :  0.187191E+06 (   0.00%)
+   (3) Mass at the deposit         :  0.209454E+12 (   6.30%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.332306E+13
+   Erupted mass                    :  0.363966E+13
+
+METEO FILE READ               
+  Current time              :  5 APR 1815 at  1: 0:39
+  Time (sec after 00UTC)    :      3640.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.5000
+    Average                 :      -6.7000
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      34.1500
+    Minimum                 :      -8.8500
+    Average                 :       8.1500
+  Air Density                 
+    Maximum                 :       1.2349
+    Minimum                 :       0.0060
+    Average                 :       0.3520
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      26.4784
+    Minimum                 :      19.1911
+    Average                 :      21.5592
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8551   -2.3989   -1.2720   -0.5620   -0.2015   -0.0612
+               min   -4.2964   -2.6218   -1.3626   -0.5870   -0.2055   -0.0618
+
+    2          max   -6.0919   -3.5321   -1.7350   -0.6974   -0.2307   -0.0680
+               min   -6.9218   -3.9160   -1.8680   -0.7257   -0.2343   -0.0684
+
+    3          max   -9.8352   -5.2070   -2.2850   -0.8149   -0.2498   -0.0712
+               min  -10.9454   -5.6506   -2.4022   -0.8327   -0.2516   -0.0714
+
+    4          max  -15.0279   -7.1834   -2.7894   -0.9031   -0.2643   -0.0743
+               min  -16.5189   -7.6597   -2.8800   -0.9137   -0.2652   -0.0744
+
+    5          max  -21.6111   -9.1239   -3.1504   -0.9549   -0.2726   -0.0761
+               min  -23.3225   -9.5221   -3.2050   -0.9599   -0.2731   -0.0761
+
+SOURCE FILE READ              
+  From time                 :   05 APR 1815 at 01 h 0039 s
+  To   time                 :   05 APR 1815 at 02 h 0000 s
+  Time interval (in sec)    :      3560
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    16
+
+  I: 50  J: 51  K:  1 ( 1397. m a.s.l.)  MFR:  0.1103E+08
+  I: 51  J: 51  K:  1 ( 1490. m a.s.l.)  MFR:  0.2476E+08
+  I: 52  J: 51  K:  1 ( 1558. m a.s.l.)  MFR:  0.5106E+07
+  I: 50  J: 52  K:  1 ( 1608. m a.s.l.)  MFR:  0.2626E+07
+  I: 51  J: 52  K:  1 ( 1754. m a.s.l.)  MFR:  0.5919E+07
+  I: 52  J: 52  K:  1 ( 1814. m a.s.l.)  MFR:  0.1217E+07
+  I: 50  J: 51  K:  2 (11397. m a.s.l.)  MFR:  0.4112E+09
+  I: 51  J: 51  K:  2 (11490. m a.s.l.)  MFR:  0.1365E+09
+  I: 52  J: 51  K:  2 (11558. m a.s.l.)  MFR:  0.2748E+06
+  I: 50  J: 52  K:  2 (11608. m a.s.l.)  MFR:  0.9823E+08
+  I: 51  J: 52  K:  2 (11754. m a.s.l.)  MFR:  0.3267E+08
+  I: 52  J: 52  K:  2 (11814. m a.s.l.)  MFR:  0.3180E+05
+  I: 50  J: 51  K:  3 (21397. m a.s.l.)  MFR:  0.1697E+09
+  I: 51  J: 51  K:  3 (21490. m a.s.l.)  MFR:  0.5293E+08
+  I: 50  J: 52  K:  3 (21608. m a.s.l.)  MFR:  0.3656E+08
+  I: 51  J: 52  K:  3 (21754. m a.s.l.)  MFR:  0.1115E+08
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.9121E+08
+      2         0.500        1420.     0.1613E+09
+      3         0.250        1640.     0.2475E+09
+      4         0.125        1860.     0.2475E+09
+      5         0.063        2080.     0.1613E+09
+      6         0.031        2300.     0.9121E+08
+
+-> Iteration                 :      101
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      70 min   (  19.56%)
+   Current time              :  5 APR 1815 at  1:10:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.354455E+13 (  92.35%)
+   (2) Approx. mass outside domain :  0.196788E+08 (   0.00%)
+   (3) Mass at the deposit         :  0.293661E+12 (   7.65%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.383824E+13
+   Erupted mass                    :  0.422535E+13
+
+-> Iteration                 :      115
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      80 min   (  22.27%)
+   Current time              :  5 APR 1815 at  1:20:11
+   -------                     
+   (1) Approx. mass inside  domain :  0.395862E+13 (  90.97%)
+   (2) Approx. mass outside domain :  0.553043E+09 (   0.01%)
+   (3) Mass at the deposit         :  0.392365E+12 (   9.02%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.435154E+13
+   Erupted mass                    :  0.481105E+13
+
+-> Iteration                 :      130
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :      90 min   (  25.18%)
+   Current time              :  5 APR 1815 at  1:30:38
+   -------                     
+   (1) Approx. mass inside  domain :  0.437830E+13 (  89.37%)
+   (2) Approx. mass outside domain :  0.693379E+10 (   0.14%)
+   (3) Mass at the deposit         :  0.513754E+12 (  10.49%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.489899E+13
+   Erupted mass                    :  0.543857E+13
+
+-> Iteration                 :      144
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     100 min   (  27.89%)
+   Current time              :  5 APR 1815 at  1:40:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.472845E+13 (  87.47%)
+   (2) Approx. mass outside domain :  0.364620E+11 (   0.67%)
+   (3) Mass at the deposit         :  0.641128E+12 (  11.86%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.540604E+13
+   Erupted mass                    :  0.602427E+13
+
+-> Iteration                 :      158
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     110 min   (  30.60%)
+   Current time              :  5 APR 1815 at  1:50: 9
+   -------                     
+   (1) Approx. mass inside  domain :  0.501001E+13 (  84.77%)
+   (2) Approx. mass outside domain :  0.118286E+12 (   2.00%)
+   (3) Mass at the deposit         :  0.781487E+12 (  13.22%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.590978E+13
+   Erupted mass                    :  0.660996E+13
+
+-> Iteration                 :      173
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     120 min   (  33.51%)
+   Current time              :  5 APR 1815 at  2: 0:37
+   -------                     
+   (1) Approx. mass inside  domain :  0.521915E+13 (  80.91%)
+   (2) Approx. mass outside domain :  0.285897E+12 (   4.43%)
+   (3) Mass at the deposit         :  0.945420E+12 (  14.66%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.645046E+13
+   Erupted mass                    :  0.723749E+13
+
+METEO FILE READ               
+  Current time              :  5 APR 1815 at  2: 0:37
+  Time (sec after 00UTC)    :      7237.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.5000
+    Average                 :      -6.7000
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      34.1500
+    Minimum                 :      -8.8500
+    Average                 :       8.1500
+  Air Density                 
+    Maximum                 :       1.2349
+    Minimum                 :       0.0060
+    Average                 :       0.3520
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      26.4784
+    Minimum                 :      19.1911
+    Average                 :      21.5592
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8551   -2.3989   -1.2720   -0.5620   -0.2015   -0.0612
+               min   -4.2964   -2.6218   -1.3626   -0.5870   -0.2055   -0.0618
+
+    2          max   -6.0919   -3.5321   -1.7350   -0.6974   -0.2307   -0.0680
+               min   -6.9218   -3.9160   -1.8680   -0.7257   -0.2343   -0.0684
+
+    3          max   -9.8352   -5.2070   -2.2850   -0.8149   -0.2498   -0.0712
+               min  -10.9454   -5.6506   -2.4022   -0.8327   -0.2516   -0.0714
+
+    4          max  -15.0279   -7.1834   -2.7894   -0.9031   -0.2643   -0.0743
+               min  -16.5189   -7.6597   -2.8800   -0.9137   -0.2652   -0.0744
+
+    5          max  -21.6111   -9.1239   -3.1504   -0.9549   -0.2726   -0.0761
+               min  -23.3225   -9.5221   -3.2050   -0.9599   -0.2731   -0.0761
+
+SOURCE FILE READ              
+  From time                 :   05 APR 1815 at 02 h 0037 s
+  To   time                 :   05 APR 1815 at 03 h 0000 s
+  Time interval (in sec)    :      3562
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    16
+
+  I: 50  J: 51  K:  1 ( 1397. m a.s.l.)  MFR:  0.1103E+08
+  I: 51  J: 51  K:  1 ( 1490. m a.s.l.)  MFR:  0.2476E+08
+  I: 52  J: 51  K:  1 ( 1558. m a.s.l.)  MFR:  0.5106E+07
+  I: 50  J: 52  K:  1 ( 1608. m a.s.l.)  MFR:  0.2626E+07
+  I: 51  J: 52  K:  1 ( 1754. m a.s.l.)  MFR:  0.5919E+07
+  I: 52  J: 52  K:  1 ( 1814. m a.s.l.)  MFR:  0.1217E+07
+  I: 50  J: 51  K:  2 (11397. m a.s.l.)  MFR:  0.4112E+09
+  I: 51  J: 51  K:  2 (11490. m a.s.l.)  MFR:  0.1365E+09
+  I: 52  J: 51  K:  2 (11558. m a.s.l.)  MFR:  0.2748E+06
+  I: 50  J: 52  K:  2 (11608. m a.s.l.)  MFR:  0.9823E+08
+  I: 51  J: 52  K:  2 (11754. m a.s.l.)  MFR:  0.3267E+08
+  I: 52  J: 52  K:  2 (11814. m a.s.l.)  MFR:  0.3180E+05
+  I: 50  J: 51  K:  3 (21397. m a.s.l.)  MFR:  0.1697E+09
+  I: 51  J: 51  K:  3 (21490. m a.s.l.)  MFR:  0.5293E+08
+  I: 50  J: 52  K:  3 (21608. m a.s.l.)  MFR:  0.3656E+08
+  I: 51  J: 52  K:  3 (21754. m a.s.l.)  MFR:  0.1115E+08
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.9121E+08
+      2         0.500        1420.     0.1613E+09
+      3         0.250        1640.     0.2475E+09
+      4         0.125        1860.     0.2475E+09
+      5         0.063        2080.     0.1613E+09
+      6         0.031        2300.     0.9121E+08
+
+-> Iteration                 :      187
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     130 min   (  36.22%)
+   Current time              :  5 APR 1815 at  2:10:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.534199E+13 (  76.74%)
+   (2) Approx. mass outside domain :  0.509362E+12 (   7.32%)
+   (3) Mass at the deposit         :  0.111006E+13 (  15.95%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.696141E+13
+   Erupted mass                    :  0.782318E+13
+
+-> Iteration                 :      201
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     140 min   (  38.93%)
+   Current time              :  5 APR 1815 at  2:20: 8
+   -------                     
+   (1) Approx. mass inside  domain :  0.542329E+13 (  72.50%)
+   (2) Approx. mass outside domain :  0.771848E+12 (  10.32%)
+   (3) Mass at the deposit         :  0.128481E+13 (  17.18%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.747995E+13
+   Erupted mass                    :  0.840887E+13
+
+-> Iteration                 :      216
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     150 min   (  41.84%)
+   Current time              :  5 APR 1815 at  2:30:36
+   -------                     
+   (1) Approx. mass inside  domain :  0.548789E+13 (  68.24%)
+   (2) Approx. mass outside domain :  0.107254E+13 (  13.34%)
+   (3) Mass at the deposit         :  0.148206E+13 (  18.43%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.804248E+13
+   Erupted mass                    :  0.903640E+13
+
+-> Iteration                 :      230
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     160 min   (  44.55%)
+   Current time              :  5 APR 1815 at  2:40:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.553848E+13 (  64.61%)
+   (2) Approx. mass outside domain :  0.135948E+13 (  15.86%)
+   (3) Mass at the deposit         :  0.167451E+13 (  19.53%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.857247E+13
+   Erupted mass                    :  0.962209E+13
+
+-> Iteration                 :      244
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     170 min   (  47.26%)
+   Current time              :  5 APR 1815 at  2:50: 7
+   -------                     
+   (1) Approx. mass inside  domain :  0.558417E+13 (  61.32%)
+   (2) Approx. mass outside domain :  0.164786E+13 (  18.10%)
+   (3) Mass at the deposit         :  0.187423E+13 (  20.58%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.910626E+13
+   Erupted mass                    :  0.102078E+14
+
+-> Iteration                 :      259
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     180 min   (  50.16%)
+   Current time              :  5 APR 1815 at  3: 0:35
+   -------                     
+   (1) Approx. mass inside  domain :  0.562919E+13 (  58.14%)
+   (2) Approx. mass outside domain :  0.195699E+13 (  20.21%)
+   (3) Mass at the deposit         :  0.209553E+13 (  21.64%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.968172E+13
+   Erupted mass                    :  0.108353E+14
+
+METEO FILE READ               
+  Current time              :  5 APR 1815 at  3: 0:35
+  Time (sec after 00UTC)    :     10835.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.5000
+    Average                 :      -6.7000
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      34.1500
+    Minimum                 :      -8.8500
+    Average                 :       8.1500
+  Air Density                 
+    Maximum                 :       1.2349
+    Minimum                 :       0.0060
+    Average                 :       0.3520
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      26.4784
+    Minimum                 :      19.1911
+    Average                 :      21.5592
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8551   -2.3989   -1.2720   -0.5620   -0.2015   -0.0612
+               min   -4.2964   -2.6218   -1.3626   -0.5870   -0.2055   -0.0618
+
+    2          max   -6.0919   -3.5321   -1.7350   -0.6974   -0.2307   -0.0680
+               min   -6.9218   -3.9160   -1.8680   -0.7257   -0.2343   -0.0684
+
+    3          max   -9.8352   -5.2070   -2.2850   -0.8149   -0.2498   -0.0712
+               min  -10.9454   -5.6506   -2.4022   -0.8327   -0.2516   -0.0714
+
+    4          max  -15.0279   -7.1834   -2.7894   -0.9031   -0.2643   -0.0743
+               min  -16.5189   -7.6597   -2.8800   -0.9137   -0.2652   -0.0744
+
+    5          max  -21.6111   -9.1239   -3.1504   -0.9549   -0.2726   -0.0761
+               min  -23.3225   -9.5221   -3.2050   -0.9599   -0.2731   -0.0761
+
+SOURCE FILE READ              
+  From time                 :   05 APR 1815 at 03 h 0035 s
+  To   time                 :   05 APR 1815 at 06 h 0000 s
+  Time interval (in sec)    :     10764
+  Mass flow rate            :   0.000000E+00
+  Number of sources         :     1
+
+  I:  1  J:  1  K:  1 (    0. m a.s.l.)  MFR:  0.0000E+00
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.0000E+00
+      2         0.500        1420.     0.0000E+00
+      3         0.250        1640.     0.0000E+00
+      4         0.125        1860.     0.0000E+00
+      5         0.063        2080.     0.0000E+00
+      6         0.031        2300.     0.0000E+00
+
+-> Iteration                 :      273
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     190 min   (  52.88%)
+   Current time              :  5 APR 1815 at  3:10:21
+   -------                     
+   (1) Approx. mass inside  domain :  0.511101E+13 (  52.90%)
+   (2) Approx. mass outside domain :  0.224541E+13 (  23.24%)
+   (3) Mass at the deposit         :  0.230503E+13 (  23.86%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.966146E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      287
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     200 min   (  55.59%)
+   Current time              :  5 APR 1815 at  3:20: 6
+   -------                     
+   (1) Approx. mass inside  domain :  0.461583E+13 (  47.78%)
+   (2) Approx. mass outside domain :  0.253351E+13 (  26.23%)
+   (3) Mass at the deposit         :  0.251057E+13 (  25.99%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.965991E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      302
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     210 min   (  58.49%)
+   Current time              :  5 APR 1815 at  3:30:34
+   -------                     
+   (1) Approx. mass inside  domain :  0.411002E+13 (  42.49%)
+   (2) Approx. mass outside domain :  0.284154E+13 (  29.37%)
+   (3) Mass at the deposit         :  0.272205E+13 (  28.14%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.967361E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      316
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     220 min   (  61.20%)
+   Current time              :  5 APR 1815 at  3:40:19
+   -------                     
+   (1) Approx. mass inside  domain :  0.365944E+13 (  37.74%)
+   (2) Approx. mass outside domain :  0.312835E+13 (  32.26%)
+   (3) Mass at the deposit         :  0.290892E+13 (  30.00%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.969672E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      330
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     230 min   (  63.91%)
+   Current time              :  5 APR 1815 at  3:50: 5
+   -------                     
+   (1) Approx. mass inside  domain :  0.322792E+13 (  33.19%)
+   (2) Approx. mass outside domain :  0.341456E+13 (  35.10%)
+   (3) Mass at the deposit         :  0.308451E+13 (  31.71%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.972698E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      345
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     240 min   (  66.82%)
+   Current time              :  5 APR 1815 at  4: 0:33
+   -------                     
+   (1) Approx. mass inside  domain :  0.278490E+13 (  28.52%)
+   (2) Approx. mass outside domain :  0.372060E+13 (  38.10%)
+   (3) Mass at the deposit         :  0.325964E+13 (  33.38%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.976514E+13
+   Erupted mass                    :  0.108353E+14
+
+METEO FILE READ               
+  Current time              :  5 APR 1815 at  4: 0:33
+  Time (sec after 00UTC)    :     14433.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.5000
+    Average                 :      -6.7000
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      34.1500
+    Minimum                 :      -8.8500
+    Average                 :       8.1500
+  Air Density                 
+    Maximum                 :       1.2349
+    Minimum                 :       0.0060
+    Average                 :       0.3520
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      26.4784
+    Minimum                 :      19.1911
+    Average                 :      21.5592
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8551   -2.3989   -1.2720   -0.5620   -0.2015   -0.0612
+               min   -4.2964   -2.6218   -1.3626   -0.5870   -0.2055   -0.0618
+
+    2          max   -6.0919   -3.5321   -1.7350   -0.6974   -0.2307   -0.0680
+               min   -6.9218   -3.9160   -1.8680   -0.7257   -0.2343   -0.0684
+
+    3          max   -9.8352   -5.2070   -2.2850   -0.8149   -0.2498   -0.0712
+               min  -10.9454   -5.6506   -2.4022   -0.8327   -0.2516   -0.0714
+
+    4          max  -15.0279   -7.1834   -2.7894   -0.9031   -0.2643   -0.0743
+               min  -16.5189   -7.6597   -2.8800   -0.9137   -0.2652   -0.0744
+
+    5          max  -21.6111   -9.1239   -3.1504   -0.9549   -0.2726   -0.0761
+               min  -23.3225   -9.5221   -3.2050   -0.9599   -0.2731   -0.0761
+
+-> Iteration                 :      359
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     250 min   (  69.53%)
+   Current time              :  5 APR 1815 at  4:10:18
+   -------                     
+   (1) Approx. mass inside  domain :  0.238793E+13 (  24.36%)
+   (2) Approx. mass outside domain :  0.400574E+13 (  40.86%)
+   (3) Mass at the deposit         :  0.341098E+13 (  34.79%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.980465E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      373
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     260 min   (  72.24%)
+   Current time              :  5 APR 1815 at  4:20: 4
+   -------                     
+   (1) Approx. mass inside  domain :  0.200577E+13 (  20.37%)
+   (2) Approx. mass outside domain :  0.429034E+13 (  43.57%)
+   (3) Mass at the deposit         :  0.355086E+13 (  36.06%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.984697E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      388
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     270 min   (  75.15%)
+   Current time              :  5 APR 1815 at  4:30:32
+   -------                     
+   (1) Approx. mass inside  domain :  0.161696E+13 (  16.34%)
+   (2) Approx. mass outside domain :  0.459018E+13 (  46.39%)
+   (3) Mass at the deposit         :  0.368848E+13 (  37.27%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.989562E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      402
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     280 min   (  77.86%)
+   Current time              :  5 APR 1815 at  4:40:17
+   -------                     
+   (1) Approx. mass inside  domain :  0.129259E+13 (  13.00%)
+   (2) Approx. mass outside domain :  0.484672E+13 (  48.73%)
+   (3) Mass at the deposit         :  0.380603E+13 (  38.27%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.994533E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      416
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     290 min   (  80.57%)
+   Current time              :  5 APR 1815 at  4:50: 3
+   -------                     
+   (1) Approx. mass inside  domain :  0.103508E+13 (  10.35%)
+   (2) Approx. mass outside domain :  0.505026E+13 (  50.51%)
+   (3) Mass at the deposit         :  0.391363E+13 (  39.14%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.999897E+13
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      431
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     300 min   (  83.48%)
+   Current time              :  5 APR 1815 at  5: 0:30
+   -------                     
+   (1) Approx. mass inside  domain :  0.850537E+12 (   8.46%)
+   (2) Approx. mass outside domain :  0.518729E+13 (  51.58%)
+   (3) Mass at the deposit         :  0.401864E+13 (  39.96%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.100565E+14
+   Erupted mass                    :  0.108353E+14
+
+METEO FILE READ               
+  Current time              :  5 APR 1815 at  5: 0:30
+  Time (sec after 00UTC)    :     18031.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.5000
+    Average                 :      -6.7000
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      34.1500
+    Minimum                 :      -8.8500
+    Average                 :       8.1500
+  Air Density                 
+    Maximum                 :       1.2349
+    Minimum                 :       0.0060
+    Average                 :       0.3520
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      26.4784
+    Minimum                 :      19.1911
+    Average                 :      21.5592
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8551   -2.3989   -1.2720   -0.5620   -0.2015   -0.0612
+               min   -4.2964   -2.6218   -1.3626   -0.5870   -0.2055   -0.0618
+
+    2          max   -6.0919   -3.5321   -1.7350   -0.6974   -0.2307   -0.0680
+               min   -6.9218   -3.9160   -1.8680   -0.7257   -0.2343   -0.0684
+
+    3          max   -9.8352   -5.2070   -2.2850   -0.8149   -0.2498   -0.0712
+               min  -10.9454   -5.6506   -2.4022   -0.8327   -0.2516   -0.0714
+
+    4          max  -15.0279   -7.1834   -2.7894   -0.9031   -0.2643   -0.0743
+               min  -16.5189   -7.6597   -2.8800   -0.9137   -0.2652   -0.0744
+
+    5          max  -21.6111   -9.1239   -3.1504   -0.9549   -0.2726   -0.0761
+               min  -23.3225   -9.5221   -3.2050   -0.9599   -0.2731   -0.0761
+
+-> Iteration                 :      445
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     310 min   (  86.19%)
+   Current time              :  5 APR 1815 at  5:10:16
+   -------                     
+   (1) Approx. mass inside  domain :  0.748294E+12 (   7.40%)
+   (2) Approx. mass outside domain :  0.524919E+13 (  51.94%)
+   (3) Mass at the deposit         :  0.410785E+13 (  40.65%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.101053E+14
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      459
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     320 min   (  88.90%)
+   Current time              :  5 APR 1815 at  5:20: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.684909E+12 (   6.75%)
+   (2) Approx. mass outside domain :  0.527406E+13 (  51.97%)
+   (3) Mass at the deposit         :  0.418942E+13 (  41.28%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.101484E+14
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      474
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     330 min   (  91.81%)
+   Current time              :  5 APR 1815 at  5:30:29
+   -------                     
+   (1) Approx. mass inside  domain :  0.637172E+12 (   6.25%)
+   (2) Approx. mass outside domain :  0.528278E+13 (  51.85%)
+   (3) Mass at the deposit         :  0.426923E+13 (  41.90%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.101892E+14
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      488
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     340 min   (  94.52%)
+   Current time              :  5 APR 1815 at  5:40:15
+   -------                     
+   (1) Approx. mass inside  domain :  0.601009E+12 (   5.88%)
+   (2) Approx. mass outside domain :  0.528504E+13 (  51.70%)
+   (3) Mass at the deposit         :  0.433741E+13 (  42.43%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.102235E+14
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      502
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     350 min   (  97.23%)
+   Current time              :  5 APR 1815 at  5:50: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.569021E+12 (   5.55%)
+   (2) Approx. mass outside domain :  0.528564E+13 (  51.54%)
+   (3) Mass at the deposit         :  0.440016E+13 (  42.91%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.102548E+14
+   Erupted mass                    :  0.108353E+14
+
+-> Iteration                 :      517
+   Critical time step        :  0.464835E+02
+   Time step                 :  0.418352E+02
+   Ellapsed time             :     360 min   ( 100.13%)
+   Current time              :  5 APR 1815 at  6: 0:28
+   -------                     
+   (1) Approx. mass inside  domain :  0.537866E+12 (   5.23%)
+   (2) Approx. mass outside domain :  0.528580E+13 (  51.39%)
+   (3) Mass at the deposit         :  0.446201E+13 (  43.38%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.102857E+14
+   Erupted mass                    :  0.108353E+14
+---------------------------------------------------
+                                                   
+             FALL3D : END OF SIMULATION            
+                                                   
+---------------------------------------------------
+
+  STATUS  :  NORMAL TERMINATION
+  CPU TIME:      69.1sec

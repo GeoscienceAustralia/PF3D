@@ -1,0 +1,16 @@
+---------------------------------------------
+              PROGRAM FALL3DPOSTP            
+---------------------------------------------
+  Starting date    : 01-29-2010 at time: 11:37:46
+  Input file: /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.inp
+  Results file     : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.res
+  GRD topo file    : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.topo.grd
+  GRD results file : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.001h.depothick.grd
+  PS  results file : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.001h.depothick.ps
+  GRD results file : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.002h.depothick.grd
+  PS  results file : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.002h.depothick.ps
+  GRD results file : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.003h.depothick.grd
+  PS  results file : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.003h.depothick.ps
+  GRD results file : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.003h.depothick.grd
+  PS  results file : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.003h.depothick.ps
+  PROGRAM FALL3DPOSTP ends normally

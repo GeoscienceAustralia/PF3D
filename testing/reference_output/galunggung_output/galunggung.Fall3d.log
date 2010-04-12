@@ -1,0 +1,1023 @@
+---------------------------------------------------
+                                                   
+               FALL3D SERIAL VERISON               
+                                                   
+---------------------------------------------------
+  Code version        :  5.0
+  Starting date       : 12-23-2009 at time: 12:23:59
+
+  FALL3D input  file  : galunggung_output/galunggung.inp
+  Source        file  : galunggung_output/galunggung.src
+  Granulometry  file  : galunggung_output/galunggung.grn
+  Meteo         file  : galunggung_output/galunggung.dbs
+  LST           file  : galunggung_output/galunggung.Fall3d.log
+  Results       file  : galunggung_output/galunggung.res
+
+----------------------------------------------------
+                                                    
+               METEO AND GRID DATA                  
+                                                    
+----------------------------------------------------
+
+METEO DATA TIME RANGE
+  Initial time       :   17 MAY 1982 at 00 h 0000 s
+  Final   time       :   17 MAY 1982 at 05 h 0000 s
+  Meteo coverage     :    5.0 h (    18000 sec)
+
+MESH
+  Bottom-left corner : ( 121639.0  9138292.4)
+  Top-right   corner : ( 236639.0  9250292.4)
+  Number points x    :       115
+  Number points y    :       112
+  X  grid spacing    :    1000.0
+  Y  grid spacing    :    1000.0
+  Min. topography    :       0.0
+  Max. topography    :    2775.3
+  Max. z domain      :   12775.3
+  Number z-levels    :        11
+    z-layer  1       :       0.0 (dz=1000.0)
+    z-layer  2       :    1000.0 (dz=1000.0)
+    z-layer  3       :    2000.0 (dz=1000.0)
+    z-layer  4       :    3000.0 (dz=1000.0)
+    z-layer  5       :    4000.0 (dz=1000.0)
+    z-layer  6       :    5000.0 (dz=1000.0)
+    z-layer  7       :    6000.0 (dz=1000.0)
+    z-layer  8       :    7000.0 (dz=1000.0)
+    z-layer  9       :    8000.0 (dz=1000.0)
+    z-layer 10       :    9000.0 (dz=1000.0)
+    z-layer 11       :   10000.0 (dz=1000.0)
+
+----------------------------------------------------
+                                                    
+               FALL3D INPUT DATA                    
+                                                    
+----------------------------------------------------
+
+FALL3D TIME RANGE
+  Initial time    :   17 MAY 1982 at 00 h 0000 s
+  Final   time    :   17 MAY 1982 at 05 h 0000 s
+  Time increment  :    5.0 h (     18000.0 s)
+  Safety factor   : 0.900000E+00
+  Print time      :    1.0 h (      3600.0 s)
+
+NUMERICAL TREATMENT
+ Vertical turbulence      
+   Kv similarity theory   
+ Horizontal turbulence    
+   Kh RAMS                
+ Limiter method           : Minmod         
+ Apply Z-mapping          : No 
+ Settling velocity model        : Ganser 93      
+
+GRANULOMETRIC DISTRIBUTION            
+  NUMBER OF PARTICLE CLASSES        :    6
+  DIAMETER                  (mm   ) :  1.0000  0.5000  0.2500  0.1250  0.0625  0.0313
+  PHI                       (-    ) :   -0.00    1.00    2.00    3.00    4.00    5.00
+  DENSITY                   (kg/m3) : 1200.00 1420.00 1640.00 1860.00 2080.00 2300.00
+  SPHERICITY                (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  MODEL FACTOR              (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  PERCENTAGE                (in % ) :     9.1    16.1    24.8    24.8    16.1     9.1
+  SUM                       (in % ) :   100.0
+
+
+----------------------------------------------------
+                                                    
+             MEMORY REQUIREMENTS                    
+                                                    
+----------------------------------------------------
+                                                    
+DYNAMIC MEMORY ALLOCATED :    24.25 MBy
+
+
+----------------------------------------------------
+                                                    
+               TIME INTEGRATION                     
+                                                    
+----------------------------------------------------
+
+
+METEO FILE READ               
+  Current time              : 17 MAY 1982 at  0: 0: 0
+  Time (sec after 00UTC)    :         0.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -26.6000
+    Average                 :     -17.1279
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      14.1500
+    Minimum                 :     -52.1500
+    Average                 :     -25.7179
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.2874
+    Average                 :       0.7226
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :    2910.4897
+    Minimum                 :      48.3961
+    Average                 :     346.5607
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8684   -2.4057   -1.2748   -0.5627   -0.2015   -0.0612
+               min   -4.3458   -2.6464   -1.3725   -0.5895   -0.2059   -0.0619
+
+    2          max   -4.0552   -2.5180   -1.3322   -0.5873   -0.2102   -0.0642
+               min   -4.5669   -2.7755   -1.4364   -0.6156   -0.2148   -0.0647
+
+    3          max   -4.2609   -2.6449   -1.3990   -0.6164   -0.2205   -0.0673
+               min   -4.8122   -2.9222   -1.5110   -0.6469   -0.2255   -0.0679
+
+    4          max   -4.4767   -2.7743   -1.4650   -0.6441   -0.2301   -0.0703
+               min   -5.0698   -3.0720   -1.5849   -0.6766   -0.2353   -0.0709
+
+    5          max   -4.7023   -2.9051   -1.5293   -0.6697   -0.2383   -0.0728
+               min   -5.3394   -3.2236   -1.6567   -0.7038   -0.2436   -0.0734
+
+    6          max   -4.9453   -3.0457   -1.5981   -0.6971   -0.2470   -0.0753
+               min   -5.6308   -3.3871   -1.7338   -0.7329   -0.2526   -0.0757
+
+    7          max   -5.1950   -3.1821   -1.6604   -0.7190   -0.2533   -0.0769
+               min   -5.9300   -3.5458   -1.8034   -0.7563   -0.2588   -0.0775
+
+    8          max   -5.4631   -3.3277   -1.7263   -0.7421   -0.2597   -0.0785
+               min   -6.2524   -3.7156   -1.8771   -0.7806   -0.2652   -0.0791
+
+    9          max   -5.7515   -3.4834   -1.7962   -0.7663   -0.2662   -0.0803
+               min   -6.6005   -3.8977   -1.9551   -0.8059   -0.2719   -0.0809
+
+   10          max   -6.0622   -3.6500   -1.8704   -0.7917   -0.2731   -0.0821
+               min   -6.9770   -4.0932   -2.0381   -0.8326   -0.2789   -0.0827
+
+   11          max   -6.3974   -3.8286   -1.9491   -0.8184   -0.2803   -0.0840
+               min   -7.3850   -4.3035   -2.1262   -0.8605   -0.2862   -0.0843
+
+SOURCE FILE READ              
+  From time                 :   17 MAY 1982 at 00 h 0000 s
+  To   time                 :   17 MAY 1982 at 01 h 0000 s
+  Time interval (in sec)    :      3600
+  Mass flow rate            :   0.500000E+05
+  Number of sources         :    18
+
+  I: 55  J: 58  K:  1 ( 1361. m a.s.l.)  MFR:  0.3351E+03
+  I: 56  J: 58  K:  1 ( 1357. m a.s.l.)  MFR:  0.2080E+03
+  I: 55  J: 59  K:  1 ( 1479. m a.s.l.)  MFR:  0.1671E+04
+  I: 56  J: 59  K:  1 ( 1321. m a.s.l.)  MFR:  0.9475E+03
+  I: 54  J: 58  K:  2 ( 2224. m a.s.l.)  MFR:  0.1131E+03
+  I: 55  J: 58  K:  2 ( 2361. m a.s.l.)  MFR:  0.1931E+04
+  I: 56  J: 58  K:  2 ( 2357. m a.s.l.)  MFR:  0.6021E+03
+  I: 54  J: 59  K:  2 ( 2444. m a.s.l.)  MFR:  0.1094E+04
+  I: 55  J: 59  K:  2 ( 2479. m a.s.l.)  MFR:  0.1112E+05
+  I: 56  J: 59  K:  2 ( 2321. m a.s.l.)  MFR:  0.1698E+04
+  I: 54  J: 58  K:  3 ( 3224. m a.s.l.)  MFR:  0.8565E+03
+  I: 55  J: 58  K:  3 ( 3361. m a.s.l.)  MFR:  0.7552E+04
+  I: 56  J: 58  K:  3 ( 3357. m a.s.l.)  MFR:  0.2082E+02
+  I: 54  J: 59  K:  3 ( 3444. m a.s.l.)  MFR:  0.2135E+04
+  I: 55  J: 59  K:  3 ( 3479. m a.s.l.)  MFR:  0.1947E+05
+  I: 56  J: 59  K:  3 ( 3321. m a.s.l.)  MFR:  0.3843E+02
+  I: 54  J: 58  K:  4 ( 4224. m a.s.l.)  MFR:  0.3015E+02
+  I: 55  J: 58  K:  4 ( 4361. m a.s.l.)  MFR:  0.1711E+03
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.4561E+04
+      2         0.500        1420.     0.8064E+04
+      3         0.250        1640.     0.1238E+05
+      4         0.125        1860.     0.1238E+05
+      5         0.063        2080.     0.8064E+04
+      6         0.031        2300.     0.4561E+04
+
+-> Iteration                 :        1
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :       0 min   (   0.11%)
+   Current time              : 17 MAY 1982 at  0: 0:20
+   -------                     
+   (1) Approx. mass inside  domain :  0.996117E+06 (  99.65%)
+   (2) Approx. mass outside domain :  0.000000E+00 (   0.00%)
+   (3) Mass at the deposit         :  0.347831E+04 (   0.35%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.999595E+06
+   Erupted mass                    :  0.103464E+07
+
+-> Iteration                 :       29
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      10 min   (   3.33%)
+   Current time              : 17 MAY 1982 at  0:10: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.255342E+08 (  89.45%)
+   (2) Approx. mass outside domain :  0.251400E-46 (   0.00%)
+   (3) Mass at the deposit         :  0.301217E+07 (  10.55%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.285464E+08
+   Erupted mass                    :  0.300045E+08
+
+-> Iteration                 :       58
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      20 min   (   6.67%)
+   Current time              : 17 MAY 1982 at  0:20: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.449956E+08 (  78.68%)
+   (2) Approx. mass outside domain :  0.410536E-15 (   0.00%)
+   (3) Mass at the deposit         :  0.121911E+08 (  21.32%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.571867E+08
+   Erupted mass                    :  0.600091E+08
+
+-> Iteration                 :       87
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      30 min   (  10.00%)
+   Current time              : 17 MAY 1982 at  0:30: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.606582E+08 (  70.45%)
+   (2) Approx. mass outside domain :  0.117417E-04 (   0.00%)
+   (3) Mass at the deposit         :  0.254452E+08 (  29.55%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.861034E+08
+   Erupted mass                    :  0.900136E+08
+
+-> Iteration                 :      116
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      40 min   (  13.34%)
+   Current time              : 17 MAY 1982 at  0:40: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.738577E+08 (  64.12%)
+   (2) Approx. mass outside domain :  0.105014E+01 (   0.00%)
+   (3) Mass at the deposit         :  0.413283E+08 (  35.88%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.115186E+09
+   Erupted mass                    :  0.120018E+09
+
+-> Iteration                 :      145
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      50 min   (  16.67%)
+   Current time              : 17 MAY 1982 at  0:50: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.853254E+08 (  59.10%)
+   (2) Approx. mass outside domain :  0.375828E+03 (   0.00%)
+   (3) Mass at the deposit         :  0.590386E+08 (  40.90%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.144364E+09
+   Erupted mass                    :  0.150023E+09
+
+-> Iteration                 :      174
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      60 min   (  20.00%)
+   Current time              : 17 MAY 1982 at  1: 0: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.954887E+08 (  55.00%)
+   (2) Approx. mass outside domain :  0.109375E+05 (   0.01%)
+   (3) Mass at the deposit         :  0.781009E+08 (  44.99%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.173601E+09
+   Erupted mass                    :  0.180027E+09
+
+METEO FILE READ               
+  Current time              : 17 MAY 1982 at  1: 0: 0
+  Time (sec after 00UTC)    :      3601.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -26.6000
+    Average                 :     -17.1279
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      14.1500
+    Minimum                 :     -52.1500
+    Average                 :     -25.7179
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.2874
+    Average                 :       0.7226
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :    2910.4897
+    Minimum                 :      48.3961
+    Average                 :     346.5607
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8684   -2.4057   -1.2748   -0.5627   -0.2015   -0.0612
+               min   -4.3458   -2.6464   -1.3725   -0.5895   -0.2059   -0.0619
+
+    2          max   -4.0552   -2.5180   -1.3322   -0.5873   -0.2102   -0.0642
+               min   -4.5669   -2.7755   -1.4364   -0.6156   -0.2148   -0.0647
+
+    3          max   -4.2609   -2.6449   -1.3990   -0.6164   -0.2205   -0.0673
+               min   -4.8122   -2.9222   -1.5110   -0.6469   -0.2255   -0.0679
+
+    4          max   -4.4767   -2.7743   -1.4650   -0.6441   -0.2301   -0.0703
+               min   -5.0698   -3.0720   -1.5849   -0.6766   -0.2353   -0.0709
+
+    5          max   -4.7023   -2.9051   -1.5293   -0.6697   -0.2383   -0.0728
+               min   -5.3394   -3.2236   -1.6567   -0.7038   -0.2436   -0.0734
+
+    6          max   -4.9453   -3.0457   -1.5981   -0.6971   -0.2470   -0.0753
+               min   -5.6308   -3.3871   -1.7338   -0.7329   -0.2526   -0.0757
+
+    7          max   -5.1950   -3.1821   -1.6604   -0.7190   -0.2533   -0.0769
+               min   -5.9300   -3.5458   -1.8034   -0.7563   -0.2588   -0.0775
+
+    8          max   -5.4631   -3.3277   -1.7263   -0.7421   -0.2597   -0.0785
+               min   -6.2524   -3.7156   -1.8771   -0.7806   -0.2652   -0.0791
+
+    9          max   -5.7515   -3.4834   -1.7962   -0.7663   -0.2662   -0.0803
+               min   -6.6005   -3.8977   -1.9551   -0.8059   -0.2719   -0.0809
+
+   10          max   -6.0622   -3.6500   -1.8704   -0.7917   -0.2731   -0.0821
+               min   -6.9770   -4.0932   -2.0381   -0.8326   -0.2789   -0.0827
+
+   11          max   -6.3974   -3.8286   -1.9491   -0.8184   -0.2803   -0.0840
+               min   -7.3850   -4.3035   -2.1262   -0.8605   -0.2862   -0.0843
+
+SOURCE FILE READ              
+  From time                 :   17 MAY 1982 at 01 h 0000 s
+  To   time                 :   17 MAY 1982 at 02 h 0000 s
+  Time interval (in sec)    :      3599
+  Mass flow rate            :   0.500000E+05
+  Number of sources         :    18
+
+  I: 55  J: 58  K:  1 ( 1361. m a.s.l.)  MFR:  0.3351E+03
+  I: 56  J: 58  K:  1 ( 1357. m a.s.l.)  MFR:  0.2080E+03
+  I: 55  J: 59  K:  1 ( 1479. m a.s.l.)  MFR:  0.1671E+04
+  I: 56  J: 59  K:  1 ( 1321. m a.s.l.)  MFR:  0.9475E+03
+  I: 54  J: 58  K:  2 ( 2224. m a.s.l.)  MFR:  0.1131E+03
+  I: 55  J: 58  K:  2 ( 2361. m a.s.l.)  MFR:  0.1931E+04
+  I: 56  J: 58  K:  2 ( 2357. m a.s.l.)  MFR:  0.6021E+03
+  I: 54  J: 59  K:  2 ( 2444. m a.s.l.)  MFR:  0.1094E+04
+  I: 55  J: 59  K:  2 ( 2479. m a.s.l.)  MFR:  0.1112E+05
+  I: 56  J: 59  K:  2 ( 2321. m a.s.l.)  MFR:  0.1698E+04
+  I: 54  J: 58  K:  3 ( 3224. m a.s.l.)  MFR:  0.8565E+03
+  I: 55  J: 58  K:  3 ( 3361. m a.s.l.)  MFR:  0.7552E+04
+  I: 56  J: 58  K:  3 ( 3357. m a.s.l.)  MFR:  0.2082E+02
+  I: 54  J: 59  K:  3 ( 3444. m a.s.l.)  MFR:  0.2135E+04
+  I: 55  J: 59  K:  3 ( 3479. m a.s.l.)  MFR:  0.1947E+05
+  I: 56  J: 59  K:  3 ( 3321. m a.s.l.)  MFR:  0.3843E+02
+  I: 54  J: 58  K:  4 ( 4224. m a.s.l.)  MFR:  0.3015E+02
+  I: 55  J: 58  K:  4 ( 4361. m a.s.l.)  MFR:  0.1711E+03
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.4561E+04
+      2         0.500        1420.     0.8064E+04
+      3         0.250        1640.     0.1238E+05
+      4         0.125        1860.     0.1238E+05
+      5         0.063        2080.     0.8064E+04
+      6         0.031        2300.     0.4561E+04
+
+-> Iteration                 :      203
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      70 min   (  23.34%)
+   Current time              : 17 MAY 1982 at  1:10: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.104569E+09 (  51.54%)
+   (2) Approx. mass outside domain :  0.896473E+05 (   0.04%)
+   (3) Mass at the deposit         :  0.982113E+08 (  48.41%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.202870E+09
+   Erupted mass                    :  0.210032E+09
+
+-> Iteration                 :      232
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      80 min   (  26.67%)
+   Current time              : 17 MAY 1982 at  1:20: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.112685E+09 (  48.54%)
+   (2) Approx. mass outside domain :  0.316508E+06 (   0.14%)
+   (3) Mass at the deposit         :  0.119162E+09 (  51.33%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.232164E+09
+   Erupted mass                    :  0.240036E+09
+
+-> Iteration                 :      261
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :      90 min   (  30.00%)
+   Current time              : 17 MAY 1982 at  1:30: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.119976E+09 (  45.88%)
+   (2) Approx. mass outside domain :  0.699908E+06 (   0.27%)
+   (3) Mass at the deposit         :  0.140801E+09 (  53.85%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.261477E+09
+   Erupted mass                    :  0.270041E+09
+
+-> Iteration                 :      290
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     100 min   (  33.34%)
+   Current time              : 17 MAY 1982 at  1:40: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.126532E+09 (  43.51%)
+   (2) Approx. mass outside domain :  0.125334E+07 (   0.43%)
+   (3) Mass at the deposit         :  0.163015E+09 (  56.06%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.290801E+09
+   Erupted mass                    :  0.300045E+09
+
+-> Iteration                 :      319
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     110 min   (  36.67%)
+   Current time              : 17 MAY 1982 at  1:50: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.132383E+09 (  41.35%)
+   (2) Approx. mass outside domain :  0.203333E+07 (   0.64%)
+   (3) Mass at the deposit         :  0.185710E+09 (  58.01%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.320127E+09
+   Erupted mass                    :  0.330050E+09
+
+-> Iteration                 :      348
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     120 min   (  40.01%)
+   Current time              : 17 MAY 1982 at  2: 0: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.137521E+09 (  39.35%)
+   (2) Approx. mass outside domain :  0.311942E+07 (   0.89%)
+   (3) Mass at the deposit         :  0.208810E+09 (  59.75%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.349450E+09
+   Erupted mass                    :  0.360054E+09
+
+METEO FILE READ               
+  Current time              : 17 MAY 1982 at  2: 0: 1
+  Time (sec after 00UTC)    :      7201.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -26.6000
+    Average                 :     -17.1279
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      14.1500
+    Minimum                 :     -52.1500
+    Average                 :     -25.7179
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.2874
+    Average                 :       0.7226
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :    2910.4897
+    Minimum                 :      48.3961
+    Average                 :     346.5607
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8684   -2.4057   -1.2748   -0.5627   -0.2015   -0.0612
+               min   -4.3458   -2.6464   -1.3725   -0.5895   -0.2059   -0.0619
+
+    2          max   -4.0552   -2.5180   -1.3322   -0.5873   -0.2102   -0.0642
+               min   -4.5669   -2.7755   -1.4364   -0.6156   -0.2148   -0.0647
+
+    3          max   -4.2609   -2.6449   -1.3990   -0.6164   -0.2205   -0.0673
+               min   -4.8122   -2.9222   -1.5110   -0.6469   -0.2255   -0.0679
+
+    4          max   -4.4767   -2.7743   -1.4650   -0.6441   -0.2301   -0.0703
+               min   -5.0698   -3.0720   -1.5849   -0.6766   -0.2353   -0.0709
+
+    5          max   -4.7023   -2.9051   -1.5293   -0.6697   -0.2383   -0.0728
+               min   -5.3394   -3.2236   -1.6567   -0.7038   -0.2436   -0.0734
+
+    6          max   -4.9453   -3.0457   -1.5981   -0.6971   -0.2470   -0.0753
+               min   -5.6308   -3.3871   -1.7338   -0.7329   -0.2526   -0.0757
+
+    7          max   -5.1950   -3.1821   -1.6604   -0.7190   -0.2533   -0.0769
+               min   -5.9300   -3.5458   -1.8034   -0.7563   -0.2588   -0.0775
+
+    8          max   -5.4631   -3.3277   -1.7263   -0.7421   -0.2597   -0.0785
+               min   -6.2524   -3.7156   -1.8771   -0.7806   -0.2652   -0.0791
+
+    9          max   -5.7515   -3.4834   -1.7962   -0.7663   -0.2662   -0.0803
+               min   -6.6005   -3.8977   -1.9551   -0.8059   -0.2719   -0.0809
+
+   10          max   -6.0622   -3.6500   -1.8704   -0.7917   -0.2731   -0.0821
+               min   -6.9770   -4.0932   -2.0381   -0.8326   -0.2789   -0.0827
+
+   11          max   -6.3974   -3.8286   -1.9491   -0.8184   -0.2803   -0.0840
+               min   -7.3850   -4.3035   -2.1262   -0.8605   -0.2862   -0.0843
+
+SOURCE FILE READ              
+  From time                 :   17 MAY 1982 at 02 h 0001 s
+  To   time                 :   17 MAY 1982 at 03 h 0000 s
+  Time interval (in sec)    :      3598
+  Mass flow rate            :   0.500000E+05
+  Number of sources         :    18
+
+  I: 55  J: 58  K:  1 ( 1361. m a.s.l.)  MFR:  0.3351E+03
+  I: 56  J: 58  K:  1 ( 1357. m a.s.l.)  MFR:  0.2080E+03
+  I: 55  J: 59  K:  1 ( 1479. m a.s.l.)  MFR:  0.1671E+04
+  I: 56  J: 59  K:  1 ( 1321. m a.s.l.)  MFR:  0.9475E+03
+  I: 54  J: 58  K:  2 ( 2224. m a.s.l.)  MFR:  0.1131E+03
+  I: 55  J: 58  K:  2 ( 2361. m a.s.l.)  MFR:  0.1931E+04
+  I: 56  J: 58  K:  2 ( 2357. m a.s.l.)  MFR:  0.6021E+03
+  I: 54  J: 59  K:  2 ( 2444. m a.s.l.)  MFR:  0.1094E+04
+  I: 55  J: 59  K:  2 ( 2479. m a.s.l.)  MFR:  0.1112E+05
+  I: 56  J: 59  K:  2 ( 2321. m a.s.l.)  MFR:  0.1698E+04
+  I: 54  J: 58  K:  3 ( 3224. m a.s.l.)  MFR:  0.8565E+03
+  I: 55  J: 58  K:  3 ( 3361. m a.s.l.)  MFR:  0.7552E+04
+  I: 56  J: 58  K:  3 ( 3357. m a.s.l.)  MFR:  0.2082E+02
+  I: 54  J: 59  K:  3 ( 3444. m a.s.l.)  MFR:  0.2135E+04
+  I: 55  J: 59  K:  3 ( 3479. m a.s.l.)  MFR:  0.1947E+05
+  I: 56  J: 59  K:  3 ( 3321. m a.s.l.)  MFR:  0.3843E+02
+  I: 54  J: 58  K:  4 ( 4224. m a.s.l.)  MFR:  0.3015E+02
+  I: 55  J: 58  K:  4 ( 4361. m a.s.l.)  MFR:  0.1711E+03
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.4561E+04
+      2         0.500        1420.     0.8064E+04
+      3         0.250        1640.     0.1238E+05
+      4         0.125        1860.     0.1238E+05
+      5         0.063        2080.     0.8064E+04
+      6         0.031        2300.     0.4561E+04
+
+-> Iteration                 :      377
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     130 min   (  43.34%)
+   Current time              : 17 MAY 1982 at  2:10: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.141928E+09 (  37.47%)
+   (2) Approx. mass outside domain :  0.459576E+07 (   1.21%)
+   (3) Mass at the deposit         :  0.232245E+09 (  61.32%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.378769E+09
+   Erupted mass                    :  0.390059E+09
+
+-> Iteration                 :      406
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     140 min   (  46.67%)
+   Current time              : 17 MAY 1982 at  2:20: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.145607E+09 (  35.68%)
+   (2) Approx. mass outside domain :  0.652534E+07 (   1.60%)
+   (3) Mass at the deposit         :  0.255954E+09 (  62.72%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.408086E+09
+   Erupted mass                    :  0.420064E+09
+
+-> Iteration                 :      435
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     150 min   (  50.01%)
+   Current time              : 17 MAY 1982 at  2:30: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.148589E+09 (  33.97%)
+   (2) Approx. mass outside domain :  0.893459E+07 (   2.04%)
+   (3) Mass at the deposit         :  0.279882E+09 (  63.99%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.437406E+09
+   Erupted mass                    :  0.450068E+09
+
+-> Iteration                 :      464
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     160 min   (  53.34%)
+   Current time              : 17 MAY 1982 at  2:40: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.150938E+09 (  32.34%)
+   (2) Approx. mass outside domain :  0.118141E+08 (   2.53%)
+   (3) Mass at the deposit         :  0.303980E+09 (  65.13%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.466732E+09
+   Erupted mass                    :  0.480073E+09
+
+-> Iteration                 :      493
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     170 min   (  56.68%)
+   Current time              : 17 MAY 1982 at  2:50: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.152735E+09 (  30.79%)
+   (2) Approx. mass outside domain :  0.151255E+08 (   3.05%)
+   (3) Mass at the deposit         :  0.328206E+09 (  66.16%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.496067E+09
+   Erupted mass                    :  0.510077E+09
+
+-> Iteration                 :      522
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     180 min   (  60.01%)
+   Current time              : 17 MAY 1982 at  3: 0: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.154072E+09 (  29.32%)
+   (2) Approx. mass outside domain :  0.188118E+08 (   3.58%)
+   (3) Mass at the deposit         :  0.352528E+09 (  67.10%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.525412E+09
+   Erupted mass                    :  0.540082E+09
+
+METEO FILE READ               
+  Current time              : 17 MAY 1982 at  3: 0: 1
+  Time (sec after 00UTC)    :     10802.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -26.6000
+    Average                 :     -17.1279
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      14.1500
+    Minimum                 :     -52.1500
+    Average                 :     -25.7179
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.2874
+    Average                 :       0.7226
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :    2910.4897
+    Minimum                 :      48.3961
+    Average                 :     346.5607
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8684   -2.4057   -1.2748   -0.5627   -0.2015   -0.0612
+               min   -4.3458   -2.6464   -1.3725   -0.5895   -0.2059   -0.0619
+
+    2          max   -4.0552   -2.5180   -1.3322   -0.5873   -0.2102   -0.0642
+               min   -4.5669   -2.7755   -1.4364   -0.6156   -0.2148   -0.0647
+
+    3          max   -4.2609   -2.6449   -1.3990   -0.6164   -0.2205   -0.0673
+               min   -4.8122   -2.9222   -1.5110   -0.6469   -0.2255   -0.0679
+
+    4          max   -4.4767   -2.7743   -1.4650   -0.6441   -0.2301   -0.0703
+               min   -5.0698   -3.0720   -1.5849   -0.6766   -0.2353   -0.0709
+
+    5          max   -4.7023   -2.9051   -1.5293   -0.6697   -0.2383   -0.0728
+               min   -5.3394   -3.2236   -1.6567   -0.7038   -0.2436   -0.0734
+
+    6          max   -4.9453   -3.0457   -1.5981   -0.6971   -0.2470   -0.0753
+               min   -5.6308   -3.3871   -1.7338   -0.7329   -0.2526   -0.0757
+
+    7          max   -5.1950   -3.1821   -1.6604   -0.7190   -0.2533   -0.0769
+               min   -5.9300   -3.5458   -1.8034   -0.7563   -0.2588   -0.0775
+
+    8          max   -5.4631   -3.3277   -1.7263   -0.7421   -0.2597   -0.0785
+               min   -6.2524   -3.7156   -1.8771   -0.7806   -0.2652   -0.0791
+
+    9          max   -5.7515   -3.4834   -1.7962   -0.7663   -0.2662   -0.0803
+               min   -6.6005   -3.8977   -1.9551   -0.8059   -0.2719   -0.0809
+
+   10          max   -6.0622   -3.6500   -1.8704   -0.7917   -0.2731   -0.0821
+               min   -6.9770   -4.0932   -2.0381   -0.8326   -0.2789   -0.0827
+
+   11          max   -6.3974   -3.8286   -1.9491   -0.8184   -0.2803   -0.0840
+               min   -7.3850   -4.3035   -2.1262   -0.8605   -0.2862   -0.0843
+
+SOURCE FILE READ              
+  From time                 :   17 MAY 1982 at 03 h 0001 s
+  To   time                 :   17 MAY 1982 at 04 h 0000 s
+  Time interval (in sec)    :      3598
+  Mass flow rate            :   0.500000E+05
+  Number of sources         :    18
+
+  I: 55  J: 58  K:  1 ( 1361. m a.s.l.)  MFR:  0.3351E+03
+  I: 56  J: 58  K:  1 ( 1357. m a.s.l.)  MFR:  0.2080E+03
+  I: 55  J: 59  K:  1 ( 1479. m a.s.l.)  MFR:  0.1671E+04
+  I: 56  J: 59  K:  1 ( 1321. m a.s.l.)  MFR:  0.9475E+03
+  I: 54  J: 58  K:  2 ( 2224. m a.s.l.)  MFR:  0.1131E+03
+  I: 55  J: 58  K:  2 ( 2361. m a.s.l.)  MFR:  0.1931E+04
+  I: 56  J: 58  K:  2 ( 2357. m a.s.l.)  MFR:  0.6021E+03
+  I: 54  J: 59  K:  2 ( 2444. m a.s.l.)  MFR:  0.1094E+04
+  I: 55  J: 59  K:  2 ( 2479. m a.s.l.)  MFR:  0.1112E+05
+  I: 56  J: 59  K:  2 ( 2321. m a.s.l.)  MFR:  0.1698E+04
+  I: 54  J: 58  K:  3 ( 3224. m a.s.l.)  MFR:  0.8565E+03
+  I: 55  J: 58  K:  3 ( 3361. m a.s.l.)  MFR:  0.7552E+04
+  I: 56  J: 58  K:  3 ( 3357. m a.s.l.)  MFR:  0.2082E+02
+  I: 54  J: 59  K:  3 ( 3444. m a.s.l.)  MFR:  0.2135E+04
+  I: 55  J: 59  K:  3 ( 3479. m a.s.l.)  MFR:  0.1947E+05
+  I: 56  J: 59  K:  3 ( 3321. m a.s.l.)  MFR:  0.3843E+02
+  I: 54  J: 58  K:  4 ( 4224. m a.s.l.)  MFR:  0.3015E+02
+  I: 55  J: 58  K:  4 ( 4361. m a.s.l.)  MFR:  0.1711E+03
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.4561E+04
+      2         0.500        1420.     0.8064E+04
+      3         0.250        1640.     0.1238E+05
+      4         0.125        1860.     0.1238E+05
+      5         0.063        2080.     0.8064E+04
+      6         0.031        2300.     0.4561E+04
+
+-> Iteration                 :      551
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     190 min   (  63.34%)
+   Current time              : 17 MAY 1982 at  3:10: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.155042E+09 (  27.95%)
+   (2) Approx. mass outside domain :  0.228084E+08 (   4.11%)
+   (3) Mass at the deposit         :  0.376918E+09 (  67.94%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.554768E+09
+   Erupted mass                    :  0.570086E+09
+
+-> Iteration                 :      580
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     200 min   (  66.68%)
+   Current time              : 17 MAY 1982 at  3:20: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.155728E+09 (  26.66%)
+   (2) Approx. mass outside domain :  0.270510E+08 (   4.63%)
+   (3) Mass at the deposit         :  0.401356E+09 (  68.71%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.584135E+09
+   Erupted mass                    :  0.600091E+09
+
+-> Iteration                 :      609
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     210 min   (  70.01%)
+   Current time              : 17 MAY 1982 at  3:30: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.156203E+09 (  25.46%)
+   (2) Approx. mass outside domain :  0.314818E+08 (   5.13%)
+   (3) Mass at the deposit         :  0.425826E+09 (  69.41%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.613511E+09
+   Erupted mass                    :  0.630095E+09
+
+-> Iteration                 :      638
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     220 min   (  73.34%)
+   Current time              : 17 MAY 1982 at  3:40: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.156524E+09 (  24.35%)
+   (2) Approx. mass outside domain :  0.360515E+08 (   5.61%)
+   (3) Mass at the deposit         :  0.450319E+09 (  70.05%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.642894E+09
+   Erupted mass                    :  0.660100E+09
+
+-> Iteration                 :      667
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     230 min   (  76.68%)
+   Current time              : 17 MAY 1982 at  3:50: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.156736E+09 (  23.31%)
+   (2) Approx. mass outside domain :  0.407208E+08 (   6.06%)
+   (3) Mass at the deposit         :  0.474826E+09 (  70.63%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.672283E+09
+   Erupted mass                    :  0.690104E+09
+
+-> Iteration                 :      696
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     240 min   (  80.01%)
+   Current time              : 17 MAY 1982 at  4: 0: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.156875E+09 (  22.36%)
+   (2) Approx. mass outside domain :  0.454598E+08 (   6.48%)
+   (3) Mass at the deposit         :  0.499342E+09 (  71.16%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.701677E+09
+   Erupted mass                    :  0.720109E+09
+
+METEO FILE READ               
+  Current time              : 17 MAY 1982 at  4: 0: 2
+  Time (sec after 00UTC)    :     14402.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :     -26.6000
+    Average                 :     -17.1279
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      14.1500
+    Minimum                 :     -52.1500
+    Average                 :     -25.7179
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.2874
+    Average                 :       0.7226
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :    2910.4897
+    Minimum                 :      48.3961
+    Average                 :     346.5607
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8684   -2.4057   -1.2748   -0.5627   -0.2015   -0.0612
+               min   -4.3458   -2.6464   -1.3725   -0.5895   -0.2059   -0.0619
+
+    2          max   -4.0552   -2.5180   -1.3322   -0.5873   -0.2102   -0.0642
+               min   -4.5669   -2.7755   -1.4364   -0.6156   -0.2148   -0.0647
+
+    3          max   -4.2609   -2.6449   -1.3990   -0.6164   -0.2205   -0.0673
+               min   -4.8122   -2.9222   -1.5110   -0.6469   -0.2255   -0.0679
+
+    4          max   -4.4767   -2.7743   -1.4650   -0.6441   -0.2301   -0.0703
+               min   -5.0698   -3.0720   -1.5849   -0.6766   -0.2353   -0.0709
+
+    5          max   -4.7023   -2.9051   -1.5293   -0.6697   -0.2383   -0.0728
+               min   -5.3394   -3.2236   -1.6567   -0.7038   -0.2436   -0.0734
+
+    6          max   -4.9453   -3.0457   -1.5981   -0.6971   -0.2470   -0.0753
+               min   -5.6308   -3.3871   -1.7338   -0.7329   -0.2526   -0.0757
+
+    7          max   -5.1950   -3.1821   -1.6604   -0.7190   -0.2533   -0.0769
+               min   -5.9300   -3.5458   -1.8034   -0.7563   -0.2588   -0.0775
+
+    8          max   -5.4631   -3.3277   -1.7263   -0.7421   -0.2597   -0.0785
+               min   -6.2524   -3.7156   -1.8771   -0.7806   -0.2652   -0.0791
+
+    9          max   -5.7515   -3.4834   -1.7962   -0.7663   -0.2662   -0.0803
+               min   -6.6005   -3.8977   -1.9551   -0.8059   -0.2719   -0.0809
+
+   10          max   -6.0622   -3.6500   -1.8704   -0.7917   -0.2731   -0.0821
+               min   -6.9770   -4.0932   -2.0381   -0.8326   -0.2789   -0.0827
+
+   11          max   -6.3974   -3.8286   -1.9491   -0.8184   -0.2803   -0.0840
+               min   -7.3850   -4.3035   -2.1262   -0.8605   -0.2862   -0.0843
+
+SOURCE FILE READ              
+  From time                 :   17 MAY 1982 at 04 h 0002 s
+  To   time                 :   17 MAY 1982 at 05 h 0000 s
+  Time interval (in sec)    :      3597
+  Mass flow rate            :   0.500000E+05
+  Number of sources         :    18
+
+  I: 55  J: 58  K:  1 ( 1361. m a.s.l.)  MFR:  0.3351E+03
+  I: 56  J: 58  K:  1 ( 1357. m a.s.l.)  MFR:  0.2080E+03
+  I: 55  J: 59  K:  1 ( 1479. m a.s.l.)  MFR:  0.1671E+04
+  I: 56  J: 59  K:  1 ( 1321. m a.s.l.)  MFR:  0.9475E+03
+  I: 54  J: 58  K:  2 ( 2224. m a.s.l.)  MFR:  0.1131E+03
+  I: 55  J: 58  K:  2 ( 2361. m a.s.l.)  MFR:  0.1931E+04
+  I: 56  J: 58  K:  2 ( 2357. m a.s.l.)  MFR:  0.6021E+03
+  I: 54  J: 59  K:  2 ( 2444. m a.s.l.)  MFR:  0.1094E+04
+  I: 55  J: 59  K:  2 ( 2479. m a.s.l.)  MFR:  0.1112E+05
+  I: 56  J: 59  K:  2 ( 2321. m a.s.l.)  MFR:  0.1698E+04
+  I: 54  J: 58  K:  3 ( 3224. m a.s.l.)  MFR:  0.8565E+03
+  I: 55  J: 58  K:  3 ( 3361. m a.s.l.)  MFR:  0.7552E+04
+  I: 56  J: 58  K:  3 ( 3357. m a.s.l.)  MFR:  0.2082E+02
+  I: 54  J: 59  K:  3 ( 3444. m a.s.l.)  MFR:  0.2135E+04
+  I: 55  J: 59  K:  3 ( 3479. m a.s.l.)  MFR:  0.1947E+05
+  I: 56  J: 59  K:  3 ( 3321. m a.s.l.)  MFR:  0.3843E+02
+  I: 54  J: 58  K:  4 ( 4224. m a.s.l.)  MFR:  0.3015E+02
+  I: 55  J: 58  K:  4 ( 4361. m a.s.l.)  MFR:  0.1711E+03
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.4561E+04
+      2         0.500        1420.     0.8064E+04
+      3         0.250        1640.     0.1238E+05
+      4         0.125        1860.     0.1238E+05
+      5         0.063        2080.     0.8064E+04
+      6         0.031        2300.     0.4561E+04
+
+-> Iteration                 :      725
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     250 min   (  83.35%)
+   Current time              : 17 MAY 1982 at  4:10: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.156963E+09 (  21.47%)
+   (2) Approx. mass outside domain :  0.502461E+08 (   6.87%)
+   (3) Mass at the deposit         :  0.523865E+09 (  71.66%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.731073E+09
+   Erupted mass                    :  0.750113E+09
+
+-> Iteration                 :      754
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     260 min   (  86.68%)
+   Current time              : 17 MAY 1982 at  4:20: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.157018E+09 (  20.65%)
+   (2) Approx. mass outside domain :  0.550639E+08 (   7.24%)
+   (3) Mass at the deposit         :  0.548391E+09 (  72.11%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.760473E+09
+   Erupted mass                    :  0.780118E+09
+
+-> Iteration                 :      783
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     270 min   (  90.01%)
+   Current time              : 17 MAY 1982 at  4:30: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.157052E+09 (  19.88%)
+   (2) Approx. mass outside domain :  0.599022E+08 (   7.58%)
+   (3) Mass at the deposit         :  0.572919E+09 (  72.53%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.789873E+09
+   Erupted mass                    :  0.810123E+09
+
+-> Iteration                 :      812
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     280 min   (  93.35%)
+   Current time              : 17 MAY 1982 at  4:40: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.157073E+09 (  19.17%)
+   (2) Approx. mass outside domain :  0.647536E+08 (   7.90%)
+   (3) Mass at the deposit         :  0.597448E+09 (  72.92%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.819275E+09
+   Erupted mass                    :  0.840127E+09
+
+-> Iteration                 :      841
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     290 min   (  96.68%)
+   Current time              : 17 MAY 1982 at  4:50: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.157085E+09 (  18.51%)
+   (2) Approx. mass outside domain :  0.696132E+08 (   8.20%)
+   (3) Mass at the deposit         :  0.621979E+09 (  73.29%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.848677E+09
+   Erupted mass                    :  0.870132E+09
+
+-> Iteration                 :      870
+   Critical time step        :  0.229920E+02
+   Time step                 :  0.206928E+02
+   Ellapsed time             :     300 min   ( 100.02%)
+   Current time              : 17 MAY 1982 at  5: 0: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.157093E+09 (  17.89%)
+   (2) Approx. mass outside domain :  0.744779E+08 (   8.48%)
+   (3) Mass at the deposit         :  0.646510E+09 (  73.63%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.878080E+09
+   Erupted mass                    :  0.900136E+09
+---------------------------------------------------
+                                                   
+             FALL3D : END OF SIMULATION            
+                                                   
+---------------------------------------------------
+
+  STATUS  :  NORMAL TERMINATION
+  CPU TIME:     359.1sec

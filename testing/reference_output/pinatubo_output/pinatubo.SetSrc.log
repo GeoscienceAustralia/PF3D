@@ -1,0 +1,21 @@
+---------------------------------------------
+              PROGRAM SETSRC                 
+---------------------------------------------
+  Starting date    : 01-29-2010 at time: 11:49:49
+  Input file       : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/pinatubo/nielso/pinatubo.inp
+  Source file      : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/pinatubo/nielso/pinatubo.src
+  Plume result file: /model_area/sandpits/nielso/aim/testing/tephra/scenarios/pinatubo/nielso/pinatubo.Plume.res
+  Plume mass file  : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/pinatubo/nielso/pinatubo.Plume.mass
+  Plume height file: /model_area/sandpits/nielso/aim/testing/tephra/scenarios/pinatubo/nielso/pinatubo.Plume.height
+  Plume computed for time interval:      0   3600
+  Plume computed for time interval:   3600   7200
+  Plume computed for time interval:   7200  10800
+  Plume computed for time interval:  10800  14400
+  Plume computed for time interval:  14400  18000
+  Plume computed for time interval:  18000  21600
+  Plume computed for time interval:  21600  25200
+  Plume computed for time interval:  25200  28800
+  Plume computed for time interval:  28800  32400
+  Plume computed for time interval:  32400  36000
+  Plume computed for time interval:  36000  39600
+  Program SETSRC ends normally

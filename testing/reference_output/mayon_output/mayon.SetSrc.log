@@ -1,0 +1,16 @@
+---------------------------------------------
+              PROGRAM SETSRC                 
+---------------------------------------------
+  Starting date    : 12-23-2009 at time: 12:22:23
+  Input file       : mayon_output/mayon.inp
+  Source file      : mayon_output/mayon.src
+  Plume result file: mayon_output/mayon.Plume.res
+  Plume mass file  : mayon_output/mayon.Plume.mass
+  Plume height file: mayon_output/mayon.Plume.height
+  Plume computed for time interval:      0   3600
+  Plume computed for time interval:   3600   7200
+  Plume computed for time interval:   7200  10800
+  Plume computed for time interval:  10800  14400
+  Plume computed for time interval:  14400  18000
+  Plume computed for time interval:  18000  21600
+  Program SETSRC ends normally

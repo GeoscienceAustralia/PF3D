@@ -1,0 +1,13 @@
+---------------------------------------------
+              PROGRAM SETSRC                 
+---------------------------------------------
+  Starting date    : 01-29-2010 at time: 11:37:23
+  Input file       : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.inp
+  Source file      : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.src
+  Plume result file: /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.Plume.res
+  Plume mass file  : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.Plume.mass
+  Plume height file: /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.Plume.height
+  Plume computed for time interval:      0   3600
+  Plume computed for time interval:   3600   7200
+  Plume computed for time interval:   7200  10800
+  Program SETSRC ends normally

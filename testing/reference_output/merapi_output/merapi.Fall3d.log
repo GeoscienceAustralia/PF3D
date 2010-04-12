@@ -1,0 +1,617 @@
+---------------------------------------------------
+                                                   
+               FALL3D SERIAL VERISON               
+                                                   
+---------------------------------------------------
+  Code version        :  5.0
+  Starting date       : 01-29-2010 at time: 11:37:25
+
+  FALL3D input  file  : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.inp
+  Source        file  : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.src
+  Granulometry  file  : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.grn
+  Meteo         file  : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.dbs
+  LST           file  : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.Fall3d.log
+  Results       file  : /model_area/sandpits/nielso/aim/testing/tephra/scenarios/merapi/nielso/merapi.res
+
+----------------------------------------------------
+                                                    
+               METEO AND GRID DATA                  
+                                                    
+----------------------------------------------------
+
+METEO DATA TIME RANGE
+  Initial time       :   14 SEP 2009 at 00 h 0000 s
+  Final   time       :   14 SEP 2009 at 03 h 0000 s
+  Meteo coverage     :    3.0 h (    10800 sec)
+
+MESH
+  Bottom-left corner : ( 412432.3  9106708.6)
+  Top-right   corner : ( 471432.3  9170708.6)
+  Number points x    :        59
+  Number points y    :        64
+  X  grid spacing    :    1000.0
+  Y  grid spacing    :    1000.0
+  Min. topography    :       0.0
+  Max. topography    :    2425.0
+  Max. z domain      :   52425.0
+  Number z-levels    :         6
+    z-layer  1       :       0.0 (dz=******)
+    z-layer  2       :   10000.0 (dz=******)
+    z-layer  3       :   20000.0 (dz=******)
+    z-layer  4       :   30000.0 (dz=******)
+    z-layer  5       :   40000.0 (dz=******)
+    z-layer  6       :   50000.0 (dz=******)
+
+----------------------------------------------------
+                                                    
+               FALL3D INPUT DATA                    
+                                                    
+----------------------------------------------------
+
+FALL3D TIME RANGE
+  Initial time    :   14 SEP 2009 at 00 h 0000 s
+  Final   time    :   14 SEP 2009 at 03 h 0000 s
+  Time increment  :    3.0 h (     10800.0 s)
+  Safety factor   : 0.900000E+00
+  Print time      :    1.0 h (      3600.0 s)
+
+NUMERICAL TREATMENT
+ Vertical turbulence      
+   Kv similarity theory   
+ Horizontal turbulence    
+   Kh RAMS                
+ Limiter method           : Minmod         
+ Apply Z-mapping          : No 
+ Settling velocity model        : Ganser 93      
+
+GRANULOMETRIC DISTRIBUTION            
+  NUMBER OF PARTICLE CLASSES        :    6
+  DIAMETER                  (mm   ) :  1.0000  0.5000  0.2500  0.1250  0.0625  0.0313
+  PHI                       (-    ) :   -0.00    1.00    2.00    3.00    4.00    5.00
+  DENSITY                   (kg/m3) : 1200.00 1420.00 1640.00 1860.00 2080.00 2300.00
+  SPHERICITY                (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  MODEL FACTOR              (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  PERCENTAGE                (in % ) :     9.1    16.1    24.8    24.8    16.1     9.1
+  SUM                       (in % ) :   100.0
+
+
+----------------------------------------------------
+                                                    
+             MEMORY REQUIREMENTS                    
+                                                    
+----------------------------------------------------
+                                                    
+DYNAMIC MEMORY ALLOCATED :     4.24 MBy
+
+
+----------------------------------------------------
+                                                    
+               TIME INTEGRATION                     
+                                                    
+----------------------------------------------------
+
+
+METEO FILE READ               
+  Current time              : 14 SEP 2009 at  0: 0: 0
+  Time (sec after 00UTC)    :         0.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -1.7365
+    Average                 :      -1.4471
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.8481
+    Average                 :      -8.2067
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      14.1500
+    Minimum                 :     -49.8500
+    Average                 :     -34.5167
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.0007
+    Average                 :       0.2860
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      39.9845
+    Minimum                 :       1.0000
+    Average                 :      16.5213
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8684   -2.4057   -1.2747   -0.5627   -0.2015   -0.0612
+               min   -4.2814   -2.6143   -1.3596   -0.5861   -0.2052   -0.0617
+
+    2          max   -6.2629   -3.6881   -1.8443   -0.7574   -0.2549   -0.0756
+               min   -7.0776   -4.0730   -1.9831   -0.7889   -0.2589   -0.0760
+
+    3          max  -10.7392   -5.7434   -2.5529   -0.9213   -0.2841   -0.0813
+               min  -12.1320   -6.3089   -2.7065   -0.9457   -0.2866   -0.0815
+
+    4          max  -17.8973   -8.4548   -3.2414   -1.0407   -0.3036   -0.0853
+               min  -19.8664   -9.0632   -3.3528   -1.0533   -0.3047   -0.0854
+
+    5          max  -26.4162  -10.7459   -3.6074   -1.0791   -0.3069   -0.0854
+               min  -28.5294  -11.1889   -3.6631   -1.0843   -0.3074   -0.0854
+
+    6          max  -34.6147  -12.2374   -3.7789   -1.0944   -0.3082   -0.0855
+               min  -36.2859  -12.4739   -3.8023   -1.0964   -0.3083   -0.0855
+
+SOURCE FILE READ              
+  From time                 :   14 SEP 2009 at 00 h 0000 s
+  To   time                 :   14 SEP 2009 at 01 h 0000 s
+  Time interval (in sec)    :      3600
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    20
+
+  I: 26  J: 59  K:  1 ( 1567. m a.s.l.)  MFR:  0.6211E+01
+  I: 27  J: 59  K:  1 ( 1677. m a.s.l.)  MFR:  0.2089E+02
+  I: 26  J: 60  K:  1 ( 1734. m a.s.l.)  MFR:  0.3789E+07
+  I: 27  J: 60  K:  1 ( 1992. m a.s.l.)  MFR:  0.1609E+08
+  I: 26  J: 61  K:  1 ( 1883. m a.s.l.)  MFR:  0.3477E+07
+  I: 27  J: 61  K:  1 ( 2323. m a.s.l.)  MFR:  0.1499E+08
+  I: 26  J: 59  K:  2 (11567. m a.s.l.)  MFR:  0.2292E+08
+  I: 27  J: 59  K:  2 (11677. m a.s.l.)  MFR:  0.4593E+08
+  I: 26  J: 60  K:  2 (11734. m a.s.l.)  MFR:  0.4518E+08
+  I: 27  J: 60  K:  2 (11992. m a.s.l.)  MFR:  0.9066E+08
+  I: 26  J: 61  K:  2 (11883. m a.s.l.)  MFR:  0.3354E+06
+  I: 27  J: 61  K:  2 (12323. m a.s.l.)  MFR:  0.1212E+07
+  I: 26  J: 59  K:  3 (21567. m a.s.l.)  MFR:  0.9825E+08
+  I: 27  J: 59  K:  3 (21677. m a.s.l.)  MFR:  0.1898E+09
+  I: 26  J: 60  K:  3 (21734. m a.s.l.)  MFR:  0.1588E+09
+  I: 27  J: 60  K:  3 (21992. m a.s.l.)  MFR:  0.3073E+09
+  I: 26  J: 59  K:  4 (31567. m a.s.l.)  MFR:  0.3943E+06
+  I: 27  J: 59  K:  4 (31677. m a.s.l.)  MFR:  0.6136E+06
+  I: 26  J: 60  K:  4 (31734. m a.s.l.)  MFR:  0.1206E+06
+  I: 27  J: 60  K:  4 (31992. m a.s.l.)  MFR:  0.1755E+06
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.9121E+08
+      2         0.500        1420.     0.1613E+09
+      3         0.250        1640.     0.2475E+09
+      4         0.125        1860.     0.2475E+09
+      5         0.063        2080.     0.1613E+09
+      6         0.031        2300.     0.9121E+08
+
+-> Iteration                 :        1
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :       0 min   (   0.33%)
+   Current time              : 14 SEP 2009 at  0: 0:36
+   -------                     
+   (1) Approx. mass inside  domain :  0.353016E+11 (  99.97%)
+   (2) Approx. mass outside domain :  0.000000E+00 (   0.00%)
+   (3) Mass at the deposit         :  0.121061E+08 (   0.03%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.353137E+11
+   Erupted mass                    :  0.360161E+11
+
+-> Iteration                 :       17
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      10 min   (   5.67%)
+   Current time              : 14 SEP 2009 at  0:10:12
+   -------                     
+   (1) Approx. mass inside  domain :  0.595889E+12 (  99.65%)
+   (2) Approx. mass outside domain :  0.260228E-16 (   0.00%)
+   (3) Mass at the deposit         :  0.208679E+10 (   0.35%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.597976E+12
+   Erupted mass                    :  0.612274E+12
+
+-> Iteration                 :       34
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      20 min   (  11.34%)
+   Current time              : 14 SEP 2009 at  0:20:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.117850E+13 (  99.18%)
+   (2) Approx. mass outside domain :  0.528118E-05 (   0.00%)
+   (3) Mass at the deposit         :  0.968992E+10 (   0.82%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.118819E+13
+   Erupted mass                    :  0.122455E+13
+
+-> Iteration                 :       50
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      30 min   (  16.67%)
+   Current time              : 14 SEP 2009 at  0:30: 0
+   -------                     
+   (1) Approx. mass inside  domain :  0.171105E+13 (  98.59%)
+   (2) Approx. mass outside domain :  0.181351E+00 (   0.00%)
+   (3) Mass at the deposit         :  0.243992E+11 (   1.41%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.173545E+13
+   Erupted mass                    :  0.180081E+13
+
+-> Iteration                 :       67
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      40 min   (  22.34%)
+   Current time              : 14 SEP 2009 at  0:40:13
+   -------                     
+   (1) Approx. mass inside  domain :  0.225868E+13 (  97.82%)
+   (2) Approx. mass outside domain :  0.150221E+03 (   0.00%)
+   (3) Mass at the deposit         :  0.503891E+11 (   2.18%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.230907E+13
+   Erupted mass                    :  0.241308E+13
+
+-> Iteration                 :       84
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      50 min   (  28.01%)
+   Current time              : 14 SEP 2009 at  0:50:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.278731E+13 (  96.91%)
+   (2) Approx. mass outside domain :  0.141281E+05 (   0.00%)
+   (3) Mass at the deposit         :  0.887658E+11 (   3.09%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.287608E+13
+   Erupted mass                    :  0.302535E+13
+
+-> Iteration                 :      100
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      60 min   (  33.35%)
+   Current time              : 14 SEP 2009 at  1: 0: 1
+   -------                     
+   (1) Approx. mass inside  domain :  0.326798E+13 (  95.97%)
+   (2) Approx. mass outside domain :  0.390451E+06 (   0.00%)
+   (3) Mass at the deposit         :  0.137158E+12 (   4.03%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.340514E+13
+   Erupted mass                    :  0.360161E+13
+
+METEO FILE READ               
+  Current time              : 14 SEP 2009 at  1: 0: 1
+  Time (sec after 00UTC)    :      3602.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -1.7365
+    Average                 :      -1.4471
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.8481
+    Average                 :      -8.2067
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      14.1500
+    Minimum                 :     -49.8500
+    Average                 :     -34.5167
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.0007
+    Average                 :       0.2860
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      39.9845
+    Minimum                 :       1.0000
+    Average                 :      16.5213
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8684   -2.4057   -1.2747   -0.5627   -0.2015   -0.0612
+               min   -4.2814   -2.6143   -1.3596   -0.5861   -0.2052   -0.0617
+
+    2          max   -6.2629   -3.6881   -1.8443   -0.7574   -0.2549   -0.0756
+               min   -7.0776   -4.0730   -1.9831   -0.7889   -0.2589   -0.0760
+
+    3          max  -10.7392   -5.7434   -2.5529   -0.9213   -0.2841   -0.0813
+               min  -12.1320   -6.3089   -2.7065   -0.9457   -0.2866   -0.0815
+
+    4          max  -17.8973   -8.4548   -3.2414   -1.0407   -0.3036   -0.0853
+               min  -19.8664   -9.0632   -3.3528   -1.0533   -0.3047   -0.0854
+
+    5          max  -26.4162  -10.7459   -3.6074   -1.0791   -0.3069   -0.0854
+               min  -28.5294  -11.1889   -3.6631   -1.0843   -0.3074   -0.0854
+
+    6          max  -34.6147  -12.2374   -3.7789   -1.0944   -0.3082   -0.0855
+               min  -36.2859  -12.4739   -3.8023   -1.0964   -0.3083   -0.0855
+
+SOURCE FILE READ              
+  From time                 :   14 SEP 2009 at 01 h 0001 s
+  To   time                 :   14 SEP 2009 at 02 h 0000 s
+  Time interval (in sec)    :      3598
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    20
+
+  I: 26  J: 59  K:  1 ( 1567. m a.s.l.)  MFR:  0.6211E+01
+  I: 27  J: 59  K:  1 ( 1677. m a.s.l.)  MFR:  0.2089E+02
+  I: 26  J: 60  K:  1 ( 1734. m a.s.l.)  MFR:  0.3789E+07
+  I: 27  J: 60  K:  1 ( 1992. m a.s.l.)  MFR:  0.1609E+08
+  I: 26  J: 61  K:  1 ( 1883. m a.s.l.)  MFR:  0.3477E+07
+  I: 27  J: 61  K:  1 ( 2323. m a.s.l.)  MFR:  0.1499E+08
+  I: 26  J: 59  K:  2 (11567. m a.s.l.)  MFR:  0.2292E+08
+  I: 27  J: 59  K:  2 (11677. m a.s.l.)  MFR:  0.4593E+08
+  I: 26  J: 60  K:  2 (11734. m a.s.l.)  MFR:  0.4518E+08
+  I: 27  J: 60  K:  2 (11992. m a.s.l.)  MFR:  0.9066E+08
+  I: 26  J: 61  K:  2 (11883. m a.s.l.)  MFR:  0.3354E+06
+  I: 27  J: 61  K:  2 (12323. m a.s.l.)  MFR:  0.1212E+07
+  I: 26  J: 59  K:  3 (21567. m a.s.l.)  MFR:  0.9825E+08
+  I: 27  J: 59  K:  3 (21677. m a.s.l.)  MFR:  0.1898E+09
+  I: 26  J: 60  K:  3 (21734. m a.s.l.)  MFR:  0.1588E+09
+  I: 27  J: 60  K:  3 (21992. m a.s.l.)  MFR:  0.3073E+09
+  I: 26  J: 59  K:  4 (31567. m a.s.l.)  MFR:  0.3943E+06
+  I: 27  J: 59  K:  4 (31677. m a.s.l.)  MFR:  0.6136E+06
+  I: 26  J: 60  K:  4 (31734. m a.s.l.)  MFR:  0.1206E+06
+  I: 27  J: 60  K:  4 (31992. m a.s.l.)  MFR:  0.1755E+06
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.9121E+08
+      2         0.500        1420.     0.1613E+09
+      3         0.250        1640.     0.2475E+09
+      4         0.125        1860.     0.2475E+09
+      5         0.063        2080.     0.1613E+09
+      6         0.031        2300.     0.9121E+08
+
+-> Iteration                 :      117
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      70 min   (  39.02%)
+   Current time              : 14 SEP 2009 at  1:10:13
+   -------                     
+   (1) Approx. mass inside  domain :  0.376136E+13 (  94.90%)
+   (2) Approx. mass outside domain :  0.319012E+08 (   0.00%)
+   (3) Mass at the deposit         :  0.202118E+12 (   5.10%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.396351E+13
+   Erupted mass                    :  0.421389E+13
+
+-> Iteration                 :      134
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      80 min   (  44.69%)
+   Current time              : 14 SEP 2009 at  1:20:26
+   -------                     
+   (1) Approx. mass inside  domain :  0.423536E+13 (  93.74%)
+   (2) Approx. mass outside domain :  0.175823E+10 (   0.04%)
+   (3) Mass at the deposit         :  0.281223E+12 (   6.22%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.451834E+13
+   Erupted mass                    :  0.482616E+13
+
+-> Iteration                 :      150
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :      90 min   (  50.02%)
+   Current time              : 14 SEP 2009 at  1:30: 2
+   -------                     
+   (1) Approx. mass inside  domain :  0.464192E+13 (  92.20%)
+   (2) Approx. mass outside domain :  0.239934E+11 (   0.48%)
+   (3) Mass at the deposit         :  0.368550E+12 (   7.32%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.503447E+13
+   Erupted mass                    :  0.540242E+13
+
+-> Iteration                 :      167
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     100 min   (  55.69%)
+   Current time              : 14 SEP 2009 at  1:40:14
+   -------                     
+   (1) Approx. mass inside  domain :  0.495484E+13 (  88.90%)
+   (2) Approx. mass outside domain :  0.144218E+12 (   2.59%)
+   (3) Mass at the deposit         :  0.474673E+12 (   8.52%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.557374E+13
+   Erupted mass                    :  0.601469E+13
+
+-> Iteration                 :      184
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     110 min   (  61.36%)
+   Current time              : 14 SEP 2009 at  1:50:26
+   -------                     
+   (1) Approx. mass inside  domain :  0.510745E+13 (  83.49%)
+   (2) Approx. mass outside domain :  0.416073E+12 (   6.80%)
+   (3) Mass at the deposit         :  0.593717E+12 (   9.71%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.611724E+13
+   Erupted mass                    :  0.662696E+13
+
+-> Iteration                 :      200
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     120 min   (  66.70%)
+   Current time              : 14 SEP 2009 at  2: 0: 3
+   -------                     
+   (1) Approx. mass inside  domain :  0.517216E+13 (  77.90%)
+   (2) Approx. mass outside domain :  0.751144E+12 (  11.31%)
+   (3) Mass at the deposit         :  0.716437E+12 (  10.79%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.663974E+13
+   Erupted mass                    :  0.720322E+13
+
+METEO FILE READ               
+  Current time              : 14 SEP 2009 at  2: 0: 3
+  Time (sec after 00UTC)    :      7203.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -1.7365
+    Average                 :      -1.4471
+  Y-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.8481
+    Average                 :      -8.2067
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      14.1500
+    Minimum                 :     -49.8500
+    Average                 :     -34.5167
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.0007
+    Average                 :       0.2860
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :      39.9845
+    Minimum                 :       1.0000
+    Average                 :      16.5213
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max   -3.8684   -2.4057   -1.2747   -0.5627   -0.2015   -0.0612
+               min   -4.2814   -2.6143   -1.3596   -0.5861   -0.2052   -0.0617
+
+    2          max   -6.2629   -3.6881   -1.8443   -0.7574   -0.2549   -0.0756
+               min   -7.0776   -4.0730   -1.9831   -0.7889   -0.2589   -0.0760
+
+    3          max  -10.7392   -5.7434   -2.5529   -0.9213   -0.2841   -0.0813
+               min  -12.1320   -6.3089   -2.7065   -0.9457   -0.2866   -0.0815
+
+    4          max  -17.8973   -8.4548   -3.2414   -1.0407   -0.3036   -0.0853
+               min  -19.8664   -9.0632   -3.3528   -1.0533   -0.3047   -0.0854
+
+    5          max  -26.4162  -10.7459   -3.6074   -1.0791   -0.3069   -0.0854
+               min  -28.5294  -11.1889   -3.6631   -1.0843   -0.3074   -0.0854
+
+    6          max  -34.6147  -12.2374   -3.7789   -1.0944   -0.3082   -0.0855
+               min  -36.2859  -12.4739   -3.8023   -1.0964   -0.3083   -0.0855
+
+SOURCE FILE READ              
+  From time                 :   14 SEP 2009 at 02 h 0003 s
+  To   time                 :   14 SEP 2009 at 03 h 0000 s
+  Time interval (in sec)    :      3596
+  Mass flow rate            :   0.100000E+10
+  Number of sources         :    20
+
+  I: 26  J: 59  K:  1 ( 1567. m a.s.l.)  MFR:  0.6211E+01
+  I: 27  J: 59  K:  1 ( 1677. m a.s.l.)  MFR:  0.2089E+02
+  I: 26  J: 60  K:  1 ( 1734. m a.s.l.)  MFR:  0.3789E+07
+  I: 27  J: 60  K:  1 ( 1992. m a.s.l.)  MFR:  0.1609E+08
+  I: 26  J: 61  K:  1 ( 1883. m a.s.l.)  MFR:  0.3477E+07
+  I: 27  J: 61  K:  1 ( 2323. m a.s.l.)  MFR:  0.1499E+08
+  I: 26  J: 59  K:  2 (11567. m a.s.l.)  MFR:  0.2292E+08
+  I: 27  J: 59  K:  2 (11677. m a.s.l.)  MFR:  0.4593E+08
+  I: 26  J: 60  K:  2 (11734. m a.s.l.)  MFR:  0.4518E+08
+  I: 27  J: 60  K:  2 (11992. m a.s.l.)  MFR:  0.9066E+08
+  I: 26  J: 61  K:  2 (11883. m a.s.l.)  MFR:  0.3354E+06
+  I: 27  J: 61  K:  2 (12323. m a.s.l.)  MFR:  0.1212E+07
+  I: 26  J: 59  K:  3 (21567. m a.s.l.)  MFR:  0.9825E+08
+  I: 27  J: 59  K:  3 (21677. m a.s.l.)  MFR:  0.1898E+09
+  I: 26  J: 60  K:  3 (21734. m a.s.l.)  MFR:  0.1588E+09
+  I: 27  J: 60  K:  3 (21992. m a.s.l.)  MFR:  0.3073E+09
+  I: 26  J: 59  K:  4 (31567. m a.s.l.)  MFR:  0.3943E+06
+  I: 27  J: 59  K:  4 (31677. m a.s.l.)  MFR:  0.6136E+06
+  I: 26  J: 60  K:  4 (31734. m a.s.l.)  MFR:  0.1206E+06
+  I: 27  J: 60  K:  4 (31992. m a.s.l.)  MFR:  0.1755E+06
+
+  Class    Diameter(mm)    Density        MFR  
+      1         1.000        1200.     0.9121E+08
+      2         0.500        1420.     0.1613E+09
+      3         0.250        1640.     0.2475E+09
+      4         0.125        1860.     0.2475E+09
+      5         0.063        2080.     0.1613E+09
+      6         0.031        2300.     0.9121E+08
+
+-> Iteration                 :      217
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     130 min   (  72.37%)
+   Current time              : 14 SEP 2009 at  2:10:15
+   -------                     
+   (1) Approx. mass inside  domain :  0.521591E+13 (  72.42%)
+   (2) Approx. mass outside domain :  0.112996E+13 (  15.69%)
+   (3) Mass at the deposit         :  0.856878E+12 (  11.90%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.720274E+13
+   Erupted mass                    :  0.781550E+13
+
+-> Iteration                 :      234
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     140 min   (  78.03%)
+   Current time              : 14 SEP 2009 at  2:20:27
+   -------                     
+   (1) Approx. mass inside  domain :  0.525272E+13 (  67.60%)
+   (2) Approx. mass outside domain :  0.151157E+13 (  19.45%)
+   (3) Mass at the deposit         :  0.100644E+13 (  12.95%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.777073E+13
+   Erupted mass                    :  0.842777E+13
+
+-> Iteration                 :      250
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     150 min   (  83.37%)
+   Current time              : 14 SEP 2009 at  2:30: 4
+   -------                     
+   (1) Approx. mass inside  domain :  0.528398E+13 (  63.59%)
+   (2) Approx. mass outside domain :  0.187046E+13 (  22.51%)
+   (3) Mass at the deposit         :  0.115450E+13 (  13.89%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.830894E+13
+   Erupted mass                    :  0.900403E+13
+
+-> Iteration                 :      267
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     160 min   (  89.04%)
+   Current time              : 14 SEP 2009 at  2:40:16
+   -------                     
+   (1) Approx. mass inside  domain :  0.531420E+13 (  59.82%)
+   (2) Approx. mass outside domain :  0.225121E+13 (  25.34%)
+   (3) Mass at the deposit         :  0.131862E+13 (  14.84%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.888403E+13
+   Erupted mass                    :  0.961630E+13
+
+-> Iteration                 :      284
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     170 min   (  94.71%)
+   Current time              : 14 SEP 2009 at  2:50:28
+   -------                     
+   (1) Approx. mass inside  domain :  0.534150E+13 (  56.45%)
+   (2) Approx. mass outside domain :  0.263149E+13 (  27.81%)
+   (3) Mass at the deposit         :  0.148899E+13 (  15.74%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.946198E+13
+   Erupted mass                    :  0.102286E+14
+
+-> Iteration                 :      300
+   Critical time step        :  0.400179E+02
+   Time step                 :  0.360161E+02
+   Ellapsed time             :     180 min   ( 100.04%)
+   Current time              : 14 SEP 2009 at  3: 0: 4
+   -------                     
+   (1) Approx. mass inside  domain :  0.536503E+13 (  53.61%)
+   (2) Approx. mass outside domain :  0.298872E+13 (  29.86%)
+   (3) Mass at the deposit         :  0.165447E+13 (  16.53%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.100082E+14
+   Erupted mass                    :  0.108048E+14
+---------------------------------------------------
+                                                   
+             FALL3D : END OF SIMULATION            
+                                                   
+---------------------------------------------------
+
+  STATUS  :  NORMAL TERMINATION
+  CPU TIME:      20.8sec

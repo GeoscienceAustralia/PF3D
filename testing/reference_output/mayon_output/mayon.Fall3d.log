@@ -1,0 +1,1021 @@
+---------------------------------------------------
+                                                   
+               FALL3D SERIAL VERISON               
+                                                   
+---------------------------------------------------
+  Code version        :  5.0
+  Starting date       : 12-23-2009 at time: 12:22:24
+
+  FALL3D input  file  : mayon_output/mayon.inp
+  Source        file  : mayon_output/mayon.src
+  Granulometry  file  : mayon_output/mayon.grn
+  Meteo         file  : mayon_output/mayon.dbs
+  LST           file  : mayon_output/mayon.Fall3d.log
+  Results       file  : mayon_output/mayon.res
+
+----------------------------------------------------
+                                                    
+               METEO AND GRID DATA                  
+                                                    
+----------------------------------------------------
+
+METEO DATA TIME RANGE
+  Initial time       :   28 FEB 2000 at 00 h 0000 s
+  Final   time       :   28 FEB 2000 at 06 h 0000 s
+  Meteo coverage     :    6.0 h (    21600 sec)
+
+MESH
+  Bottom-left corner : ( 520861.1  1402130.3)
+  Top-right   corner : ( 628861.1  1507130.3)
+  Number points x    :       108
+  Number points y    :       105
+  X  grid spacing    :    1000.0
+  Y  grid spacing    :    1000.0
+  Min. topography    :      -0.0
+  Max. topography    :    1791.5
+  Max. z domain      :   11791.5
+  Number z-levels    :         2
+    z-layer  1       :       0.0 (dz=******)
+    z-layer  2       :   10000.0 (dz=******)
+
+----------------------------------------------------
+                                                    
+               FALL3D INPUT DATA                    
+                                                    
+----------------------------------------------------
+
+FALL3D TIME RANGE
+  Initial time    :   28 FEB 2000 at 00 h 0000 s
+  Final   time    :   28 FEB 2000 at 06 h 0000 s
+  Time increment  :    6.0 h (     21600.0 s)
+  Safety factor   : 0.900000E+00
+  Print time      :    1.0 h (      3600.0 s)
+
+NUMERICAL TREATMENT
+ Vertical turbulence      
+   Kv similarity theory   
+ Horizontal turbulence    
+   Kh RAMS                
+ Limiter method           : Minmod         
+ Apply Z-mapping          : No 
+ Settling velocity model        : Ganser 93      
+
+GRANULOMETRIC DISTRIBUTION            
+  NUMBER OF PARTICLE CLASSES        :    6
+  DIAMETER                  (mm   ) : 16.0000  5.2780  1.7411  0.5744  0.1895  0.0625
+  PHI                       (-    ) :   -4.00   -2.40   -0.80    0.80    2.40    4.00
+  DENSITY                   (kg/m3) : 2350.00 2540.00 2730.00 2920.00 3110.00 3300.00
+  SPHERICITY                (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  MODEL FACTOR              (-    ) :    0.90    0.90    0.90    0.90    0.90    0.90
+  PERCENTAGE                (in % ) :     0.0     0.5    15.4    56.7    26.0     1.4
+  SUM                       (in % ) :   100.0
+
+
+----------------------------------------------------
+                                                    
+             MEMORY REQUIREMENTS                    
+                                                    
+----------------------------------------------------
+                                                    
+DYNAMIC MEMORY ALLOCATED :     5.62 MBy
+
+
+----------------------------------------------------
+                                                    
+               TIME INTEGRATION                     
+                                                    
+----------------------------------------------------
+
+
+METEO FILE READ               
+  Current time              : 28 FEB 2000 at  0: 0: 0
+  Time (sec after 00UTC)    :         0.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.9000
+    Average                 :      -4.9500
+  Y-velocity values           
+    Maximum                 :       9.9000
+    Minimum                 :       0.0000
+    Average                 :       4.9500
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      19.7500
+    Minimum                 :     -59.3500
+    Average                 :     -19.8000
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.3277
+    Average                 :       0.8123
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :       1.0000
+    Minimum                 :       1.0000
+    Average                 :       1.0000
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max  -20.5022  -12.7218   -8.2034   -4.2711   -1.4621   -0.3068
+               min  -22.3970  -13.9487   -8.9725   -4.5760   -1.5309   -0.3121
+
+    2          max  -35.4027  -22.1491  -14.1881   -7.0506   -2.2932   -0.4519
+               min  -39.7315  -24.9788  -15.9052   -7.6826   -2.4234   -0.4603
+
+SOURCE FILE READ              
+  From time                 :   28 FEB 2000 at 00 h 0000 s
+  To   time                 :   28 FEB 2000 at 01 h 0000 s
+  Time interval (in sec)    :      3600
+  Mass flow rate            :   0.100000E+07
+  Number of sources         :    16
+
+  I: 52  J: 63  K:  1 (  926. m a.s.l.)  MFR:  0.1412E+03
+  I: 53  J: 63  K:  1 ( 1287. m a.s.l.)  MFR:  0.9855E+05
+  I: 54  J: 63  K:  1 ( 1518. m a.s.l.)  MFR:  0.4049E+05
+  I: 52  J: 64  K:  1 ( 1001. m a.s.l.)  MFR:  0.1010E+06
+  I: 53  J: 64  K:  1 ( 1444. m a.s.l.)  MFR:  0.3034E+06
+  I: 54  J: 64  K:  1 ( 1791. m a.s.l.)  MFR:  0.3673E+05
+  I: 52  J: 65  K:  1 (  977. m a.s.l.)  MFR:  0.1574E+05
+  I: 53  J: 65  K:  1 ( 1398. m a.s.l.)  MFR:  0.2878E+05
+  I: 52  J: 63  K:  2 (10926. m a.s.l.)  MFR:  0.7949E+02
+  I: 53  J: 63  K:  2 (11287. m a.s.l.)  MFR:  0.1014E+05
+  I: 54  J: 63  K:  2 (11518. m a.s.l.)  MFR:  0.3119E+04
+  I: 52  J: 64  K:  2 (11001. m a.s.l.)  MFR:  0.1083E+06
+  I: 53  J: 64  K:  2 (11444. m a.s.l.)  MFR:  0.1996E+06
+  I: 54  J: 64  K:  2 (11791. m a.s.l.)  MFR:  0.3501E+04
+  I: 52  J: 65  K:  2 (10977. m a.s.l.)  MFR:  0.1844E+05
+  I: 53  J: 65  K:  2 (11398. m a.s.l.)  MFR:  0.3201E+05
+
+  Class    Diameter(mm)    Density        MFR  
+      1        16.000        2350.     0.1337E+02
+      2         5.278        2540.     0.4648E+04
+      3         1.741        2730.     0.1540E+06
+      4         0.574        2920.     0.5671E+06
+      5         0.189        3110.     0.2603E+06
+      6         0.063        3300.     0.1391E+05
+
+-> Iteration                 :        1
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :       0 min   (   0.12%)
+   Current time              : 28 FEB 2000 at  0: 0:26
+   -------                     
+   (1) Approx. mass inside  domain :  0.129621E+08 (  98.52%)
+   (2) Approx. mass outside domain :  0.000000E+00 (   0.00%)
+   (3) Mass at the deposit         :  0.195137E+06 (   1.48%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.131572E+08
+   Erupted mass                    :  0.260820E+08
+
+-> Iteration                 :       24
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      10 min   (   2.90%)
+   Current time              : 28 FEB 2000 at  0:10:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.287273E+09 (  83.48%)
+   (2) Approx. mass outside domain :  0.106787E-27 (   0.00%)
+   (3) Mass at the deposit         :  0.568352E+08 (  16.52%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.344108E+09
+   Erupted mass                    :  0.625967E+09
+
+-> Iteration                 :       47
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      20 min   (   5.68%)
+   Current time              : 28 FEB 2000 at  0:20:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.517688E+09 (  71.75%)
+   (2) Approx. mass outside domain :  0.584316E-09 (   0.00%)
+   (3) Mass at the deposit         :  0.203861E+09 (  28.25%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.721549E+09
+   Erupted mass                    :  0.122585E+10
+
+-> Iteration                 :       70
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      30 min   (   8.45%)
+   Current time              : 28 FEB 2000 at  0:30:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.711039E+09 (  62.53%)
+   (2) Approx. mass outside domain :  0.134787E-01 (   0.00%)
+   (3) Mass at the deposit         :  0.426097E+09 (  37.47%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.113714E+10
+   Erupted mass                    :  0.182574E+10
+
+-> Iteration                 :       93
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      40 min   (  11.23%)
+   Current time              : 28 FEB 2000 at  0:40:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.874425E+09 (  55.19%)
+   (2) Approx. mass outside domain :  0.178551E+03 (   0.00%)
+   (3) Mass at the deposit         :  0.709997E+09 (  44.81%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.158442E+10
+   Erupted mass                    :  0.242562E+10
+
+-> Iteration                 :      116
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      50 min   (  14.01%)
+   Current time              : 28 FEB 2000 at  0:50:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.101398E+10 (  49.26%)
+   (2) Approx. mass outside domain :  0.574496E+05 (   0.00%)
+   (3) Mass at the deposit         :  0.104458E+10 (  50.74%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.205862E+10
+   Erupted mass                    :  0.302551E+10
+
+-> Iteration                 :      139
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      60 min   (  16.78%)
+   Current time              : 28 FEB 2000 at  1: 0:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.113382E+10 (  44.34%)
+   (2) Approx. mass outside domain :  0.194472E+07 (   0.08%)
+   (3) Mass at the deposit         :  0.142131E+10 (  55.58%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.255707E+10
+   Erupted mass                    :  0.362539E+10
+
+METEO FILE READ               
+  Current time              : 28 FEB 2000 at  1: 0:25
+  Time (sec after 00UTC)    :      3625.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.9000
+    Average                 :      -4.9500
+  Y-velocity values           
+    Maximum                 :       9.9000
+    Minimum                 :       0.0000
+    Average                 :       4.9500
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      19.7500
+    Minimum                 :     -59.3500
+    Average                 :     -19.8000
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.3277
+    Average                 :       0.8123
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :       1.0000
+    Minimum                 :       1.0000
+    Average                 :       1.0000
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max  -20.5022  -12.7218   -8.2034   -4.2711   -1.4621   -0.3068
+               min  -22.3970  -13.9487   -8.9725   -4.5760   -1.5309   -0.3121
+
+    2          max  -35.4027  -22.1491  -14.1881   -7.0506   -2.2932   -0.4519
+               min  -39.7315  -24.9788  -15.9052   -7.6826   -2.4234   -0.4603
+
+SOURCE FILE READ              
+  From time                 :   28 FEB 2000 at 01 h 0025 s
+  To   time                 :   28 FEB 2000 at 02 h 0000 s
+  Time interval (in sec)    :      3574
+  Mass flow rate            :   0.100000E+07
+  Number of sources         :    16
+
+  I: 52  J: 63  K:  1 (  926. m a.s.l.)  MFR:  0.1412E+03
+  I: 53  J: 63  K:  1 ( 1287. m a.s.l.)  MFR:  0.9855E+05
+  I: 54  J: 63  K:  1 ( 1518. m a.s.l.)  MFR:  0.4049E+05
+  I: 52  J: 64  K:  1 ( 1001. m a.s.l.)  MFR:  0.1010E+06
+  I: 53  J: 64  K:  1 ( 1444. m a.s.l.)  MFR:  0.3034E+06
+  I: 54  J: 64  K:  1 ( 1791. m a.s.l.)  MFR:  0.3673E+05
+  I: 52  J: 65  K:  1 (  977. m a.s.l.)  MFR:  0.1574E+05
+  I: 53  J: 65  K:  1 ( 1398. m a.s.l.)  MFR:  0.2878E+05
+  I: 52  J: 63  K:  2 (10926. m a.s.l.)  MFR:  0.7949E+02
+  I: 53  J: 63  K:  2 (11287. m a.s.l.)  MFR:  0.1014E+05
+  I: 54  J: 63  K:  2 (11518. m a.s.l.)  MFR:  0.3119E+04
+  I: 52  J: 64  K:  2 (11001. m a.s.l.)  MFR:  0.1083E+06
+  I: 53  J: 64  K:  2 (11444. m a.s.l.)  MFR:  0.1996E+06
+  I: 54  J: 64  K:  2 (11791. m a.s.l.)  MFR:  0.3501E+04
+  I: 52  J: 65  K:  2 (10977. m a.s.l.)  MFR:  0.1844E+05
+  I: 53  J: 65  K:  2 (11398. m a.s.l.)  MFR:  0.3201E+05
+
+  Class    Diameter(mm)    Density        MFR  
+      1        16.000        2350.     0.1337E+02
+      2         5.278        2540.     0.4648E+04
+      3         1.741        2730.     0.1540E+06
+      4         0.574        2920.     0.5671E+06
+      5         0.189        3110.     0.2603E+06
+      6         0.063        3300.     0.1391E+05
+
+-> Iteration                 :      162
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      70 min   (  19.56%)
+   Current time              : 28 FEB 2000 at  1:10:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.123257E+10 (  40.01%)
+   (2) Approx. mass outside domain :  0.149497E+08 (   0.49%)
+   (3) Mass at the deposit         :  0.183341E+10 (  59.51%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.308093E+10
+   Erupted mass                    :  0.422528E+10
+
+-> Iteration                 :      185
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      80 min   (  22.34%)
+   Current time              : 28 FEB 2000 at  1:20:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.131129E+10 (  36.12%)
+   (2) Approx. mass outside domain :  0.439398E+08 (   1.21%)
+   (3) Mass at the deposit         :  0.227511E+10 (  62.67%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.363034E+10
+   Erupted mass                    :  0.482516E+10
+
+-> Iteration                 :      208
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :      90 min   (  25.12%)
+   Current time              : 28 FEB 2000 at  1:30:25
+   -------                     
+   (1) Approx. mass inside  domain :  0.137720E+10 (  32.80%)
+   (2) Approx. mass outside domain :  0.797180E+08 (   1.90%)
+   (3) Mass at the deposit         :  0.274153E+10 (  65.30%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.419845E+10
+   Erupted mass                    :  0.542505E+10
+
+-> Iteration                 :      231
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     100 min   (  27.89%)
+   Current time              : 28 FEB 2000 at  1:40:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.143490E+10 (  30.02%)
+   (2) Approx. mass outside domain :  0.116348E+09 (   2.43%)
+   (3) Mass at the deposit         :  0.322880E+10 (  67.55%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.478005E+10
+   Erupted mass                    :  0.602493E+10
+
+-> Iteration                 :      254
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     110 min   (  30.67%)
+   Current time              : 28 FEB 2000 at  1:50:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.148613E+10 (  27.66%)
+   (2) Approx. mass outside domain :  0.153003E+09 (   2.85%)
+   (3) Mass at the deposit         :  0.373390E+10 (  69.49%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.537303E+10
+   Erupted mass                    :  0.662482E+10
+
+-> Iteration                 :      277
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     120 min   (  33.45%)
+   Current time              : 28 FEB 2000 at  2: 0:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.153191E+10 (  25.63%)
+   (2) Approx. mass outside domain :  0.189659E+09 (   3.17%)
+   (3) Mass at the deposit         :  0.425446E+10 (  71.19%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.597602E+10
+   Erupted mass                    :  0.722470E+10
+
+METEO FILE READ               
+  Current time              : 28 FEB 2000 at  2: 0:24
+  Time (sec after 00UTC)    :      7225.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.9000
+    Average                 :      -4.9500
+  Y-velocity values           
+    Maximum                 :       9.9000
+    Minimum                 :       0.0000
+    Average                 :       4.9500
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      19.7500
+    Minimum                 :     -59.3500
+    Average                 :     -19.8000
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.3277
+    Average                 :       0.8123
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :       1.0000
+    Minimum                 :       1.0000
+    Average                 :       1.0000
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max  -20.5022  -12.7218   -8.2034   -4.2711   -1.4621   -0.3068
+               min  -22.3970  -13.9487   -8.9725   -4.5760   -1.5309   -0.3121
+
+    2          max  -35.4027  -22.1491  -14.1881   -7.0506   -2.2932   -0.4519
+               min  -39.7315  -24.9788  -15.9052   -7.6826   -2.4234   -0.4603
+
+SOURCE FILE READ              
+  From time                 :   28 FEB 2000 at 02 h 0024 s
+  To   time                 :   28 FEB 2000 at 03 h 0000 s
+  Time interval (in sec)    :      3575
+  Mass flow rate            :   0.100000E+07
+  Number of sources         :    16
+
+  I: 52  J: 63  K:  1 (  926. m a.s.l.)  MFR:  0.1412E+03
+  I: 53  J: 63  K:  1 ( 1287. m a.s.l.)  MFR:  0.9855E+05
+  I: 54  J: 63  K:  1 ( 1518. m a.s.l.)  MFR:  0.4049E+05
+  I: 52  J: 64  K:  1 ( 1001. m a.s.l.)  MFR:  0.1010E+06
+  I: 53  J: 64  K:  1 ( 1444. m a.s.l.)  MFR:  0.3034E+06
+  I: 54  J: 64  K:  1 ( 1791. m a.s.l.)  MFR:  0.3673E+05
+  I: 52  J: 65  K:  1 (  977. m a.s.l.)  MFR:  0.1574E+05
+  I: 53  J: 65  K:  1 ( 1398. m a.s.l.)  MFR:  0.2878E+05
+  I: 52  J: 63  K:  2 (10926. m a.s.l.)  MFR:  0.7949E+02
+  I: 53  J: 63  K:  2 (11287. m a.s.l.)  MFR:  0.1014E+05
+  I: 54  J: 63  K:  2 (11518. m a.s.l.)  MFR:  0.3119E+04
+  I: 52  J: 64  K:  2 (11001. m a.s.l.)  MFR:  0.1083E+06
+  I: 53  J: 64  K:  2 (11444. m a.s.l.)  MFR:  0.1996E+06
+  I: 54  J: 64  K:  2 (11791. m a.s.l.)  MFR:  0.3501E+04
+  I: 52  J: 65  K:  2 (10977. m a.s.l.)  MFR:  0.1844E+05
+  I: 53  J: 65  K:  2 (11398. m a.s.l.)  MFR:  0.3201E+05
+
+  Class    Diameter(mm)    Density        MFR  
+      1        16.000        2350.     0.1337E+02
+      2         5.278        2540.     0.4648E+04
+      3         1.741        2730.     0.1540E+06
+      4         0.574        2920.     0.5671E+06
+      5         0.189        3110.     0.2603E+06
+      6         0.063        3300.     0.1391E+05
+
+-> Iteration                 :      300
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     130 min   (  36.22%)
+   Current time              : 28 FEB 2000 at  2:10:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.157292E+10 (  23.88%)
+   (2) Approx. mass outside domain :  0.226315E+09 (   3.44%)
+   (3) Mass at the deposit         :  0.478850E+10 (  72.69%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.658773E+10
+   Erupted mass                    :  0.782459E+10
+
+-> Iteration                 :      323
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     140 min   (  39.00%)
+   Current time              : 28 FEB 2000 at  2:20:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.160948E+10 (  22.33%)
+   (2) Approx. mass outside domain :  0.262971E+09 (   3.65%)
+   (3) Mass at the deposit         :  0.533428E+10 (  74.02%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.720673E+10
+   Erupted mass                    :  0.842447E+10
+
+-> Iteration                 :      346
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     150 min   (  41.78%)
+   Current time              : 28 FEB 2000 at  2:30:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.164198E+10 (  20.97%)
+   (2) Approx. mass outside domain :  0.299627E+09 (   3.83%)
+   (3) Mass at the deposit         :  0.589014E+10 (  75.21%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.783175E+10
+   Erupted mass                    :  0.902435E+10
+
+-> Iteration                 :      369
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     160 min   (  44.56%)
+   Current time              : 28 FEB 2000 at  2:40:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.167092E+10 (  19.75%)
+   (2) Approx. mass outside domain :  0.336283E+09 (   3.97%)
+   (3) Mass at the deposit         :  0.645461E+10 (  76.28%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.846182E+10
+   Erupted mass                    :  0.962424E+10
+
+-> Iteration                 :      392
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     170 min   (  47.33%)
+   Current time              : 28 FEB 2000 at  2:50:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.169674E+10 (  18.65%)
+   (2) Approx. mass outside domain :  0.372939E+09 (   4.10%)
+   (3) Mass at the deposit         :  0.702643E+10 (  77.25%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.909612E+10
+   Erupted mass                    :  0.102241E+11
+
+-> Iteration                 :      415
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     180 min   (  50.11%)
+   Current time              : 28 FEB 2000 at  3: 0:24
+   -------                     
+   (1) Approx. mass inside  domain :  0.171990E+10 (  17.67%)
+   (2) Approx. mass outside domain :  0.409595E+09 (   4.21%)
+   (3) Mass at the deposit         :  0.760451E+10 (  78.12%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.973401E+10
+   Erupted mass                    :  0.108240E+11
+
+METEO FILE READ               
+  Current time              : 28 FEB 2000 at  3: 0:24
+  Time (sec after 00UTC)    :     10824.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.9000
+    Average                 :      -4.9500
+  Y-velocity values           
+    Maximum                 :       9.9000
+    Minimum                 :       0.0000
+    Average                 :       4.9500
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      19.7500
+    Minimum                 :     -59.3500
+    Average                 :     -19.8000
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.3277
+    Average                 :       0.8123
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :       1.0000
+    Minimum                 :       1.0000
+    Average                 :       1.0000
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max  -20.5022  -12.7218   -8.2034   -4.2711   -1.4621   -0.3068
+               min  -22.3970  -13.9487   -8.9725   -4.5760   -1.5309   -0.3121
+
+    2          max  -35.4027  -22.1491  -14.1881   -7.0506   -2.2932   -0.4519
+               min  -39.7315  -24.9788  -15.9052   -7.6826   -2.4234   -0.4603
+
+SOURCE FILE READ              
+  From time                 :   28 FEB 2000 at 03 h 0024 s
+  To   time                 :   28 FEB 2000 at 04 h 0000 s
+  Time interval (in sec)    :      3575
+  Mass flow rate            :   0.100000E+07
+  Number of sources         :    16
+
+  I: 52  J: 63  K:  1 (  926. m a.s.l.)  MFR:  0.1412E+03
+  I: 53  J: 63  K:  1 ( 1287. m a.s.l.)  MFR:  0.9855E+05
+  I: 54  J: 63  K:  1 ( 1518. m a.s.l.)  MFR:  0.4049E+05
+  I: 52  J: 64  K:  1 ( 1001. m a.s.l.)  MFR:  0.1010E+06
+  I: 53  J: 64  K:  1 ( 1444. m a.s.l.)  MFR:  0.3034E+06
+  I: 54  J: 64  K:  1 ( 1791. m a.s.l.)  MFR:  0.3673E+05
+  I: 52  J: 65  K:  1 (  977. m a.s.l.)  MFR:  0.1574E+05
+  I: 53  J: 65  K:  1 ( 1398. m a.s.l.)  MFR:  0.2878E+05
+  I: 52  J: 63  K:  2 (10926. m a.s.l.)  MFR:  0.7949E+02
+  I: 53  J: 63  K:  2 (11287. m a.s.l.)  MFR:  0.1014E+05
+  I: 54  J: 63  K:  2 (11518. m a.s.l.)  MFR:  0.3119E+04
+  I: 52  J: 64  K:  2 (11001. m a.s.l.)  MFR:  0.1083E+06
+  I: 53  J: 64  K:  2 (11444. m a.s.l.)  MFR:  0.1996E+06
+  I: 54  J: 64  K:  2 (11791. m a.s.l.)  MFR:  0.3501E+04
+  I: 52  J: 65  K:  2 (10977. m a.s.l.)  MFR:  0.1844E+05
+  I: 53  J: 65  K:  2 (11398. m a.s.l.)  MFR:  0.3201E+05
+
+  Class    Diameter(mm)    Density        MFR  
+      1        16.000        2350.     0.1337E+02
+      2         5.278        2540.     0.4648E+04
+      3         1.741        2730.     0.1540E+06
+      4         0.574        2920.     0.5671E+06
+      5         0.189        3110.     0.2603E+06
+      6         0.063        3300.     0.1391E+05
+
+-> Iteration                 :      438
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     190 min   (  52.89%)
+   Current time              : 28 FEB 2000 at  3:10:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.174080E+10 (  16.78%)
+   (2) Approx. mass outside domain :  0.446251E+09 (   4.30%)
+   (3) Mass at the deposit         :  0.818795E+10 (  78.92%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.103750E+11
+   Erupted mass                    :  0.114239E+11
+
+-> Iteration                 :      461
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     200 min   (  55.67%)
+   Current time              : 28 FEB 2000 at  3:20:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.175976E+10 (  15.97%)
+   (2) Approx. mass outside domain :  0.482907E+09 (   4.38%)
+   (3) Mass at the deposit         :  0.877599E+10 (  79.65%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.110187E+11
+   Erupted mass                    :  0.120238E+11
+
+-> Iteration                 :      484
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     210 min   (  58.44%)
+   Current time              : 28 FEB 2000 at  3:30:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.177708E+10 (  15.23%)
+   (2) Approx. mass outside domain :  0.519562E+09 (   4.45%)
+   (3) Mass at the deposit         :  0.936802E+10 (  80.31%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.116647E+11
+   Erupted mass                    :  0.126237E+11
+
+-> Iteration                 :      507
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     220 min   (  61.22%)
+   Current time              : 28 FEB 2000 at  3:40:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.179300E+10 (  14.56%)
+   (2) Approx. mass outside domain :  0.556218E+09 (   4.52%)
+   (3) Mass at the deposit         :  0.996355E+10 (  80.92%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.123128E+11
+   Erupted mass                    :  0.132235E+11
+
+-> Iteration                 :      530
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     230 min   (  64.00%)
+   Current time              : 28 FEB 2000 at  3:50:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.180772E+10 (  13.95%)
+   (2) Approx. mass outside domain :  0.592874E+09 (   4.57%)
+   (3) Mass at the deposit         :  0.105622E+11 (  81.48%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.129628E+11
+   Erupted mass                    :  0.138234E+11
+
+-> Iteration                 :      553
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     240 min   (  66.77%)
+   Current time              : 28 FEB 2000 at  4: 0:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.182137E+10 (  13.38%)
+   (2) Approx. mass outside domain :  0.629530E+09 (   4.62%)
+   (3) Mass at the deposit         :  0.111635E+11 (  82.00%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.136144E+11
+   Erupted mass                    :  0.144233E+11
+
+METEO FILE READ               
+  Current time              : 28 FEB 2000 at  4: 0:23
+  Time (sec after 00UTC)    :     14423.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.9000
+    Average                 :      -4.9500
+  Y-velocity values           
+    Maximum                 :       9.9000
+    Minimum                 :       0.0000
+    Average                 :       4.9500
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      19.7500
+    Minimum                 :     -59.3500
+    Average                 :     -19.8000
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.3277
+    Average                 :       0.8123
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :       1.0000
+    Minimum                 :       1.0000
+    Average                 :       1.0000
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max  -20.5022  -12.7218   -8.2034   -4.2711   -1.4621   -0.3068
+               min  -22.3970  -13.9487   -8.9725   -4.5760   -1.5309   -0.3121
+
+    2          max  -35.4027  -22.1491  -14.1881   -7.0506   -2.2932   -0.4519
+               min  -39.7315  -24.9788  -15.9052   -7.6826   -2.4234   -0.4603
+
+SOURCE FILE READ              
+  From time                 :   28 FEB 2000 at 04 h 0023 s
+  To   time                 :   28 FEB 2000 at 05 h 0000 s
+  Time interval (in sec)    :      3576
+  Mass flow rate            :   0.100000E+07
+  Number of sources         :    16
+
+  I: 52  J: 63  K:  1 (  926. m a.s.l.)  MFR:  0.1412E+03
+  I: 53  J: 63  K:  1 ( 1287. m a.s.l.)  MFR:  0.9855E+05
+  I: 54  J: 63  K:  1 ( 1518. m a.s.l.)  MFR:  0.4049E+05
+  I: 52  J: 64  K:  1 ( 1001. m a.s.l.)  MFR:  0.1010E+06
+  I: 53  J: 64  K:  1 ( 1444. m a.s.l.)  MFR:  0.3034E+06
+  I: 54  J: 64  K:  1 ( 1791. m a.s.l.)  MFR:  0.3673E+05
+  I: 52  J: 65  K:  1 (  977. m a.s.l.)  MFR:  0.1574E+05
+  I: 53  J: 65  K:  1 ( 1398. m a.s.l.)  MFR:  0.2878E+05
+  I: 52  J: 63  K:  2 (10926. m a.s.l.)  MFR:  0.7949E+02
+  I: 53  J: 63  K:  2 (11287. m a.s.l.)  MFR:  0.1014E+05
+  I: 54  J: 63  K:  2 (11518. m a.s.l.)  MFR:  0.3119E+04
+  I: 52  J: 64  K:  2 (11001. m a.s.l.)  MFR:  0.1083E+06
+  I: 53  J: 64  K:  2 (11444. m a.s.l.)  MFR:  0.1996E+06
+  I: 54  J: 64  K:  2 (11791. m a.s.l.)  MFR:  0.3501E+04
+  I: 52  J: 65  K:  2 (10977. m a.s.l.)  MFR:  0.1844E+05
+  I: 53  J: 65  K:  2 (11398. m a.s.l.)  MFR:  0.3201E+05
+
+  Class    Diameter(mm)    Density        MFR  
+      1        16.000        2350.     0.1337E+02
+      2         5.278        2540.     0.4648E+04
+      3         1.741        2730.     0.1540E+06
+      4         0.574        2920.     0.5671E+06
+      5         0.189        3110.     0.2603E+06
+      6         0.063        3300.     0.1391E+05
+
+-> Iteration                 :      576
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     250 min   (  69.55%)
+   Current time              : 28 FEB 2000 at  4:10:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.183411E+10 (  12.85%)
+   (2) Approx. mass outside domain :  0.666186E+09 (   4.67%)
+   (3) Mass at the deposit         :  0.117674E+11 (  82.48%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.142677E+11
+   Erupted mass                    :  0.150232E+11
+
+-> Iteration                 :      599
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     260 min   (  72.33%)
+   Current time              : 28 FEB 2000 at  4:20:23
+   -------                     
+   (1) Approx. mass inside  domain :  0.184603E+10 (  12.37%)
+   (2) Approx. mass outside domain :  0.702842E+09 (   4.71%)
+   (3) Mass at the deposit         :  0.123735E+11 (  82.92%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.149224E+11
+   Erupted mass                    :  0.156231E+11
+
+-> Iteration                 :      622
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     270 min   (  75.11%)
+   Current time              : 28 FEB 2000 at  4:30:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.185721E+10 (  11.92%)
+   (2) Approx. mass outside domain :  0.739498E+09 (   4.75%)
+   (3) Mass at the deposit         :  0.129816E+11 (  83.33%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.155783E+11
+   Erupted mass                    :  0.162230E+11
+
+-> Iteration                 :      645
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     280 min   (  77.88%)
+   Current time              : 28 FEB 2000 at  4:40:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.186775E+10 (  11.50%)
+   (2) Approx. mass outside domain :  0.776154E+09 (   4.78%)
+   (3) Mass at the deposit         :  0.135917E+11 (  83.72%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.162356E+11
+   Erupted mass                    :  0.168229E+11
+
+-> Iteration                 :      668
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     290 min   (  80.66%)
+   Current time              : 28 FEB 2000 at  4:50:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.187769E+10 (  11.11%)
+   (2) Approx. mass outside domain :  0.812810E+09 (   4.81%)
+   (3) Mass at the deposit         :  0.142034E+11 (  84.07%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.168939E+11
+   Erupted mass                    :  0.174227E+11
+
+-> Iteration                 :      691
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     300 min   (  83.44%)
+   Current time              : 28 FEB 2000 at  5: 0:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.188709E+10 (  10.75%)
+   (2) Approx. mass outside domain :  0.849466E+09 (   4.84%)
+   (3) Mass at the deposit         :  0.148168E+11 (  84.41%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.175534E+11
+   Erupted mass                    :  0.180226E+11
+
+METEO FILE READ               
+  Current time              : 28 FEB 2000 at  5: 0:22
+  Time (sec after 00UTC)    :     18023.
+
+  X-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :      -9.9000
+    Average                 :      -4.9500
+  Y-velocity values           
+    Maximum                 :       9.9000
+    Minimum                 :       0.0000
+    Average                 :       4.9500
+  Z-velocity values           
+    Maximum                 :       0.0000
+    Minimum                 :       0.0000
+    Average                 :       0.0000
+  Temperature ºC              
+    Maximum                 :      19.7500
+    Minimum                 :     -59.3500
+    Average                 :     -19.8000
+  Air Density                 
+    Maximum                 :       1.2250
+    Minimum                 :       0.3277
+    Average                 :       0.8123
+  Horizontal diffusion        
+    Maximum                 :    2250.0000
+    Minimum                 :    2250.0000
+    Average                 :    2250.0000
+  Vertical   diffusion        
+    Maximum                 :       1.0000
+    Minimum                 :       1.0000
+    Average                 :       1.0000
+
+TERMINAL VELOCITIES (m/s)
+  Level/Class           1         2         3         4         5         6
+
+    1          max  -20.5022  -12.7218   -8.2034   -4.2711   -1.4621   -0.3068
+               min  -22.3970  -13.9487   -8.9725   -4.5760   -1.5309   -0.3121
+
+    2          max  -35.4027  -22.1491  -14.1881   -7.0506   -2.2932   -0.4519
+               min  -39.7315  -24.9788  -15.9052   -7.6826   -2.4234   -0.4603
+
+SOURCE FILE READ              
+  From time                 :   28 FEB 2000 at 05 h 0022 s
+  To   time                 :   28 FEB 2000 at 06 h 0000 s
+  Time interval (in sec)    :      3577
+  Mass flow rate            :   0.100000E+07
+  Number of sources         :    16
+
+  I: 52  J: 63  K:  1 (  926. m a.s.l.)  MFR:  0.1412E+03
+  I: 53  J: 63  K:  1 ( 1287. m a.s.l.)  MFR:  0.9855E+05
+  I: 54  J: 63  K:  1 ( 1518. m a.s.l.)  MFR:  0.4049E+05
+  I: 52  J: 64  K:  1 ( 1001. m a.s.l.)  MFR:  0.1010E+06
+  I: 53  J: 64  K:  1 ( 1444. m a.s.l.)  MFR:  0.3034E+06
+  I: 54  J: 64  K:  1 ( 1791. m a.s.l.)  MFR:  0.3673E+05
+  I: 52  J: 65  K:  1 (  977. m a.s.l.)  MFR:  0.1574E+05
+  I: 53  J: 65  K:  1 ( 1398. m a.s.l.)  MFR:  0.2878E+05
+  I: 52  J: 63  K:  2 (10926. m a.s.l.)  MFR:  0.7949E+02
+  I: 53  J: 63  K:  2 (11287. m a.s.l.)  MFR:  0.1014E+05
+  I: 54  J: 63  K:  2 (11518. m a.s.l.)  MFR:  0.3119E+04
+  I: 52  J: 64  K:  2 (11001. m a.s.l.)  MFR:  0.1083E+06
+  I: 53  J: 64  K:  2 (11444. m a.s.l.)  MFR:  0.1996E+06
+  I: 54  J: 64  K:  2 (11791. m a.s.l.)  MFR:  0.3501E+04
+  I: 52  J: 65  K:  2 (10977. m a.s.l.)  MFR:  0.1844E+05
+  I: 53  J: 65  K:  2 (11398. m a.s.l.)  MFR:  0.3201E+05
+
+  Class    Diameter(mm)    Density        MFR  
+      1        16.000        2350.     0.1337E+02
+      2         5.278        2540.     0.4648E+04
+      3         1.741        2730.     0.1540E+06
+      4         0.574        2920.     0.5671E+06
+      5         0.189        3110.     0.2603E+06
+      6         0.063        3300.     0.1391E+05
+
+-> Iteration                 :      714
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     310 min   (  86.22%)
+   Current time              : 28 FEB 2000 at  5:10:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.189601E+10 (  10.41%)
+   (2) Approx. mass outside domain :  0.886121E+09 (   4.87%)
+   (3) Mass at the deposit         :  0.154317E+11 (  84.73%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.182138E+11
+   Erupted mass                    :  0.186225E+11
+
+-> Iteration                 :      737
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     320 min   (  88.99%)
+   Current time              : 28 FEB 2000 at  5:20:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.190447E+10 (  10.09%)
+   (2) Approx. mass outside domain :  0.922777E+09 (   4.89%)
+   (3) Mass at the deposit         :  0.160480E+11 (  85.02%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.188753E+11
+   Erupted mass                    :  0.192224E+11
+
+-> Iteration                 :      760
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     330 min   (  91.77%)
+   Current time              : 28 FEB 2000 at  5:30:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.191252E+10 (   9.79%)
+   (2) Approx. mass outside domain :  0.959433E+09 (   4.91%)
+   (3) Mass at the deposit         :  0.166656E+11 (  85.30%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.195376E+11
+   Erupted mass                    :  0.198223E+11
+
+-> Iteration                 :      783
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     340 min   (  94.55%)
+   Current time              : 28 FEB 2000 at  5:40:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.192019E+10 (   9.51%)
+   (2) Approx. mass outside domain :  0.996089E+09 (   4.93%)
+   (3) Mass at the deposit         :  0.172845E+11 (  85.56%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.202008E+11
+   Erupted mass                    :  0.204222E+11
+
+-> Iteration                 :      806
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     350 min   (  97.32%)
+   Current time              : 28 FEB 2000 at  5:50:22
+   -------                     
+   (1) Approx. mass inside  domain :  0.192750E+10 (   9.24%)
+   (2) Approx. mass outside domain :  0.103274E+10 (   4.95%)
+   (3) Mass at the deposit         :  0.179045E+11 (  85.81%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.208648E+11
+   Erupted mass                    :  0.210221E+11
+
+-> Iteration                 :      829
+   Critical time step        :  0.289799E+02
+   Time step                 :  0.260820E+02
+   Ellapsed time             :     360 min   ( 100.10%)
+   Current time              : 28 FEB 2000 at  6: 0:21
+   -------                     
+   (1) Approx. mass inside  domain :  0.193447E+10 (   8.99%)
+   (2) Approx. mass outside domain :  0.106940E+10 (   4.97%)
+   (3) Mass at the deposit         :  0.185257E+11 (  86.05%)
+       ---------------------------  
+   Summ (1)+(2)+(3)                :  0.215295E+11
+   Erupted mass                    :  0.216219E+11
+---------------------------------------------------
+                                                   
+             FALL3D : END OF SIMULATION            
+                                                   
+---------------------------------------------------
+
+  STATUS  :  NORMAL TERMINATION
+  CPU TIME:      56.0sec
