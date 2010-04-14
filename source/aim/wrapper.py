@@ -399,7 +399,7 @@ class AIM:
 
                 
     def write_input_file(self, verbose=False):
-        """Generate input file for Fall3d-5.1.1
+        """Generate input file for Fall3d-6
         """
 
         params = self.params

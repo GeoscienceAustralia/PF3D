@@ -158,7 +158,7 @@ def run_scenario(scenario, dircomment=None,
     # actual parameters to provide a complete audit trail
     aim.store_inputdata(verbose=verbose)
         
-    # Generate input file for Fall3d-5.1.1
+    # Generate input file for Fall3d-6
     aim.write_input_file(verbose=verbose)
 
     # Generate input data files in Fall3D format

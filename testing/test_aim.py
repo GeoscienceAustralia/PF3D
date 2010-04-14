@@ -120,7 +120,7 @@ class Test_AIM(unittest.TestCase):
                       verbose=False)
           
             #-----------------------------------------------------
-            # Test Fall3d-5.1.1 input files against reference data
+            # Test Fall3d input files against reference data
             #-----------------------------------------------------            
 
             aim.write_input_file()
@@ -134,7 +134,7 @@ class Test_AIM(unittest.TestCase):
             
     
             #-------------------------------------------------
-            # Test Fall3d-5.1.1 outputs against reference data
+            # Test Fall3d outputs against reference data
             #-------------------------------------------------            
             
             aim.set_granum(verbose=False)

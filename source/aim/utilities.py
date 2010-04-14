@@ -167,7 +167,7 @@ def get_fall3d_home(verbose=True):
     else:
         FALL3DHOME = os.getcwd()
         
-    Fall3d_dir = os.path.join(FALL3DHOME, 'Fall3d-5.1.1')
+    Fall3d_dir = os.path.join(FALL3DHOME, 'Fall3d-PUB')
     
     return Fall3d_dir
 
