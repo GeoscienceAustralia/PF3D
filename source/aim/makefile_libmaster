@@ -1,0 +1,66 @@
+
+#! /bin/sh -f
+
+#----------------------------------------
+#  Makefile generated my AIM
+#----------------------------------------
+
+include <insert config>
+
+
+# Compiler selection
+ifeq ($(FC),gfortran)
+  F90FLAGS = -ffixed-line-length-132  -fdefault-real-8  
+  F77FLAGS = -ffixed-line-length-132     
+  LINKER = $(FC)
+  LFLAGS =
+endif	
+ifeq ($(FC),f90)
+  F90FLAGS = -extend_source -r8 -64
+  F77FLAGS = -extend_source -r4 -64  
+  LINKER = $(FC) -64
+  LFLAGS =
+endif	
+ifeq ($(FC),ifort)
+  F90FLAGS = -132 -r8 
+  F77FLAGS = -132   
+  LINKER = $(FC) 
+  LFLAGS =
+endif
+ifeq ($(FC),xlf90)
+  FOPT = -O3 -qstrict -qtune=ppc970 -qarch=ppc970 -qcache=auto -q64 -qextname=flush 
+  F90FLAGS = -qfree=f90 -qrealsize=8 $(FOPT)  
+  F77FLAGS = -qrealsize=4 $(FOPT)  
+  LINKER = $(FC)
+  LFLAGS = $(F90FLAGS) 
+endif
+
+
+.SUFFIXES:.o .f90 .f
+
+
+.f90.o:
+	$(FC) -c $(F90FLAGS) ${INC_NetCDF} $<
+.f.o:
+	$(FC) -c $(F77FLAGS) $<
+
+#----------------------------------------------
+#  Tasks
+#----------------------------------------------
+
+FMODS = 
+FOBJS = Decode.o get_input_int.o get_input_npar.o get_input_rea.o get_input_cha.o get_dbs_property_int.o get_dbs_property_rea.o get_dbs_value_plane.o get_dbs_value_volume.o get_dbs_value_dimension.o get_dbs_value_point.o get_granulometry_nclass.o get_granulometry_value.o get_granulometry_ngas.o get_granulometry_gas.o get_source_nsrc.o get_source_nclass.o get_source_value.o get_source_coordinates.o get_dbs_property_cha.o get_points_npts.o get_points_coordinates.o get_areas_coordinates.o
+PROG = LibMaster.a
+
+LibMaster.a: $(FMODS) $(FOBJS)
+	ar rv $@ $?
+	@mv $(PROG) ..
+	@echo '---------------------------->>> END OF COMPILATION'
+
+
+new:
+	@rm -rf *.o *.mod core*
+	@make target
+
+clean:
+	@rm -f core core.* *~ *.o *.mod

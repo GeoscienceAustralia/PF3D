@@ -6,19 +6,14 @@ If it is not specified, Fall3d will be installed within the AIM source tree.
 """
 
 #----------------------------------------
-# User defined parameters
-#----------------------------------------
-
-compiler = 'fcompiler_gfortran'
-#compiler = 'fcompiler_ifort'
-
-
-#----------------------------------------
 # Auxiliary modules and functions
 #----------------------------------------
 import os
+import sys
 from utilities import makedir, run, header, get_shell, set_bash_variable
-from config import update_marker
+from config import update_marker, compiler, modules, makefile_content
+from config import make_configuration_filename, make_configuration_content
+
 
 def replace_string_in_file(filename, s1, s2, verbose=False):
     """Replace string s1 with string s2 in filename 
@@ -88,7 +83,7 @@ if __name__ == '__main__':
         msg += 'sudo apt-get install python-gdal'
         raise Exception(msg)                
         
-    err = os.system('gdalinfo --help-general 2> /dev/null')
+    err = os.system('gdalinfo --help-general > /dev/null 2> /dev/null')
     if err != 0:
         msg = 'GDAL must be present\n'
         msg += 'On Ubuntu/Debian systems this can be done as follows\n'
@@ -205,17 +200,19 @@ if __name__ == '__main__':
 
     path = os.path.join(url, tarball)
 
-    if not os.path.isfile(tarball): # FIXME: Should also check integrity of tgz file.
+    if not os.path.isfile(tarball): 
+        # FIXME: Should also check integrity of tgz file.
         cmd = 'wget ' + path
         run(cmd, verbose=True)
 
+        
     #----------------------------------------
     # Start installation procedure in earnest
     #----------------------------------------
 
     # Cleanup
     s = '/bin/rm -rf %s' % fall3d
-    run(s)
+    run(s, verbose=False)
 
     print 'Unpacking tarball'
     print
@@ -234,43 +231,76 @@ if __name__ == '__main__':
     # Get origin directory
     os.chdir(fall3d)
     fall3dpath = os.getcwd()
-
-    # Run makefile
-    for directory in ['Sources',
-                      'Utilities/SetSrc/Sources',
-                      'Utilities/SetGrn/Sources',
-                      'Utilities/SetDbs/Sources',
-                      'Utilities/Fall3dPostp/Sources']:
+    
+    #----------
+    # Makefiles
+    #----------    
+    
+    # Generate common makefile configuration
+    make_configuration = os.path.join(fall3dpath, 'Install', make_configuration_filename)
+    fid = open(make_configuration, 'w')
+    fid.write(make_configuration_content % (compiler, fall3dpath, fall3dpath) )
+    fid.close()
+    
+    # Generate and run specific makefiles
+    for program in ['LibMaster', 'MergeNCEP1', 'SetDbs', 'SetGrn', 'SetSrc', 'Sources_ser']:
+    
+        mod = modules[program]
         
-        os.chdir(directory)
-        print 'Changed to', os.getcwd()
-        set_compiler('Makefile')
-
-        print 'Compiling'
-        err = run('make > make.log 2> make.err', verbose=False)
-        if err != 0:
-            msg = 'Make in directory %s exited with error code = %d.\n' % (directory, err)
-            msg += 'See make.log and make.err for details.'
-            raise Exception(msg)
-        print    
+        if mod.file is None:
+            # Generate standard makefile
+            fid = open(os.path.join(mod.path, 'Makefile'), 'w')
+            fid.write(makefile_content % (fall3dpath, make_configuration_filename, mod.mods, mod.objs, mod.prog))
+            fid.close()
+        else:
+            # Use predefined makefile
+            makefile = os.path.join(mod.path, 'Makefile')
+            s = 'cp %s %s' % (os.path.join(cwd, mod.file), makefile) 
+            run(s, verbose=False)
             
-        os.chdir(fall3dpath)
+            # Patch include statement
+            replace_string_in_file(makefile, 
+                                   'include <insert config>', 
+                                   'include %s' % make_configuration, 
+                                   verbose=False)
 
+        sys.stdout.write('Compiling %s: ' % program)
+        run('cd %s; make' % mod.path, 
+            stdout=os.path.join(cwd, 'make_%s.stdout' % program), 
+            stderr=os.path.join(cwd, 'make_%s.stderr' % program), 
+            verbose=False)
+    
+        #-----------------------------
+        # Test presence of executables
+        #-----------------------------
+        
+        p = mod.path.split(os.sep)
+        # Strip last dir off path as that is where makefiles put targets
+        if len(p) > 1:
+            p = os.path.join(*p[:-1])
+        else:
+            p = ''
 
-    print 'Done'
-    print
+        f = os.path.join(fall3dpath, p, mod.prog)     
+        if os.path.isfile(f):
+            res = 'OK'
+        else:
+            res = 'FAILED'
+            
+        print('%s' % res)
+
     
     
-    header('Test the installation and try the examples')
-    print 'To test the installation, go to %s and run' % os.path.join(AIMHOME, 
-                                                                      'testing')
-    print 'python test_all.py'
-    print
-    print 'You can also run the provided examples individually, e.g.'
-    print
-    print 'python tambora.py'
-    print
-    print 'and check the results in tambora_output'
+    #header('Test the installation and try the examples')
+    #print 'To test the installation, go to %s and run' % os.path.join(AIMHOME, 
+    #                                                                  'testing')
+    #print 'python test_all.py'
+    #print
+    #print 'You can also run the provided examples individually, e.g.'
+    #print
+    #print 'python tambora.py'
+    #print
+    #print 'and check the results in tambora_output'
     
 
     
