@@ -804,7 +804,8 @@ class AIM:
         
         # Store actual parameters (as Python file)        
         actual_params_file = os.path.join(audit_dir, 'actual_parameters.py')
-        run('chmod +w %s' % actual_params_file, verbose=verbose) # In case it was there already
+        if os.path.isfile(actual_params_file):
+            run('chmod +w %s' % actual_params_file, verbose=verbose) # In case it was there already
         fid = open(actual_params_file, 'w')
         fid.write('"""All actual parameters used in scenario %s\n\n'\
                       % self.basepath)
