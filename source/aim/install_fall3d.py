@@ -1,4 +1,4 @@
-"""Install Fall3d-5.1.1 on Linux platform
+"""Install Fall3d-6.0 on Linux platform
 
 An environment variable, FALL3DHOME, may be specified to determine
 the location of the Fall3d installation.
@@ -130,6 +130,7 @@ if __name__ == '__main__':
                             if __file__ in files:
                                 variable_set = True
             else:
+                # Otherwise, just verify that it has been set.
                 value = os.environ[envvar]
                 if value:            
                     variable_set = True
@@ -140,7 +141,7 @@ if __name__ == '__main__':
             # If we are using the bash shell ask for permission to modify .bashrc
             if get_shell() == 'bash':
                 if not ok_to_modify and askuser:
-                    answer = raw_input('Would you like me to update your .bashrc file? (Y,N)[Y]')
+                    answer = raw_input('Would you like me to update your .bashrc file with reasonable default values? (Y,N)[Y]')
                     askuser = False # Don't ask again
                     if answer.lower() == 'n':                    
                         print 'OK - you may want to set this variable later'                    
@@ -154,30 +155,30 @@ if __name__ == '__main__':
                     if envvar == 'PYTHONPATH':
                         # We already know what it should be                    
                         envvalue = AIMHOME
-                        print 'Setting it to %s' % AIMHOME
-                    else: 
-                        # Ask user
-                        print 'The environment variable %s should point to a directory where you have permission to write ' % envvar,
-                        if envvar == 'TEPHRADATA':
-                            print 'e.g. /model_area/tephra'
-                        elif envvar == 'FALL3DHOME':
-                            print 'e.g. ~/fall3d'
-                        envvalue = raw_input('Please enter the directory for %s: ' % envvar)
+                    elif envvar == 'FALL3DHOME':
+                        # Use ~/fall3d as default                                        
+                        envvalue = os.path.expanduser('~/fall3d')
+                    elif envvar == 'TEPHRADATA': 
+                        # Use ~/tephra as default                
+                        envvalue = os.path.expanduser('~/tephra')
+
                     
                     # Modify .bashrc
+                    print 'Setting environment variable %s to %s' % (envvar, envvalue)
                     set_bash_variable(envvar, envvalue)
                     modified = True
+                    
+                    # Also assign variables for the rest of this session
+                    os.environ[envvar] = envvalue
                     print
+
+                
         
     if modified:
         print 'Bash configuration file ~/.bashrc has been modified'
+        print 'You can change it manually if you wish.'
         print
-        print 'You must run the command'
-        print 'source ~/.bashrc'
-        print 'or start a new shell. '
-        print 
-        print 'Then run %s again.' % __file__
-        import sys; sys.exit() 
+        
         
     
     #---------------------
@@ -194,16 +195,19 @@ if __name__ == '__main__':
     os.chdir(FALL3DHOME)
                 
     #----------------
-    # Download Fall3d
+    # Download Fall3d version 6 (public version)
+    # http://www.bsc.es/projects/earthscience/fall3d/Downloads/Fall3d-PUB.tar.gz
     #----------------
-    fall3d = 'Fall3d-5.1.1'
+    fall3d = 'Fall3d-PUB'
     tarball = fall3d + '.tar.gz'
-    url = 'http://www.aifdr.org/projects/aim/raw-attachment/wiki/WikiStart/'
+    url = 'http://www.bsc.es/projects/earthscience/fall3d/Downloads'
+
+
     path = os.path.join(url, tarball)
 
-    if not os.path.isfile(tarball):
+    if not os.path.isfile(tarball): # FIXME: Should also check integrity of tgz file.
         cmd = 'wget ' + path
-        run(cmd)
+        run(cmd, verbose=True)
 
     #----------------------------------------
     # Start installation procedure in earnest

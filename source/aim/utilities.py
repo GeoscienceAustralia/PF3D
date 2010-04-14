@@ -7,15 +7,27 @@ from math import sqrt, pi, sin, cos, acos
 from subprocess import Popen, PIPE
 from config import update_marker, tephra_output_dir
 
-def run(s, 
-        stdout='/dev/null',
-        stderr='/dev/null', 
+def run(cmd, 
+        stdout=None,
+        stderr=None, 
         verbose=True):
+        
+    s = cmd    
+    if stdout:
+        s += ' > %s' % stdout
+        
+    if stderr:
+        s += ' 2> %s' % stderr        
         
     if verbose:
         print s
-        
-    err = os.system(s + ' >%s 2>%s' % (stdout, stderr))
+    err = os.system(s)
+    
+    if err != 0:
+        msg = 'Command "%s" failed with errorcode %i. ' % (cmd, err)
+        if stderr: msg += 'See logfile %s for details' % stderr
+        raise Exception(msg)
+
     return err
     
 def header(s):
