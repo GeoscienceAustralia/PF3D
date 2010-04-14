@@ -198,7 +198,7 @@ class AIM:
         """
             
         executable = os.path.join(self.utilities_dir, 
-                                  'SetGrn', 'SetGrn.exe')
+                                  'SetGrn', 'SetGrn.PUB.exe')
         
         logfile = self.basepath + '.SetGrn.log'
 
@@ -223,7 +223,7 @@ class AIM:
         
         
         executable = os.path.join(self.utilities_dir, 
-                                  'SetDbs', 'SetDbs.exe')
+                                  'SetDbs', 'SetDbs.PUB.exe')
         
         logfile = self.basepath + '.SetDbs.log'
         
@@ -249,7 +249,7 @@ class AIM:
         """
     
         executable = os.path.join(self.utilities_dir, 
-                                  'SetSrc', 'SetSrc.exe')
+                                  'SetSrc', 'SetSrc.PUB.exe')
         
         logfile = self.basepath + '.SetSrc.log'
 
@@ -278,7 +278,7 @@ class AIM:
         - database file
         """
     
-        executable = os.path.join(self.Fall3d_dir, 'Fall3d.ser.exe')
+        executable = os.path.join(self.Fall3d_dir, 'Fall3d_ser.PUB.exe')
         
         logfile = self.basepath + '.Fall3d.log'
         
@@ -298,33 +298,33 @@ class AIM:
                        verbose=verbose)                         
 
     
-    def process_model_results(self, verbose=True):
-        """Postprocess Fall3d output
-        """
-    
-                
-        executable = os.path.join(self.utilities_dir, 
-                                  'Fall3dPostp', 
-                                  'Fall3dPostp.exe')
-        
-        logfile = self.basepath + '.Fall3dPostp.log'
-        
-        if verbose:
-            header('Processing model outputs (Fall3dPostp)')
-        
-                               
-        # Optional terrain symbols file
-        symfile = self.basepath + '.sym'
-
-
-        cmd = '%s '*6 % (executable, logfile,
-                         self.inputfile,
-                         self.resultfile,
-                         self.basepath,
-                         symfile)
-                         
-        self.runscript(cmd, 'Fall3dPostp', logfile, lines=4,
-                       verbose=verbose)                          
+    #def process_model_results(self, verbose=True):
+    #    """Postprocess Fall3d output
+    #    """
+    #
+    #            
+    #    executable = os.path.join(self.utilities_dir, 
+    #                              'Fall3dPostp', 
+    #                              'Fall3dPostp.exe')
+    #    
+    #    logfile = self.basepath + '.Fall3dPostp.log'
+    #    
+    #    if verbose:
+    #        header('Processing model outputs (Fall3dPostp)')
+    #    
+    #                           
+    #    # Optional terrain symbols file
+    #    symfile = self.basepath + '.sym'
+    #
+    #
+    #    cmd = '%s '*6 % (executable, logfile,
+    #                     self.inputfile,
+    #                     self.resultfile,
+    #                     self.basepath,
+    #                     symfile)
+    #                     
+    #    self.runscript(cmd, 'Fall3dPostp', logfile, lines=4,
+    #                   verbose=verbose)                          
             
             
     def convert_surfergrids_to_asciigrids(self, verbose=True):
