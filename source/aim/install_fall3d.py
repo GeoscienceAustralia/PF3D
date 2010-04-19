@@ -90,6 +90,12 @@ if __name__ == '__main__':
         msg += 'sudo apt-get install gdal-bin'
         raise Exception(msg)                        
         
+    if not os.path.isfile('/usr/include/netcdf.mod'): 
+        msg = 'The NetCDF library must be present\n'
+        msg += 'On Ubuntu/Debian systems this can be done as follows\n'
+        msg += 'sudo apt-get install libnetcdf-dev'
+        raise Exception(msg)                                
+        
         
     
     #--------------------------------------------------------------------
