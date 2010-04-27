@@ -295,8 +295,23 @@ if __name__ == '__main__':
             
         print('%s' % res)
 
+    #--------------------------------------------------------
+    # Patch the Fall3d scripts to remove hardwired references
+    #--------------------------------------------------------
+
+    os.chdir(os.path.join(FALL3DHOME, fall3d, 'Scripts'))
+    for program in ['SetDbs', 'SetGrn', 'SetSrc', 'manager', 'Fall3d_Pub']:
+        
+        # Patch include statement
+        replace_string_in_file('Script-' + program, 
+                               'set HOME=/Users/arnaufolch/Documents/Software/Fall3d-6.0/PUB/Fall3d-6.2-PUB', 
+                               'set HOME=%s' % os.path.join(FALL3DHOME, fall3d),
+                               verbose=False)
+
+        
     
     
+        
     #header('Test the installation and try the examples')
     #print 'To test the installation, go to %s and run' % os.path.join(AIMHOME, 
     #                                                                  'testing')
