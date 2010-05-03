@@ -621,8 +621,9 @@ class AIM:
         lines = infile.readlines()
         infile.close()
 
-        timeblocks=[]
         
+        # Gather wind data for each time block
+        timeblocks=[]
         if lines[0].startswith('Constant'):
             # Model will use these wind values throughout
             timeblock = []
@@ -646,8 +647,18 @@ class AIM:
                     timeblock.append(line.strip())
 
 
-
+        # Write Fall3D wind profile
         outfile=open(self.windprofile, 'w')
+
+        vent_location_x = self.params['Vent_location_X_coordinate']
+        vent_location_y = self.params['Vent_location_Y_coordinate']        
+        outfile.write('%.0f. %.0f.\n' % (vent_location_x, vent_location_y))
+                
+        eruption_year = self.params['Eruption_Year']
+        eruption_month = self.params['Eruption_Month']                
+        eruption_day = self.params['Eruption_Day']
+        outfile.write('%s%s%s\n' % (str(eruption_year), string.zfill(eruption_month, 2), string.zfill(eruption_day, 2)))        
+        
         for hour, timeblock in enumerate(timeblocks):
             if len(timeblock) != nz:
                 msg = 'Number of z layers must be constant for all time blocks'
