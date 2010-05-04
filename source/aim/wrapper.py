@@ -112,7 +112,7 @@ class AIM:
         self.sourcefile = self.basepath + '.src'
         
         # Vertical wind profile data generated from scenario_wind.txt
-        self.windprofile = self.basepath + '.profile.dat'
+        self.windprofile = self.basepath + '.profile'
         
         # Regional topographic grid generated from scenario_topography.txt
         self.topography = self.basepath + '.regionaltopo.grd'
@@ -606,10 +606,10 @@ class AIM:
             infile = open(self.wind_profile)
         except IOError:
         
-            # Assume existence of Fall3d native <scenario_name>.profile.dat
+            # Assume existence of Fall3d native <scenario_name>.profile
             # and copy to work area
         
-            native_profile = '%s.profile.dat' % self.scenario_name
+            native_profile = '%s.profile' % self.scenario_name
             print('AIM wind profile %s could not be found.' % self.wind_profile)
             print('Assuming existence of Fall3d profile named %s' % native_profile)
             
