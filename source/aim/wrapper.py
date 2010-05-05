@@ -425,28 +425,57 @@ class AIM:
         write_line(fid, 'YEAR = %i' % Eruption_Year, indent=2) 
         write_line(fid, 'MONTH = %02i' % Eruption_Month, indent=2)  
         write_line(fid, 'DAY = %i' % Eruption_Day, indent=2) 
-        write_line(fid, 'RUN_START_(HOURS_AFTER_00) = %f' % Start_time_of_run, indent=2) 
+	write_line(fid, 'BEGIN_METEO_DATA_(HOURS_AFTER_00) = %f' % Start_time_of_meteo_data, indent=2)
+	write_line(fid, 'TIME_STEP_METEO_DATA_(MIN) = %f' % meteo_time_step, indent=2)
+	write_line(fid, 'END_METEO_DATA_(HOURS_AFTER_00) = %f' % End_time_of_meteo_data, indent=2)	
+        write_line(fid, 'ERUPTION_START_(HOURS_AFTER_00) = %f' % Start_time_of_eruption, indent=2) 
+
+# Need to change 'Start_time_of_run' to 'Start_time_of_eruption' in scenario.py
+
         write_line(fid, 'ERUPTION_END_(HOURS_AFTER_00) = %f' % End_time_of_eruption, indent=2) 
         write_line(fid, 'RUN_END_(HOURS_AFTER_00) = %f' % End_time_of_run, indent=2)
         write_line(fid, '')
-        write_line(fid, 'FALL3D')
-        write_line(fid, 'ZLAYER_(M) FROM %f TO %f INCREMENT %f' % (Z_layer_minimum, 
+
+	write_line(fid, 'GRID')
+
+# Need to add new GRID Block to scenario.py
+
+	write_line(fid, 'COORDINATES = %s' % Coordinates, indent=2)
+
+# Need to add 'Coordinates' to new GRID Block in scenario.py - possibilities are LON-LAT/UTM
+
+	write_line(fid, 'LON-LAT')
+	write_line(fid, 'LONMIN = %f' % Longitude_minimum, indent=5)
+	write_line(fid, 'LONMAX = %f' % Longitude_maximum, indent=5)
+	write_line(fid, 'LATMAX = %f' % Latitude_minimum, indent=5)
+	write_line(fid, 'LATMAX = %f' % Latitude_maximum, indent=5)
+	write_line(fid, 'LON_VENT = %f' % Longitude_of_vent, indent=5)
+	write_line(fid, 'LAT_VENT = %f' % Latitude_of_vent, indent=5)
+
+# Need to add 'LON-LAT', and all options listed to new GRID Block in scenario.py
+
+	write_line(fid, 'UTM')
+	write_line(fid, 'XMIN = %f' % X_coordinate_minimum, indent=5)
+	write_line(fid, 'XMAX = %f' % X_coordinate_maximum, indent=5)
+	write_line(fid, 'YMAX = %f' % Y_coordinate_minimum, indent=5)
+	write_line(fid, 'YMAX = %f' % Y_coordinate_maximum, indent=5)
+	write_line(fid, 'X_VENT = %f' % X_coordinate_of_vent, indent=5)
+	write_line(fid, 'Y_VENT = %f' % y_coordinate_of_vent, indent=5)
+
+# Need to add 'UTM' and all options to new GRID Block in scenario.py
+	write_line(fid, 'NX = %i' % Number_cells_X_direction, indent=2)
+
+        write_line(fid, 'NY = %i' % Number_cells_Y_direction, indent=2)
+ 	write_line(fid, 'ZLAYER_(M) FROM %f TO %f INCREMENT %f' % (Z_layer_minimum, 
                                                                    Z_layers[-1],
                                                                    Z_layer_increment), indent=2)
-        write_line(fid, 'TERMINAL_VELOCITY_MODEL = %s' % Terminal_velocity_model, indent=2)
-        write_line(fid, 'VERTICAL_TURBULENCE_MODEL = %s' % Vertical_turbulence_model, indent=2) 
-        write_line(fid, 'VERTICAL_DIFFUSION_COEFFICIENT = %f' % Vertical_diffusion_coefficient, indent=2) 
-        write_line(fid, 'VERTICAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % Vertical_diffusion_coefficient, indent=2) 
-        write_line(fid, 'HORIZONTAL_TURBULENCE_MODEL = %s' % Horizontal_turbulence_model, indent=2) 
-        write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT = %f' % Horizontal_diffusion_coefficient, indent=2) 
-	write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % Horizontal_diffusion_coefficient, indent=2)
-        write_line(fid, 'POSTPROCESS_TIME_INTERVAL_(HOURS) = %f' % Post_process_time_interval, indent=2)
-        write_line(fid, '') 
-        write_line(fid, dashes)  
-        write_line(fid, dashes)
-        write_line(fid, '')
+	write_line(fid, '')
+	
+	write_line(fid, 'GRANULOMETRY')
+	write_line(fid, 'DISTRIBUTION = %s' % Grainsize_distribution, indent=2)
 
-        write_line(fid, 'GRANULOMETRY')
+# Need to add 'Grainsize_distribution' to scenario.py - possibilities are GAUSSIAN/BIGAUSSIAN
+
         write_line(fid, 'NUMBER_OF_CLASSES = %i' % Number_of_grainsize_classes, indent=2)
         write_line(fid, 'FI_MEAN = %f' % Mean_grainsize, indent=2)
         write_line(fid, 'FI_DISP = %f' % Sorting, indent=2)
@@ -455,112 +484,73 @@ class AIM:
         write_line(fid, 'DENSITY_RANGE = %f %f' % (Density_minimum,
                                                    Density_maximum), indent=2)
         write_line(fid, 'SPHERICITY_RANGE = %f %f' % (Sphericity_minimum,
-                                                          Sphericity_maximum), indent=2)
+                                                      Sphericity_maximum), indent=2)
+	write_line(fid, '')
+	write_line(fid, 'SOURCE')
+        write_line(fid, 'SOURCE_TYPE = %s' % Source_type, indent=2) 
+        write_line(fid, 'POINT_SOURCE', indent=2)
+        write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
+        write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %f' % Height_above_vent, indent=5)
+        write_line(fid, 'SUZUKI_SOURCE', indent=2)
+	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
+        write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %f' % Height_above_vent, indent=5)
+        write_line(fid, 'A = %i' % A, indent=5)
+        write_line(fid, 'L = %i' % L, indent=5)
+        write_line(fid, 'PLUME_SOURCE', indent=2)
+	write_line(fid, 'SOLVE_PLUME_FOR = %f' % Height_or_MFR, indent =5)
+	write_line(fid, 'MFR_SEARCH_RANGE = %f %f' % (MFR_minimum, 
+						      MFR_maximum), indent=5)
+	write_line(fid, 'HEIGHT_ABOVE_VENT = %f' % Height_above_vent, indent=5)
+	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
+        write_line(fid, 'EXIT_VELOCIY_(MS) = %f' % Exit_velocity, indent=5)
+        write_line(fid, 'EXIT_TEMPERATURE_(K) = %f' % Exit_temperature, indent=5)
+        write_line(fid, 'EXIT_VOLATILE_FRACTION_(IN%%) = %f' % Exit_volatile_fraction, indent=5)
         write_line(fid, '')
-        write_line(fid, dashes)
-        write_line(fid, dashes)
-        write_line(fid, '')
-        write_line(fid, 'METEO_DATABASE')
-        write_line(fid, 'YEAR = %i' % Year, indent=2)
-        write_line(fid, 'MONTH = %i' % Month, indent=2)
-        write_line(fid, 'DAY = %i' % Day, indent=2)
-        write_line(fid, 'BEGIN_METEO_DATA_(HOURS_AFTER_00) = %f' % Start_time_of_meteo_data, indent=2)
-        write_line(fid, 'END_METEO_DATA_(HOURS_AFTER_00) = %f' % End_time_of_meteo_data, indent=2)
-        write_line(fid, 'TIME_STEP_METEO_DATA_(MIN) = %f' % meteo_time_step, indent=2)
-        write_line(fid, 'X_ORIGIN_(UTM_M) = %f' % X_coordinate_lower_left_corner, indent=2)
-        write_line(fid, 'Y_ORIGIN_(UTM_M) = %f' % Y_coordinate_lower_left_corner, indent=2)
-        write_line(fid, 'CELL_SIZE_(KM) = %f' % Cell_size, indent=2)
-        write_line(fid, 'NX = %i' % Number_cells_X_direction, indent=2)
-        write_line(fid, 'NY = %i' % Number_cells_Y_direction, indent=2)
 
+# Need to remove Vent_location_X_coordinate from scenario.py
+# Need to remove Vent_locaton_Y_coordinate from scenario.py
+# Need to add Mass_eruption_rate for Point source to scenario.py
+# Need to add Mass_eruption_rate for Suzuki source to scenario.py 
+# Need to add Height_or_MFR for Plume source to scenario.py - possibilities are HEIGHT/MFR
+# Need to add MFR_minimum for Plume source to scenario.py
+# Need to add MFR_maximum for Plume source to scenario.py
+# Need to add Height_above_vent for Plume source to scenario.py
+# Need to add Mass_eruption_rate for Plume source to scenario.py
+
+        write_line(fid, 'FALL3D')
+        write_line(fid, 'TERMINAL_VELOCITY_MODEL = %s' % Terminal_velocity_model, indent=2)
+        write_line(fid, 'VERTICAL_TURBULENCE_MODEL = %s' % Vertical_turbulence_model, indent=2) 
+        write_line(fid, 'VERTICAL_DIFFUSION_COEFFICIENT = %f' % Vertical_diffusion_coefficient, indent=2) 
+        write_line(fid, 'VERTICAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % Vertical_diffusion_coefficient, indent=2) 
+        write_line(fid, 'HORIZONTAL_TURBULENCE_MODEL = %s' % Horizontal_turbulence_model, indent=2) 
+        write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT = %f' % Horizontal_diffusion_coefficient, indent=2) 
+	write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % Horizontal_diffusion_coefficient, indent=2)
+	write_line(fid, 'RAMS_CS = %f' % Value_of_CS, indent=2)
+        write_line(fid, '') 
+
+# Need to delete Z_layer_minimum, Z_layers and Z_layer_increment from FALL3D Block in scenario.py
+# Need to delete Post_process_time_interval from scenario.py
+# Need to add Value_of_CS to scenario.py - the value of CS in the RAMS model (only used when Horizontal_turbulence_model = RAMS)
+
+# Need to delete 'METEO DATABASE' Block - all variables still used moved to the new GRID block (see above) and others are discarded
+# Need to delete 'POSTPROCESS_MODELS' Block and replace with new 'OUTPUT' Block (see below)
         Z_layer_string = ''
         for Z in Z_layers:
             Z_layer_string += '%f ' % Z
         write_line(fid, 'Z_LAYER_(M) = %s' % Z_layer_string, indent=2)
 
         write_line(fid,'')
-        write_line(fid, dashes)
-        write_line(fid, dashes)
-        write_line(fid, '')
-        write_line(fid, 'SOURCE')
-        write_line(fid, 'X_VENT_(UTM_M) = %f' % Vent_location_X_coordinate, indent=2)
-        write_line(fid, 'Y_VENT_(UTM_M) = %f' % Vent_location_Y_coordinate, indent=2)
-        write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=2)
-        write_line(fid, 'SOURCE_TYPE = %s' % Source_type, indent=2)
-        write_line(fid, 'POINT_SOURCE', indent=2)
-        write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %f' % Height_above_vent, indent=5)
-        write_line(fid, 'SUZUKI_SOURCE', indent=2)
-        write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %f' % Height_above_vent, indent=5)
-        write_line(fid, 'A = %i' % A, indent=5)
-        write_line(fid, 'L = %i' % L, indent=5)
-        write_line(fid, 'PLUME_SOURCE', indent=2)
-        write_line(fid, 'EXIT_VELOCIY_(MS) = %f' % Exit_velocity, indent=5)
-        write_line(fid, 'EXIT_TEMPERATURE_(K) = %f' % Exit_temperature, indent=5)
-        write_line(fid, 'EXIT_VOLATILE_FRACTION_(IN%%) = %f' % Exit_volatile_fraction, indent=5)
-        write_line(fid, '')
-        write_line(fid, dashes)
-        write_line(fid, dashes)
-        write_line(fid, 'POSTPROCESS_MODELS')
-        write_line(fid, 'OUTPUT_FILES_IN_GRD_FORMAT = %s' % Output_results_in_GRD_format, indent=2)
-        write_line(fid, 'OUTPUT_FILES_IN_PS_FORMAT = %s' % Output_results_in_PS_format, indent=2)
-        write_line(fid, '')
 
-        write_line(fid, 'MAP_TOTAL_LOAD = %s' % Map_total_load, indent=2)
-        write_line(fid, 'UNITS = %s' % load_units, indent=5)
-        Load_contours_string = ''
-        for contours in Load_contours:
-            Load_contours_string += '%f ' % contours
-        write_line(fid, 'CONTOUR_LEVELS = %s' % Load_contours_string, indent=5)
-        write_line(fid, '')
+        write_line(fid, 'OUTPUT')
+        write_line(fid, 'POSTPROCESS_TIME_INTERVAL_(HOURS) = %F' % Postprocess_time_interval, indent=2)
+        write_line(fid, 'POSTPROCESS_3D_VARIABLES = %s' % Postprocess_3D_variables, indent=2)
+        write_line(fid, 'POSTPROCESS_CLASSES = %s' % Postprocess_classes, indent=2)
+	write_line(fid, 'TRACK_POINTS = %s' % Track_points, indent=2)
 
-        write_line(fid, 'MAP_CLASS_LOAD = %s' % Map_class_load, indent=2)
-        Class_load_contours_string = ''
-        for contours in Class_load_contours:
-            Class_load_contours_string += '%f ' % contours
-        write_line(fid, 'UNITS = %s' % class_load_units, indent=5)
-        write_line(fid, 'CONTOUR_LEVELS = %s' % Class_load_contours_string, indent=5)
-
-        write_line(fid, '')
-
-        write_line(fid, 'MAP_DEPOSIT_THICKNESS = %s' % Map_deposit_thickness, indent=2)
-        write_line(fid, 'UNITS = %s' % Map_thickness_units, indent=5)
-        write_line(fid, 'COMPACTATION_FACTOR = %f' % Map_thickness_compaction_factor, indent=5)
-        Thickness_contours_string = ''
-        for contours in Thickness_contours:
-            Thickness_contours_string += '%f ' % contours
-        write_line(fid, 'CONTOUR_LEVELS = %s' % Thickness_contours_string, indent=5)
-        write_line(fid, '')
-
-        write_line(fid, 'MAP_TOTAL_CONCENTRATION = %s' % Map_total_concentration, indent=2)
-        Map_total_concentration_z_cuts_string = ''
-        for z_cuts in Map_total_concentration_z_cuts:
-            Map_total_concentration_z_cuts_string += '%f ' % z_cuts
-        write_line(fid, 'UNITS = %s' % total_concentration_units, indent=5)
-        write_line(fid, 'Z_CUTS_(M) = %s' % Map_total_concentration_z_cuts_string, indent=5)
-        Total_concentration_contours_string = ''
-        for contours in Total_concentration_contours:
-            Total_concentration_contours_string += '%e ' % contours
-        write_line(fid, 'CONTOUR_LEVELS = %s' % Total_concentration_contours_string, indent=5)
-        write_line(fid, '')
-
-        write_line(fid, 'MAP_Z_CUMMULATIVE_CONCENTRATION = %s' % Map_z_cummulative_concentration, indent=2)
-        write_line(fid, 'UNITS = %s' % z_cummulative_concentration_units, indent=5)
-        Cummulative_concentration_contours_string = ''
-        for contours in Cummulative_concentration_contours:
-            Cummulative_concentration_contours_string += '%f ' % contours
-        write_line(fid, 'CONTOUR_LEVELS = %s' % Cummulative_concentration_contours_string, indent=5)
-        write_line(fid, '')
-
-        write_line(fid, 'MAP_Z_MAXIMUM_CONCENTRATION = %s' % Map_Z_maximum_concentration, indent=2)
-        write_line(fid, 'UNITS = %s' % z_maximum_concentration_units, indent=5)
-        Maximum_concentration_contours_string = ''
-        for contours in Maximum_concentration_contours:
-            Maximum_concentration_contours_string += '%e ' % contours
-        write_line(fid, 'CONTOUR_LEVELS = %s' % Maximum_concentration_contours_string, indent=5)
-        write_line(fid, '')
-        fid.close()
-    
-    
+# Need to add Postprocess_time_interval to new 'OUTPUT' Block in scenario.py
+# Need to add Postprocess_3D_variables to new 'OUTPUT' Block in scenario.py - possibilities are YES/NO 
+# Need to add Postprocess_classes to new 'OUTPUT' Block in scenario.py - possibilities are YES/NO 
+# Need to add Track_points to new 'OUTPUT' Block in scenario.py   possibilities are YES/NO
         
     #------------------------
     # AIM conversion routines
