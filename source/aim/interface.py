@@ -101,6 +101,8 @@ def run_scenario(scenario, dircomment=None,
       dircomment: will be added to output dir for easy identification.
       store_locally: if True, don't use TEPHRAHOME for outputs
       timestamp_output: If True, add timestamp to output dir
+                        If False overwrite previous output with same name 
+      
     
     
     """
