@@ -226,7 +226,7 @@ class Test_AIM(unittest.TestCase):
                     raise Exception(msg)
                     
                     
-    def XXtest_asc2grd(self):
+    def test_asc2grd(self):
         """test_asc2grd - Test conversion from asc to grd files
         
         This test relies on files 
@@ -248,7 +248,7 @@ class Test_AIM(unittest.TestCase):
         # Check that result is good
         # FIXME: Refactor compare_to_reference_file to accommodate the more general case
         
-        fid1 = open(grdfilename[:-4] + '.grd')
+        fid1 = open(ascfilename[:-4] + '.grd')
         data1 = fid1.readlines()
         fid1.close()        
         

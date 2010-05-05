@@ -391,7 +391,115 @@ def grd2asc(grdfilename,
         fid.write(projection)
         fid.close()
 
+
+def asc2grd(ascfilename, 
+            nodatavalue=1.70141e+38,
+            projection=None):
+    """Convert ESRI asc grid format to Surfer grd file 
+
+    Input:
+    ascfilename: Name of ESRI asc grid (extension .asc assumed) with format
+    
+        ncols <ncols>
+        nrows <nrows>
+        xllcorner <x coordinate of lower left corner>
+        yllcorner <y coordinate of lower left corner>
+        cellsize <cellsize>
+        NODATA_value <nodata value, typically -9999 for elevation data or 
+        otherwise 1.70141e+38>
+    
+    An output file with same basename and the extension .grd
+    Golden Software Surfer grid file 
+    will be generated following the format
+
+
+        DSAA
+        <ncols> <nrows>
+        <xmin> <xmax>
+        <ymin> <ymax>
+        <zmin> <zmax>
+        z11 z21 z31 ....  (rows of z values)
+
+
+        Note: Surfer grids use 1.70141e+38 for no data.
+
+
+    # FIXME: Not done yet    
+    If optional argument projection is specified, a projection file with same basename and the 
+        extension .prj will be generated.
+        It is assumed that the projection follows the WKT projection format.
+    """
+    
+    basename, extension = os.path.splitext(ascfilename)
+    msg = 'ASCII file %s must have extension asc' % ascfilename
+    assert extension == '.asc', msg
+
+    grdfilename = basename + '.grd'
+    prjfilename = basename + '.prj'
+
+
+    fid = open(ascfilename)
+    lines = fid.readlines()
+    fid.close()
+
+    fid = open(grdfilename, 'w')
+    # Write header
+    fid.write('DSAA\n')
+    
+    # Check header and get number of columns
+    line = lines[0].strip()
+    fields = line.split()
         
+    msg = 'input file %s does not look like an ASCII grd file. It must start with ncols' % ascfilename
+    assert fields[0] == 'ncols', msg
+    assert len(fields) == 2
+    ncols = int(fields[1])
+
+    # Get number of rows
+    line = lines[1]
+    fields = line.split() 
+    nrows = int(fields[1])       
+    
+    #THIS FAR 5 MAY
+    
+    fid.write('%i %i\n' % (ncols, nrows))
+
+    # Get origin
+    line = lines[2]
+    xmin, xmax = [float(x) for x in line.split()]
+
+    line = lines[3]
+    ymin, ymax = [float(x) for x in line.split()]
+   
+    # Get cellsize and check that cells are square
+    cellsize = (xmax-xmin)/(ncols-1)
+    #msg = 'Cells are not square'
+    #assert abs(cellsize - (ymax-ymin)/(nrows-1)) > 1.0e-6, msg 
+
+    # Write origin using pixel registration used by ESRI instead of grid line registration used by Surfer.
+    fid.write('xllcorner %f\n' % (xmin - cellsize/2))   # FIXME: CHECK THIS 
+    fid.write('yllcorner %f\n' % (ymin - cellsize/2))
+    fid.write('cellsize %f\n' % cellsize)
+    
+    # Write value for no data
+    fid.write('NODATA_value %d\n' % nodatavalue)
+
+    # Write data reversed
+    data = lines[5:]
+    data.reverse()
+
+    for line in data:
+        fid.write(line)
+
+    fid.close()
+
+    if projection:
+        # Create associated projection file
+        fid = open(prjfilename, 'w')
+        fid.write(projection)
+        fid.close()
+
+                
 def convert_meteorological_winddirection_to_windfield(s, d):
     """Convert windspeed and meteorological direction to windfield (u, v)
     
