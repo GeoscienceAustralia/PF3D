@@ -54,6 +54,7 @@ class AIM:
         scenario_dir = get_username()            
         if timestamp_output:
             scenario_dir += '_' + get_timestamp()        
+
             
         if dircomment is not None:
             try:
@@ -65,10 +66,17 @@ class AIM:
             scenario_dir += '_' + dircomment
         
         output_dir = os.path.join(output_dir, scenario_dir)
+        if not timestamp_output:
+            # Clean out any previous files
+            s = 'chmod -R +w %s' % output_dir 
+            run(s, verbose=False)                    
+            s = '/bin/rm -rf %s' % output_dir
+            run(s, verbose=False)        
+        
                                   
         # Base filename for all files in this scenario 
         self.basepath = os.path.join(output_dir, scenario_name)
-        
+
         # AIM input files
         self.wind_profile = scenario_name + '_wind.txt'
         
