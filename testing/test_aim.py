@@ -179,6 +179,101 @@ class Test_AIM(unittest.TestCase):
                                       
                                       
             
+    def test_grd2asc(self):
+        """test_grd2asc - Test conversion from grd to asc files
+        
+        This test relies on files 
+        test_data.grd
+        test_data.asc
+        test_data.prj # FIXME: Not tested yet
+        """
+        
+        
+        # Rename input file to a temporary filename
+        grdfilename = 'xkshkoek.grd'
+        
+        s = 'cp test_data.grd %s' % grdfilename
+        run(s)
+        
+        # Run conversion from grd to asc
+        grd2asc(grdfilename)
+        
+        # Check that result is good
+        # FIXME: Refactor compare_to_reference_file to accommodate the more general case
+        
+        fid1 = open(grdfilename[:-4] + '.asc')
+        data1 = fid1.readlines()
+        fid1.close()        
+        
+        fid2 = open('test_data.asc')        
+        data2 = fid2.readlines()
+        fid2.close()        
+        
+        for i in range(len(data1)):
+            msg = 'ASC file does not match '
+            msg += 'reference test_data.asc in line %i.\n' % i
+
+            #print data1[i].strip()
+            #print data2[i].strip()
+            #print 
+            
+            if data1[i] != data2[i]:
+                # Lines are different
+                # Try to see if they are close enough 
+                # in a numerical sense
+                
+                if not lines_numerically_close(data1[i], data2[i]):
+                    raise Exception(msg)
+                    
+                    
+    def XXtest_asc2grd(self):
+        """test_asc2grd - Test conversion from asc to grd files
+        
+        This test relies on files 
+        test_data.grd
+        test_data.asc
+        test_data.prj # FIXME: Not tested yet
+        """
+        
+        
+        # Rename input file to a temporary filename
+        ascfilename = 'xkshkoek.asc'
+        
+        s = 'cp test_data.asc %s' % ascfilename
+        run(s)
+        
+        # Run conversion from asc to grd
+        asc2grd(ascfilename)
+        
+        # Check that result is good
+        # FIXME: Refactor compare_to_reference_file to accommodate the more general case
+        
+        fid1 = open(grdfilename[:-4] + '.grd')
+        data1 = fid1.readlines()
+        fid1.close()        
+        
+        fid2 = open('test_data.grd')        
+        data2 = fid2.readlines()
+        fid2.close()        
+        
+        for i in range(len(data1)):
+            msg = 'GRD file does not match '
+            msg += 'reference test_data.asc in line %i.\n' % i
+
+            #print data1[i].strip()
+            #print data2[i].strip()
+            #print 
+            
+            if data1[i] != data2[i]:
+                # Lines are different
+                # Try to see if they are close enough 
+                # in a numerical sense
+                
+                if not lines_numerically_close(data1[i], data2[i]):
+                    raise Exception(msg)                    
+            
+
+        
             
             
 
