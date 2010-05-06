@@ -434,24 +434,15 @@ class AIM:
         write_line(fid, 'MONTH = %02i' % Eruption_Month, indent=2)  
         write_line(fid, 'DAY = %i' % Eruption_Day, indent=2) 
 	write_line(fid, 'BEGIN_METEO_DATA_(HOURS_AFTER_00) = %f' % Start_time_of_meteo_data, indent=2)
-	write_line(fid, 'TIME_STEP_METEO_DATA_(MIN) = %f' % meteo_time_step, indent=2)
+	write_line(fid, 'TIME_STEP_METEO_DATA_(MIN) = %f' % Meteo_time_step, indent=2)
 	write_line(fid, 'END_METEO_DATA_(HOURS_AFTER_00) = %f' % End_time_of_meteo_data, indent=2)	
-        write_line(fid, 'ERUPTION_START_(HOURS_AFTER_00) = %f' % Start_time_of_eruption, indent=2) 
-
-# Need to change 'Start_time_of_run' to 'Start_time_of_eruption' in scenario.py
-
+        write_line(fid, 'ERUPTION_START_(HOURS_AFTER_00) = %f' % Start_time_of_eruption, indent=2)
         write_line(fid, 'ERUPTION_END_(HOURS_AFTER_00) = %f' % End_time_of_eruption, indent=2) 
         write_line(fid, 'RUN_END_(HOURS_AFTER_00) = %f' % End_time_of_run, indent=2)
         write_line(fid, '')
 
 	write_line(fid, 'GRID')
-
-# Need to add new GRID Block to scenario.py
-
 	write_line(fid, 'COORDINATES = %s' % Coordinates, indent=2)
-
-# Need to add 'Coordinates' to new GRID Block in scenario.py - possibilities are LON-LAT/UTM
-
 	write_line(fid, 'LON-LAT')
 	write_line(fid, 'LONMIN = %f' % Longitude_minimum, indent=5)
 	write_line(fid, 'LONMAX = %f' % Longitude_maximum, indent=5)
@@ -459,9 +450,6 @@ class AIM:
 	write_line(fid, 'LATMAX = %f' % Latitude_maximum, indent=5)
 	write_line(fid, 'LON_VENT = %f' % Longitude_of_vent, indent=5)
 	write_line(fid, 'LAT_VENT = %f' % Latitude_of_vent, indent=5)
-
-# Need to add 'LON-LAT', and all options listed to new GRID Block in scenario.py
-
 	write_line(fid, 'UTM')
 	write_line(fid, 'XMIN = %f' % X_coordinate_minimum, indent=5)
 	write_line(fid, 'XMAX = %f' % X_coordinate_maximum, indent=5)
@@ -469,10 +457,7 @@ class AIM:
 	write_line(fid, 'YMAX = %f' % Y_coordinate_maximum, indent=5)
 	write_line(fid, 'X_VENT = %f' % X_coordinate_of_vent, indent=5)
 	write_line(fid, 'Y_VENT = %f' % y_coordinate_of_vent, indent=5)
-
-# Need to add 'UTM' and all options to new GRID Block in scenario.py
 	write_line(fid, 'NX = %i' % Number_cells_X_direction, indent=2)
-
         write_line(fid, 'NY = %i' % Number_cells_Y_direction, indent=2)
  	write_line(fid, 'ZLAYER_(M) FROM %f TO %f INCREMENT %f' % (Z_layer_minimum, 
                                                                    Z_layers[-1],
@@ -481,9 +466,6 @@ class AIM:
 	
 	write_line(fid, 'GRANULOMETRY')
 	write_line(fid, 'DISTRIBUTION = %s' % Grainsize_distribution, indent=2)
-
-# Need to add 'Grainsize_distribution' to scenario.py - possibilities are GAUSSIAN/BIGAUSSIAN
-
         write_line(fid, 'NUMBER_OF_CLASSES = %i' % Number_of_grainsize_classes, indent=2)
         write_line(fid, 'FI_MEAN = %f' % Mean_grainsize, indent=2)
         write_line(fid, 'FI_DISP = %f' % Sorting, indent=2)
@@ -515,16 +497,6 @@ class AIM:
         write_line(fid, 'EXIT_VOLATILE_FRACTION_(IN%%) = %f' % Exit_volatile_fraction, indent=5)
         write_line(fid, '')
 
-# Need to remove Vent_location_X_coordinate from scenario.py
-# Need to remove Vent_locaton_Y_coordinate from scenario.py
-# Need to add Mass_eruption_rate for Point source to scenario.py
-# Need to add Mass_eruption_rate for Suzuki source to scenario.py 
-# Need to add Height_or_MFR for Plume source to scenario.py - possibilities are HEIGHT/MFR
-# Need to add MFR_minimum for Plume source to scenario.py
-# Need to add MFR_maximum for Plume source to scenario.py
-# Need to add Height_above_vent for Plume source to scenario.py
-# Need to add Mass_eruption_rate for Plume source to scenario.py
-
         write_line(fid, 'FALL3D')
         write_line(fid, 'TERMINAL_VELOCITY_MODEL = %s' % Terminal_velocity_model, indent=2)
         write_line(fid, 'VERTICAL_TURBULENCE_MODEL = %s' % Vertical_turbulence_model, indent=2) 
@@ -536,12 +508,6 @@ class AIM:
 	write_line(fid, 'RAMS_CS = %f' % Value_of_CS, indent=2)
         write_line(fid, '') 
 
-# Need to delete Z_layer_minimum, Z_layers and Z_layer_increment from FALL3D Block in scenario.py
-# Need to delete Post_process_time_interval from scenario.py
-# Need to add Value_of_CS to scenario.py - the value of CS in the RAMS model (only used when Horizontal_turbulence_model = RAMS)
-
-# Need to delete 'METEO DATABASE' Block - all variables still used moved to the new GRID block (see above) and others are discarded
-# Need to delete 'POSTPROCESS_MODELS' Block and replace with new 'OUTPUT' Block (see below)
         Z_layer_string = ''
         for Z in Z_layers:
             Z_layer_string += '%f ' % Z
@@ -554,11 +520,6 @@ class AIM:
         write_line(fid, 'POSTPROCESS_3D_VARIABLES = %s' % Postprocess_3D_variables, indent=2)
         write_line(fid, 'POSTPROCESS_CLASSES = %s' % Postprocess_classes, indent=2)
 	write_line(fid, 'TRACK_POINTS = %s' % Track_points, indent=2)
-
-# Need to add Postprocess_time_interval to new 'OUTPUT' Block in scenario.py
-# Need to add Postprocess_3D_variables to new 'OUTPUT' Block in scenario.py - possibilities are YES/NO 
-# Need to add Postprocess_classes to new 'OUTPUT' Block in scenario.py - possibilities are YES/NO 
-# Need to add Track_points to new 'OUTPUT' Block in scenario.py   possibilities are YES/NO
         
     #------------------------
     # AIM conversion routines
