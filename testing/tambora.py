@@ -26,12 +26,12 @@ End_time_of_run = 6                             # Hours after 00
 
 # Grid (Volcanological input file)
 Coordinates = UTM                               # LON-LAT/UTM
-Longitude_minimum =                             # LON-LAT only 
-Longitude_maximum =                             # LON-LAT only
-Latitude_minimum =                              # LON-LAT only
-Latitude_maximum =                              # LON-LAT only
-Longitude_of_vent =                             # LON-LAT only
-Latitude_of_vent =                              # LON-LAT only
+Longitude_minimum = 0                           # LON-LAT only 
+Longitude_maximum = 0                           # LON-LAT only
+Latitude_minimum = 0                            # LON-LAT only
+Latitude_maximum = 0                            # LON-LAT only
+Longitude_of_vent = 0                           # LON-LAT only
+Latitude_of_vent = 0                            # LON-LAT only
 X_coordinate_minimum = 555534.0                 # UTM only   
 X_coordinate_maximum = 655534.0                 # UTM only
 Y_coordinate_minimum = 9032899.6                # UTM only
@@ -60,9 +60,9 @@ Mass_eruption_rate = 1e9                        # kg/s (if point, if suzuki or i
 Height_above_vent = [40000, 30000, 20000, 10000] # m (if point, if suzuki or if plume where Height_pr_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
-Height_or_MFR =                                 # plume only
-MFR_minimum =                                   # kg/s (plume only)
-MFR_maximum =                                   # kg/s (plume only) 
+Height_or_MFR = n/a                             # plume only
+MFR_minimum = n/a                               # kg/s (plume only)
+MFR_maximum = n/a                               # kg/s (plume only) 
 Exit_velocity = 100                             # m/s (plume only)
 Exit_temperature = 1073                         # K (plume only)
 Exit_volatile_fraction = 0                      # % (plume only)
