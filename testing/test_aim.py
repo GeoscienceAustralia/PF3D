@@ -237,7 +237,7 @@ class Test_AIM(unittest.TestCase):
         
         
         # Rename input file to a temporary filename
-        ascfilename = 'xkshkoek.asc'
+        ascfilename = 'yfeauhkrc.asc'
         
         s = 'cp test_data.asc %s' % ascfilename
         run(s)
@@ -248,6 +248,8 @@ class Test_AIM(unittest.TestCase):
         # Check that result is good
         # FIXME: Refactor compare_to_reference_file to accommodate the more general case
         
+        print 'Open', ascfilename[:-4] + '.grd'
+
         fid1 = open(ascfilename[:-4] + '.grd')
         data1 = fid1.readlines()
         fid1.close()        
@@ -258,7 +260,10 @@ class Test_AIM(unittest.TestCase):
         
         for i in range(len(data1)):
             msg = 'GRD file does not match '
-            msg += 'reference test_data.asc in line %i.\n' % i
+            msg += 'reference test_data.grd in line %i:\n' % i
+            msg += '%s\n' % str(data1[i])
+            msg += '%s\n' % str(data2[i])            
+            
 
             #print data1[i].strip()
             #print data2[i].strip()
@@ -268,12 +273,10 @@ class Test_AIM(unittest.TestCase):
                 # Lines are different
                 # Try to see if they are close enough 
                 # in a numerical sense
-                
                 if not lines_numerically_close(data1[i], data2[i]):
                     raise Exception(msg)                    
             
 
-        
             
             
 

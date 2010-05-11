@@ -2,7 +2,7 @@
   
 """  
 
-import os        
+import os, sys        
 from math import sqrt, pi, sin, cos, acos
 from subprocess import Popen, PIPE
 from config import update_marker, tephra_output_dir
@@ -365,8 +365,8 @@ def grd2asc(grdfilename,
    
     # Get cellsize and check that cells are square
     cellsize = (xmax-xmin)/(ncols-1)
-    #msg = 'Cells are not square'
-    #assert abs(cellsize - (ymax-ymin)/(nrows-1)) > 1.0e-6, msg 
+    msg = 'Cells are not square'
+    assert abs(cellsize - (ymax-ymin)/(nrows-1)) < 1.0e-6, msg 
 
     # Write origin using pixel registration used by ESRI instead of grid line registration used by Surfer.
     fid.write('xllcorner %f\n' % (xmin - cellsize/2))   # FIXME: CHECK THIS 
@@ -450,42 +450,59 @@ def asc2grd(ascfilename,
     line = lines[0].strip()
     fields = line.split()
         
-    msg = 'input file %s does not look like an ASCII grd file. It must start with ncols' % ascfilename
+    msg = 'Input file %s does not look like an ASCII grd file. It must start with ncols' % ascfilename
     assert fields[0] == 'ncols', msg
     assert len(fields) == 2
     ncols = int(fields[1])
 
-    # Get number of rows
+    # Get number of rows and write
     line = lines[1]
     fields = line.split() 
     nrows = int(fields[1])       
     
-    #THIS FAR 5 MAY
-    
     fid.write('%i %i\n' % (ncols, nrows))
+    
+    # Get data and compute zmin and zmax
+    data = lines[6:]    
+    zmin = sys.maxint
+    zmax = -zmin
+    for line in data:
+        for z in [float(x) for x in line.split()]:
+            if z > zmax: zmax = z
+            if z < zmin: zmin = z            
 
+    # Get cellsize
+    msg = 'ASCII file does not look right. Check Traceback and source code %s.' % __file__
+    line = lines[4]
+    assert line.startswith('cellsize'), msg
+    fields = line.split()
+    cellsize = float(fields[1])        
+        
     # Get origin
     line = lines[2]
-    xmin, xmax = [float(x) for x in line.split()]
-
-    line = lines[3]
-    ymin, ymax = [float(x) for x in line.split()]
-   
-    # Get cellsize and check that cells are square
-    cellsize = (xmax-xmin)/(ncols-1)
-    #msg = 'Cells are not square'
-    #assert abs(cellsize - (ymax-ymin)/(nrows-1)) > 1.0e-6, msg 
-
-    # Write origin using pixel registration used by ESRI instead of grid line registration used by Surfer.
-    fid.write('xllcorner %f\n' % (xmin - cellsize/2))   # FIXME: CHECK THIS 
-    fid.write('yllcorner %f\n' % (ymin - cellsize/2))
-    fid.write('cellsize %f\n' % cellsize)
+    assert line.startswith('xllcorner'), msg
+    fields = line.split()
+    xmin = float(fields[1]) + cellsize/2
     
-    # Write value for no data
-    fid.write('NODATA_value %d\n' % nodatavalue)
+    line = lines[3]
+    assert line.startswith('yllcorner'), msg
+    fields = line.split()
+    ymin = float(fields[1]) + cellsize/2    
+    
+    # Calculate upper bounds and write
+    xmax = cellsize * (ncols-1) + xmin
+    ymax = cellsize * (nrows-1) + ymin
+    
+    assert abs(cellsize - (xmax-xmin)/(ncols-1)) < 1.0e-6
+    assert abs(cellsize - (ymax-ymin)/(nrows-1)) < 1.0e-6    
+    
+    fid.write('%f %f\n' % (xmin, xmax))
+    fid.write('%f %f\n' % (ymin, ymax))    
+    fid.write('%e %e\n' % (zmin, zmax))
 
-    # Write data reversed
-    data = lines[5:]
+
+    # Write ASCII data reversed into GRD file
+
     data.reverse()
 
     for line in data:
