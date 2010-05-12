@@ -122,8 +122,8 @@ class AIM:
         # Vertical wind profile data generated from scenario_wind.txt
         self.windprofile = self.basepath + '.profile'
         
-        # Regional topographic grid generated from scenario_topography.txt
-        self.topography = self.basepath + '.regionaltopo.grd'
+        # Topographic surfer grid generated from scenario_topography.txt
+        self.topography = self.basepath + '.top'
                                        
         # Output database file
         self.databasefile = self.basepath + '.dbs'
@@ -137,7 +137,7 @@ class AIM:
         #----------------------------
         
         # Verify that the right parameters have been provided        
-        check_presence_of_required_parameters(params)        
+        #check_presence_of_required_parameters(params)        
         
         # Derive implied spatial and modelling parameters
         derive_implied_parameters(self.topography_grid, params)
@@ -654,10 +654,10 @@ class AIM:
         self.WKT_projection = None # Default - no projection
 
         if not self.native_AIM_topo:
-            # Assume existence of Fall3d native <scenario_name>.regionaltopo.grd
+            # Assume existence of Fall3d native <scenario_name>.top
             # and copy to work area
             
-            native_grid = '%s.regionaltopo.grd' % self.scenario_name
+            native_grid = '%s.top' % self.scenario_name
             s = 'cp %s %s' % (native_grid, self.output_dir)
             print(s)
             os.system(s)

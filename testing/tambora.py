@@ -54,6 +54,17 @@ Density_maximum = 2300                          # kg/m3
 Sphericity_minimum = 0.9
 Sphericity_maximum = 0.9
 
+# Meteorological database (Volcanological input file)
+#Year = 1815                                     # Of meteo data
+#Month = 4                                       # Of meteo data
+#Day = 5                                         # Of meteo data
+#Start_time_of_meteo_data = 0                    # Hours after 00
+#End_time_of_meteo_data = 6                      # Hours after 00
+Hours_between_meteo_data_blocks = 1             # Hours
+#Z_layers = [0, 10000, 30000, 40000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+
+
+
 # Source (Volcanological input file)
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 Mass_eruption_rate = 1e9                        # kg/s (if point, if suzuki or if plume where Height_pr_MFR = MFR)
@@ -77,13 +88,14 @@ Value_of_CS = 0.1                               # RAMS only
 
 # Output (Volcanological input file)
 Postprocess_time_interval = 6                   # Hours
-Postprocess_3D_variables = 'No'                   # Yes/No
-Postprocess_classes = 'No'                        # Yes/No
-Track_points = 'No'                               # Yes/No
+Postprocess_3D_variables = 'No'                 # Yes/No
+Postprocess_classes = 'No'                      # Yes/No
+Track_points = 'No'                             # Yes/No
 
 # Fixed_contour_interval = 1                    # Contour interval for kml and shp files
-Topography_grid = 'tambora.txt'                          # Specify ASCII topography grid to use. 
-                                                # If empty, AIM will look for a topography grid named                                                                         # <scenario_name>_topography.txt         
+Topography_grid = 'tambora_topography.txt'      # Specify ASCII topography grid to use. 
+                                                # If empty, AIM will look for a topography grid named
+                                                # <scenario_name>.top (surfer GRD format)         
 
 # Run model using specified parameters
 if __name__ == '__main__':

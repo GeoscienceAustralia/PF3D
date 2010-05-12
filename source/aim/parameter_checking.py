@@ -116,8 +116,8 @@ def derive_spatial_parameters(topography_grid, params):
         fid = open(topography_grid)
     except IOError:
      
-        # Assume existence of native Fall3d topogrid named
-        # <scenario_name>.regionaltopo.grd
+        # Assume existence of native Fall3d (surfer) topogrid named
+        # <scenario_name>.top
         #
         #DSAA
         #171  171
@@ -125,7 +125,7 @@ def derive_spatial_parameters(topography_grid, params):
         #4100000.0 4270000.0
         #0.0    3129.5
         
-        native_grid = '%s.regionaltopo.grd' % scenario_name
+        native_grid = '%s.top' % scenario_name
         print('AIM topography grid %s could not be found.' % topography_grid)
         print('Assuming existence of Fall3d grid named %s'% native_grid)
         
