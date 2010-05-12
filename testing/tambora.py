@@ -82,7 +82,7 @@ Postprocess_classes = 'No'                        # Yes/No
 Track_points = 'No'                               # Yes/No
 
 # Fixed_contour_interval = 1                    # Contour interval for kml and shp files
- Topography_grid = 'tambora.top'                          # Specify ASCII topography grid to use. 
+Topography_grid = 'tambora.txt'                          # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named                                                                         # <scenario_name>_topography.txt         
 
 # Run model using specified parameters
