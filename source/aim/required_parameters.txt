@@ -10,7 +10,7 @@ Start_time_of_meteo_data
 Meteo_time_step
 End_time_of_meteo_data
 Start_time_of_eruption
-End_time_of_erupion
+End_time_of_eruption
 End_time_of_run
 Coordinates
 Longitude_minimum
