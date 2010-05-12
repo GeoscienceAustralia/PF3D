@@ -25,7 +25,7 @@ End_time_of_eruption = 3                        # Hours after 00
 End_time_of_run = 6                             # Hours after 00  
 
 # Grid (Volcanological input file)
-Coordinates = UTM                               # LON-LAT/UTM
+Coordinates = 'UTM'                               # LON-LAT/UTM
 Longitude_minimum = 0                           # LON-LAT only 
 Longitude_maximum = 0                           # LON-LAT only
 Latitude_minimum = 0                            # LON-LAT only
@@ -43,7 +43,7 @@ Number_of_cells_Y_direction = 89
 Z_layers = [0, 10000, 20000, 30000, 40000, 50000]     # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
-Grainsize_distribution = GAUSSIAN               # Possibilites are GAUSSIAN/BIGAUSSIAN
+Grainsize_distribution = 'GAUSSIAN'               # Possibilites are GAUSSIAN/BIGAUSSIAN
 Number_of_grainsize_classes = 6
 Mean_grainsize = 2.5                            # phi
 Sorting = 1.5
@@ -60,9 +60,9 @@ Mass_eruption_rate = 1e9                        # kg/s (if point, if suzuki or i
 Height_above_vent = [40000, 30000, 20000, 10000] # m (if point, if suzuki or if plume where Height_pr_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
-Height_or_MFR = n/a                             # plume only
-MFR_minimum = n/a                               # kg/s (plume only)
-MFR_maximum = n/a                               # kg/s (plume only) 
+Height_or_MFR = 'MFR'                             # plume only
+MFR_minimum = 1e7                               # kg/s (plume only)
+MFR_maximum = 1e9                               # kg/s (plume only) 
 Exit_velocity = 100                             # m/s (plume only)
 Exit_temperature = 1073                         # K (plume only)
 Exit_volatile_fraction = 0                      # % (plume only)
@@ -77,12 +77,12 @@ Value_of_CS = 0.1                               # RAMS only
 
 # Output (Volcanological input file)
 Postprocess_time_interval = 6                   # Hours
-Postprocess_3D_variables = No                   # Yes/No
-Postprocess_classes = No                        # Yes/No
-Track_points = No                               # Yes/No
+Postprocess_3D_variables = 'No'                   # Yes/No
+Postprocess_classes = 'No'                        # Yes/No
+Track_points = 'No'                               # Yes/No
 
 # Fixed_contour_interval = 1                    # Contour interval for kml and shp files
-# Topography_grid = ''                          # Specify ASCII topography grid to use. 
+ Topography_grid = 'tambora.top'                          # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named                                                                         # <scenario_name>_topography.txt         
 
 # Run model using specified parameters
