@@ -453,7 +453,7 @@ class AIM:
 	write_line(fid, 'UTM')
 	write_line(fid, 'XMIN = %f' % X_coordinate_minimum, indent=5)
 	write_line(fid, 'XMAX = %f' % X_coordinate_maximum, indent=5)
-	write_line(fid, 'YMAX = %f' % Y_coordinate_minimum, indent=5)
+	write_line(fid, 'YMIN = %f' % Y_coordinate_minimum, indent=5)
 	write_line(fid, 'YMAX = %f' % Y_coordinate_maximum, indent=5)
 	write_line(fid, 'X_VENT = %f' % X_coordinate_of_vent, indent=5)
 	write_line(fid, 'Y_VENT = %f' % Y_coordinate_of_vent, indent=5)

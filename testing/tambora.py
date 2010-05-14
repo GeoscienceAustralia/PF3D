@@ -40,10 +40,10 @@ X_coordinate_of_vent = 605918                   # UTM only
 Y_coordinate_of_vent = 9083088                  # UTM only  
 Number_of_cells_X_direction = 100
 Number_of_cells_Y_direction = 89               
-Z_layers = [0, 10000, 20000, 30000, 40000, 50000]     # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+Z_layers = [0, 10000, 30000, 40000]             # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
-Grainsize_distribution = 'GAUSSIAN'               # Possibilites are GAUSSIAN/BIGAUSSIAN
+Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
 Number_of_grainsize_classes = 6
 Mean_grainsize = 2.5                            # phi
 Sorting = 1.5
