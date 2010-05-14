@@ -451,6 +451,7 @@ class AIM:
 	write_line(fid, 'LON_VENT = %f' % Longitude_of_vent, indent=5)
 	write_line(fid, 'LAT_VENT = %f' % Latitude_of_vent, indent=5)
 	write_line(fid, 'UTM')
+	write_line(fid, 'UTMZONE = %s' % UTMZONE, indent=5)        
 	write_line(fid, 'XMIN = %f' % X_coordinate_minimum, indent=5)
 	write_line(fid, 'XMAX = %f' % X_coordinate_maximum, indent=5)
 	write_line(fid, 'YMIN = %f' % Y_coordinate_minimum, indent=5)

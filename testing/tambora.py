@@ -32,6 +32,7 @@ Latitude_minimum = 0                            # LON-LAT only
 Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
+UTMZONE = '50S'                                 # UTM only
 X_coordinate_minimum = 555534.0                 # UTM only   
 X_coordinate_maximum = 655534.0                 # UTM only
 Y_coordinate_minimum = 9032899.6                # UTM only
