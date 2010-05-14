@@ -456,7 +456,7 @@ class AIM:
 	write_line(fid, 'YMAX = %f' % Y_coordinate_minimum, indent=5)
 	write_line(fid, 'YMAX = %f' % Y_coordinate_maximum, indent=5)
 	write_line(fid, 'X_VENT = %f' % X_coordinate_of_vent, indent=5)
-	write_line(fid, 'Y_VENT = %f' % y_coordinate_of_vent, indent=5)
+	write_line(fid, 'Y_VENT = %f' % Y_coordinate_of_vent, indent=5)
 	write_line(fid, 'NX = %i' % Number_cells_X_direction, indent=2)
         write_line(fid, 'NY = %i' % Number_cells_Y_direction, indent=2)
  	write_line(fid, 'ZLAYER_(M) FROM %f TO %f INCREMENT %f' % (Z_layer_minimum, 
@@ -480,17 +480,22 @@ class AIM:
         write_line(fid, 'SOURCE_TYPE = %s' % Source_type, indent=2) 
         write_line(fid, 'POINT_SOURCE', indent=2)
         write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
-        write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %f' % Height_above_vent, indent=5)
+
+        Height_above_vent_string = ''
+        for H in Height_above_vent:
+            Height_above_vent_string += '%f ' % H
+        
+        write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5)
         write_line(fid, 'SUZUKI_SOURCE', indent=2)
 	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
-        write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %f' % Height_above_vent, indent=5)
+        #write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %f' % Height_above_vent, indent=5) # FIXME: Why?
         write_line(fid, 'A = %i' % A, indent=5)
         write_line(fid, 'L = %i' % L, indent=5)
         write_line(fid, 'PLUME_SOURCE', indent=2)
-	write_line(fid, 'SOLVE_PLUME_FOR = %f' % Height_or_MFR, indent =5)
+	write_line(fid, 'SOLVE_PLUME_FOR = %s' % Height_or_MFR, indent =5)
 	write_line(fid, 'MFR_SEARCH_RANGE = %f %f' % (MFR_minimum, 
 						      MFR_maximum), indent=5)
-	write_line(fid, 'HEIGHT_ABOVE_VENT = %f' % Height_above_vent, indent=5)
+	#write_line(fid, 'HEIGHT_ABOVE_VENT = %f' % Height_above_vent, indent=5) # FIXME: Why?
 	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
         write_line(fid, 'EXIT_VELOCIY_(MS) = %f' % Exit_velocity, indent=5)
         write_line(fid, 'EXIT_TEMPERATURE_(K) = %f' % Exit_temperature, indent=5)
@@ -609,8 +614,8 @@ class AIM:
         # Write Fall3D wind profile
         outfile=open(self.windprofile, 'w')
 
-        vent_location_x = self.params['Vent_location_X_coordinate']
-        vent_location_y = self.params['Vent_location_Y_coordinate']        
+        vent_location_x = self.params['X_coordinate_of_vent']
+        vent_location_y = self.params['Y_coordinate_of_vent']        
         outfile.write('%.0f. %.0f.\n' % (vent_location_x, vent_location_y))
                 
         eruption_year = self.params['Eruption_Year']
@@ -620,7 +625,9 @@ class AIM:
         
         for hour, timeblock in enumerate(timeblocks):
             if len(timeblock) != nz:
-                msg = 'Number of z layers must be constant for all time blocks'
+                msg = 'Number of z layers in each time block much equal the number of spefified Z layers.\n'
+                msg += 'You specfied %i Z layers ' % nz
+                msg += 'but timeblock in %s was %s, i.e. %i layers.' % (self.wind_profile, timeblock, len(timeblock))
                 raise Exception(msg)
             
             itime1=hour*3600

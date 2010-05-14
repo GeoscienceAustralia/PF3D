@@ -74,12 +74,12 @@ def check_parameter_ranges(params):
     lo = X_coordinate_lower_left_corner
     hi = lo + Cell_size*1000*Number_cells_X_direction
     msg = 'Vent location not within easting range [%i, %i]' % (lo, hi)
-    assert lo <= Vent_location_X_coordinate <= hi, msg
+    assert lo <= X_coordinate_of_vent <= hi, msg
 
     lo = Y_coordinate_lower_left_corner
     hi = lo + Cell_size*1000*Number_cells_Y_direction
     msg = 'Vent location not within northing range [%i, %i]' % (lo, hi)
-    assert lo <= Vent_location_Y_coordinate <= hi, msg
+    assert lo <= Y_coordinate_of_vent <= hi, msg
       
 
 #    if Number_cells_X_direction > 150 or Number_cells_Y_direction > 150:
@@ -201,7 +201,7 @@ def derive_modelling_parameters(params):
         params['Z_layer_increment'] = 500
 
 
-    params['meteo_time_step'] = params['Hours_between_meteo_data_blocks'] * 60
+    params['meteo_time_step'] = params['Meteo_time_step'] * 60 # Convert timestep in 'hours' to 'minutes' (FIXME: Naming?)
     #params['source_type'] = 'plume'                       # only relevant source type
     params['load_units'] = 'kg/m2'                        # only relevant unit 
     params['class_load_units'] = 'kg/m2'                  # only relevant unit

@@ -18,7 +18,7 @@ Eruption_Year = 1815                            # YYYY
 Eruption_Month = 4                              # MM  
 Eruption_Day = 5                                # DD 
 Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 1                             # Hours
+Meteo_time_step = 1                             # Hours       
 End_time_of_meteo_data = 6                      # Hours after 00
 Start_time_of_eruption = 0                      # Hours after 00
 End_time_of_eruption = 3                        # Hours after 00 
@@ -53,17 +53,6 @@ Density_minimum = 1200                          # kg/m3
 Density_maximum = 2300                          # kg/m3
 Sphericity_minimum = 0.9
 Sphericity_maximum = 0.9
-
-# Meteorological database (Volcanological input file)
-#Year = 1815                                     # Of meteo data
-#Month = 4                                       # Of meteo data
-#Day = 5                                         # Of meteo data
-#Start_time_of_meteo_data = 0                    # Hours after 00
-#End_time_of_meteo_data = 6                      # Hours after 00
-Hours_between_meteo_data_blocks = 1             # Hours
-#Z_layers = [0, 10000, 30000, 40000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
-
-
 
 # Source (Volcanological input file)
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
