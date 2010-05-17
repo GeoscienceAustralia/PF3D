@@ -201,7 +201,8 @@ if __name__ == '__main__':
     #----------------
     fall3d = 'Fall3d-PUB'
     tarball = fall3d + '.tar.gz'
-    url = 'http://www.bsc.es/projects/earthscience/fall3d/Downloads'
+    #url = 'http://www.bsc.es/projects/earthscience/fall3d/Downloads' # Original
+    url = 'http://www.aifdr.org/projects/aim/raw-attachment/wiki/WikiStart' # AIFDR mirror (to keep things stable!)
 
 
     path = os.path.join(url, tarball)
