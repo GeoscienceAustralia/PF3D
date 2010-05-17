@@ -240,8 +240,8 @@ class AIM:
 
         cmd = '%s '*7 % (executable, logfile, 
                          self.inputfile, self.windprofile, 
-                         self.databasefile, 'profile', 
-                         self.topography)
+                         self.databasefile, 
+                         self.topography, 'profile')
                          
         self.runscript(cmd, 'SetDbs', logfile, lines=5,
                        verbose=verbose)
@@ -265,11 +265,13 @@ class AIM:
             header('Creating eruptive source file (SetSrc)')
   
 
-        cmd = '%s '*6 % (executable, logfile, 
+        cmd = '%s '*8 % (executable, logfile, 
                          self.inputfile,
                          self.sourcefile,                                
                          self.grainfile,
-                         self.databasefile)
+                         self.databasefile,
+                         'FALL3D',    # Taken from hardwired values in Script-SetSrc
+                         'YES')
                  
         
         self.runscript(cmd, 'SetSrc', logfile, lines=5, 
