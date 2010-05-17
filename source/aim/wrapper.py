@@ -480,6 +480,7 @@ class AIM:
                                                       Sphericity_maximum), indent=2)
 	write_line(fid, '')
 	write_line(fid, 'SOURCE')
+	write_line(fid, 'VENT_HEIGHT_(M) = %f' % Vent_height, indent=2)
         write_line(fid, 'SOURCE_TYPE = %s' % Source_type, indent=2) 
         write_line(fid, 'POINT_SOURCE', indent=2)
         write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)

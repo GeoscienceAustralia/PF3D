@@ -38,6 +38,7 @@ Density_minimum
 Density_maximum
 Sphericity_minimum
 Sphericity_maximum
+Vent_height
 Source_type
 Mass_eruption_rate
 Height_above_vent

@@ -56,6 +56,7 @@ Sphericity_minimum = 0.9
 Sphericity_maximum = 0.9
 
 # Source (Volcanological input file)
+Vent_height = 1554.6
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 Mass_eruption_rate = 1e9                        # kg/s (if point, if suzuki or if plume where Height_pr_MFR = MFR)
 Height_above_vent = [40000, 30000, 20000, 10000] # m (if point, if suzuki or if plume where Height_pr_MFR = Height)            
