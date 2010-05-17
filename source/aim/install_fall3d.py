@@ -35,16 +35,16 @@ def replace_string_in_file(filename, s1, s2, verbose=False):
         outfile.write(new_string + '\n')
     outfile.close()
 
-def set_compiler(filename):
-    replace_string_in_file(filename, 'FC= ifort',  '#FC= ifort')
-    replace_string_in_file(filename, 'LINKER= ifort',  '#LINKER= ifort')
-    replace_string_in_file(filename, 'FFLAGS= -132',  '#FFLAGS= -132')
-    replace_string_in_file(filename, 'LINKFLAGS= -132',  '#LINKFLAGS= -132')
-
-    replace_string_in_file(filename, '#FC= gfortran',  'FC= gfortran')
-    replace_string_in_file(filename, '#LINKER= gfortran',  'LINKER= gfortran')
-    replace_string_in_file(filename, '#FFLAGS= -ffixed',  'FFLAGS= -ffixed')
-    replace_string_in_file(filename, '#LINKFLAGS= -ffixed',  'LINKFLAGS= -ffixed')
+#def set_compiler(filename):
+#    replace_string_in_file(filename, 'FC= ifort',  '#FC= ifort')
+#    replace_string_in_file(filename, 'LINKER= ifort',  '#LINKER= ifort')
+#    replace_string_in_file(filename, 'FFLAGS= -132',  '#FFLAGS= -132')
+#    replace_string_in_file(filename, 'LINKFLAGS= -132',  '#LINKFLAGS= -132')
+#
+#    replace_string_in_file(filename, '#FC= gfortran',  'FC= gfortran')
+#    replace_string_in_file(filename, '#LINKER= gfortran',  'LINKER= gfortran')
+#    replace_string_in_file(filename, '#FFLAGS= -ffixed',  'FFLAGS= -ffixed')
+#    replace_string_in_file(filename, '#LINKFLAGS= -ffixed',  'LINKFLAGS= -ffixed')
 
 
 if __name__ == '__main__':
