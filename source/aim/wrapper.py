@@ -338,32 +338,32 @@ class AIM:
                         
                         
 
-    #def convert_ncgrids_to_asciigrids(self, verbose=True):
-    #    """Convert (selected) NC data layers to ASC files
-    #    
-    #    One ASCII file is generated for each timestep (assumed to be in hours).
-    #    
-    #    The purposes of the ASCII files are
-    #    * They can be ingested by ESRI and other GIS tools.
-    #    * They have an associated projection file that allows georeferencing.
-    #    * They form the inputs for the contouring 
-    #    """
-    #
-    #    if verbose:
-    #        header('Converting NetCDF data to ASCII grids')
-    #                           
-    #            
-    #    for filename in os.listdir(self.output_dir):
-    #        if filename.endswith('.res.nc'):
-    #            if verbose: print '  ', filename
-    #            for subdataset in ['LOAD', 'THICKNESS']:
-    #                nc2asc(os.path.join(self.output_dir, filename), 
-    #                       subdataset=subdataset,
-    #                       projection=self.WKT_projection)
+    def convert_ncgrids_to_asciigrids(self, verbose=True):
+        """Convert (selected) NC data layers to ASC files
+        
+        One ASCII file is generated for each timestep (assumed to be in hours).
+        
+        The purposes of the ASCII files are
+        * They can be ingested by ESRI and other GIS tools.
+        * They have an associated projection file that allows georeferencing.
+        * They form the inputs for the contouring 
+        """
+    
+        if verbose:
+            header('Converting NetCDF data to ASCII grids')
+                               
+                
+        for filename in os.listdir(self.output_dir):
+            if filename.endswith('.res.nc'):
+                if verbose: print '  ', filename
+                for subdataset in ['LOAD', 'THICKNESS']:
+                    nc2asc(os.path.join(self.output_dir, filename), 
+                           subdataset=subdataset,
+                           projection=self.WKT_projection)
                            
                         
                         
-    def old_generate_contours(self, interval=1, verbose=True):
+    def XXXXASCgenerate_contours(self, interval=1, verbose=True):
         """Contour ASCII grids
         """
         
@@ -409,60 +409,59 @@ class AIM:
                                          verbose=verbose)
                     
                                                 
+
     def generate_contours(self, interval=1, verbose=True):
         """Contour NetCDF grids directly
         """
-        
+	       
         if verbose:
-            header('Contouring NetCDF thickness grids')        
-        
+            header('Contouring NetCDF thickness grids')       
+	       
         for filename in os.listdir(self.output_dir):
             if filename.endswith('.res.nc'):
-            
+                
                 pathname = os.path.join(self.output_dir, filename)
-                if verbose: print '  ', pathname        
-                
+                if verbose: print '  ', pathname       
+	               
                 basename, ext = os.path.splitext(pathname)
-                
+	               
                 tiffile = basename + '.tif'
                 shpfile = basename + '.shp'
                 kmlfile = basename + '.kml'
                 prjfile = basename + '.prj'
-                
-
-                
+	               
+	
+	               
                 # Generate GeoTIFF raster
                 netcdf_subdata = 'NETCDF:"%s":THICKNESS' % pathname
-                s = 'gdal_translate -of GTiff %s %s' % (netcdf_subdata, tiffile)
+                s = 'gdal_translate -of GTiff -b 1 %s %s' % (netcdf_subdata, tiffile) # FIXME: Band is hardwired
                 self.run_with_errorcheck(s, tiffile, 
-                                         verbose=verbose)                                
-
-
+                                         verbose=verbose)                               
+	
+	
                 # Generate contours as shapefiles
                 s = '/bin/rm -rf %s' % shpfile # Clear the way
                 run(s, verbose=False)
-                
+	               
                 s = 'gdal_contour -i %f %s %s' % (interval, tiffile, shpfile)
                 self.run_with_errorcheck(s, shpfile, 
-                                         verbose=verbose)                
-                
-                # Create associated projection file
-                fid = open(prjfile, 'w')
-                fid.write(self.WKT_projection)
-                fid.close()
-
-                
-                # Generate KML
+                                         verbose=verbose)               
+	               
+	               
+	        # Generate KML
                 if self.WKT_projection:
+                    # Create associated projection file
+                    fid = open(prjfile, 'w')
+                    fid.write(self.WKT_projection)
+                    fid.close()        
+                            
                     s = 'ogr2ogr -f KML -t_srs EPSG:4623 -s_srs %s %s %s' % (prjfile, kmlfile, shpfile)
-                else:    
-                    s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)                
-                
+                else:   
+                    s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)               
+	               
                 self.run_with_errorcheck(s, kmlfile, 
-                                         verbose=verbose)
-                    
-                          
-
+                                         verbose=verbose)                                
+                                                
                 
     def write_input_file(self, verbose=False):
         """Generate input file for Fall3d-6

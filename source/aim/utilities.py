@@ -291,7 +291,18 @@ def tail(filename,
             if s: 
                 print space + s
         
+
+def nc2asc(ncfilename,
+           subdataset,
+           projection=None):
+    """Extract given subdataset from ncfile name and create one ASCII file for each band.
     
+    The underlying command is of the form
+    gdal_translate -of AAIGrid -b 4 NETCDF:"merapi.res.nc":THICKNESS merapi.003h.depothick.asc
+    
+    """
+           
+    pass
     
 
 
