@@ -83,7 +83,7 @@ Postprocess_3D_variables = 'No'                 # Yes/No
 Postprocess_classes = 'No'                      # Yes/No
 Track_points = 'No'                             # Yes/No
 
-# Fixed_contour_interval = 1                    # Contour interval for kml and shp files
+Fixed_contour_interval = 1                      # Contour interval for kml and shp files
 Topography_grid = 'tambora_topography.txt'      # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
@@ -91,7 +91,10 @@ Topography_grid = 'tambora_topography.txt'      # Specify ASCII topography grid 
 # Run model using specified parameters
 if __name__ == '__main__':
     from aim import run_scenario
-    run_scenario(__file__, dircomment=Eruption_comment)
+    run_scenario(__file__, 
+                 store_locally=True, 
+                 timestamp_output=False,
+                 dircomment=Eruption_comment)
 
 
  

@@ -67,11 +67,17 @@ class AIM:
         
         output_dir = os.path.join(output_dir, scenario_dir)
         if not timestamp_output:
-            # Clean out any previous files
-            s = 'chmod -R +w %s' % output_dir 
-            run(s, verbose=False)                    
-            s = '/bin/rm -rf %s' % output_dir
-            run(s, verbose=False)        
+            try:
+                os.listdir(output_dir)
+            except:
+                # OK if it doesn't exist
+                pass
+            else:
+                # Clean out any previous files
+                s = 'chmod -R +w %s' % output_dir 
+                run(s, verbose=False)                    
+                s = '/bin/rm -rf %s' % output_dir
+                run(s, verbose=False)        
         
                                   
         # Base filename for all files in this scenario 
@@ -305,38 +311,10 @@ class AIM:
                          self.resultfile)
                          
         self.runscript(cmd, 'Fall3d', logfile, lines=2,
-                       verbose=verbose)                         
-
+                       verbose=verbose)
+                       
+                                                
     
-    #def process_model_results(self, verbose=True):
-    #    """Postprocess Fall3d output
-    #    """
-    #
-    #            
-    #    executable = os.path.join(self.utilities_dir, 
-    #                              'Fall3dPostp', 
-    #                              'Fall3dPostp.exe')
-    #    
-    #    logfile = self.basepath + '.Fall3dPostp.log'
-    #    
-    #    if verbose:
-    #        header('Processing model outputs (Fall3dPostp)')
-    #    
-    #                           
-    #    # Optional terrain symbols file
-    #    symfile = self.basepath + '.sym'
-    #
-    #
-    #    cmd = '%s '*6 % (executable, logfile,
-    #                     self.inputfile,
-    #                     self.resultfile,
-    #                     self.basepath,
-    #                     symfile)
-    #                     
-    #    self.runscript(cmd, 'Fall3dPostp', logfile, lines=4,
-    #                   verbose=verbose)                          
-            
-            
     def convert_surfergrids_to_asciigrids(self, verbose=True):
         """Convert GRD files to ASC files
         
@@ -346,6 +324,7 @@ class AIM:
         * They form the inputs for the contouring 
         """
 
+        # FIXME (Ole): This function is probably obsolete in Fall3d, version 6
         grd = self.params['Output_results_in_GRD_format'].lower()
         if verbose and grd == 'yes':
             header('Converting GRD files to ASCII grids')
@@ -358,13 +337,37 @@ class AIM:
                         projection=self.WKT_projection)
                         
                         
+
+    #def convert_ncgrids_to_asciigrids(self, verbose=True):
+    #    """Convert (selected) NC data layers to ASC files
+    #    
+    #    One ASCII file is generated for each timestep (assumed to be in hours).
+    #    
+    #    The purposes of the ASCII files are
+    #    * They can be ingested by ESRI and other GIS tools.
+    #    * They have an associated projection file that allows georeferencing.
+    #    * They form the inputs for the contouring 
+    #    """
+    #
+    #    if verbose:
+    #        header('Converting NetCDF data to ASCII grids')
+    #                           
+    #            
+    #    for filename in os.listdir(self.output_dir):
+    #        if filename.endswith('.res.nc'):
+    #            if verbose: print '  ', filename
+    #            for subdataset in ['LOAD', 'THICKNESS']:
+    #                nc2asc(os.path.join(self.output_dir, filename), 
+    #                       subdataset=subdataset,
+    #                       projection=self.WKT_projection)
+                           
                         
-    def generate_contours(self, interval=1, verbose=True):
-        """Contour ASCII grid
+                        
+    def old_generate_contours(self, interval=1, verbose=True):
+        """Contour ASCII grids
         """
         
-        grd = self.params['Output_results_in_GRD_format'].lower()        
-        if verbose and grd == 'yes':
+        if verbose:
             header('Contouring ASCII grids')        
         
         for filename in os.listdir(self.output_dir):
@@ -395,6 +398,59 @@ class AIM:
                 s = 'gdal_contour -i %f %s %s' % (interval, tiffile, shpfile)
                 self.run_with_errorcheck(s, shpfile, 
                                          verbose=verbose)                
+                
+                # Generate KML
+                if self.WKT_projection:
+                    s = 'ogr2ogr -f KML -t_srs EPSG:4623 -s_srs %s %s %s' % (prjfile, kmlfile, shpfile)
+                else:    
+                    s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)                
+                
+                self.run_with_errorcheck(s, kmlfile, 
+                                         verbose=verbose)
+                    
+                                                
+    def generate_contours(self, interval=1, verbose=True):
+        """Contour NetCDF grids directly
+        """
+        
+        if verbose:
+            header('Contouring NetCDF thickness grids')        
+        
+        for filename in os.listdir(self.output_dir):
+            if filename.endswith('.res.nc'):
+            
+                pathname = os.path.join(self.output_dir, filename)
+                if verbose: print '  ', pathname        
+                
+                basename, ext = os.path.splitext(pathname)
+                
+                tiffile = basename + '.tif'
+                shpfile = basename + '.shp'
+                kmlfile = basename + '.kml'
+                prjfile = basename + '.prj'
+                
+
+                
+                # Generate GeoTIFF raster
+                netcdf_subdata = 'NETCDF:"%s":THICKNESS' % pathname
+                s = 'gdal_translate -of GTiff %s %s' % (netcdf_subdata, tiffile)
+                self.run_with_errorcheck(s, tiffile, 
+                                         verbose=verbose)                                
+
+
+                # Generate contours as shapefiles
+                s = '/bin/rm -rf %s' % shpfile # Clear the way
+                run(s, verbose=False)
+                
+                s = 'gdal_contour -i %f %s %s' % (interval, tiffile, shpfile)
+                self.run_with_errorcheck(s, shpfile, 
+                                         verbose=verbose)                
+                
+                # Create associated projection file
+                fid = open(prjfile, 'w')
+                fid.write(self.WKT_projection)
+                fid.close()
+
                 
                 # Generate KML
                 if self.WKT_projection:

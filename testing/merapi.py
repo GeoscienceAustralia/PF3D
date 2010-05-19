@@ -16,7 +16,7 @@ Eruption_comment = 'version_6_test'
 # Time (Volcanological input file)
 Eruption_Year = 2010                            # YYYY  
 Eruption_Month = 5                              # MM  
-Eruption_Day = 18                                # DD 
+Eruption_Day = 18                               # DD 
 Start_time_of_meteo_data = 0                    # Hours after 00
 Meteo_time_step = 1                             # Hours       
 End_time_of_meteo_data = 3                      # Hours after 00
@@ -33,10 +33,10 @@ Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
 UTMZONE = '49S'                                 # UTM only
-X_coordinate_minimum = 412432.3                   # UTM only   
+X_coordinate_minimum = 412432.3                 # UTM only   
 X_coordinate_maximum = 471432                   # UTM only
-Y_coordinate_minimum = 9106708.6                  # UTM only
-Y_coordinate_maximum = 9170708                # UTM only  
+Y_coordinate_minimum = 9106708.6                # UTM only
+Y_coordinate_maximum = 9170708                  # UTM only  
 X_coordinate_of_vent = 439423                   # UTM only
 Y_coordinate_of_vent = 9167213                  # UTM only  
 Number_of_cells_X_direction = 59
@@ -62,7 +62,7 @@ Mass_eruption_rate = 1e9                        # kg/s (if point, if suzuki or i
 Height_above_vent = [40000, 30000, 20000, 10000, 5000, 2000, 1000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
-Height_or_MFR = 'MFR'                             # plume only
+Height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 
 Exit_velocity = 100                             # m/s (plume only)
@@ -83,15 +83,18 @@ Postprocess_3D_variables = 'No'                 # Yes/No
 Postprocess_classes = 'No'                      # Yes/No
 Track_points = 'No'                             # Yes/No
 
-# Fixed_contour_interval = 1                    # Contour interval for kml and shp files
-Topography_grid = 'merapi_topography.txt'      # Specify ASCII topography grid to use. 
+Fixed_contour_interval = 1                      # Contour interval for kml and shp files
+Topography_grid = 'merapi_topography.txt'       # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
 
 # Run model using specified parameters
 if __name__ == '__main__':
     from aim import run_scenario
-    run_scenario(__file__, dircomment=Eruption_comment)
+    run_scenario(__file__, 
+                 store_locally=True, 
+                 timestamp_output=False,    
+                 dircomment=Eruption_comment)
 
 
  

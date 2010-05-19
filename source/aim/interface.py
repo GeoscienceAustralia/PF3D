@@ -172,10 +172,9 @@ def run_scenario(scenario, dircomment=None,
     aim.set_database(verbose=verbose)
     aim.set_source(verbose=verbose)
     aim.run_fall3d(verbose=verbose)
-    aim.process_model_results(verbose=verbose)
 
     # AIM post processing
-    aim.convert_surfergrids_to_asciigrids(verbose=verbose)
+    #aim.convert_ncgrids_to_asciigrids(verbose=verbose)
     aim.generate_contours(interval=params['Fixed_contour_interval'],
                           verbose=verbose)
 
