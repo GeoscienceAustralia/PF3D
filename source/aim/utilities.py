@@ -31,8 +31,14 @@ def run(cmd,
     return err
 
 def pipe(cmd, verbose=True):
+    """Simplification of the new style pipe command
+    
+    One object p is returned and it has
+    p.stdout, p.stdin and p.stderr
+    
+    If p.stdout is None an exception will be raised.
     """
-    """
+    pass
         
 def header(s):
     dashes = '-'*len(s)

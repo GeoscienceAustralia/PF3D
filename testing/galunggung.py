@@ -83,7 +83,7 @@ Postprocess_3D_variables = 'No'                 # Yes/No
 Postprocess_classes = 'No'                      # Yes/No
 Track_points = 'No'                             # Yes/No
 
-# Fixed_contour_interval = 1                    # Contour interval for kml and shp files
+Fixed_contour_interval = 1                    # Contour interval for kml and shp files
 Topography_grid = 'galunggung_topography.txt'      # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
