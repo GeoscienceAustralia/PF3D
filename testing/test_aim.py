@@ -324,7 +324,35 @@ class Test_AIM(unittest.TestCase):
                 if not lines_numerically_close(data1[i], data2[i]):
                     raise Exception(msg)
             
+    def test_pipe(self):
+        """test_pipe
+        
+        Test that simplified process piping works
+        """
+        
+        #
+        p = pipe('whoami', verbose=False)
+        res = p.stdout.read().strip()
+        ref = os.getlogin().strip()
+        assert res == ref
+        
+        #
+        p = pipe('klchaohckck')
+        res = p.stdout.read().strip()
+        assert len(res) == 0
+        
+        err = p.stderr.read().strip()
+        assert err.endswith('not found')
 
+        #
+        p = pipe('wc -c', verbose=False)
+        p.stdin.write('aoeu')
+        p.stdin.close()
+        assert p.stdout.read().strip() == '4'
+        
+
+        
+                
 
 ################################################################################
 

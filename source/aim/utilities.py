@@ -30,7 +30,7 @@ def run(cmd,
 
     return err
 
-def pipe(cmd, verbose=True):
+def pipe(cmd, verbose=False):
     """Simplification of the new style pipe command
     
     One object p is returned and it has
@@ -38,7 +38,19 @@ def pipe(cmd, verbose=True):
     
     If p.stdout is None an exception will be raised.
     """
-    pass
+    
+    if verbose:
+        print cmd
+        
+    p = Popen(cmd, shell=True,
+              stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)
+              
+    if p.stdout is None:
+        msg = 'Piping of command %s could be executed' % cmd
+        raise Exception(msg)
+        
+    return p
+
         
 def header(s):
     dashes = '-'*len(s)
@@ -200,18 +212,17 @@ def get_tephradata(verbose=True):
 def get_username():
     """Get username
     """
-    p = Popen('whoami', shell=True,
-              stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)
-              
-    if p.stdout is not None:
-        username = p.stdout.read().strip()
+    
+    try:
+        p = pipe('whoami')
+    except:    
+        username = 'unknown'    
     else:
-        username = 'unknown'
+        username = p.stdout.read().strip()
         
-        
-    #print 'Got username', username
     return username
     
+
 def get_timestamp():
     """Get timestamp in the ISO 8601 format
     
@@ -234,16 +245,12 @@ def get_shell():
     """Get shell if UNIX platform
     Otherwise return None
     """
-    
-    p = Popen('echo $SHELL', shell=True,
-              stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)
-              
-    shell = None
-    if p.stdout is not None:
-        shell = p.stdout.read().strip()
-        shell = os.path.split(shell)[-1] # Only last part of path
+
+    p = pipe('echo $SHELL')
+    shell = p.stdout.read().strip()
+    shell = os.path.split(shell)[-1] # Only last part of path
         
-    return shell
+    return shell    
 
     
 def set_bash_variable(envvar, envvalue):
@@ -291,15 +298,13 @@ def tail(filename,
 
     space = ' '*indent
     s = 'tail -%i %s' % (count, filename)
-    p = Popen(s, shell=True,
-              stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)
+    p = pipe(s)
               
     result = []
-    if p.stdout is not None:
-        for line in p.stdout.readlines():
-            s = line.strip()
-            if s: 
-                print space + s
+    for line in p.stdout.readlines():
+        s = line.strip()
+        if s: 
+            print space + s
         
 
 def nc2asc(ncfilename,
@@ -316,10 +321,10 @@ def nc2asc(ncfilename,
        
     # First assert that this is a valid NetCDF file and that requested subdataset exists
     s = 'gdalinfo %s' % ncfilename
-    p = Popen(s, shell=True,
-              stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)    
-
-    if p.stdout is None:
+    
+    try:
+        p = pipe(s)
+    except: 
         msg = 'Could not read NetCDF file %s' % ncfilename
         raise Exception(msg)
     else:
@@ -349,10 +354,10 @@ def nc2asc(ncfilename,
     # FIXME (Ole): There is much more scope for using NetCDF info here if needed
     #              For now we just assume 'hours' but use the numbers given here
     s = 'gdalinfo NETCDF:"%s":%s' % (ncfilename, subdataset)
-    p = Popen(s, shell=True,
-              stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)   
-                   
-    if p.stdout is None:
+    
+    try:
+        p = pipe(s)
+    except:               
         msg = 'Could not execute command: %s' % s
         raise Exception(msg)
     else:
