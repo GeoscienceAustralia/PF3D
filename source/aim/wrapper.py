@@ -5,7 +5,7 @@ import os, string
 
 from config import tephra_output_dir
 from utilities import run, write_line, makedir, header, tail
-from utilities import check_presence_of_required_parameters, grd2asc
+from utilities import check_presence_of_required_parameters, nc2asc
 from utilities import get_fall3d_home, get_tephradata, get_username, get_timestamp
 from utilities import convert_meteorological_winddirection_to_windfield
 from utilities import get_wind_direction
@@ -359,11 +359,11 @@ class AIM:
                 for subdataset in ['LOAD', 'THICKNESS']:
                     nc2asc(os.path.join(self.output_dir, filename), 
                            subdataset=subdataset,
+                           ascii_header_file=self.topography_grid,                           
                            projection=self.WKT_projection)
                            
                         
-                        
-    def XXXXASCgenerate_contours(self, interval=1, verbose=True):
+    def generate_contours(self, interval=1, verbose=True):
         """Contour ASCII grids
         """
         
@@ -410,9 +410,10 @@ class AIM:
                     
                                                 
 
-    def generate_contours(self, interval=1, verbose=True):
+    def Xgenerate_contours(self, interval=1, verbose=True):
         """Contour NetCDF grids directly
         """
+        # FIXME (Ole): This does not work - probably due to the GDAL NetCDF driver ignoring coordinate system
 	       
         if verbose:
             header('Contouring NetCDF thickness grids')       

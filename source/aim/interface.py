@@ -174,7 +174,7 @@ def run_scenario(scenario, dircomment=None,
     aim.run_fall3d(verbose=verbose)
 
     # AIM post processing
-    #aim.convert_ncgrids_to_asciigrids(verbose=verbose)
+    aim.convert_ncgrids_to_asciigrids(verbose=verbose)
     aim.generate_contours(interval=params['Fixed_contour_interval'],
                           verbose=verbose)
 

@@ -190,7 +190,7 @@ class Test_AIM(unittest.TestCase):
         
         
         # Rename input file to a temporary filename
-        grdfilename = 'xkshkoek.grd'
+        grdfilename = 'tmpxkshkoek.grd'
         
         s = 'cp test_data.grd %s' % grdfilename
         run(s)
@@ -225,7 +225,8 @@ class Test_AIM(unittest.TestCase):
                 if not lines_numerically_close(data1[i], data2[i]):
                     raise Exception(msg)
                     
-                    
+        os.remove(grdfilename)
+        
     def test_asc2grd(self):
         """test_asc2grd - Test conversion from asc to grd files
         
@@ -276,7 +277,52 @@ class Test_AIM(unittest.TestCase):
                 if not lines_numerically_close(data1[i], data2[i]):
                     raise Exception(msg)                    
             
-
+        os.remove(ascfilename)
+        
+    def test_nc2asc(self):
+        """test_nc2asc - Test conversion from NetCDF to asc files
+        
+        This test relies on files
+        merapi.res.nc
+        merapi.003h.depothick.asc
+        merapi.003h.depothick.prj        
+        
+        
+        """
+        
+        # Run conversion from grd to asc
+        nc2asc('merapi.res.nc', 'THICKNESS', 
+               ascii_header_file='merapi_topography.txt',
+               verbose=False)
+        
+        # Check that result is good
+        # FIXME: Refactor compare_to_reference_file to accommodate the more general case
+        
+        fid1 = open('merapi.003h.thickness.asc')
+        data1 = fid1.readlines()
+        fid1.close()        
+        
+        fid2 = open('merapi.003h.depothick_reference.asc')
+        data2 = fid2.readlines()
+        fid2.close()        
+        
+        # FIXME: Not yet sure about reference data
+        return
+        
+        
+        for i in range(len(data1)):
+            msg = 'ASC file does not match '
+            msg += 'reference test_data.asc in line %i.\n' % i
+            msg += data1[i]
+            msg += data2[i]
+            
+            if data1[i] != data2[i]:
+                # Lines are different
+                # Try to see if they are close enough 
+                # in a numerical sense
+                
+                if not lines_numerically_close(data1[i], data2[i]):
+                    raise Exception(msg)
             
 
 

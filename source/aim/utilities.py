@@ -29,7 +29,11 @@ def run(cmd,
         raise Exception(msg)
 
     return err
-    
+
+def pipe(cmd, verbose=True):
+    """
+    """
+        
 def header(s):
     dashes = '-'*len(s)
     print
@@ -294,18 +298,156 @@ def tail(filename,
 
 def nc2asc(ncfilename,
            subdataset,
-           projection=None):
+           ascii_header_file=None, # If ASCII header is known it can be supplied
+           projection=None,
+           verbose=False):
     """Extract given subdataset from ncfile name and create one ASCII file for each band.
     
     The underlying command is of the form
     gdal_translate -of AAIGrid -b 4 NETCDF:"merapi.res.nc":THICKNESS merapi.003h.depothick.asc
     
     """
-           
-    pass
+       
+    # First assert that this is a valid NetCDF file and that requested subdataset exists
+    s = 'gdalinfo %s' % ncfilename
+    p = Popen(s, shell=True,
+              stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)    
+
+    if p.stdout is None:
+        msg = 'Could not read NetCDF file %s' % ncfilename
+        raise Exception(msg)
+    else:
+        lines = p.stdout.readlines()
+        expected_header = 'Driver: netCDF/Network Common Data Format'
+        header = lines[0].strip()
+        if header != expected_header:
+            msg = 'File %s does not look like a valid NetCDF file.\n' % ncfilename
+            msg += 'Expected header: "%s"\n' % expected_header
+            msg += 'but got instead: "%s"' % header
+            raise Exception(msg)
     
+        # Look for something like: SUBDATASET_3_NAME=NETCDF:"merapi.res.nc":THICKNESS
+        found = False
+        for line in lines:
+            info = line.strip()
+            if info.startswith('SUBDATASET') and info.find('NAME=NETCDF:') > 0 and info.endswith(':THICKNESS'):
+                #print 'Found', info
+                found = True
+                
+        msg = 'Did not find subdataset %s in %s' % (subdataset, ncfilename)        
+        assert found, msg        
+            
+    # Then extract all bands for this subdataset        
+    # Command is for example: gdalinfo NETCDF:"merapi.res.nc":THICKNESS
+    #
+    # FIXME (Ole): There is much more scope for using NetCDF info here if needed
+    #              For now we just assume 'hours' but use the numbers given here
+    s = 'gdalinfo NETCDF:"%s":%s' % (ncfilename, subdataset)
+    p = Popen(s, shell=True,
+              stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)   
+                   
+    if p.stdout is None:
+        msg = 'Could not execute command: %s' % s
+        raise Exception(msg)
+    else:
+        bands = {}
+        lines = p.stdout.readlines()
+        for line in lines:
+            info = line.strip()
+            #print info
+            
+            # Get new band
+            if info.startswith('Band'):
+                fields = info.split()
+                band_number = int(fields[1])
+                bands[band_number] = [] # Create new entry
+                
+                assert band_number == len(bands)
+                              
+            # Get associated time                  
+            if info.startswith('NETCDF_DIMENSION_time'):
+                fields = info.split('=')
+                
+                # Round to nearest integer!                 
+                #FIXME: This is not totally general but handy for naming of files                
+                time = int(float(fields[1]))
+                bands[band_number].append(time)
+                
+                
+            # Get associated units                  
+            if info.startswith('NETCDF_time_units'):
+                fields = info.split('=')
+                
+                unit = fields[1]
+                bands[band_number].append(unit)                
+                
+    # Extract ASCII file for each band    
+    for key in bands:
+        time = bands[key][0]
+        dim =  bands[key][1]
+        
+        # Name each output file
+        basename = ncfilename.split('.')[0]
+        bandname = str(time).zfill(3)
+        output_filename = basename + '.' + bandname + dim + '.' + subdataset.lower() + '.asc'
+        prjfilename = output_filename[:-4] + '.prj'
+        #print key, bands[key], output_filename            
+        
 
-
+        # Convert NetCDF subdataset and band to ascii file
+        s = 'gdal_translate -of AAIGrid -b %i NETCDF:"%s":%s %s' % (key, ncfilename, subdataset, output_filename)
+        if verbose:
+            run(s, verbose=verbose)
+        else:
+            run(s, stdout='/dev/null', stderr='/dev/null', verbose=verbose)
+        
+        # Now replace the header which GDAL gets wrong
+        #s = 'ncdump %s' % ncfilename
+        #p = Popen(s, shell=True,
+        #          stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)   
+        #           
+        #if p.stdout is None:
+        #    msg = 'Could not execute command: %s' % s
+        #    raise Exception(msg)    
+        #else:
+        #    lines = p.stdout.readlines()
+        #    
+        #    for line in lines:
+        #        info = line.strip()        
+        #        fields = info.split('=')
+        #        if info.startswith('XMIN'):
+        #            xllcorner = float(fields[1]) - cellsize/2
+        
+        
+        # Now replace the header which GDAL gets wrong
+        if ascii_header_file:
+        
+            # Read replacement
+            f = open(ascii_header_file)
+            new_header = f.readlines()[:6]
+            f.close()
+            
+            # Read ASCII file
+            f = open(output_filename)
+            lines = f.readlines()
+            f.close()
+                        
+            # Write replacement      
+            f = open(output_filename, 'w')
+            for i, line in enumerate(lines):
+                if i < 6:
+                    f.write(new_header[i])
+                else:
+                    f.write(line)
+            f.close()        
+        
+        if projection:
+            # Create associated projection file
+            fid = open(prjfilename, 'w')
+            fid.write(projection)
+            fid.close()
+        
+                              
 def grd2asc(grdfilename, 
             nodatavalue=-9999, 
             projection=None): #1.70141e+38):
