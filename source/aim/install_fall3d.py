@@ -1,4 +1,4 @@
-"""Install Fall3d-6.0 on Linux platform
+"""Install Fall3d-6.2 on Linux platform
 
 An environment variable, FALL3DHOME, may be specified to determine
 the location of the Fall3d installation.
@@ -13,6 +13,7 @@ import sys
 from utilities import makedir, run, header, get_shell, set_bash_variable
 from config import update_marker, compiler, modules, makefile_content
 from config import make_configuration_filename, make_configuration_content
+from config import fall3d_distro, url, tarball
 
 
 def replace_string_in_file(filename, s1, s2, verbose=False):
@@ -199,11 +200,6 @@ if __name__ == '__main__':
     # Download Fall3d version 6 (public version)
     # http://www.bsc.es/projects/earthscience/fall3d/Downloads/Fall3d-PUB.tar.gz
     #----------------
-    fall3d = 'Fall3d-PUB'
-    tarball = fall3d + '.tar.gz'
-    #url = 'http://www.bsc.es/projects/earthscience/fall3d/Downloads' # Original
-    url = 'http://www.aifdr.org/projects/aim/raw-attachment/wiki/WikiStart' # AIFDR mirror (to keep things stable!)
-
 
     path = os.path.join(url, tarball)
 
@@ -218,7 +214,7 @@ if __name__ == '__main__':
     #----------------------------------------
 
     # Cleanup
-    s = '/bin/rm -rf %s' % fall3d
+    s = '/bin/rm -rf %s' % fall3d_distro
     run(s, verbose=False)
 
     print 'Unpacking tarball'
@@ -236,7 +232,7 @@ if __name__ == '__main__':
         raise Exception(msg)
 
     # Get origin directory
-    os.chdir(fall3d)
+    os.chdir(fall3d_distro)
     fall3dpath = os.getcwd()
     
     #----------
@@ -300,13 +296,13 @@ if __name__ == '__main__':
     # Patch the Fall3d scripts to remove hardwired references
     #--------------------------------------------------------
 
-    os.chdir(os.path.join(FALL3DHOME, fall3d, 'Scripts'))
+    os.chdir(os.path.join(FALL3DHOME, fall3d_distro, 'Scripts'))
     for program in ['SetDbs', 'SetGrn', 'SetSrc', 'manager', 'Fall3d_Pub']:
         
         # Patch include statement
         replace_string_in_file('Script-' + program, 
                                'set HOME=/Users/arnaufolch/Documents/Software/Fall3d-6.0/PUB/Fall3d-6.2-PUB', 
-                               'set HOME=%s' % os.path.join(FALL3DHOME, fall3d),
+                               'set HOME=%s' % os.path.join(FALL3DHOME, fall3d_distro),
                                verbose=False)
 
         

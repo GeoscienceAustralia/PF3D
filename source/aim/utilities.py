@@ -5,7 +5,7 @@
 import os, sys        
 from math import sqrt, pi, sin, cos, acos
 from subprocess import Popen, PIPE
-from config import update_marker, tephra_output_dir
+from config import update_marker, tephra_output_dir, fall3d_distro
 
 def run(cmd, 
         stdout=None,
@@ -189,7 +189,7 @@ def get_fall3d_home(verbose=True):
     else:
         FALL3DHOME = os.getcwd()
         
-    Fall3d_dir = os.path.join(FALL3DHOME, 'Fall3d-PUB')
+    Fall3d_dir = os.path.join(FALL3DHOME, fall3d_distro)
     
     return Fall3d_dir
 

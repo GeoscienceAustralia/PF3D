@@ -5,6 +5,18 @@ update_marker = '# Updated by AIM'
 tephra_output_dir = 'tephra' # Name for generated data
 make_configuration_filename = 'make_configuration.txt'
 
+# Installation info
+fall3d_distro = 'Fall3d-6.2-PUB' # Name of subdir where Fall3d lives
+tarball = 'Fall3d-PUB.tar.gz' # Name of compressed distro file
+#url = 'http://www.bsc.es/projects/earthscience/fall3d/Downloads' # Original 
+#url = 'http://www.aifdr.org/projects/aim/raw-attachment/wiki/WikiStart' # AIFDR mirror (to keep things stable!)
+url = 'http://datasim.ov.ingv.it/Downloads' # Location as of late May 2010
+
+
+
+
+# Patching info
+
 # Must be supplied with string interpolation (compiler, fall3dpath, fall3dpath)
 make_configuration_content = """
 #------------------------------------------
