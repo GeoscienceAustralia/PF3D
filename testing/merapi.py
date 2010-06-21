@@ -87,6 +87,9 @@ Fixed_contour_interval = 1                      # Contour interval for kml and s
 Topography_grid = 'merapi_topography.txt'       # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
+                                                
+
+                                                
 
 # Run model using specified parameters
 if __name__ == '__main__':

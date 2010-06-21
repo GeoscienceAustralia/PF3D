@@ -136,6 +136,9 @@ class AIM:
                                          
         # Output result file
         self.resultfile = self.basepath + '.res'
+        
+        # Output Surfer grid file        
+        self.grdfile = self.basepath + '.grd'
                                        
                                        
         #----------------------------
@@ -314,7 +317,37 @@ class AIM:
                        verbose=verbose)
                        
                                                 
+    def nc2grd(self, verbose=True):
+        """Run nc2grd
+        
+        Requires 
+        - input file
+        - source file
+        - grain file
+        - database file
+        """
+        
+        executable = os.path.join(self.utilities_dir, 'nc2grd', 'nc2grd.exe')
+        
+        logfile = self.basepath + '.nc2grd.log'
+        
+        if verbose:
+            header('Running nc2grd')
+
+               
+        cmd = '%s '*5 % (executable, 
+                         logfile,
+                         self.inputfile,
+                         self.resultfile,
+                         self.grdfile)
+                         
+        self.runscript(cmd, 'nc2grd', logfile, lines=2,
+                       verbose=verbose)
+                       
+                                                
     
+
+                                                    
     def convert_surfergrids_to_asciigrids(self, verbose=True):
         """Convert GRD files to ASC files
         
@@ -585,6 +618,35 @@ class AIM:
         write_line(fid, 'POSTPROCESS_3D_VARIABLES = %s' % Postprocess_3D_variables, indent=2)
         write_line(fid, 'POSTPROCESS_CLASSES = %s' % Postprocess_classes, indent=2)
 	write_line(fid, 'TRACK_POINTS = %s' % Track_points, indent=2)
+        
+        # Write POST processing data (hardwired for now)
+        write_line(fid, '')        
+        write_line(fid, 'POSTPROCESS')
+        write_line(fid, 'MAP_TOPOGRAPHY = no                 (Possibilities: YES/NO)', indent=2)
+        write_line(fid, 'UNITS = M                           (Possibilities: M)', indent=5)
+        write_line(fid, 'MAP_TOTAL_LOAD = yes                (Possibilities: YES/NO)', indent=2)
+        write_line(fid, 'UNITS = KG/M2                       (Possibilities: KG/M2)', indent=5)
+        write_line(fid, 'MAP_CLASS_LOAD = no                 (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = KG/M2                       (Possibilities: KG/M2)',  indent=5)
+        write_line(fid, 'MAP_DEPOSIT_THICKNESS = no          (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = CM                          (Possibilities: MM/CM/M)',  indent=5)
+        write_line(fid, 'COMPACTATION_FACTOR = 0.7',  indent=5)
+        write_line(fid, 'MAP_COLUMN_MASS = no                (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = GR/M2                       (Possibilities: GR/M2)',  indent=5)
+        write_line(fid, 'MAP_FLIGHT_LEVEL = no               (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
+        write_line(fid, 'MAP_CONCE_GROUND = no               (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
+        write_line(fid, 'MAP_PMxx_GROUND = no                (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
+        write_line(fid, 'MAP_PMxx_CUMMUL = no                (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = GR/M2                       (Possibilities: GR/M2)',  indent=5)
+        write_line(fid, 'MAP_TOTAL_CONCENTRATION = no        (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
+        write_line(fid, 'Z_CUTS_(M)       = 2000. 4000. 6000.',  indent=5)
+        write_line(fid, 'MAP_CLASS_CONCENTRATION = no        (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
+        
         
     #------------------------
     # AIM conversion routines
