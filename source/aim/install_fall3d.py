@@ -293,7 +293,7 @@ if __name__ == '__main__':
         print('%s' % res)
 
     #--------------------------------------------------------
-    # Patch the Fall3d scripts to remove hardwired references
+    # Patch the Fall3d scripts to remove hardwired references (FIXME: unnecessary)
     #--------------------------------------------------------
 
     os.chdir(os.path.join(FALL3DHOME, fall3d_distro, 'Scripts'))
@@ -306,8 +306,32 @@ if __name__ == '__main__':
                                verbose=False)
 
         
+
+        
+    #----------------------------------------------------------------------------
+    # Compile and install post-processing source code which is not part of Fall3d
+    #----------------------------------------------------------------------------
     
     
+    # Write new Makefile relative to install dir (CWD)
+    post_proc_path = os.path.join(cwd, 'post-processing')
+    print post_proc_path
+    fid = open(os.path.join(post_proc_path, 'Makefile'), 'w')
+    mods = 'KindType.o Master.o InpOut.o Res_nc.o TimeFun.o'
+    objs = 'nc2grd.o runend.o openinp.o readat.o readres.o wrigrd.o'
+    prog = 'nc2grd.exe'
+    fid.write(makefile_content % (fall3dpath, make_configuration_filename, mods, objs, prog))
+    fid.close()
+        
+    run('cd %s; make' % post_proc_path, 
+        stdout=os.path.join(cwd, 'make_%s.stdout' % prog), 
+        stderr=os.path.join(cwd, 'make_%s.stderr' % prog), 
+        verbose=True)
+    
+    post_dir = os.path.join(os.path.join(FALL3DHOME, fall3d_distro, 'Utilities', 'nc2grd'))
+    run('mkdir %s' % post_dir)
+    run('mv %s %s' % (os.path.join(cwd, prog), post_dir))
+            
         
     #header('Test the installation and try the examples')
     #print 'To test the installation, go to %s and run' % os.path.join(AIMHOME, 
