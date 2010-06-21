@@ -134,7 +134,7 @@ class AIM:
         # Output database file
         self.databasefile = self.basepath + '.dbs'
                                          
-        # Output result file
+        # Output result file (Fall3d adds another .nc to this)
         self.resultfile = self.basepath + '.res'
         
         # Output Surfer grid file        
@@ -338,7 +338,7 @@ class AIM:
         cmd = '%s '*5 % (executable, 
                          logfile,
                          self.inputfile,
-                         self.resultfile,
+                         self.resultfile + '.nc',
                          self.grdfile)
                          
         self.runscript(cmd, 'nc2grd', logfile, lines=2,
