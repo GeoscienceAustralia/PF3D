@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'version_6_test_newventlocation'
+Eruption_comment = 'version_6_test'
 
 # Time (Volcanological input file)
 Eruption_Year = 1815                            # YYYY  
@@ -33,14 +33,14 @@ Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
 UTMZONE = '50S'                                 # UTM only
-X_coordinate_minimum = 595107.92893918           # UTM only   
-X_coordinate_maximum = 625257.92893918            # UTM only
-Y_coordinate_minimum = 9072852.8610178           # UTM only
-Y_coordinate_maximum = 9103002.8610178         # UTM only  
-X_coordinate_of_vent = 608667                   # UTM only
-Y_coordinate_of_vent = 9088370                  # UTM only  
-Number_of_cells_X_direction = 150
-Number_of_cells_Y_direction = 150               
+X_coordinate_minimum = 555534.03489588           # UTM only   
+X_coordinate_maximum = 655534            # UTM only
+Y_coordinate_minimum = 9032899.6063608           # UTM only
+Y_coordinate_maximum = 9121899         # UTM only  
+X_coordinate_of_vent = 605918                   # UTM only
+Y_coordinate_of_vent = 9083088                  # UTM only  
+Number_of_cells_X_direction = 100
+Number_of_cells_Y_direction = 89               
 Z_layers = [0, 10000, 30000, 50000]             # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)

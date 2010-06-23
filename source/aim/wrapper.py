@@ -545,10 +545,10 @@ class AIM:
 	write_line(fid, 'LAT_VENT = %f' % Latitude_of_vent, indent=5)
 	write_line(fid, 'UTM')
 	write_line(fid, 'UTMZONE = %s' % UTMZONE, indent=5)        
-	write_line(fid, 'XMIN = %.7f' % X_coordinate_minimum, indent=5)
-	write_line(fid, 'XMAX = %.7f' % X_coordinate_maximum, indent=5)
-	write_line(fid, 'YMIN = %.7f' % Y_coordinate_minimum, indent=5)
-	write_line(fid, 'YMAX = %.7f' % Y_coordinate_maximum, indent=5)
+	write_line(fid, 'XMIN = %f' % X_coordinate_minimum, indent=5)
+	write_line(fid, 'XMAX = %f' % X_coordinate_maximum, indent=5)
+	write_line(fid, 'YMIN = %f' % Y_coordinate_minimum, indent=5)
+	write_line(fid, 'YMAX = %f' % Y_coordinate_maximum, indent=5)
 	write_line(fid, 'X_VENT = %f' % X_coordinate_of_vent, indent=5)
 	write_line(fid, 'Y_VENT = %f' % Y_coordinate_of_vent, indent=5)
 	write_line(fid, 'NX = %i' % Number_cells_X_direction, indent=2)
@@ -805,7 +805,7 @@ class AIM:
 
         header1 = 'DSAA'
         header2 = '%i %i' % (ncols, nrows)
-        header3 = '%.7f %.7f' % (xllcorner, xllcorner+ncols*cellsize)
+        header3 = '%.8f %.8f' % (xllcorner, xllcorner+ncols*cellsize)
         header4 = '%.7f %.7f' % (yllcorner, yllcorner+nrows*cellsize)
         header5 = '0.0 0.0' # Can be obtained from data if needed
 

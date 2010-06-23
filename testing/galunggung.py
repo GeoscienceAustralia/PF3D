@@ -21,7 +21,7 @@ Start_time_of_meteo_data = 0                    # Hours after 00
 Meteo_time_step = 1                             # Hours       
 End_time_of_meteo_data = 5                      # Hours after 00
 Start_time_of_eruption = 0                      # Hours after 00
-End_time_of_eruption = 4                        # Hours after 00 
+End_time_of_eruption = 5                        # Hours after 00 
 End_time_of_run = 5                             # Hours after 00  
 
 # Grid (Volcanological input file)
@@ -33,14 +33,14 @@ Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
 UTMZONE = '49S'                                 # UTM only
-X_coordinate_minimum = 74160.22045357                  # UTM only   
-X_coordinate_maximum = 276802.2204536                   # UTM only
-Y_coordinate_minimum = 9095476.9145407                 # UTM only
-Y_coordinate_maximum = 9298118.9145407                  # UTM only  
+X_coordinate_minimum = 121639.1                   # UTM only   
+X_coordinate_maximum = 236639                   # UTM only
+Y_coordinate_minimum = 9138292.45                  # UTM only
+Y_coordinate_maximum = 9250292                  # UTM only  
 X_coordinate_of_vent = 176267                   # UTM only
 Y_coordinate_of_vent = 9197056                  # UTM only  
-Number_of_cells_X_direction = 151
-Number_of_cells_Y_direction = 151               
+Number_of_cells_X_direction = 115
+Number_of_cells_Y_direction = 112               
 Z_layers = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
@@ -91,7 +91,10 @@ Topography_grid = 'galunggung_topography.txt'      # Specify ASCII topography gr
 # Run model using specified parameters
 if __name__ == '__main__':
     from aim import run_scenario
-    run_scenario(__file__, dircomment=Eruption_comment)
+    run_scenario(__file__, 
+                 store_locally=True, 
+                 timestamp_output=False,        
+                 dircomment=Eruption_comment)
 
 
  

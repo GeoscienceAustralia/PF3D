@@ -91,7 +91,10 @@ Topography_grid = 'mayon_topography.txt'      # Specify ASCII topography grid to
 # Run model using specified parameters
 if __name__ == '__main__':
     from aim import run_scenario
-    run_scenario(__file__, dircomment=Eruption_comment)
+    run_scenario(__file__, 
+                 store_locally=True, 
+                 timestamp_output=False,        
+                 dircomment=Eruption_comment)
 
 
  
