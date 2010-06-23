@@ -5,7 +5,7 @@ import os, string
 
 from config import tephra_output_dir
 from utilities import run, write_line, makedir, header, tail
-from utilities import check_presence_of_required_parameters, nc2asc
+from utilities import check_presence_of_required_parameters, grd2asc
 from utilities import get_fall3d_home, get_tephradata, get_username, get_timestamp
 from utilities import convert_meteorological_winddirection_to_windfield
 from utilities import get_wind_direction
@@ -358,11 +358,13 @@ class AIM:
         """
 
         # FIXME (Ole): This function is probably obsolete in Fall3d, version 6
-        grd = self.params['Output_results_in_GRD_format'].lower()
-        if verbose and grd == 'yes':
-            header('Converting GRD files to ASCII grids')
+        #grd = self.params['Output_results_in_GRD_format'].lower()
+        #if verbose and grd == 'yes':
+        #    header('Converting GRD files to ASCII grids')
                                
-                
+        if verbose:
+            header('Converting grd files to ASCII')
+                            
         for filename in os.listdir(self.output_dir):
             if filename.endswith('.grd'):
                 if verbose: print '  ', filename
