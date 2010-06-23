@@ -33,14 +33,14 @@ Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
 UTMZONE = '48S'                                 # UTM only
-X_coordinate_minimum = 785767.7          # UTM only   
-X_coordinate_maximum = 842767                   # UTM only
-Y_coordinate_minimum = 9180524.45          # UTM only
-Y_coordinate_maximum = 9237524                 # UTM only  
+X_coordinate_minimum = 714418.5254916          # UTM only   
+X_coordinate_maximum = 917060.5254916                   # UTM only
+Y_coordinate_minimum = 9106086.7935312         # UTM only
+Y_coordinate_maximum = 9308728.7935312                 # UTM only  
 X_coordinate_of_vent = 814924                   # UTM only
 Y_coordinate_of_vent = 9208168                  # UTM only  
-Number_of_cells_X_direction = 57
-Number_of_cells_Y_direction = 57               
+Number_of_cells_X_direction = 151
+Number_of_cells_Y_direction = 151               
 Z_layers = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
