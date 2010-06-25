@@ -7,7 +7,7 @@
      use KindType
      use Res_nc
      use Master
-	 use InpOut
+     use InpOut
      use netcdf
      implicit none
 !     
