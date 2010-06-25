@@ -10,31 +10,28 @@
      use InpOut
      use netcdf
      implicit none
-!     
+     
      integer(ip),save :: ipass = 0
      integer(ip) :: ilen
      real   (rp) :: xo,yo,dxo,dyo
-!
+
 !*** If necessary allocates memory
-!
      if(ipass.eq.0) then
         ipass = 1
         allocate(work2d(nx,ny))
         allocate(work3d(nx,ny,nz))         
      end if
-!
-!***  File name (date is in format hh:mmZddmmmyyyy)
-!
+
+!***  File name (date is in format hh:mmZddmmmyyyy) ! NO IT IS NOT
      fname = TRIM(fgrd)//'.'
-	 ilen = LEN_TRIM(fname)
-	 write(fname(ilen+1:ilen+9),'(a)') date(7:15)       ! time 
+         ilen = LEN_TRIM(fname)
+	 write(fname(ilen+1:ilen+9),'(a)') date(7:15)       ! time
      fname = TRIM(fname)//'.'	 
 	 ilen = LEN_TRIM(fname)
 	 write(fname(ilen+1:ilen+5),'(a)') date(1:5)  
-	 fname = TRIM(fname)//'.'//TRIM(name)//'.grd'
-!
+     fname = TRIM(fname)//'.'//TRIM(name)//'.grd'
+
 !*** Gets dimensions
-!
      SELECT CASE(coord_sys)
      case('LON-LAT')
         xo  = lonmin

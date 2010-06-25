@@ -930,12 +930,15 @@ class AIM:
         """Organise output files in directories by time
         
         Output files named e.g.
-        merapi.003h.depothick.asc
-        merapi.003h.depothick.ps
+        merapi.grd.18may2010.03:00.depload.grd
+        merapi.grd.18may2010.03:00.depload.asc        
+
         ...
-        will all go to a sub directory named 003h
+        will all go to a sub directory named 18may2010.03:00
         
         """
+        
+        # FIXME: This really needs to use a proper standard for time stamps
         
         dirname = None
         last_hour = -1
@@ -943,22 +946,25 @@ class AIM:
         for file in os.listdir(self.output_dir):
             if file.startswith(self.scenario_name):
                 fields = file.split('.')
-                if len(fields) > 1:
-                    if fields[1].endswith('h'):
-                        dirname = os.path.join(self.output_dir, fields[1])
-                        filename = os.path.join(self.output_dir, file)
-                        makedir(dirname)
-                        s = 'mv %s %s' % (filename, dirname)
-                        run(s, verbose=verbose)
-                     
-                        # Record last hour
-                        hour = int(fields[1][:-1])
-                        if hour > last_hour:
-                            last_hour = hour
-                            last_dir = dirname
+                if len(fields) > 4:
+                    # This needs to check that middle field is a timestamp
+                    dirname = os.path.join(self.output_dir, 
+                                           fields[2] + '_' + fields[3])
+                    
+                    
+                    filename = os.path.join(self.output_dir, file)
+                    makedir(dirname)
+                    s = 'mv %s %s' % (filename, dirname)
+                    run(s, verbose=verbose)
+                    
+                    # Record last hour
+                    #hour = int(fields[1][:-1])
+                    #if hour > last_hour:
+                    #    last_hour = hour
+                    #    last_dir = dirname
                         
         # Create shortcut to last dir                
-        if last_dir:
-            s = 'ln -s %s %s/final_output' % (last_dir, self.output_dir)
-            run(s, verbose=verbose)
+        #if last_dir:
+        #    s = 'ln -s %s %s/final_output' % (last_dir, self.output_dir)
+        #    run(s, verbose=verbose)
             
