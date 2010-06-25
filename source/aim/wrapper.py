@@ -721,7 +721,7 @@ class AIM:
             
             # Repeat timeblock for duration of eruption (rounded up)
             t_stop = self.params['End_time_of_run']
-            t_start = self.params['Start_time_of_run']
+            t_start = self.params['Start_time_of_eruption']
             for i in range(int(t_stop-t_start+1)):
                 timeblocks.append(timeblock)
         else:    
@@ -749,7 +749,7 @@ class AIM:
         
         for hour, timeblock in enumerate(timeblocks):
             if len(timeblock) != nz:
-                msg = 'Number of z layers in each time block much equal the number of spefified Z layers.\n'
+                msg = 'Number of z layers in each time block much equal the number of specified Z layers.\n'
                 msg += 'You specfied %i Z layers ' % nz
                 msg += 'but timeblock in %s was %s, i.e. %i layers.' % (self.wind_profile, timeblock, len(timeblock))
                 raise Exception(msg)
