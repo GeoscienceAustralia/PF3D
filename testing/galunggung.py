@@ -16,9 +16,9 @@ Eruption_comment = 'version_6_test'
 # Time (Volcanological input file)
 Eruption_Year = 1982                            # YYYY  
 Eruption_Month = 5                              # MM  
-Eruption_Day = 17                                # DD 
+Eruption_Day = 17                               # DD 
 Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 1                             # Hours       
+Meteo_time_step = 60                            # Mins       
 End_time_of_meteo_data = 5                      # Hours after 00
 Start_time_of_eruption = 0                      # Hours after 00
 End_time_of_eruption = 5                        # Hours after 00 
@@ -33,14 +33,14 @@ Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
 UTMZONE = '49S'                                 # UTM only
-X_coordinate_minimum = 121639.1                   # UTM only   
-X_coordinate_maximum = 236639                   # UTM only
-Y_coordinate_minimum = 9138292.45                  # UTM only
-Y_coordinate_maximum = 9250292                  # UTM only  
+X_coordinate_minimum = 73273                    # UTM only   
+X_coordinate_maximum = 275915                   # UTM only
+Y_coordinate_minimum = 9095473                  # UTM only
+Y_coordinate_maximum = 9298115                  # UTM only  
 X_coordinate_of_vent = 176267                   # UTM only
 Y_coordinate_of_vent = 9197056                  # UTM only  
-Number_of_cells_X_direction = 115
-Number_of_cells_Y_direction = 112               
+Number_of_cells_X_direction = 151
+Number_of_cells_Y_direction = 151               
 Z_layers = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
@@ -62,7 +62,7 @@ Mass_eruption_rate = 5e4                        # kg/s (if point, if suzuki or i
 Height_above_vent = [9000, 7000, 5000, 2000, 1000, 500, 250] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
-Height_or_MFR = 'MFR'                             # plume only
+Height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 
 Exit_velocity = 100                             # m/s (plume only)
@@ -83,7 +83,7 @@ Postprocess_3D_variables = 'No'                 # Yes/No
 Postprocess_classes = 'No'                      # Yes/No
 Track_points = 'No'                             # Yes/No
 
-Fixed_contour_interval = 1                    # Contour interval for kml and shp files
+Fixed_contour_interval = 1                      # Contour interval for kml and shp files
 Topography_grid = 'galunggung_topography.txt'      # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         

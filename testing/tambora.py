@@ -18,14 +18,14 @@ Eruption_Year = 1815                            # YYYY
 Eruption_Month = 4                              # MM  
 Eruption_Day = 5                                # DD 
 Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 1                             # Hours       
+Meteo_time_step = 60                            # Mins       
 End_time_of_meteo_data = 6                      # Hours after 00
 Start_time_of_eruption = 0                      # Hours after 00
 End_time_of_eruption = 3                        # Hours after 00 
 End_time_of_run = 6                             # Hours after 00  
 
 # Grid (Volcanological input file)
-Coordinates = 'UTM'                               # LON-LAT/UTM
+Coordinates = 'UTM'                             # LON-LAT/UTM
 Longitude_minimum = 0                           # LON-LAT only 
 Longitude_maximum = 0                           # LON-LAT only
 Latitude_minimum = 0                            # LON-LAT only
@@ -33,14 +33,14 @@ Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
 UTMZONE = '50S'                                 # UTM only
-X_coordinate_minimum = 555534.03489588           # UTM only   
-X_coordinate_maximum = 655534            # UTM only
-Y_coordinate_minimum = 9032899.6063608           # UTM only
-Y_coordinate_maximum = 9121899         # UTM only  
-X_coordinate_of_vent = 605918                   # UTM only
-Y_coordinate_of_vent = 9083088                  # UTM only  
-Number_of_cells_X_direction = 100
-Number_of_cells_Y_direction = 89               
+X_coordinate_minimum = 510146                   # UTM only   
+X_coordinate_maximum = 711446                   # UTM only
+Y_coordinate_minimum = 8986719                  # UTM only
+Y_coordinate_maximum = 9188019                  # UTM only  
+X_coordinate_of_vent = 609511                   # UTM only
+Y_coordinate_of_vent = 9088892                  # UTM only  
+Number_of_cells_X_direction = 150
+Number_of_cells_Y_direction = 150               
 Z_layers = [0, 10000, 30000, 50000]             # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
@@ -62,7 +62,7 @@ Mass_eruption_rate = 1e9                        # kg/s (if point, if suzuki or i
 Height_above_vent = [40000, 30000, 20000, 10000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
-Height_or_MFR = 'MFR'                             # plume only
+Height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 
 Exit_velocity = 100                             # m/s (plume only)

@@ -16,9 +16,9 @@ Eruption_comment = 'version_6_test'
 # Time (Volcanological input file)
 Eruption_Year = 2000                            # YYYY  
 Eruption_Month = 2                              # MM  
-Eruption_Day = 28                                # DD 
+Eruption_Day = 28                               # DD 
 Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 1                             # Hours       
+Meteo_time_step = 60                            # Mins       
 End_time_of_meteo_data = 6                      # Hours after 00
 Start_time_of_eruption = 0                      # Hours after 00
 End_time_of_eruption = 6                        # Hours after 00 
@@ -33,9 +33,9 @@ Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
 UTMZONE = '51S'                                 # UTM only
-X_coordinate_minimum = 520861.2                   # UTM only   
+X_coordinate_minimum = 520861.2                 # UTM only   
 X_coordinate_maximum = 628861                   # UTM only
-Y_coordinate_minimum = 1402130.4                  # UTM only
+Y_coordinate_minimum = 1402130.4                # UTM only
 Y_coordinate_maximum = 1507130                  # UTM only  
 X_coordinate_of_vent = 574207                   # UTM only
 Y_coordinate_of_vent = 1465567                  # UTM only  
@@ -46,9 +46,9 @@ Z_layers = [100, 250, 500, 5000, 1000, 5000, 7500, 12000] # List Z layers in inc
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
 Number_of_grainsize_classes = 6
-Mean_grainsize = 1                            # phi
+Mean_grainsize = 1                              # phi
 Sorting = 1
-Minimum_grainsize = -4                           # phi
+Minimum_grainsize = -4                          # phi
 Maximum_grainsize = 4                           # phi
 Density_minimum = 2350                          # kg/m3
 Density_maximum = 3300                          # kg/m3
@@ -62,7 +62,7 @@ Mass_eruption_rate = 1e6                        # kg/s (if point, if suzuki or i
 Height_above_vent = [10000, 8000, 6000, 4000, 2000, 500] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
-Height_or_MFR = 'MFR'                             # plume only
+Height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 
 Exit_velocity = 100                             # m/s (plume only)
@@ -83,8 +83,8 @@ Postprocess_3D_variables = 'No'                 # Yes/No
 Postprocess_classes = 'No'                      # Yes/No
 Track_points = 'No'                             # Yes/No
 
-Fixed_contour_interval = 1                    # Contour interval for kml and shp files
-Topography_grid = 'mayon_topography.txt'      # Specify ASCII topography grid to use. 
+Fixed_contour_interval = 1                      # Contour interval for kml and shp files
+Topography_grid = 'mayon_topography.txt'        # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
 
