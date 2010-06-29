@@ -805,8 +805,8 @@ class AIM:
 
         header1 = 'DSAA'
         header2 = '%i %i' % (ncols, nrows)
-        header3 = '%.8f %.8f' % (xllcorner, xllcorner+ncols*cellsize)
-        header4 = '%.7f %.7f' % (yllcorner, yllcorner+nrows*cellsize)
+        header3 = '%f %f' % (xllcorner, xllcorner+ncols*cellsize)
+        header4 = '%f %f' % (yllcorner, yllcorner+nrows*cellsize)
         header5 = '0.0 0.0' # Can be obtained from data if needed
 
         outfile = open(self.topography, 'w')

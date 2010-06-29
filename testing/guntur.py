@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'version_6_test'
+Eruption_comment = 'contour interval 0.5'
 
 # Time (Volcanological input file)
 Eruption_Year = 2010                            # YYYY  
@@ -33,10 +33,10 @@ Latitude_maximum = 0                            # LON-LAT only
 Longitude_of_vent = 0                           # LON-LAT only
 Latitude_of_vent = 0                            # LON-LAT only
 UTMZONE = '48S'                                 # UTM only
-X_coordinate_minimum = 804846                   # UTM only   
-X_coordinate_maximum = 825080                   # UTM only
-Y_coordinate_minimum = 9198037                  # UTM only
-Y_coordinate_maximum = 9218271                  # UTM only  
+X_coordinate_minimum = 714418                   # UTM only   
+X_coordinate_maximum = 917060                   # UTM only
+Y_coordinate_minimum = 9106086                  # UTM only
+Y_coordinate_maximum = 9308728                  # UTM only  
 X_coordinate_of_vent = 814924                   # UTM only
 Y_coordinate_of_vent = 9208168                  # UTM only  
 Number_of_cells_X_direction = 151
@@ -83,7 +83,7 @@ Postprocess_3D_variables = 'No'                 # Yes/No
 Postprocess_classes = 'No'                      # Yes/No
 Track_points = 'No'                             # Yes/No
 
-Fixed_contour_interval = 1                      # Contour interval for kml and shp files
+Fixed_contour_interval = 0.5                      # Contour interval for kml and shp files
 Topography_grid = 'guntur_topography.txt'       # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
