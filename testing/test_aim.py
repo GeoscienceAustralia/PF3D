@@ -351,6 +351,17 @@ class Test_AIM(unittest.TestCase):
         assert p.stdout.read().strip() == '4'
         
 
+    def test_ASCII_extrema(self):
+        """test_ASCII_extrema
+        
+        Test that maxima and minima can be computed from ESRI ASCII files        
+        """
+
+        min, max = calculate_extrema('test_data.asc', verbose=False)
+
+        assert min <= max
+        
+        assert num.allclose([min, max], [3.163064e-27, 5648.979])
         
                 
 

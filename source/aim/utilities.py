@@ -6,6 +6,7 @@ import os, sys
 from math import sqrt, pi, sin, cos, acos
 from subprocess import Popen, PIPE
 from config import update_marker, tephra_output_dir, fall3d_distro
+import numpy
 
 def run(cmd, 
         stdout=None,
@@ -307,6 +308,41 @@ def tail(filename,
             print space + s
         
 
+def calculate_extrema(filename, verbose=False):
+    """Calculate minimum and maximum value of ASCII file.
+    
+    Format is ESRI ASCII grid.
+    """
+
+    import sys 
+    
+    # Read ASCII file
+    fid = open(filename)
+    lines = fid.readlines()  
+    fid.close()  
+    
+    # Check header and get number of columns
+    line = lines[0].strip()
+    fields = line.split()
+        
+    msg = 'Input file %s does not look like an ASCII grd file. It must start with ncols' % filename
+    assert fields[0] == 'ncols', msg
+    assert len(fields) == 2
+    
+    # Compute extrema and return
+    min_val = sys.maxint
+    max_val = -min_val
+    
+    for line in lines[6:]:
+        A = numpy.array([float(x) for x in line.split()])
+        min_val = min(min_val, A.min()) 
+        max_val = max(max_val, A.max())         
+        
+
+    return min_val, max_val    
+        
+        
+        
 def nc2asc(ncfilename,
            subdataset,
            ascii_header_file=None, # If ASCII header is known it can be supplied
@@ -610,6 +646,7 @@ def asc2grd(ascfilename,
     fid.close()
 
     fid = open(grdfilename, 'w')
+    
     # Write header
     fid.write('DSAA\n')
     

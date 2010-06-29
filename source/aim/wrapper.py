@@ -8,7 +8,7 @@ from utilities import run, write_line, makedir, header, tail
 from utilities import check_presence_of_required_parameters, grd2asc
 from utilities import get_fall3d_home, get_tephradata, get_username, get_timestamp
 from utilities import convert_meteorological_winddirection_to_windfield
-from utilities import get_wind_direction
+from utilities import get_wind_direction, calculate_extrema
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
@@ -419,6 +419,8 @@ class AIM:
                 prjfile = basename + '.prj'
                 
 
+                # Calculate minimum and maximum values of ascii file
+                min, max = calculate_extrema(filename)
                 
                 # Generate GeoTIFF raster
                 s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
