@@ -8,7 +8,7 @@ from utilities import run, write_line, makedir, header, tail
 from utilities import check_presence_of_required_parameters, grd2asc
 from utilities import get_fall3d_home, get_tephradata, get_username, get_timestamp
 from utilities import convert_meteorological_winddirection_to_windfield
-from utilities import get_wind_direction, calculate_extrema
+from utilities import get_wind_direction, calculate_extrema, label_kml_contours
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
@@ -427,6 +427,16 @@ class AIM:
         for filename in os.listdir(self.output_dir):
             if filename.endswith('.asc'):
             
+                fields = filename.split('.')
+                
+                # FIXME: Unit specified in post processing block (hardwired)
+                if fields[-2] == 'depload': 
+                    units = 'kg/m^2'
+                elif fields[-2] == 'depthick': 
+                    units = 'cm'
+                else:                 
+                    units = 'no unit'
+                
                 pathname = os.path.join(self.output_dir, filename)
                 basename, ext = os.path.splitext(pathname)
                 
@@ -440,10 +450,9 @@ class AIM:
                 min, max = calculate_extrema(pathname)
                 interval = (max-min)/number_of_contours
                 if verbose: 
-                    # FIXME: Unit specified in post processing block (hardwired)                                    
                     print '  %s:' % os.path.split(kmlfile)[-1]
-                    print '     Range (cm): [%f, %f]' % (min, max) 
-                    print '     Contour interval: %f cm' % interval
+                    print '     Range (%s): [%f, %f]' % (units, min, max) 
+                    print '     Contour interval: %f %s' % (interval, units)
                     
                 if interval < 1.0e-6: 
                     print 'WARNING (generate_contours): Range in file %s is really too small to contour: %f' % (pathname, interval)
@@ -472,6 +481,8 @@ class AIM:
                 self.run_with_errorcheck(s, kmlfile, 
                                          verbose=False)
                     
+                # Label KML file with contour intervals
+                label_kml_contours(kmlfile, interval)
                                                 
 
     def Xgenerate_contours(self, interval=1, verbose=True):
