@@ -455,8 +455,9 @@ class AIM:
                     print '     Contour interval: %f %s' % (interval, units)
                     
                 if interval < 1.0e-6: 
-                    msg = 'WARNING (generate_contours): Range in file %s is really too small to contour: %f' % (pathname, interval)
-                    raise Exception(msg)
+                    msg = 'WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
+                    print msg
+                    continue
                     
                 # Generate GeoTIFF raster
                 s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
@@ -468,7 +469,7 @@ class AIM:
                 s = '/bin/rm -rf %s' % shpfile # Clear the way
                 run(s, verbose=False)
                 
-                s = 'gdal_contour -i %f %s %s' % (interval, tiffile, shpfile)
+                s = 'gdal_contour -i %.8f %s %s' % (interval, tiffile, shpfile)
                 self.run_with_errorcheck(s, shpfile, 
                                          verbose=False)                
                 
