@@ -398,7 +398,7 @@ class AIM:
                            projection=self.WKT_projection)
                            
                         
-    def generate_contours(self, interval=1, verbose=True):
+    def generate_contours(self, number_of_contours=5, verbose=True):
         """Contour ASCII grids
         """
         
@@ -420,7 +420,7 @@ class AIM:
                 
 
                 # Calculate minimum and maximum values of ascii file
-                min, max = calculate_extrema(filename)
+                min, max = calculate_extrema(pathname)
                 
                 # Generate GeoTIFF raster
                 s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
