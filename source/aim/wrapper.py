@@ -482,7 +482,7 @@ class AIM:
                                          verbose=False)
                     
                 # Label KML file with contour intervals
-                label_kml_contours(kmlfile, interval)
+                label_kml_contours(kmlfile, interval, number_of_contours, units)
                                                 
 
     def Xgenerate_contours(self, interval=1, verbose=True):

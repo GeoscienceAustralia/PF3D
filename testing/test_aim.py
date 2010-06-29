@@ -375,9 +375,8 @@ class Test_AIM(unittest.TestCase):
         os.system(s)
         
         # Edit label file
+        label_kml_contours('test_contour_with_labels.kml', 78.4866, 5, 'cm')
         
-        
-        pass
         
 
 ################################################################################
