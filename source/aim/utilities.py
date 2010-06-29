@@ -568,12 +568,12 @@ def grd2asc(grdfilename,
     
     # Put out warning if cells are not square
     msg = 'Cells are not square: %i, %i' % (cellsize, (ymax-ymin)/(nrows-1))
-    print 'WARNING (grd2asc): %s' % msg
+    if abs(cellsize - (ymax-ymin)/(nrows-1)) > 1.0e-1: print 'WARNING (grd2asc): %s' % msg
     #assert abs(cellsize - (ymax-ymin)/(nrows-1)) < 1.0e-6, msg 
 
     # Write origin using pixel registration used by ESRI instead of grid line registration used by Surfer.
-    fid.write('xllcorner %f\n' % (xmin - cellsize/2))   # FIXME: CHECK THIS 
-    fid.write('yllcorner %f\n' % (ymin - cellsize/2))
+    fid.write('xllcorner %f\n' % (xmin - cellsize/2.))   # FIXME: CHECK THIS 
+    fid.write('yllcorner %f\n' % (ymin - cellsize/2.))
     fid.write('cellsize %f\n' % cellsize)
     
     # Write value for no data

@@ -180,7 +180,7 @@ def run_scenario(scenario, dircomment=None,
     #aim.convert_ncgrids_to_asciigrids(verbose=verbose)
     aim.convert_surfergrids_to_asciigrids()
     aim.generate_contours(interval=params['Fixed_contour_interval'],
-                          verbose=False)
+                          verbose=True)
 
     aim.organise_output()
     

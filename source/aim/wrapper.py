@@ -187,7 +187,7 @@ class AIM:
             tail(logfile, lines)
             
         if err:
-            msg = 'SetSrc ended abnormally. Log files are:\n'
+            msg = 'Script %s ended abnormally. Log files are:\n' % cmd
             msg += '  %s\n' % logfile
             msg += '  %s\n' % stdout            
             msg += '  %s\n' % stderr                        
@@ -405,6 +405,8 @@ class AIM:
     def generate_contours(self, interval=1, number_of_contours=5, verbose=True):
         """Contour ASCII grids
         """
+       
+        assert number_of_contours > 0
         
         if verbose:
             header('Contouring ASCII grids')        
@@ -413,8 +415,6 @@ class AIM:
             if filename.endswith('.asc'):
             
                 pathname = os.path.join(self.output_dir, filename)
-                if verbose: print '  ', pathname        
-                
                 basename, ext = os.path.splitext(pathname)
                 
                 tiffile = basename + '.tif'
@@ -425,11 +425,16 @@ class AIM:
 
                 # Calculate minimum and maximum values of ascii file
                 min, max = calculate_extrema(pathname)
+                interval = (max-min)/number_of_contours
+                if verbose: 
+                    print '  %s:' % filename
+                    print '     Range=[%f, %f]' % (min, max) 
+                    print '     Contour interval=%f' % interval        
                 
                 # Generate GeoTIFF raster
                 s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
                 self.run_with_errorcheck(s, tiffile, 
-                                         verbose=verbose)                                
+                                         verbose=False)                                
 
 
                 # Generate contours as shapefiles
@@ -438,16 +443,17 @@ class AIM:
                 
                 s = 'gdal_contour -i %f %s %s' % (interval, tiffile, shpfile)
                 self.run_with_errorcheck(s, shpfile, 
-                                         verbose=verbose)                
+                                         verbose=False)                
                 
                 # Generate KML
                 if self.WKT_projection:
                     s = 'ogr2ogr -f KML -t_srs EPSG:4623 -s_srs %s %s %s' % (prjfile, kmlfile, shpfile)
-                else:    
+                else: 
+                    print 'WARNING (generate_contours): Model did not have a projection file'
                     s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)                
                 
                 self.run_with_errorcheck(s, kmlfile, 
-                                         verbose=verbose)
+                                         verbose=False)
                     
                                                 
 
