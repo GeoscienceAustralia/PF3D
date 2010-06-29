@@ -630,7 +630,7 @@ class AIM:
         write_line(fid, 'UNITS = KG/M2                       (Possibilities: KG/M2)', indent=5)
         write_line(fid, 'MAP_CLASS_LOAD = no                 (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = KG/M2                       (Possibilities: KG/M2)',  indent=5)
-        write_line(fid, 'MAP_DEPOSIT_THICKNESS = no          (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_DEPOSIT_THICKNESS = yes         (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = CM                          (Possibilities: MM/CM/M)',  indent=5)
         write_line(fid, 'COMPACTATION_FACTOR = 0.7',  indent=5)
         write_line(fid, 'MAP_COLUMN_MASS = no                (Possibilities: YES/NO)',  indent=2)
