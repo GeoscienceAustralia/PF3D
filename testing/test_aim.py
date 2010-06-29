@@ -363,7 +363,22 @@ class Test_AIM(unittest.TestCase):
         
         assert num.allclose([min, max], [3.163064e-27, 5648.979])
         
-                
+
+    def test_label_kml_contours(self):
+        """test labeling of kml contours.
+        
+        This is really not testing the validity of the KML, but generates one that
+        must be checked with Google Earth.
+        """
+        
+        s = 'cp test_contour.kml test_contour_with_labels.kml'
+        os.system(s)
+        
+        # Edit label file
+        
+        
+        pass
+        
 
 ################################################################################
 
