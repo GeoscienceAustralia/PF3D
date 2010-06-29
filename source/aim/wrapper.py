@@ -398,7 +398,7 @@ class AIM:
                            projection=self.WKT_projection)
                            
                         
-    def generate_contours(self, number_of_contours=5, verbose=True):
+    def generate_contours(self, interval=1, number_of_contours=5, verbose=True):
         """Contour ASCII grids
         """
         
