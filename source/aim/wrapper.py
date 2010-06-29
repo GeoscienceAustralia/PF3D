@@ -322,7 +322,7 @@ class AIM:
                        
                                                 
     def nc2grd(self, verbose=True):
-        """Run nc2grd
+        """Run nc2grd - post processing tool
         
         Requires 
         - input file
@@ -349,8 +349,21 @@ class AIM:
                        verbose=verbose)
                        
                                                 
-    
-
+        # Fix the filenames up (FIXME: Hopefully this is a temporary measure)
+        #print 'Post processing generated the following files:'
+        for filename in os.listdir(self.output_dir):
+            if filename.endswith('.grd'):
+                fields = filename.split('.')
+                
+                # Ditch date and minutes
+                hour, _ = fields[3].split(':')
+                
+                new_filename = fields[0] + '.' + hour + 'h.' + fields[-2] + '.' + fields[-1]
+                
+                
+                s = 'cd %s; mv %s %s' % (self.output_dir, filename, new_filename)
+                os.system(s)
+                
                                                     
     def convert_surfergrids_to_asciigrids(self, verbose=True):
         """Convert GRD files to ASC files
@@ -402,14 +415,14 @@ class AIM:
                            projection=self.WKT_projection)
                            
                         
-    def generate_contours(self, interval=1, number_of_contours=5, verbose=True):
+    def generate_contours(self, number_of_contours=5, verbose=True):
         """Contour ASCII grids
         """
        
         assert number_of_contours > 0
         
         if verbose:
-            header('Contouring ASCII grids')        
+            header('Contouring ASCII grids to KML files')        
         
         for filename in os.listdir(self.output_dir):
             if filename.endswith('.asc'):
@@ -427,9 +440,13 @@ class AIM:
                 min, max = calculate_extrema(pathname)
                 interval = (max-min)/number_of_contours
                 if verbose: 
-                    print '  %s:' % filename
-                    print '     Range=[%f, %f]' % (min, max) 
-                    print '     Contour interval=%f' % interval        
+                    # FIXME: Unit specified in post processing block (hardwired)                                    
+                    print '  %s:' % os.path.split(kmlfile)[-1]
+                    print '     Range (cm): [%f, %f]' % (min, max) 
+                    print '     Contour interval: %f cm' % interval
+                    
+                if interval < 1.0e-6: 
+                    print 'WARNING (generate_contours): Range in file %s is really too small to contour: %f' % (pathname, interval)
                 
                 # Generate GeoTIFF raster
                 s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
@@ -633,7 +650,7 @@ class AIM:
         write_line(fid, 'POSTPROCESS_CLASSES = %s' % Postprocess_classes, indent=2)
 	write_line(fid, 'TRACK_POINTS = %s' % Track_points, indent=2)
         
-        # Write POST processing data (hardwired for now)
+        # Write POST processing data (hardwired for now - note in particular that units are CM (see contouring))
         write_line(fid, '')        
         write_line(fid, 'POSTPROCESS')
         write_line(fid, 'MAP_TOPOGRAPHY = no                 (Possibilities: YES/NO)', indent=2)
@@ -943,10 +960,13 @@ class AIM:
         
         Output files named e.g.
         merapi.grd.18may2010.03:00.depload.grd
-        merapi.grd.18may2010.03:00.depload.asc        
+        
+        are renamed to 
+        
+        merapi.03h.depload.asc        
 
-        ...
-        will all go to a sub directory named 18may2010.03:00
+       
+        and will all go to a sub directory named 03h
         
         """
         
@@ -958,10 +978,8 @@ class AIM:
         for file in os.listdir(self.output_dir):
             if file.startswith(self.scenario_name):
                 fields = file.split('.')
-                if len(fields) > 4:
-                    # This needs to check that middle field is a timestamp
-                    dirname = os.path.join(self.output_dir, 
-                                           fields[2] + '_' + fields[3])
+                if fields[1][-1] == 'h':
+                    dirname = os.path.join(self.output_dir, fields[1])
                     
                     
                     filename = os.path.join(self.output_dir, file)
@@ -970,13 +988,13 @@ class AIM:
                     run(s, verbose=verbose)
                     
                     # Record last hour
-                    #hour = int(fields[1][:-1])
-                    #if hour > last_hour:
-                    #    last_hour = hour
-                    #    last_dir = dirname
+                    hour = int(fields[1][:-1])
+                    if hour > last_hour:
+                        last_hour = hour
+                        last_dir = dirname
                         
         # Create shortcut to last dir                
-        #if last_dir:
-        #    s = 'ln -s %s %s/final_output' % (last_dir, self.output_dir)
-        #    run(s, verbose=verbose)
+        if last_dir:
+            s = 'ln -s %s %s/final_output' % (last_dir, self.output_dir)
+            run(s, verbose=verbose)
             

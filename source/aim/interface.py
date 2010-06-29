@@ -179,8 +179,7 @@ def run_scenario(scenario, dircomment=None,
     # AIM post processing
     #aim.convert_ncgrids_to_asciigrids(verbose=verbose)
     aim.convert_surfergrids_to_asciigrids()
-    aim.generate_contours(interval=params['Fixed_contour_interval'],
-                          verbose=True)
+    aim.generate_contours(verbose=True)
 
     aim.organise_output()
     
