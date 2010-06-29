@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'contour interval 0.25'
+Eruption_comment = 'fixed contour number'
 
 # Time (Volcanological input file)
 Eruption_Year = 2010                            # YYYY  
@@ -83,7 +83,7 @@ Postprocess_3D_variables = 'No'                 # Yes/No
 Postprocess_classes = 'No'                      # Yes/No
 Track_points = 'No'                             # Yes/No
 
-Fixed_contour_interval = 0.25                      # Contour interval for kml and shp files
+#Fixed_contour_interval = 0.25                      # Contour interval for kml and shp files
 Topography_grid = 'guntur_topography.txt'       # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
