@@ -170,6 +170,10 @@ class AIM:
         """Run Fall3d script and report
         """
 
+        if verbose:
+            print 'Logfile: %s' % logfile
+
+        
         stdout = self.basepath + '.%s.stdout' % name
         stderr = self.basepath + '.%s.stderr' % name
         err=run(cmd, 
@@ -179,7 +183,7 @@ class AIM:
 
             
         if verbose:
-            print 'Logfile %s ends as follows:' % logfile
+            print 'Logfile ended as follows:'
             tail(logfile, lines)
             
         if err:
