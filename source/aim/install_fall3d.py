@@ -158,11 +158,16 @@ if __name__ == '__main__':
                         # We already know what it should be                    
                         envvalue = AIMHOME
                     elif envvar == 'FALL3DHOME':
-                        # Use ~/fall3d as default                                        
+                        # Use ~/fall3d as default        
                         envvalue = os.path.expanduser('~/fall3d')
                     elif envvar == 'TEPHRADATA': 
-                        # Use ~/tephra as default                
-                        envvalue = os.path.expanduser('~/tephra')
+                        if os.path.isdir('/model_area'):
+                            # Use /model_data/tephra as default if possible
+                            makedir('/model_area/tephra')
+                            envvalue = '/model_area/tephra'
+                        else:
+                            # Otherwise use ~/tephra as default                
+                            envvalue = os.path.expanduser('~/tephra')
 
                     
                     # Modify .bashrc
