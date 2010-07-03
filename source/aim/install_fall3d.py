@@ -162,7 +162,7 @@ if __name__ == '__main__':
                         envvalue = os.path.expanduser('~/fall3d')
                     elif envvar == 'TEPHRADATA': 
                         if os.path.isdir('/model_area'):
-                            # Use /model_data/tephra as default if possible
+                            # Use /model_area/tephra as default if possible
                             makedir('/model_area/tephra')
                             envvalue = '/model_area/tephra'
                         else:
