@@ -8,7 +8,8 @@ scenarios = ['mayon',
              'galunggung', 
              'pinatubo',
              'merapi',                           
-             'tambora']
+             'tambora',
+             'guntur']
         
 for scenario_name in scenarios:
 
