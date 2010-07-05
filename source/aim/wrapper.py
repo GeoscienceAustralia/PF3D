@@ -82,6 +82,9 @@ class AIM:
                                   
         # Base filename for all files in this scenario 
         self.basepath = os.path.join(output_dir, scenario_name)
+        
+        # Path for log file
+        #self.logpath = os.path.join(self.baoutput_dir, scenario_name)         
 
         # AIM input files
         self.wind_profile = scenario_name + '_wind.txt'
@@ -992,6 +995,17 @@ class AIM:
         
         """
         
+        # Move log files away
+        logdir = os.path.join(self.output_dir, 'logfiles')
+        makedir(logdir)
+        for file in os.listdir(self.output_dir):
+            _, ext = os.path.splitext(file)
+            if ext in ['.log', '.stdout', '.stderr']:
+                filename = os.path.join(self.output_dir, file)
+                s = 'mv %s %s' % (filename, logdir) 
+                run(s, verbose=False)
+        
+        
         # FIXME: This really needs to use a proper standard for time stamps
         
         dirname = None
@@ -1020,3 +1034,4 @@ class AIM:
             s = 'ln -s %s %s/final_output' % (last_dir, self.output_dir)
             run(s, verbose=verbose)
             
+                
