@@ -115,7 +115,6 @@ class Test_AIM(unittest.TestCase):
             
             # Instantiate model object  
             aim = AIM(params, 
-                      store_locally=True, 
                       timestamp_output=False,
                       verbose=False)
           
@@ -160,7 +159,6 @@ class Test_AIM(unittest.TestCase):
             
         scenario_name = 'merapi'    
         aim = run_scenario('%s.py' % scenario_name, 
-                           store_locally=True, 
                            timestamp_output=False,
                            verbose=False)
             

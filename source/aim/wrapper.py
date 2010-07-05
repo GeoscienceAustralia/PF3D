@@ -162,7 +162,15 @@ class AIM:
             
         makedir(output_dir)
         self.output_dir = output_dir
-                                       
+            
+        # Symbolic link to output directory
+        self.symlink = 'latest_output'
+        s = '/bin/rm -rf %s' % self.symlink    
+        run(s)
+    
+        s = 'ln -s %s %s' % (self.output_dir, self.symlink)
+        run(s)
+      
     #---------------------------
     # Fall3d script replacements
     #---------------------------        
@@ -172,6 +180,7 @@ class AIM:
 
         if verbose:
             print 'Logfile: %s' % logfile
+            print 'Shortcut: %s' % os.path.join(self.symlink, os.path.split(logfile)[-1]) 
 
         
         stdout = self.basepath + '.%s.stdout' % name

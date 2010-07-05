@@ -183,11 +183,18 @@ def run_scenario(scenario, dircomment=None,
 
     aim.organise_output()
     
-    # Done    
+    # Done
     if verbose:
-        header('Simulation finished in %.2f seconds, output data are in %s'\
+        header('Simulation finished in %.2f seconds, output data are in %s.'
                    % (time.time() - t_start,
                       aim.output_dir))
+ 
+        target = os.readlink(aim.symlink)                      
+        if target == aim.output_dir:              
+            header('Shortcut to output data is: %s' % aim.symlink)
+        else:
+            header('WARNING: Shortcut %s has been changed by more recent run to: %s' % (aim.symlink, target))
+                        
         print
     
     # Return object in case user wants access to it 

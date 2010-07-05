@@ -14,7 +14,6 @@ scenarios = ['mayon',
 for scenario_name in scenarios:
 
     aim = run_scenario('%s.py' % scenario_name, 
-                       store_locally=True, 
                        timestamp_output=False,
                        verbose=True)
 

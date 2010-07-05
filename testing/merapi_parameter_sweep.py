@@ -86,7 +86,6 @@ Cummulative_concentration_contours = [0.01, 0.1, 1, 10]             # List conto
 Map_Z_maximum_concentration = 'No'                                  # Yes/No                                                
 Maximum_concentration_contours = [1e-4, 1e-3]                       # List contour intervals (Ps format only)
 
-Fixed_contour_interval = 1                                          # Contour interval for kml and shp files
 Topography_grid = 'merapi_topography.txt'                           # Specify ASCII topography grid to use. 
                                                                     # If empty, AIM will look for a topography grid named
                                                                     # <scenario_name>_topography.txt         
