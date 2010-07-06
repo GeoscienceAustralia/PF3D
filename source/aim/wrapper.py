@@ -12,6 +12,8 @@ from utilities import get_wind_direction, calculate_extrema, label_kml_contours
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
+
+from osgeo import osr # GDAL libraries
         
 class AIM:
 
@@ -98,7 +100,63 @@ class AIM:
         # Derive projection file name               
         basename, ext = os.path.splitext(self.topography_grid) 
         self.projection_file = basename + '.prj'
+        
+        # Read projection if available
+        self.WKT_projection = None # Default - no projection
+        self.projection = None # Default - no projection        
 
+        # Take note of projection file if present
+        try:
+            infile = open(self.projection_file)        
+        except:
+            msg = 'WARNING: Projection file %s could not be opened. '\
+                % self.projection_file
+            msg += 'This means that model results must be manually '
+            msg += 'georeferenced or the model run again with an '
+            msg += 'ESRI WKT projection file '
+            msg += 'named %s.' % self.projection_file
+            print msg
+            return
+            
+        # Read in projection file
+        self.WKT_projection = infile.read()
+
+        # This section extracts projection details
+        srs = osr.SpatialReference()
+        srs.ImportFromWkt(self.WKT_projection)
+        proj4 = srs.ExportToProj4()   
+        fields = proj4.split()
+        
+        zone = proj = datum = units = None
+        
+        if '+south' in fields:
+            hemisphere = 'S'
+        else:
+            hemisphere = 'N'            
+        
+        for field in fields:
+            #print field
+            
+            res = field.split('=')
+            if len(res) == 2:
+                x, y = res
+                if x == '+zone': zone = y
+                if x == '+proj': proj = y            
+                if x == '+ellps': datum = y            
+                if x == '+units': units = y
+
+        #print self.WKT_projection            
+        #print proj4
+                    
+        self.projection = {}
+        self.projection['zone'] = zone
+        self.projection['hemisphere'] = hemisphere
+        self.projection['proj'] = proj
+        self.projection['datum'] = datum
+        self.projection['units'] = units
+        #print zone, hemisphere, proj, datum, units
+        
+        
         # Determine if topography is an AIM input file
         msg = 'AIM topography grid %s must have extension .txt' % self.topography_grid
         assert ext == '.txt', msg
@@ -152,7 +210,7 @@ class AIM:
         #check_presence_of_required_parameters(params)        
         
         # Derive implied spatial and modelling parameters
-        derive_implied_parameters(self.topography_grid, params)
+        derive_implied_parameters(self.topography_grid, self.projection, params)
         
         # Check that parameters are physically compatible  
         check_parameter_ranges(params)
@@ -836,8 +894,6 @@ class AIM:
         and record georeference.
         """
 
-        self.WKT_projection = None # Default - no projection
-
         if not self.native_AIM_topo:
             # Assume existence of Fall3d native <scenario_name>.top
             # and copy to work area
@@ -884,58 +940,7 @@ class AIM:
 
         outfile.close()
         
-        # Take note of projection file if present
-        try:
-            infile = open(self.projection_file)        
-        except:
-            #msg = 'Projection file %s could not be opened. '\
-            #    % self.projection_file
-            #msg += 'The topography file must be '
-            #msg += 'georeferenced with an '
-            #msg += 'ESRI WKT projection file '
-            #msg += 'named %s.' % self.projection_file
-            #raise Exception(msg)
-            
-            msg = 'WARNING: Projection file %s could not be opened. '\
-                % self.projection_file
-            msg += 'This means that model results must be manually '
-            msg += 'georeferenced or the model run again with an '
-            msg += 'ESRI WKT projection file '
-            msg += 'named %s.' % self.projection_file
-            print msg
-            return
-            
-        # Read in projection file
-        self.WKT_projection = infile.read()
 
-        # This section demonstrates how the OSGEO GDAL libraries 
-        # might help get projection details.
-        #
-        #from osgeo import osr # GDAL libraries
-        #srs = osr.SpatialReference()
-        #srs.ImportFromWkt(WKT)
-        #proj4 = srs.ExportToProj4()   
-        #fields = proj4.split()
-        #
-        #zone = proj = datum = units = None
-        #for field in fields:
-        #    print field
-        #    
-        #    res = field.split('=')
-        #    if len(res) == 2:
-        #        x, y = res
-        #        if x == '+zone': zone = y
-        #        if x == '+proj': proj = y            
-        #        if x == '+ellps': datum = y            
-        #        if x == '+units': units = y
-        #    else:    
-        #        if res == '+south': 
-        #            hemisphere = 'S'
-        #        else: 
-        #            hemisphere = 'N'
-        #
-        #print zone, hemisphere, proj, datum, units
-            
     
     def store_inputdata(self, verbose=False):
         """Create exact copy of input data into output area

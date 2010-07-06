@@ -71,13 +71,13 @@ def check_parameter_ranges(params):
 
       
     # Check that vent location is within model domain
-    lo = X_coordinate_lower_left_corner
-    hi = lo + Cell_size*1000*Number_cells_X_direction
+    lo = X_coordinate_minimum
+    hi = X_coordinate_maximum
     msg = 'Vent location not within easting range [%i, %i]' % (lo, hi)
     assert lo <= X_coordinate_of_vent <= hi, msg
 
-    lo = Y_coordinate_lower_left_corner
-    hi = lo + Cell_size*1000*Number_cells_Y_direction
+    lo = Y_coordinate_minimum
+    hi = Y_coordinate_maximum    
     msg = 'Vent location not within northing range [%i, %i]' % (lo, hi)
     assert lo <= Y_coordinate_of_vent <= hi, msg
       
@@ -99,19 +99,20 @@ def check_parameter_ranges(params):
     
     
         
-def derive_implied_parameters(topography_grid, params):
+def derive_implied_parameters(topography_grid, projection, params):
     """Compute parameters that can be derived from topography grid and scenario parameters.
        Input:
            topography_grid: filename
+           projection: dictionary of projection parameters
            params: dictionary with model parameters
     """
     
-    derive_spatial_parameters(topography_grid, params)
+    derive_spatial_parameters(topography_grid, projection, params)
     derive_modelling_parameters(params)
    
             
         
-def derive_spatial_parameters(topography_grid, params):
+def derive_spatial_parameters(topography_grid, projection, params):
     """Derive spatial parameters from topography grid
        Input:
            topography_grid: filename
@@ -132,7 +133,8 @@ def derive_spatial_parameters(topography_grid, params):
         #430000.0  600000.0
         #4100000.0 4270000.0
         #0.0    3129.5
-        
+
+        # FIXME (Ole): I think we should get rid of this eventuality.        
         native_grid = '%s.top' % scenario_name
         print('AIM topography grid %s could not be found.' % topography_grid)
         print('Assuming existence of Fall3d grid named %s'% native_grid)
@@ -153,12 +155,12 @@ def derive_spatial_parameters(topography_grid, params):
             if i == 2:
                 xmin = round(float(fields[0]), 1)
                 xmax = round(float(fields[1]), 1)
-                params['X_coordinate_lower_left_corner'] = xmin
+                params['X_coordinate_minimum'] = xmin
                     
             if i == 3:
                 ymin = round(float(fields[0]), 1)
                 ymax = round(float(fields[1]), 1)            
-                params['Y_coordinate_lower_left_corner'] = ymin
+                params['Y_coordinate_minimum'] = ymin
 
         params['Cell_size'] = (xmax-xmin)/nx/1000 # Convert to km
         return
@@ -180,17 +182,33 @@ def derive_spatial_parameters(topography_grid, params):
             
         if i == 2:
             assert fields[0] == 'xllcorner'
-            params['X_coordinate_lower_left_corner'] = round(val, 1)        
+            params['X_coordinate_minimum'] = round(val, 1)        
             
         if i == 3:
             assert fields[0] == 'yllcorner'
-            params['Y_coordinate_lower_left_corner'] = round(val, 1)
+            params['Y_coordinate_minimum'] = round(val, 1)
             
         if i == 4:
             assert fields[0] == 'cellsize'
             params['Cell_size'] = float(val)/1000  # Convert to km
 
+    # Calculate upper bounds
+    params['X_coordinate_maximum'] = params['X_coordinate_minimum'] + params['Cell_size']*1000*params['Number_cells_X_direction']
+    params['Y_coordinate_maximum'] = params['Y_coordinate_minimum'] + params['Cell_size']*1000*params['Number_cells_Y_direction']    
             
+    # Get UTMZONE from projection file.
+    params['Coordinates'] = projection['proj'].upper()                           # E.g. UTM
+    params['UTMZONE'] = '%s%s' % (projection['zone'], projection['hemisphere'])   # E.g. 51S
+    #print 'Zone', params['UTMZONE']
+    
+    # FIXME (Ole): Disable geographic coordinates for the time being, but they should also be derived from topography if needed.
+    params['Longitude_minimum'] = 0                           # LON-LAT only 
+    params['Longitude_maximum'] = 0                           # LON-LAT only
+    params['Latitude_minimum'] = 0                            # LON-LAT only
+    params['Latitude_maximum'] = 0                            # LON-LAT only
+    params['Longitude_of_vent'] = 0                           # LON-LAT only
+    params['Latitude_of_vent'] = 0                            # LON-LAT only
+    
             
 def derive_modelling_parameters(params):
     """Compute modelling parameters that can be derived from scenario parameters
