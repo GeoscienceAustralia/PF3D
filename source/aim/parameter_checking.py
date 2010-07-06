@@ -89,7 +89,15 @@ def check_parameter_ranges(params):
 #        raise Exception(msg)
 
 
-
+    # Check consistency of model times
+    if End_time_of_meteo_data < End_time_of_run:
+        msg = 'End time of meteorological data must be greater than or equal to end time of run. I got\n'
+        msg += 'End_time_meteo_data = %f and ' % End_time_of_meteo_data
+        msg += 'End_time_of_run = %f.' % End_time_of_run
+        raise Exception(msg)
+        
+    
+    
         
 def derive_implied_parameters(topography_grid, params):
     """Compute parameters that can be derived from topography grid and scenario parameters.
