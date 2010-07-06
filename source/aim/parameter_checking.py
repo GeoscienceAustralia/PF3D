@@ -153,13 +153,13 @@ def derive_spatial_parameters(topography_grid, projection, params):
                 ny = params['Number_cells_Y_direction'] = int(fields[1])
             
             if i == 2:
-                xmin = round(float(fields[0]), 1)
-                xmax = round(float(fields[1]), 1)
+                xmin = float(fields[0])
+                xmax = float(fields[1])
                 params['X_coordinate_minimum'] = xmin
-                    
+                
             if i == 3:
-                ymin = round(float(fields[0]), 1)
-                ymax = round(float(fields[1]), 1)            
+                ymin = float(fields[0])
+                ymax = float(fields[1])
                 params['Y_coordinate_minimum'] = ymin
 
         params['Cell_size'] = (xmax-xmin)/nx/1000 # Convert to km
@@ -182,24 +182,27 @@ def derive_spatial_parameters(topography_grid, projection, params):
             
         if i == 2:
             assert fields[0] == 'xllcorner'
-            params['X_coordinate_minimum'] = round(val, 1)        
+            xmin = params['X_coordinate_minimum'] = float(val)        
             
         if i == 3:
             assert fields[0] == 'yllcorner'
-            params['Y_coordinate_minimum'] = round(val, 1)
+            params['Y_coordinate_minimum'] = float(val)
             
         if i == 4:
             assert fields[0] == 'cellsize'
             params['Cell_size'] = float(val)/1000  # Convert to km
 
-    # Calculate upper bounds
-    params['X_coordinate_maximum'] = params['X_coordinate_minimum'] + params['Cell_size']*1000*params['Number_cells_X_direction']
-    params['Y_coordinate_maximum'] = params['Y_coordinate_minimum'] + params['Cell_size']*1000*params['Number_cells_Y_direction']    
-            
+    # Calculate upper bounds (rounded downwards to nearest integer to avoid error: read_PRO_grid: xmax of the domain is outside the DEM file)
+    # FIXME (Ole): Ask Arnaut and Antonio about this
+    xmax = params['X_coordinate_minimum'] + params['Cell_size']*1000*params['Number_cells_X_direction']
+    params['X_coordinate_maximum'] = int(xmax)
+    
+    ymax = params['Y_coordinate_minimum'] + params['Cell_size']*1000*params['Number_cells_Y_direction']
+    params['Y_coordinate_maximum'] = int(ymax)
+
     # Get UTMZONE from projection file.
     params['Coordinates'] = projection['proj'].upper()                           # E.g. UTM
     params['UTMZONE'] = '%s%s' % (projection['zone'], projection['hemisphere'])   # E.g. 51S
-    #print 'Zone', params['UTMZONE']
     
     # FIXME (Ole): Disable geographic coordinates for the time being, but they should also be derived from topography if needed.
     params['Longitude_minimum'] = 0                           # LON-LAT only 

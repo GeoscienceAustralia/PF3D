@@ -24,23 +24,10 @@ Start_time_of_eruption = 0                      # Hours after 00
 End_time_of_eruption = 6                        # Hours after 00 
 End_time_of_run = 6                             # Hours after 00  
 
-# Grid (Volcanological input file)
-Coordinates = 'UTM'                             # LON-LAT/UTM
-Longitude_minimum = 0                           # LON-LAT only 
-Longitude_maximum = 0                           # LON-LAT only
-Latitude_minimum = 0                            # LON-LAT only
-Latitude_maximum = 0                            # LON-LAT only
-Longitude_of_vent = 0                           # LON-LAT only
-Latitude_of_vent = 0                            # LON-LAT only
-UTMZONE = '51S'                                 # UTM only
-X_coordinate_minimum = 520861.2                 # UTM only   
-X_coordinate_maximum = 628861                   # UTM only
-Y_coordinate_minimum = 1402130.4                # UTM only
-Y_coordinate_maximum = 1507130                  # UTM only  
-X_coordinate_of_vent = 574207                   # UTM only
-Y_coordinate_of_vent = 1465567                  # UTM only  
-Number_of_cells_X_direction = 108
-Number_of_cells_Y_direction = 105               
+# Location (Volcanological input file)
+X_coordinate_of_vent = 574207                   # UTM zone implied by topography projection 
+Y_coordinate_of_vent = 1465567                  # UTM zone implied by topography projection 
+
 Z_layers = [100, 250, 500, 5000, 1000, 5000, 7500, 12000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)

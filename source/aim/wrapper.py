@@ -43,7 +43,9 @@ class AIM:
                 
         # AIM names and directories
         self.scenario_name = scenario_name = params['scenario_name']
+        
         if store_locally:
+            # FIXME (Obsolete)
             output_dir = os.path.join(os.getcwd(), tephra_output_dir)
         else:
             output_dir = get_tephradata()
@@ -145,8 +147,7 @@ class AIM:
                 if x == '+ellps': datum = y            
                 if x == '+units': units = y
 
-        #print self.WKT_projection            
-        #print proj4
+        header('Got georeferencing: %s' % str(proj4))
                     
         self.projection = {}
         self.projection['zone'] = zone
@@ -646,6 +647,7 @@ class AIM:
         write_line(fid, 'RUN_END_(HOURS_AFTER_00) = %f' % End_time_of_run, indent=2)
         write_line(fid, '')
 
+        # Symbol %f will round to six decimal points
 	write_line(fid, 'GRID')
 	write_line(fid, 'COORDINATES = %s' % Coordinates, indent=2)
 	write_line(fid, 'LON-LAT')
@@ -657,6 +659,7 @@ class AIM:
 	write_line(fid, 'LAT_VENT = %f' % Latitude_of_vent, indent=5)
 	write_line(fid, 'UTM')
 	write_line(fid, 'UTMZONE = %s' % UTMZONE, indent=5)        
+        
 	write_line(fid, 'XMIN = %f' % X_coordinate_minimum, indent=5)
 	write_line(fid, 'XMAX = %f' % X_coordinate_maximum, indent=5)
 	write_line(fid, 'YMIN = %f' % Y_coordinate_minimum, indent=5)
@@ -915,8 +918,8 @@ class AIM:
 
         header1 = 'DSAA'
         header2 = '%i %i' % (ncols, nrows)
-        header3 = '%f %f' % (xllcorner, xllcorner+ncols*cellsize)
-        header4 = '%f %f' % (yllcorner, yllcorner+nrows*cellsize)
+        header3 = '%f %f' % (xllcorner, self.params['X_coordinate_maximum'])
+        header4 = '%f %f' % (yllcorner, self.params['Y_coordinate_maximum'])
         header5 = '0.0 0.0' # Can be obtained from data if needed
 
         outfile = open(self.topography, 'w')
@@ -934,7 +937,7 @@ class AIM:
                 z = float(element)
                 if z == -9999:
                     z = 0
-                s = ' %14E' % (z) 
+                s = ' %f' % z 
                 outfile.write(s)
             outfile.write('\n')
 
