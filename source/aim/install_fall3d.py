@@ -10,7 +10,7 @@ If it is not specified, Fall3d will be installed within the AIM source tree.
 #----------------------------------------
 import os
 import sys
-from utilities import makedir, run, header, get_shell, set_bash_variable
+from utilities import makedir, run, header, get_shell, set_bash_variable, pipe
 from config import update_marker, compiler, modules, makefile_content
 from config import make_configuration_filename, make_configuration_content
 from config import fall3d_distro, url, tarball
@@ -102,9 +102,14 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------
     # Determine AIMHOME - this is what needs to be assigned to PYTHONPATH
     #--------------------------------------------------------------------
-    cwd = os.getcwd()
+    
+    #cwd = os.getcwd() # getcwd follow symlinks, so it is better to use pwd
+        
+    p = pipe('pwd')
+    cwd = p.stdout.read().strip()
+    
     AIMHOME = os.path.split(cwd)[0] # Parent dir
-
+    print 'AIMHOME determined to be', AIMHOME
     
     #-----------------------------
     # Verify environment variables
@@ -264,6 +269,7 @@ if __name__ == '__main__':
             # Use predefined makefile
             makefile = os.path.join(mod.path, 'Makefile')
             s = 'cp %s %s' % (os.path.join(cwd, mod.file), makefile) 
+            print 'CMD', s
             run(s, verbose=False)
             
             # Patch include statement
