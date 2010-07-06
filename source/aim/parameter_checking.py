@@ -34,7 +34,7 @@ def check_parameter_ranges(params):
 
 
     # Assert that column height is compatible with mass eruption rate
-    Eruption_column_height = Z_layers[-1]
+    Eruption_column_height = Height_above_vent[0]
     if Eruption_column_height < 2000:
         msg = 'Eruption column height must be greater than or equal to 2000.\n'
         msg += 'A height of %i was specified' % Eruption_column_height
