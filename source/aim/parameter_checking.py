@@ -36,41 +36,41 @@ def check_parameter_ranges(params):
     #    raise Exception(msg)
 
 
-    # Assert that column height is compatible with mass eruption rate
-    Eruption_column_height = Height_above_vent[0]
-    if Eruption_column_height < 2000:
-        msg = 'Eruption column height must be greater than or equal to 2000.\n'
-        msg += 'A height of %i was specified' % Eruption_column_height
-        raise Exception(msg)    
+#     # Assert that column height is compatible with mass eruption rate
+#     Eruption_column_height = Height_above_vent[0]
+#     if Eruption_column_height < 2000:
+#         msg = 'Eruption column height must be greater than or equal to 2000.\n'
+#         msg += 'A height of %i was specified' % Eruption_column_height
+#         raise Exception(msg)    
 
-    if 2000 <= Eruption_column_height < 10000:
-        msg = 'Mass eruption rate inconsistent with column height: '
-        msg += 'Eruption_column_height = %.0f m, ' % Eruption_column_height
-        msg += 'Mass_eruption_rate = %.0e kg/s' % Mass_eruption_rate
-        assert 1.0e4 <= Mass_eruption_rate <= 1.0e6, msg
+#     if 2000 <= Eruption_column_height < 10000:
+#         msg = 'Mass eruption rate inconsistent with column height: '
+#         msg += 'Eruption_column_height = %.0f m, ' % Eruption_column_height
+#         msg += 'Mass_eruption_rate = %.0e kg/s' % Mass_eruption_rate
+#         assert 1.0e4 <= Mass_eruption_rate <= 1.0e6, msg
       
-    if 10000 <= Eruption_column_height < 15000:
-        msg = 'Mass eruption rate inconsistent with column height: '
-        msg += 'Eruption_column_height = %.0f m, ' % Eruption_column_height
-        msg += 'Mass_eruption_rate = %.0e kg/s' % Mass_eruption_rate
-        assert 1.0e4 <= Mass_eruption_rate < 1.0e8, msg    
+#     if 10000 <= Eruption_column_height < 15000:
+#         msg = 'Mass eruption rate inconsistent with column height: '
+#         msg += 'Eruption_column_height = %.0f m, ' % Eruption_column_height
+#         msg += 'Mass_eruption_rate = %.0e kg/s' % Mass_eruption_rate
+#         assert 1.0e4 <= Mass_eruption_rate < 1.0e8, msg    
       
-    if 15000 <= Eruption_column_height < 30000:
-        msg = 'Mass eruption rate inconsistent with column height: '
-        msg += 'Eruption_column_height = %.0f m, ' % Eruption_column_height
-        msg += 'Mass_eruption_rate = %.0e kg/s' % Mass_eruption_rate
-        assert 1.0e5 <= Mass_eruption_rate < 1.0e8, msg        
+#     if 15000 <= Eruption_column_height < 30000:
+#         msg = 'Mass eruption rate inconsistent with column height: '
+#         msg += 'Eruption_column_height = %.0f m, ' % Eruption_column_height
+#         msg += 'Mass_eruption_rate = %.0e kg/s' % Mass_eruption_rate
+#         assert 1.0e5 <= Mass_eruption_rate < 1.0e8, msg        
       
-    if 30000 <= Eruption_column_height < 80000:
-        msg = 'Mass eruption rate inconsistent with column height: '
-        msg += 'Eruption_column_height = %.0f m, ' % Eruption_column_height
-        msg += 'Mass_eruption_rate = %.0e kg/s' % Mass_eruption_rate
-        assert 1.0e8 <= Mass_eruption_rate < 1.0e12, msg            
+#     if 30000 <= Eruption_column_height < 80000:
+#         msg = 'Mass eruption rate inconsistent with column height: '
+#         msg += 'Eruption_column_height = %.0f m, ' % Eruption_column_height
+#         msg += 'Mass_eruption_rate = %.0e kg/s' % Mass_eruption_rate
+#         assert 1.0e8 <= Mass_eruption_rate < 1.0e12, msg            
 
-    if Eruption_column_height >= 80000:
-        msg = 'Eruption column height cannot equal or exceed 80000.\n'
-        msg += 'A height of %i was specified' % Eruption_column_height
-        raise Exception(msg)
+#     if Eruption_column_height >= 80000:
+#         msg = 'Eruption column height cannot equal or exceed 80000.\n'
+#         msg += 'A height of %i was specified' % Eruption_column_height
+#         raise Exception(msg)
 
       
     # Check that vent location is within model domain
