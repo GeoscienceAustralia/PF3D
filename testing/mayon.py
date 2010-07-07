@@ -32,7 +32,7 @@ Z_layers = [100, 250, 500, 5000, 1000, 5000, 7500, 12000] # List Z layers in inc
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
-Number_of_grainsize_classes = 6
+Number_of_grainsize_classes = 2
 Mean_grainsize = 1                              # phi
 Sorting = 1
 Minimum_grainsize = -4                          # phi
@@ -79,7 +79,7 @@ Topography_grid = 'mayon_topography.txt'        # Specify ASCII topography grid 
 #   True: Provide a fixed number of contours covering entire range
 #   Number: Fixed (vertical) interval between contours
 #   List of numbers: Exact contour levels
-Thickness_contours = True                       # True, False, number or list of numbers
+Thickness_contours = [1, 2, 3, 5, 10, 15, 17]   # True, False, number or list of numbers
 Thickness_units = 'cm'                          # mm/cm/m
 
 Load_contours = True                            # True, False, number or list of numbers                                                 

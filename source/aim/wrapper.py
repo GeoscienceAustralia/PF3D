@@ -530,7 +530,7 @@ class AIM:
                     if verbose: print 'No contouring requested'
                     continue
                 elif contours is True:
-                    interval = (max-min)/5 # Calculate interval automatically
+                    interval = (max-min)/8 # Calculate interval automatically
                 else:
                     # The variable 'contours' is either a list or a number
                     try: 
