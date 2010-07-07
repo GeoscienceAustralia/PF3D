@@ -550,6 +550,11 @@ class AIM:
                     print msg
                     continue
                         
+                if min + interval >= max:
+                    msg = 'No contours generated for range=[%f, %f], interval=%f' % (min, max, interval) 
+                    print msg
+                    continue
+
                 
                 # Generate list of contours from input
                 contour_list = []                
@@ -569,7 +574,8 @@ class AIM:
                     while level < max:
                         contour_list.append(level)
                         level += interval                         
-                        
+                       
+
 
                         
                 # Generate GeoTIFF raster

@@ -82,7 +82,7 @@ Topography_grid = 'mayon_topography.txt'        # Specify ASCII topography grid 
 Thickness_contours = True                       # True, False, number or list of numbers
 Thickness_units = 'cm'                          # mm/cm/m
 
-Load_contours = 2000                            # True, False, number or list of numbers                                                 
+Load_contours = True                            # True, False, number or list of numbers                                                 
 
 
                                                 
