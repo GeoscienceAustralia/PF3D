@@ -505,11 +505,11 @@ class AIM:
                 if fields[-2] == 'depload': 
                     units = 'kg/m^2'
                     contours = self.params['Load_contours']
-                    attribute_name = 'Load'
+                    attribute_name = 'Load[%s]' % units
                 elif fields[-2] == 'depthick': 
                     units = self.params['Thickness_units'].lower()
                     contours = self.params['Thickness_contours']                    
-                    attribute_name = 'Thickness'                    
+                    attribute_name = 'Thickness[%s]' % units                    
                 else:                 
                     units = 'no unit'
                     contours = True # Default is fixed number of contours
