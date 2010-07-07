@@ -242,7 +242,7 @@ class AIM:
 
         if verbose:
             print 'Logfile: %s' % logfile
-            print 'Shortcut: %s' % os.path.join(self.symlink, os.path.split(logfile)[-1]) 
+            #print 'Shortcut: %s' % os.path.join(self.symlink, os.path.split(logfile)[-1]) 
 
         
         stdout = self.basepath + '.%s.stdout' % name
