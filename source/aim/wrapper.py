@@ -486,11 +486,12 @@ class AIM:
                            projection=self.WKT_projection)
                            
                         
-    def generate_contours(self, number_of_contours=5, verbose=True):
-        """Contour ASCII grids
+    def generate_contours(self, verbose=True):
+        """Contour ASCII grids into shp and kml files
+        
+        The function uses model parameters Load_contours, Thickness_contours and Thickness_units.
         """
        
-        assert number_of_contours > 0
         
         if verbose:
             header('Contouring ASCII grids to SHP and KML files')        
@@ -501,7 +502,6 @@ class AIM:
                 if verbose: print 'Processing %s:\t' % filename
                 fields = filename.split('.')
                 
-                # FIXME: Unit specified in post processing block (hardwired)
                 if fields[-2] == 'depload': 
                     units = 'kg/m^2'
                     contours = self.params['Load_contours']
@@ -525,70 +525,86 @@ class AIM:
                 # Get range of data
                 min, max = calculate_extrema(pathname)
                 
-                # Determine whether contours is True, False, value or list
-                interval = -1                
-                fixed_levels = ''
-                
+                # Establish if interval is constant
                 if contours is False:
                     if verbose: print 'No contouring requested'
+                    continue
                 elif contours is True:
-                    # Calculate minimum and maximum values of ascii file
-                    interval = (max-min)/number_of_contours
-                    if interval < 1.0e-6: 
-                        msg = 'WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
-                        print msg
-                        continue
+                    interval = (max-min)/5 # Calculate interval automatically
                 else:
-                    # Contours is either a list or a number
+                    # The variable 'contours' is either a list or a number
                     try: 
-                        float(contours)
+                        interval = float(contours) # Constant interval specified
                     except:
-                        # Contours must be a list - use content as fixed levels
+                        # The variable 'contours' must be a list
                         if type(contours) != type([]):
                             msg = 'Expected list of contours. Must be either True, False, a number or a list of numbers.'
                             raise Exception(msg)
                         
-                        number_of_contours = len(contours) # For use with KML labelling
-                        for c in contours:
-                            try:
-                                float(c)
-                            except:
-                                msg = 'Contour value was not a number. I got %s' % c
-                       
-                            u = units.lower()     
-                            if u == 'mm':
-                                fixed_levels += ' %.0f' % c
-                            elif u == 'cm':     
-                                fixed_levels += ' %.2f' % c                            
-                            elif u == 'm':     
-                                fixed_levels += ' %.6f' % c                                 
-                                
-                    else:
-                        # Contours is a constant
-                        interval = contours
-                        number_of_contours = -1 # Irrelevant
-                                            
+                        interval = -1 # Indicate interval is not fixed
+
                         
+                # Check for degenerate interval values        
+                if 0 < interval < 1.0e-6: 
+                    msg = 'WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
+                    print msg
+                    continue
                         
-                    
+                
+                # Generate list of contours from input
+                contour_list = []                
+                if interval < 0:
+                    # A list was specified
+                    for c in contours:
+                        try:
+                            val = float(c)
+                        except:
+                            msg = 'Contour value was not a number. I got %s' % c
+                            raise Exception(msg)
+                        else:
+                            contour_list.append(val)
+                else:
+                    # A constant interval was given. Build list (exclude both min and max themselves)
+                    level = min + interval    
+                    while level < max:
+                        contour_list.append(level)
+                        level += interval                         
+                        
+
+                        
                 # Generate GeoTIFF raster
                 s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
                 self.run_with_errorcheck(s, tiffile, 
                                          verbose=False)                                
 
 
-                # Generate contours as shapefiles
-                s = '/bin/rm -rf %s' % shpfile # Clear the way
+                # Clear the way for contours.
+                s = '/bin/rm -rf %s' % shpfile # 
                 run(s, verbose=False)
                 
-                if verbose: print '  Range (%s): [%f, %f]' % (units, min, max) 
-                if interval > 0:
-                    if verbose: print '  Contour interval[%s]: %f' % (units, interval)
-                    s = 'gdal_contour -i %.8f %s %s' % (interval, tiffile, shpfile)                
-                else:
-                    if verbose: print '  Contour levels[%s]: %s' % (units, fixed_levels)
-                    s = 'gdal_contour -fl %s %s %s' % (fixed_levels, tiffile, shpfile)
-                    
+                
+                # Convert contours into GDAL argument
+                u = units.lower()                     
+                fixed_levels = ''
+                for c in contour_list:
+                    if u == 'mm':
+                        fixed_levels += ' %.0f' % c
+                    elif u == 'cm':     
+                        fixed_levels += ' %.2f' % c                            
+                    elif u == 'm':     
+                        fixed_levels += ' %.6f' % c                                 
+                    else:
+                        # E.g. kg/m^2 for ash load
+                        fixed_levels += ' %.4f' % c                                                     
+
+                        
+                if verbose: 
+                    print '  Range (%s): [%f, %f]' % (units, min, max) 
+                    print '  Contour levels[%s]: %s' % (units, fixed_levels)
+                        
+                
+                # Run contouring algorithm 
+                s = 'gdal_contour -fl %s %s %s' % (fixed_levels, tiffile, shpfile)
                 self.run_with_errorcheck(s, shpfile, 
                                          verbose=False)                               
                 
@@ -604,7 +620,7 @@ class AIM:
                                          verbose=False)
                     
                 # Label KML file with contour intervals
-                label_kml_contours(kmlfile, interval, number_of_contours, contours, units)
+                #label_kml_contours(kmlfile, contours, units)
                                                 
 
     def Xgenerate_contours(self, interval=1, verbose=True):
