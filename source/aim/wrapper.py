@@ -455,7 +455,7 @@ class AIM:
                             
         for filename in os.listdir(self.output_dir):
             if filename.endswith('.grd'):
-                if verbose: print '  ', filename
+                if verbose: print '%s -> %s' % (filename, filename[:-4] + '.asc')
                 grd2asc(os.path.join(self.output_dir, filename), 
                         projection=self.WKT_projection)
                         
@@ -493,20 +493,26 @@ class AIM:
         assert number_of_contours > 0
         
         if verbose:
-            header('Contouring ASCII grids to KML files')        
+            header('Contouring ASCII grids to SHP and KML files')        
         
         for filename in os.listdir(self.output_dir):
             if filename.endswith('.asc'):
             
+                if verbose: print 'Processing %s:\t' % filename
                 fields = filename.split('.')
                 
                 # FIXME: Unit specified in post processing block (hardwired)
                 if fields[-2] == 'depload': 
                     units = 'kg/m^2'
+                    contours = self.params['Load_contours']
                 elif fields[-2] == 'depthick': 
-                    units = 'cm'
+                    units = self.params['Thickness_units'].lower()
+                    contours = self.params['Thickness_contours']                    
                 else:                 
                     units = 'no unit'
+                    contours = True # Default is fixed number of contours
+                    
+                
                 
                 pathname = os.path.join(self.output_dir, filename)
                 basename, ext = os.path.splitext(pathname)
@@ -516,19 +522,54 @@ class AIM:
                 kmlfile = basename + '.kml'
                 prjfile = basename + '.prj'
                 
-
-                # Calculate minimum and maximum values of ascii file
+                # Get range of data
                 min, max = calculate_extrema(pathname)
-                interval = (max-min)/number_of_contours
-                if verbose: 
-                    print '  %s:' % os.path.split(kmlfile)[-1]
-                    print '     Range (%s): [%f, %f]' % (units, min, max) 
-                    print '     Contour interval: %f %s' % (interval, units)
-                    
-                if interval < 1.0e-6: 
-                    msg = 'WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
-                    print msg
-                    continue
+                
+                # Determine whether contours is True, False, value or list
+                interval = -1                
+                fixed_levels = ''
+                
+                if contours is False:
+                    if verbose: print 'No contouring requested'
+                elif contours is True:
+                    # Calculate minimum and maximum values of ascii file
+                    interval = (max-min)/number_of_contours
+                    if interval < 1.0e-6: 
+                        msg = 'WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
+                        print msg
+                        continue
+                else:
+                    # Contours is either a list or a number
+                    try: 
+                        float(contours)
+                    except:
+                        # Contours must be a list - use content as fixed levels
+                        if type(contours) != type([]):
+                            msg = 'Expected list of contours. Must be either True, False, a number or a list of numbers.'
+                            raise Exception(msg)
+                        
+                        number_of_contours = len(contours) # For use with KML labelling
+                        for c in contours:
+                            try:
+                                float(c)
+                            except:
+                                msg = 'Contour value was not a number. I got %s' % c
+                       
+                            u = units.lower()     
+                            if u == 'mm':
+                                fixed_levels += ' %.0f' % c
+                            elif u == 'cm':     
+                                fixed_levels += ' %.2f' % c                            
+                            elif u == 'm':     
+                                fixed_levels += ' %.6f' % c                                 
+                                
+                    else:
+                        # Contours is a constant
+                        interval = contours
+                        number_of_contours = -1 # Irrelevant
+                                            
+                        
+                        
                     
                 # Generate GeoTIFF raster
                 s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
@@ -540,9 +581,17 @@ class AIM:
                 s = '/bin/rm -rf %s' % shpfile # Clear the way
                 run(s, verbose=False)
                 
-                s = 'gdal_contour -i %.8f %s %s' % (interval, tiffile, shpfile)
+                if verbose: print '  Range (%s): [%f, %f]' % (units, min, max) 
+                if interval > 0:
+                    if verbose: print '  Contour interval[%s]: %f' % (units, interval)
+                    s = 'gdal_contour -i %.8f %s %s' % (interval, tiffile, shpfile)                
+                else:
+                    if verbose: print '  Contour levels[%s]: %s' % (units, fixed_levels)
+                    s = 'gdal_contour -fl %s %s %s' % (fixed_levels, tiffile, shpfile)
+                    
                 self.run_with_errorcheck(s, shpfile, 
-                                         verbose=False)                
+                                         verbose=False)                               
+                
                 
                 # Generate KML
                 if self.WKT_projection:
@@ -555,7 +604,7 @@ class AIM:
                                          verbose=False)
                     
                 # Label KML file with contour intervals
-                label_kml_contours(kmlfile, interval, number_of_contours, units)
+                label_kml_contours(kmlfile, interval, number_of_contours, contours, units)
                                                 
 
     def Xgenerate_contours(self, interval=1, verbose=True):
@@ -736,7 +785,8 @@ class AIM:
         write_line(fid, 'POSTPROCESS_CLASSES = %s' % Postprocess_classes, indent=2)
 	write_line(fid, 'TRACK_POINTS = %s' % Track_points, indent=2)
         
-        # Write POST processing data (hardwired for now - note in particular that units are CM (see contouring))
+        # Write POST processing data (selection is hardwired to LOAD and DEPOSIT THICKNESS for now)
+        # Only controllable variable is units for thickness (mm, cm, m)
         write_line(fid, '')        
         write_line(fid, 'POSTPROCESS')
         write_line(fid, 'MAP_TOPOGRAPHY = no                 (Possibilities: YES/NO)', indent=2)
@@ -746,7 +796,7 @@ class AIM:
         write_line(fid, 'MAP_CLASS_LOAD = no                 (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = KG/M2                       (Possibilities: KG/M2)',  indent=5)
         write_line(fid, 'MAP_DEPOSIT_THICKNESS = yes         (Possibilities: YES/NO)',  indent=2)
-        write_line(fid, 'UNITS = CM                          (Possibilities: MM/CM/M)',  indent=5)
+        write_line(fid, 'UNITS = %s                          (Possibilities: MM/CM/M)' % Thickness_units.upper(),  indent=5)
         write_line(fid, 'COMPACTATION_FACTOR = 0.7',  indent=5)
         write_line(fid, 'MAP_COLUMN_MASS = no                (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M2                       (Possibilities: GR/M2)',  indent=5)

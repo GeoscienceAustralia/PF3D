@@ -73,6 +73,15 @@ Track_points = 'No'                             # Yes/No
 Topography_grid = 'tambora_topography.txt'      # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
+# Contouring:
+#   False: Disabled
+#   True: Provide a fixed number of contours covering entire range
+#   Number: Fixed (vertical) interval between contours
+#   List of numbers: Exact contour levels
+Thickness_contours = True                       # True, False, number or list of numbers
+Thickness_units = 'cm'                          # mm/cm/m
+
+Load_contours = 2000                            # True, False, number or list of numbers                                                 
 
 # Run model using specified parameters
 if __name__ == '__main__':

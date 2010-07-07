@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'version_6_test'
+Eruption_comment = '2cl_contours_variable'
 
 # Time (Volcanological input file)
 Eruption_Year = 2010                            # YYYY  
@@ -32,7 +32,7 @@ Z_layers = [0, 100, 500, 1000, 5000, 10000, 20000, 30000, 50000] # List Z layers
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
-Number_of_grainsize_classes = 6
+Number_of_grainsize_classes = 2
 Mean_grainsize = 2.5                            # phi
 Sorting = 1.5
 Minimum_grainsize = 0                           # phi
@@ -74,8 +74,15 @@ Topography_grid = 'merapi_topography.txt'       # Specify ASCII topography grid 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
                                                 
+# Contouring:
+#   False: Disabled
+#   True: Provide a fixed number of contours covering entire range
+#   Number: Fixed (vertical) interval between contours
+#   List of numbers: Exact contour levels
+Thickness_contours = [1, 2, 5, 50, 100]                       # True, False, number or list of numbers
+Thickness_units = 'cm'                          # mm/cm/m
 
-                                                
+Load_contours = 2000                            # True, False, number or list of numbers                                                 
 
 # Run model using specified parameters
 if __name__ == '__main__':

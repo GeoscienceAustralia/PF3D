@@ -189,11 +189,17 @@ def run_scenario(scenario, dircomment=None,
                    % (time.time() - t_start,
                       aim.output_dir))
  
-        target = os.readlink(aim.symlink)                      
-        if target == aim.output_dir:              
-            header('Shortcut to output data is: %s' % aim.symlink)
-        else:
-            header('WARNING: Shortcut %s has been changed by more recent run to: %s' % (aim.symlink, target))
+        try:
+            target = os.readlink(aim.symlink)                      
+        except e:
+            header('WARNING: Shortcut %s does not appear to be working. Use real directory %s instead.' % (symlink, target))
+            print 'Error message was', e
+        else:    
+            
+            if target == aim.output_dir:              
+                header('Shortcut to output data is: %s' % aim.symlink)
+            else:
+                header('WARNING: Shortcut %s has been changed by more recent run to: %s' % (aim.symlink, target))
                         
         print
     
