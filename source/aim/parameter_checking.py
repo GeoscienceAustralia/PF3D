@@ -5,6 +5,9 @@ and adds AIM specific methods.
 
 """
 
+from math import ceil
+
+
 def check_parameter_ranges(params):    
     """Catch unphysical situations and raise appropriate error messages
        Input:
@@ -182,11 +185,11 @@ def derive_spatial_parameters(topography_grid, projection, params):
             
         if i == 2:
             assert fields[0] == 'xllcorner'
-            xmin = params['X_coordinate_minimum'] = float(val)        
+            params['X_coordinate_minimum'] = ceil(float(val)) # See comment below       
             
         if i == 3:
             assert fields[0] == 'yllcorner'
-            params['Y_coordinate_minimum'] = float(val)
+            params['Y_coordinate_minimum'] = ceil(float(val)) # See comment below       
             
         if i == 4:
             assert fields[0] == 'cellsize'
