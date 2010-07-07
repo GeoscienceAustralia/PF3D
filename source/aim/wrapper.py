@@ -505,9 +505,11 @@ class AIM:
                 if fields[-2] == 'depload': 
                     units = 'kg/m^2'
                     contours = self.params['Load_contours']
+                    attribute_name = 'Load'
                 elif fields[-2] == 'depthick': 
                     units = self.params['Thickness_units'].lower()
                     contours = self.params['Thickness_contours']                    
+                    attribute_name = 'Thickness'                    
                 else:                 
                     units = 'no unit'
                     contours = True # Default is fixed number of contours
@@ -612,7 +614,7 @@ class AIM:
                         
                 
                 # Run contouring algorithm 
-                s = 'gdal_contour -fl %s %s %s' % (fixed_levels, tiffile, shpfile)
+                s = 'gdal_contour -a %s -fl %s %s %s' % (attribute_name, fixed_levels, tiffile, shpfile)
                 self.run_with_errorcheck(s, shpfile, 
                                          verbose=False)                               
                 
