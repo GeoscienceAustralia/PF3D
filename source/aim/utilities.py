@@ -26,7 +26,7 @@ def run(cmd,
     
     if err != 0:
         msg = 'Command "%s" failed with errorcode %i. ' % (cmd, err)
-        if stderr: msg += 'See logfile %s for details' % stderr
+        if stdout and stderr: msg += 'See logfiles %s and %s for details' % (stdout, stderr)
         raise Exception(msg)
 
     return err

@@ -592,16 +592,18 @@ class AIM:
                 # Convert contours into GDAL argument
                 u = units.lower()                     
                 fixed_levels = ''
+                
                 for c in contour_list:
-                    if u == 'mm':
-                        fixed_levels += ' %.0f' % c
-                    elif u == 'cm':     
-                        fixed_levels += ' %.2f' % c                            
-                    elif u == 'm':     
-                        fixed_levels += ' %.6f' % c                                 
-                    else:
-                        # E.g. kg/m^2 for ash load
-                        fixed_levels += ' %.4f' % c                                                     
+                    fixed_levels += ' %.6f' % c                                                 
+                    #if u == 'mm':
+                    #    fixed_levels += ' %.0f' % c
+                    #elif u == 'cm':     
+                    #    fixed_levels += ' %.2f' % c                            
+                    #elif u == 'm':     
+                    #    fixed_levels += ' %.6f' % c                                 
+                    #else:
+                    #    # E.g. kg/m^2 for ash load
+                    #    fixed_levels += ' %.4f' % c                                                     
 
                         
                 if verbose: 
