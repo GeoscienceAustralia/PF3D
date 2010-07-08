@@ -650,7 +650,7 @@ class AIM:
                 # Check that all contour levels are within range
                 for c in contour_list:
                     if not min < c < max:
-                        print '  WARNING (generate_contours): Requested contour %f was outside range.' % c
+                        print '  WARNING: Requested contour %f is outside range and will not be shown.' % c
                 
                 
                 # Run contouring algorithm 
