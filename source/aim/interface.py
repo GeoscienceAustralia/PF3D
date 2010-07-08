@@ -140,8 +140,6 @@ def run_scenario(scenario, dircomment=None,
             params_unpacked = params.copy()
             for value in p:
                 params_unpacked[name] = value
-                #print name, params[name], params_unpacked[name]
-                print name, p, value
                 aim = run_scenario(params_unpacked, dircomment=dircomment + '_%s_%s' % (name, value),
                                    store_locally=store_locally, 
                                    timestamp_output=timestamp_output,
@@ -185,7 +183,7 @@ def run_scenario(scenario, dircomment=None,
     
     # Done
     if verbose:
-        header('Simulation finished in %.2f seconds, output data are in %s.'
+        header('Simulation finished in %.2f seconds, output data are in %s'
                    % (time.time() - t_start,
                       aim.output_dir))
  

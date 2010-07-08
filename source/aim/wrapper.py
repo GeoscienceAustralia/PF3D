@@ -9,11 +9,13 @@ from utilities import check_presence_of_required_parameters, grd2asc
 from utilities import get_fall3d_home, get_tephradata, get_username, get_timestamp
 from utilities import convert_meteorological_winddirection_to_windfield
 from utilities import get_wind_direction, calculate_extrema, label_kml_contours
+from utilities import start_logging
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
 
 from osgeo import osr # GDAL libraries
+import logging
         
 class AIM:
 
@@ -22,7 +24,7 @@ class AIM:
                  store_locally=False,
                  dircomment=None,
                  verbose=True):
-        """Create AIM instance and common file names
+        """Create AIM instance, common file names and start logging
         
         
         Optional arguments:
@@ -87,9 +89,42 @@ class AIM:
         # Base filename for all files in this scenario 
         self.basepath = os.path.join(output_dir, scenario_name)
         
-        # Path for log file
-        #self.logpath = os.path.join(self.baoutput_dir, scenario_name)         
-
+        
+        # Create output dir
+        makedir(output_dir)
+        self.output_dir = output_dir
+            
+        
+        
+        # Start logging to AIM log file
+        # Possible levels are
+        #logging.DEBUG
+        #logging.INFO
+        #logging.WARNING
+        #logging.ERROR
+        #logging.CRITICAL
+        self.logfile = self.basepath + '_AIM.log'
+        
+        start_logging(filename=self.logfile)
+        #logging.basicConfig(filename=self.logfile)
+        #logger = self.logger = logging.getLogger('AIM')
+        #logger.setLevel(logging.INFO)
+        
+        # From http://docs.python.org/library/logging.html - but doesn't work
+        #ch = logging.StreamHandler() # Control formatting of log messages
+        #ch.setLevel(logging.INFO)
+        #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        #ch.setFormatter(formatter)
+        #self.logger.addHandler(ch)
+        
+        #self.logger.critical('Logging to logfile %s' % self.logfile)
+        #self.logger.info('Info')        
+        #logging.critical('Info from singleton!')        
+        
+        if verbose:
+            header('Running AIM/Fall3d scenario %s' % self.scenario_name)
+            print 'Writing to %s' % output_dir
+            
         # AIM input files
         self.wind_profile = scenario_name + '_wind.txt'
         
@@ -217,14 +252,6 @@ class AIM:
         check_parameter_ranges(params)
         self.params = params
 
-        # Create output dir
-        if verbose:
-            header('Running AIM/Fall3d scenario %s' % self.scenario_name)
-            print 'Writing to %s' % output_dir
-            
-        makedir(output_dir)
-        self.output_dir = output_dir
-            
         # Symbolic link to output directory
         self.symlink = 'latest_output'
         s = '/bin/rm -rf %s' % self.symlink    
@@ -232,7 +259,7 @@ class AIM:
     
         s = 'ln -s %s %s' % (self.output_dir, self.symlink)
         run(s)
-      
+        
     #---------------------------
     # Fall3d script replacements
     #---------------------------        
@@ -529,7 +556,7 @@ class AIM:
                 
                 # Establish if interval is constant
                 if contours is False:
-                    if verbose: print 'No contouring requested'
+                    if verbose: print '  No contouring requested'
                     continue
                 elif contours is True:
                     interval = (max-min)/8 # Calculate interval automatically
@@ -548,12 +575,12 @@ class AIM:
                         
                 # Check for degenerate interval values        
                 if 0 < interval < 1.0e-6: 
-                    msg = 'WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
+                    msg = '  WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
                     print msg
                     continue
                         
                 if min + interval >= max:
-                    msg = 'No contours generated for range=[%f, %f], interval=%f' % (min, max, interval) 
+                    msg = '  WARNING (generate_contours): No contours generated for range=[%f, %f], interval=%f' % (min, max, interval) 
                     print msg
                     continue
 
@@ -563,10 +590,16 @@ class AIM:
                 if interval < 0:
                     # A list was specified
                     for c in contours:
+                        msg = 'Value in contour list %s was not a number. I got %s' % (contours, c)
+                        
+                        if c is True or c is False:
+                            # Just catching situation where someone puts boolean values in list.
+                            # The problem is that float(c) below will convert it to 1 or 0
+                            raise Exception(msg)
+                            
                         try:
                             val = float(c)
                         except:
-                            msg = 'Contour value was not a number. I got %s' % c
                             raise Exception(msg)
                         else:
                             contour_list.append(val)
@@ -609,9 +642,16 @@ class AIM:
 
                         
                 if verbose: 
-                    print '  Range (%s): [%f, %f]' % (units, min, max) 
-                    print '  Contour levels[%s]: %s' % (units, fixed_levels)
+                    print '  Units: %s' % units
+                    print '  Range in data: [%f, %f]' % (min, max) 
+                    print '  Contour levels: %s' % fixed_levels
                         
+                
+                # Check that all contour levels are within range
+                for c in contour_list:
+                    if not min < c < max:
+                        print '  WARNING (generate_contours): Requested contour %f was outside range.' % c
+                
                 
                 # Run contouring algorithm 
                 s = 'gdal_contour -a %s -fl %s %s %s' % (attribute_name, fixed_levels, tiffile, shpfile)

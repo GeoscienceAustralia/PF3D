@@ -7,6 +7,9 @@ from math import sqrt, pi, sin, cos, acos
 from subprocess import Popen, PIPE
 from config import update_marker, tephra_output_dir, fall3d_distro
 import numpy
+import logging
+import time
+
 
 def run(cmd, 
         stdout=None,
@@ -237,9 +240,8 @@ def get_timestamp():
     after one o'clock in the afternoon on the first of April 2009. 
     """
     
-    from time import strftime
-    #return strftime('%Y-%m-%dT%H:%M:%S') # ISO 8601
-    return strftime('%Y-%m-%dT%H%M%S') # Something Windows can read
+    #return time.strftime('%Y-%m-%dT%H:%M:%S') # ISO 8601
+    return time.strftime('%Y-%m-%dT%H%M%S') # Something Windows can read
 
     
 def get_shell():
@@ -308,6 +310,47 @@ def tail(filename,
             print space + s
         
 
+def start_logging(filename):
+    """ Duplicate print statements to file.
+    Slightly modified from last example in 
+    http://stackoverflow.com/questions/616645/how-do-i-duplicate-sys-stdout-to-a-log-file-in-python
+    """
+
+    log = logging.getLogger('AIM')
+
+    class StreamLogger(object):
+
+        def __init__(self, stream):
+            self.stream = stream
+            self.data = ''
+
+        def write(self, data):
+            self.stream.write(data)
+            self.stream.flush()
+
+            timestamp = time.strftime('%b%d-%H:%M')
+            
+            self.data += data
+            tmp = str(self.data)
+            if '\x0a' in tmp or '\x0d' in tmp:
+                tmp = tmp.rstrip('\x0a\x0d')
+                log.info('[%s] %s' % (timestamp, tmp))
+                self.data = ''
+
+
+    logging.basicConfig(level=logging.INFO,
+                        filename=filename,
+                        filemode='a')
+
+    sys.stdout = StreamLogger(sys.stdout)
+
+    print 'Logging to AIM logfile: %s' % filename
+    
+    
+    
+    
+    
+        
 def calculate_extrema(filename, verbose=False):
     """Calculate minimum and maximum value of ASCII file.
     
