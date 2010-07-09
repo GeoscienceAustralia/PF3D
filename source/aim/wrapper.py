@@ -820,7 +820,7 @@ class AIM:
 	write_line(fid, 'SOLVE_PLUME_FOR = %s' % Height_or_MFR, indent =5)
 	write_line(fid, 'MFR_SEARCH_RANGE = %f %f' % (MFR_minimum, 
 						      MFR_maximum), indent=5)
-	write_line(fid, 'HEIGHT_ABOVE_VENT = %s' % Height_above_vent_string, indent=5) # FIXME: Why?
+	write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5) # FIXME: Why?
 	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
         write_line(fid, 'EXIT_VELOCIY_(MS) = %f' % Exit_velocity, indent=5)
         write_line(fid, 'EXIT_TEMPERATURE_(K) = %f' % Exit_temperature, indent=5)
