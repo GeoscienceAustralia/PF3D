@@ -23,6 +23,10 @@ def check_parameter_ranges(params):
         exec(s)
 
     # Check parameters
+    try:
+        float(params['Mass_eruption_rate'])
+    except:
+        assert params['Mass_eruption_rate'].lower() == 'estimate'
         
     if params['Mass_eruption_rate'] <= 0:
          msg = 'Mass eruption rate must be greater than zero.\n'

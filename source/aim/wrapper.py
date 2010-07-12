@@ -816,7 +816,7 @@ class AIM:
 	write_line(fid, 'VENT_HEIGHT_(M) = %f' % Vent_height, indent=2)
         write_line(fid, 'SOURCE_TYPE = %s' % Source_type, indent=2) 
         write_line(fid, 'POINT_SOURCE', indent=2)
-        write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
+        write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
 
         Height_above_vent_string = ''
         for H in Height_above_vent:
@@ -824,7 +824,7 @@ class AIM:
         
         write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5)
         write_line(fid, 'SUZUKI_SOURCE', indent=2)
-	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
+	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
         write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5) # FIXME: Why?
         write_line(fid, 'A = %i' % A, indent=5)
         write_line(fid, 'L = %i' % L, indent=5)
@@ -833,7 +833,7 @@ class AIM:
 	write_line(fid, 'MFR_SEARCH_RANGE = %f %f' % (MFR_minimum, 
 						      MFR_maximum), indent=5)
 	write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5) # FIXME: Why?
-	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %f' % Mass_eruption_rate, indent=5)
+	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
         write_line(fid, 'EXIT_VELOCIY_(MS) = %f' % Exit_velocity, indent=5)
         write_line(fid, 'EXIT_TEMPERATURE_(K) = %f' % Exit_temperature, indent=5)
         write_line(fid, 'EXIT_VOLATILE_FRACTION_(IN%%) = %f' % Exit_volatile_fraction, indent=5)
