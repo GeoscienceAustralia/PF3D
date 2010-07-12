@@ -315,6 +315,18 @@ class AIM:
         Requires 
         - input file
         """
+        
+        grainfilename = self.scenario_name + '.grn'
+        #print os.listdir('.')
+        #print self.grainfile
+        
+
+        if grainfilename in os.listdir('.'):
+            print 'Grainfile found - will not run SetGrn'
+            s = 'cp %s %s' % (grainfilename, self.grainfile)
+            run(s)
+            return
+
             
         executable = os.path.join(self.utilities_dir, 
                                   'SetGrn', 'SetGrn.PUB.exe')

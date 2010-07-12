@@ -22,8 +22,9 @@ def check_parameter_ranges(params):
         s = '%s = params["%s"]' % (key, key)
         exec(s)
 
-    # Check parameters    
-    if params['Mass_eruption_rate'] < 0:
+    # Check parameters
+        
+    if params['Mass_eruption_rate'] <= 0:
          msg = 'Mass eruption rate must be greater than zero.\n'
          msg += 'A value of %e was specified' % params['Mass_eruption_rate']
          raise Exception(msg)
