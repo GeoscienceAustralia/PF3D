@@ -26,12 +26,13 @@ def check_parameter_ranges(params):
     try:
         float(params['Mass_eruption_rate'])
     except:
-        assert params['Mass_eruption_rate'].lower() == 'estimate'
-        
-    if params['Mass_eruption_rate'] <= 0:
-         msg = 'Mass eruption rate must be greater than zero.\n'
-         msg += 'A value of %e was specified' % params['Mass_eruption_rate']
-         raise Exception(msg)
+        msg = 'Mass_eruption_rate must be either a floating point number or the string "estimate"'
+        assert params['Mass_eruption_rate'].lower() == 'estimate', msg
+    else:    
+        if params['Mass_eruption_rate'] <= 0:
+            msg = 'Mass eruption rate must be greater than zero.\n'
+            msg += 'A value of %e was specified' % params['Mass_eruption_rate']
+            raise Exception(msg)
 
 
     #log_estimated_mass_eruption_rate = 4 + 1.7*math.log(Eruption_column_height)
