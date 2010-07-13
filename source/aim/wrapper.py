@@ -9,7 +9,7 @@ from utilities import check_presence_of_required_parameters, grd2asc
 from utilities import get_fall3d_home, get_tephradata, get_username, get_timestamp
 from utilities import convert_meteorological_winddirection_to_windfield
 from utilities import get_wind_direction, calculate_extrema, label_kml_contours
-from utilities import start_logging
+from utilities import start_logging, list_to_string
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
@@ -769,8 +769,8 @@ class AIM:
 	write_line(fid, 'BEGIN_METEO_DATA_(HOURS_AFTER_00) = %f' % Start_time_of_meteo_data, indent=2)
 	write_line(fid, 'TIME_STEP_METEO_DATA_(MIN) = %f' % Meteo_time_step, indent=2)
 	write_line(fid, 'END_METEO_DATA_(HOURS_AFTER_00) = %f' % End_time_of_meteo_data, indent=2)	
-        write_line(fid, 'ERUPTION_START_(HOURS_AFTER_00) = %f' % Start_time_of_eruption, indent=2)
-        write_line(fid, 'ERUPTION_END_(HOURS_AFTER_00) = %f' % End_time_of_eruption, indent=2) 
+        write_line(fid, 'ERUPTION_START_(HOURS_AFTER_00) = %s' % list_to_string(Start_time_of_eruption), indent=2)
+        write_line(fid, 'ERUPTION_END_(HOURS_AFTER_00) = %s' % list_to_string(End_time_of_eruption), indent=2) 
         write_line(fid, 'RUN_END_(HOURS_AFTER_00) = %f' % End_time_of_run, indent=2)
         write_line(fid, '')
 
@@ -818,9 +818,9 @@ class AIM:
         write_line(fid, 'POINT_SOURCE', indent=2)
         write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
 
-        Height_above_vent_string = ''
-        for H in Height_above_vent:
-            Height_above_vent_string += '%f ' % H
+
+        Height_above_vent_string = list_to_string(Height_above_vent)
+
         
         write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5)
         write_line(fid, 'SUZUKI_SOURCE', indent=2)
@@ -850,9 +850,7 @@ class AIM:
 	write_line(fid, 'RAMS_CS = %f' % Value_of_CS, indent=2)
         write_line(fid, '') 
 
-        Z_layer_string = ''
-        for Z in Z_layers:
-            Z_layer_string += '%f ' % Z
+        Z_layer_string = list_to_string(Z_layers)
         write_line(fid, 'Z_LAYER_(M) = %s' % Z_layer_string, indent=2)
 
         write_line(fid,'')
