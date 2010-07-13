@@ -704,7 +704,7 @@ class AIM:
                 
                 
                 # Generate KML
-                if self.meteorological_model == 'ncep':
+                if self.meteorological_model == 'ncep1':
                     # FIXME: Test should be about coordinate system rather than meteo model
                     # Such as self.params['Coordinates'] == 'UTM' or 'LON-LAT'
                     s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)      
