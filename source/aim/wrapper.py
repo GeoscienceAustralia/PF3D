@@ -46,44 +46,59 @@ class AIM:
         # AIM names and directories
         self.scenario_name = scenario_name = params['scenario_name']
         
-        if store_locally:
-            # FIXME (Obsolete)
-            output_dir = os.path.join(os.getcwd(), tephra_output_dir)
+        
+        
+        import sys
+        if len(sys.argv) > 1:
+            # Assume that only postprocessing is requested using data in provided directory.
+            self.postprocessing = True
+            
+            output_dir = sys.argv[1]
         else:
-            output_dir = get_tephradata()
+            # Create output dir
         
-        # Build output datastructure like    
-        # $TEPHRADATA/<scenario>/<scenario>_user_timestamp
-        output_dir = os.path.join(output_dir, 'scenarios')        
-        output_dir = os.path.join(output_dir, scenario_name)
-        
-        scenario_dir = get_username()            
-        if timestamp_output:
-            scenario_dir += '_' + get_timestamp()        
-
+            self.postprocessing = False        
             
-        if dircomment is not None:
-            try:
-                dircomment = string.replace(dircomment, ' ', '_')
-            except:
-                msg = 'Dircomment %s could not be appended to output dir' % str(dircomment)
-                raise Exception(msg)                
-            
-            scenario_dir += '_' + dircomment
-        
-        output_dir = os.path.join(output_dir, scenario_dir)
-        if not timestamp_output:
-            try:
-                os.listdir(output_dir)
-            except:
-                # OK if it doesn't exist
-                pass
+            if store_locally:
+                # FIXME (Obsolete)
+                output_dir = os.path.join(os.getcwd(), tephra_output_dir)
             else:
-                # Clean out any previous files
-                s = 'chmod -R +w %s' % output_dir 
-                run(s, verbose=False)                    
-                s = '/bin/rm -rf %s' % output_dir
-                run(s, verbose=False)        
+                output_dir = get_tephradata()
+        
+            # Build output datastructure like    
+            # $TEPHRADATA/<scenario>/<scenario>_user_timestamp
+            output_dir = os.path.join(output_dir, 'scenarios')        
+            output_dir = os.path.join(output_dir, scenario_name)
+        
+            scenario_dir = get_username()            
+            if timestamp_output:
+                scenario_dir += '_' + get_timestamp()        
+
+                
+            if dircomment is not None:
+                try:
+                    dircomment = string.replace(dircomment, ' ', '_')
+                except:
+                    msg = 'Dircomment %s could not be appended to output dir' % str(dircomment)
+                    raise Exception(msg)                
+                
+                scenario_dir += '_' + dircomment
+        
+            output_dir = os.path.join(output_dir, scenario_dir)
+            if not timestamp_output:
+                try:
+                    os.listdir(output_dir)
+                except:
+                    # OK if it doesn't exist
+                    pass
+                else:
+                    # Clean out any previous files
+                    s = 'chmod -R +w %s' % output_dir 
+                    run(s, verbose=False)                    
+                    s = '/bin/rm -rf %s' % output_dir
+                    run(s, verbose=False)        
+        
+        
         
                                   
         # Base filename for all files in this scenario 
@@ -1191,4 +1206,15 @@ class AIM:
             s = 'ln -s %s %s/final_output' % (last_dir, self.output_dir)
             run(s, verbose=verbose)
             
+                
+    def restore_output(self, verbose=False):
+        """Move files back for post processing
+        """
+        
+        for dir in os.listdir(self.output_dir):
+            if dir.endswith('h'):
+                
+                s = 'mv %s/%s/* %s' % (self.output_dir, dir, self.output_dir)
+                run(s)
+                
                 

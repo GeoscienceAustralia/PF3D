@@ -154,25 +154,29 @@ def run_scenario(scenario, dircomment=None,
               timestamp_output=timestamp_output,
               verbose=verbose)    
 
-    # Store scenario script, input data files and 
-    # actual parameters to provide a complete audit trail
-    aim.store_inputdata(verbose=verbose)
-        
-    # Generate input file for Fall3d-6
-    aim.write_input_file(verbose=verbose)
+    if aim.postprocessing:
+        aim.restore_output()
+    else:
+              
+        # Store scenario script, input data files and 
+        # actual parameters to provide a complete audit trail
+        aim.store_inputdata(verbose=verbose)
+            
+        # Generate input file for Fall3d-6
+        aim.write_input_file(verbose=verbose)
 
-    # Generate input data files in Fall3D format
-    aim.generate_windprofile(verbose=verbose)    
-    aim.generate_topography(verbose=verbose)
+        # Generate input data files in Fall3D format
+        aim.generate_windprofile(verbose=verbose)    
+        aim.generate_topography(verbose=verbose)
     
-    # Run scripts for Fall3d
-    aim.set_granum(verbose=verbose)
-    aim.set_database(verbose=verbose)
-    aim.set_source(verbose=verbose)
-    aim.run_fall3d(verbose=verbose)
+        # Run scripts for Fall3d
+        aim.set_granum(verbose=verbose)
+        aim.set_database(verbose=verbose)
+        aim.set_source(verbose=verbose)
+        aim.run_fall3d(verbose=verbose)
 
-    # Fall3d postprocessing nc2grd
-    aim.nc2grd()
+        # Fall3d postprocessing nc2grd
+        aim.nc2grd()
     
     # AIM post processing
     #aim.convert_ncgrids_to_asciigrids(verbose=verbose)
@@ -195,7 +199,7 @@ def run_scenario(scenario, dircomment=None,
         else:    
             
             if target == aim.output_dir:              
-                header('Shortcut to output data is: %s' % aim.symlink)
+                header('Shortcut to output data is: %s -> %s' % (aim.symlink, target))
             else:
                 header('WARNING: Shortcut %s has been changed by more recent run to: %s' % (aim.symlink, target))
                         
