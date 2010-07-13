@@ -33,6 +33,8 @@ Z_min = 0.0
 Z_max = 50000
 Z_increment = 10000
 
+# Select meteorological input type
+Meteorological_model = 'profile'                 # profile, ncep, ...
 
 # Altitudes of wind data in meteorological profile
 wind_altitudes = [0, 100, 500, 1000, 5000, 10000, 20000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])

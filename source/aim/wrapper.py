@@ -207,6 +207,13 @@ class AIM:
 
 
             
+        if params['Meteorological_model'] == 'profile':    
+            self.meteorological_model = 'profile'
+        elif params['Meteorological_model'] == 'ncep':                
+            self.meteorological_model = 'ncep1'
+        else:
+            msg = 'Meteorological_model should be either "profile" or "ncep1"'
+            raise Exception(msg)
         
         
         #--------------------------------------
@@ -223,7 +230,11 @@ class AIM:
         self.sourcefile = self.basepath + '.src'
         
         # Vertical wind profile data generated from scenario_wind.txt
-        self.windprofile = self.basepath + '.profile'
+        if self.meteorological_model == 'profile':
+            self.windprofile = self.basepath + '.profile'
+        else:    
+            self.windprofile = scenario_name + '.ncep1.nc'            
+            
         
         # Topographic surfer grid generated from scenario_topography.txt
         self.topography = self.basepath + '.top'
@@ -365,10 +376,12 @@ class AIM:
         if verbose:
             header('Building meteorological database (SetDbs)')
 
+            
         cmd = '%s '*7 % (executable, logfile, 
                          self.inputfile, self.windprofile, 
                          self.databasefile, 
-                         self.topography, 'profile')
+                         self.topography, self.meteorological_model)
+
                          
         self.runscript(cmd, 'SetDbs', logfile, lines=5,
                        verbose=verbose)
@@ -749,6 +762,7 @@ class AIM:
 
         params = self.params
         # Create local variables from dictionary
+        
         for key in params:
             s = '%s = params["%s"]' % (key, key)
             exec(s)
@@ -784,7 +798,7 @@ class AIM:
 	write_line(fid, 'LON-LAT')
 	write_line(fid, 'LONMIN = %f' % Longitude_minimum, indent=5)
 	write_line(fid, 'LONMAX = %f' % Longitude_maximum, indent=5)
-	write_line(fid, 'LATMAX = %f' % Latitude_minimum, indent=5)
+	write_line(fid, 'LATMIN = %f' % Latitude_minimum, indent=5)
 	write_line(fid, 'LATMAX = %f' % Latitude_maximum, indent=5)
 	write_line(fid, 'LON_VENT = %f' % Longitude_of_vent, indent=5)
 	write_line(fid, 'LAT_VENT = %f' % Latitude_of_vent, indent=5)
@@ -929,6 +943,10 @@ class AIM:
            
            in which case values will be reused for the simulation duration   
         """
+        
+        
+        if self.meteorological_model == 'ncep1':
+            return
         
         zlayers = self.params['wind_altitudes']
         nz=len(zlayers)

@@ -6,7 +6,7 @@ and adds AIM specific methods.
 """
 
 from math import ceil
-from utilities import list_to_string
+from utilities import list_to_string, get_scenario_parameters
 
 def check_parameter_ranges(params):    
     """Catch unphysical situations and raise appropriate error messages
@@ -221,16 +221,39 @@ def derive_spatial_parameters(topography_grid, projection, params):
     params['Y_coordinate_maximum'] = int(ymax)
 
     # Get UTMZONE from projection file.
-    params['Coordinates'] = projection['proj'].upper()                           # E.g. UTM
+    if params['Meteorological_model'].lower() == 'profile':
+        params['Coordinates'] = projection['proj'].upper()                           # UTM
+        
+        
+        # FIXME (Ole): Disable geographic coordinates for the time being.
+        params['Longitude_minimum'] = 0                           # LON-LAT only 
+        params['Longitude_maximum'] = 0                           # LON-LAT only
+        params['Latitude_minimum'] = 0                            # LON-LAT only
+        params['Latitude_maximum'] = 0                            # LON-LAT only
+        params['Longitude_of_vent'] = 0                           # LON-LAT only
+        params['Latitude_of_vent'] = 0                            # LON-LAT only
+        
+        
+        
+    elif params['Meteorological_model'].lower() == 'ncep':
+        params['Coordinates'] = 'LON-LAT'                
+        
+        # Get parameters specified in scenario_file
+        metparams = get_scenario_parameters('%s_meteorological_domain.py' % params['scenario_name'])
+        
+        for key in metparams:
+            if key.startswith('Lat') or key.startswith('Lon'):
+                #print 'Got', key, metparams[key]
+                params[key] = metparams[key]
+        
+         
+    else:
+        msg = 'Unknown choice of met data: %s. Expect either "profile" or "ncep".' % params['Meteorological_model']
+        raise Exception(msg)
+        
+        
     params['UTMZONE'] = '%s%s' % (projection['zone'], projection['hemisphere'])   # E.g. 51S
     
-    # FIXME (Ole): Disable geographic coordinates for the time being, but they should also be derived from topography if needed.
-    params['Longitude_minimum'] = 0                           # LON-LAT only 
-    params['Longitude_maximum'] = 0                           # LON-LAT only
-    params['Latitude_minimum'] = 0                            # LON-LAT only
-    params['Latitude_maximum'] = 0                            # LON-LAT only
-    params['Longitude_of_vent'] = 0                           # LON-LAT only
-    params['Latitude_of_vent'] = 0                            # LON-LAT only
     
             
 def derive_modelling_parameters(params):
