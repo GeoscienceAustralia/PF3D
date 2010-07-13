@@ -21,7 +21,7 @@ Start_time_of_meteo_data = 0                    # Hours after 00
 Meteo_time_step = 60                            # Mins       
 End_time_of_meteo_data = 3                      # Hours after 00
 Start_time_of_eruption = [0, 2]                 # Hours after 00
-End_time_of_eruption = [3]                        # Hours after 00 
+End_time_of_eruption = 3                        # Hours after 00 
 End_time_of_run = 3                             # Hours after 00  
 
 # Location (Volcanological input file)
