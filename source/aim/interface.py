@@ -154,10 +154,7 @@ def run_scenario(scenario, dircomment=None,
               timestamp_output=timestamp_output,
               verbose=verbose)    
 
-    if aim.postprocessing:
-        aim.restore_output()
-    else:
-              
+    if not aim.postprocessing:
         # Store scenario script, input data files and 
         # actual parameters to provide a complete audit trail
         aim.store_inputdata(verbose=verbose)
@@ -175,8 +172,8 @@ def run_scenario(scenario, dircomment=None,
         aim.set_source(verbose=verbose)
         aim.run_fall3d(verbose=verbose)
 
-        # Fall3d postprocessing nc2grd
-        aim.nc2grd()
+    # Fall3d postprocessing nc2grd
+    aim.nc2grd()
     
     # AIM post processing
     #aim.convert_ncgrids_to_asciigrids(verbose=verbose)

@@ -1209,8 +1209,11 @@ class AIM:
         # Create shortcut to last dir                
         if last_dir:
             s = 'ln -s %s %s/final_output' % (last_dir, self.output_dir)
-            run(s, verbose=verbose)
-            
+            try:
+                run(s, verbose=verbose)
+            except:
+                pass
+                
                 
     def restore_output(self, verbose=False):
         """Move files back for post processing
