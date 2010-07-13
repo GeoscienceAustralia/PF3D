@@ -704,11 +704,16 @@ class AIM:
                 
                 
                 # Generate KML
-                if self.WKT_projection:
-                    s = 'ogr2ogr -f KML -t_srs EPSG:4623 -s_srs %s %s %s' % (prjfile, kmlfile, shpfile)
-                else: 
-                    print 'WARNING (generate_contours): Model did not have a projection file'
-                    s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)                
+                if self.meteorological_model == 'ncep':
+                    # FIXME: Test should be about coordinate system rather than meteo model
+                    # Such as self.params['Coordinates'] == 'UTM' or 'LON-LAT'
+                    s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)      
+                else:                              
+                    if self.WKT_projection:
+                        s = 'ogr2ogr -f KML -t_srs EPSG:4623 -s_srs %s %s %s' % (prjfile, kmlfile, shpfile)
+                    else: 
+                        print 'WARNING (generate_contours): Model did not have a projection file'
+                        s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)                
                 
                 self.run_with_errorcheck(s, kmlfile, 
                                          verbose=False)
