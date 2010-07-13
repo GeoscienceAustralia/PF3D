@@ -1102,7 +1102,10 @@ class AIM:
         
         # Store input files
         s = 'cp %s %s' % (self.wind_profile, audit_dir)
-        run(s, verbose=verbose)
+        try:
+            run(s, verbose=verbose)
+        except:
+            pass
         
         #s = 'cp %s %s' % (self.topography_grid, audit_dir)
         #run(s, verbose=verbose)        
