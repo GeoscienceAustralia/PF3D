@@ -6,7 +6,7 @@ and adds AIM specific methods.
 """
 
 from math import ceil
-
+from utilities import list_to_string
 
 def check_parameter_ranges(params):    
     """Catch unphysical situations and raise appropriate error messages
@@ -22,12 +22,23 @@ def check_parameter_ranges(params):
         s = '%s = params["%s"]' % (key, key)
         exec(s)
 
-    # Check parameters
+    # Mass Eruption Rate can be either
+    # 'estimate'
+    # number
+    # list of numbers
+    
+    
+    
     try:
         float(params['Mass_eruption_rate'])
     except:
-        msg = 'Mass_eruption_rate must be either a floating point number or the string "estimate"'
-        assert params['Mass_eruption_rate'].lower() == 'estimate', msg
+        if isinstance(params['Mass_eruption_rate'], basestring):
+            msg = 'Mass_eruption_rate must be either a number, a list or the word "estimate"'
+            assert params['Mass_eruption_rate'].lower() == 'estimate', msg
+        else:    
+            # Must be a list - convert
+            params['Mass_eruption_rate'] = list_to_string(params['Mass_eruption_rate'])
+        
     else:    
         if params['Mass_eruption_rate'] <= 0:
             msg = 'Mass eruption rate must be greater than zero.\n'
@@ -227,16 +238,9 @@ def derive_modelling_parameters(params):
     """
     
     # Assume the lowest atmospheric layer starts at zero
-    params['Z_layer_minimum'] = 0
+    #params['Z_min'] = 0
     
-    
-    Zmax = params['Z_layers'][-1] 
-    if Zmax >= 20000:
-        params['Z_layer_increment'] = 10000
-    elif 10000 <= Zmax < 20000:
-        params['Z_layer_increment'] = 1000        
-    else:
-        params['Z_layer_increment'] = 500
+    #FIXME CHECK MORE
 
 
     params['meteo_time_step'] = params['Meteo_time_step'] * 60 # Convert timestep in 'hours' to 'minutes' (FIXME: Naming?)

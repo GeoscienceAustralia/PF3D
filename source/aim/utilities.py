@@ -348,7 +348,7 @@ def start_logging(filename):
     
     
 def list_to_string(L):
-    """Convert list with numbers to string of values suitable for Fall3d
+    """Convert list of numerical values suitable for Fall3d
     If L is a single number it will be used as such.
     """
     

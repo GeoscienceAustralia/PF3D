@@ -20,7 +20,7 @@ Eruption_Day = 28                               # DD
 Start_time_of_meteo_data = 0                    # Hours after 00
 Meteo_time_step = 60                            # Mins       
 End_time_of_meteo_data = 6                      # Hours after 00
-Start_time_of_eruption = 0                      # Hours after 00
+Start_time_of_eruption = [0,2]                  # Hours after 00
 End_time_of_eruption = 6                        # Hours after 00 
 End_time_of_run = 6                             # Hours after 00  
 
@@ -28,7 +28,12 @@ End_time_of_run = 6                             # Hours after 00
 X_coordinate_of_vent = 574207                   # UTM zone implied by topography projection 
 Y_coordinate_of_vent = 1465567                  # UTM zone implied by topography projection 
 
-Z_layers = [100, 250, 500, 5000, 1000, 5000, 7500, 12000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+# Vertical discretisation for model domain
+Z_min = 0.0
+Z_max = 12000
+Z_increment = 1000
+
+wind_altitudes = [100, 250, 500, 5000, 1000, 5000, 7500, 12000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -45,7 +50,7 @@ Sphericity_maximum = 0.9
 # Source (Volcanological input file)
 Vent_height = 2462
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
-Mass_eruption_rate = 1e6                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
+Mass_eruption_rate = [1e6, 1e5]                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
 Height_above_vent = [10000, 8000, 6000, 4000, 2000, 500] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)

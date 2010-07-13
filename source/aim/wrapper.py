@@ -229,7 +229,7 @@ class AIM:
         self.topography = self.basepath + '.top'
                                        
         # Output database file
-        self.databasefile = self.basepath + '.dbs'
+        self.databasefile = self.basepath + '.dbs.nc'
                                          
         # Output result file (Fall3d adds another .nc to this)
         self.resultfile = self.basepath + '.res'
@@ -317,10 +317,6 @@ class AIM:
         """
         
         grainfilename = self.scenario_name + '.grn'
-        #print os.listdir('.')
-        #print self.grainfile
-        
-
         if grainfilename in os.listdir('.'):
             print 'Grainfile found - will not run SetGrn'
             s = 'cp %s %s' % (grainfilename, self.grainfile)
@@ -352,7 +348,15 @@ class AIM:
         - windprofile
         """
         
+
+        dbsfilename = self.scenario_name + '.dbs.nc'
+        if dbsfilename in os.listdir('.'):
+            print 'DBS file found - will not run SetDbs'
+            s = 'cp %s %s' % (dbsfilename, self.databasefile)
+            run(s)
+            return
         
+                
         executable = os.path.join(self.utilities_dir, 
                                   'SetDbs', 'SetDbs.PUB.exe')
         
@@ -770,7 +774,7 @@ class AIM:
 	write_line(fid, 'TIME_STEP_METEO_DATA_(MIN) = %f' % Meteo_time_step, indent=2)
 	write_line(fid, 'END_METEO_DATA_(HOURS_AFTER_00) = %f' % End_time_of_meteo_data, indent=2)	
         write_line(fid, 'ERUPTION_START_(HOURS_AFTER_00) = %s' % list_to_string(Start_time_of_eruption), indent=2)
-        write_line(fid, 'ERUPTION_END_(HOURS_AFTER_00) = %s' % list_to_string(End_time_of_eruption), indent=2) 
+        write_line(fid, 'ERUPTION_END_(HOURS_AFTER_00) = %s' % End_time_of_eruption, indent=2) 
         write_line(fid, 'RUN_END_(HOURS_AFTER_00) = %f' % End_time_of_run, indent=2)
         write_line(fid, '')
 
@@ -795,9 +799,9 @@ class AIM:
 	write_line(fid, 'Y_VENT = %f' % Y_coordinate_of_vent, indent=5)
 	write_line(fid, 'NX = %i' % Number_cells_X_direction, indent=2)
         write_line(fid, 'NY = %i' % Number_cells_Y_direction, indent=2)
- 	write_line(fid, 'ZLAYER_(M) FROM %f TO %f INCREMENT %f' % (Z_layer_minimum, 
-                                                                   Z_layers[-1],
-                                                                   Z_layer_increment), indent=2)
+ 	write_line(fid, 'ZLAYER_(M) FROM %f TO %f INCREMENT %f' % (Z_min, 
+                                                                   Z_max,
+                                                                   Z_increment), indent=2)
 	write_line(fid, '')
 	
 	write_line(fid, 'GRANULOMETRY')
@@ -816,6 +820,7 @@ class AIM:
 	write_line(fid, 'VENT_HEIGHT_(M) = %f' % Vent_height, indent=2)
         write_line(fid, 'SOURCE_TYPE = %s' % Source_type, indent=2) 
         write_line(fid, 'POINT_SOURCE', indent=2)
+        
         write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
 
 
@@ -826,8 +831,8 @@ class AIM:
         write_line(fid, 'SUZUKI_SOURCE', indent=2)
 	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
         write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5) # FIXME: Why?
-        write_line(fid, 'A = %i' % A, indent=5)
-        write_line(fid, 'L = %i' % L, indent=5)
+        write_line(fid, 'A = %s' % list_to_string(A), indent=5)
+        write_line(fid, 'L = %s' % list_to_string(L), indent=5)
         write_line(fid, 'PLUME_SOURCE', indent=2)
 	write_line(fid, 'SOLVE_PLUME_FOR = %s' % Height_or_MFR, indent =5)
 	write_line(fid, 'MFR_SEARCH_RANGE = %f %f' % (MFR_minimum, 
@@ -849,9 +854,6 @@ class AIM:
 	write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % Horizontal_diffusion_coefficient, indent=2)
 	write_line(fid, 'RAMS_CS = %f' % Value_of_CS, indent=2)
         write_line(fid, '') 
-
-        Z_layer_string = list_to_string(Z_layers)
-        write_line(fid, 'Z_LAYER_(M) = %s' % Z_layer_string, indent=2)
 
         write_line(fid,'')
 
@@ -928,7 +930,7 @@ class AIM:
            in which case values will be reused for the simulation duration   
         """
         
-        zlayers = self.params['Z_layers']
+        zlayers = self.params['wind_altitudes']
         nz=len(zlayers)
 
         try:
