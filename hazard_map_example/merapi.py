@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = '2cl_contours_variable'
+Eruption_comment = 'hazard_map_example'
 
 # Time (Volcanological input file)
 Eruption_Year = 2010                            # YYYY  
@@ -37,7 +37,7 @@ Z_increment = 10000
 Meteorological_model = 'profile'                 # profile, ncep, ...
 
 # Altitudes of wind data in meteorological profile
-wind_altitudes = [0, 100, 500, 1000, 5000, 10000, 20000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+wind_altitudes = [50, 500, 1000, 5000, 10000, 20000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -95,10 +95,10 @@ Load_contours = 2000                            # True, False, number or list of
 
 # Run model using specified parameters
 if __name__ == '__main__':
-    from aim import run_scenario
-    run_scenario(__file__, 
-                 timestamp_output=False,    
-                 dircomment=Eruption_comment)
+    from aim import run_multiple_windfields
+    run_multiple_windfields(__file__, 
+                            windfield_directory='merapi_wind',
+                            dircomment=Eruption_comment)
 
 
  
