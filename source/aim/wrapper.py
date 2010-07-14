@@ -985,6 +985,10 @@ class AIM:
         #lines = infile.readlines()
         #infile.close()
 
+        # Skip blanks
+        for i, line in enumerate(lines):
+            if line.strip() != '': break
+        lines = lines[i:]
         
         # Gather wind data for each time block
         timeblocks=[]
