@@ -1002,7 +1002,11 @@ class AIM:
             
             # Repeat timeblock for duration of eruption (rounded up)
             t_stop = self.params['End_time_of_run']
-            t_start = self.params['Start_time_of_eruption']
+            try:
+                t_start = float(self.params['Start_time_of_eruption'])
+            except:
+                t_start = float(self.params['Start_time_of_eruption'][0]) 
+                
             for i in range(int(t_stop-t_start+1)):
                 timeblocks.append(timeblock)
         else:    
