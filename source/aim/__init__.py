@@ -2,6 +2,6 @@
 public methods.
 """
 
-from interface import run_scenario
+from interface import run_scenario, run_multiple_windfields
 from utilities import get_scenario_parameters
 
