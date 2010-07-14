@@ -309,42 +309,6 @@ def tail(filename,
         if s: 
             print space + s
         
-
-def start_logging(filename):
-    """ Duplicate print statements to file.
-    Slightly modified from last example in 
-    http://stackoverflow.com/questions/616645/how-do-i-duplicate-sys-stdout-to-a-log-file-in-python
-    """
-
-    log = logging.getLogger('AIM')
-
-    class StreamLogger(object):
-
-        def __init__(self, stream):
-            self.stream = stream
-            self.data = ''
-
-        def write(self, data):
-            self.stream.write(data)
-            self.stream.flush()
-
-            timestamp = time.strftime('%b%d-%H:%M')
-            
-            self.data += data
-            tmp = str(self.data)
-            if '\x0a' in tmp or '\x0d' in tmp:
-                tmp = tmp.rstrip('\x0a\x0d')
-                log.info('[%s] %s' % (timestamp, tmp))
-                self.data = ''
-
-
-    logging.basicConfig(level=logging.INFO,
-                        filename=filename,
-                        filemode='a')
-
-    sys.stdout = StreamLogger(sys.stdout)
-
-    print 'Logging to AIM logfile: %s' % filename
     
     
 def list_to_string(L):
