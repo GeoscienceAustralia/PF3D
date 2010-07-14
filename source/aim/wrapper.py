@@ -9,13 +9,13 @@ from utilities import check_presence_of_required_parameters, grd2asc
 from utilities import get_fall3d_home, get_tephradata, get_username, get_timestamp
 from utilities import convert_meteorological_winddirection_to_windfield
 from utilities import get_wind_direction, calculate_extrema, label_kml_contours
-from utilities import start_logging, list_to_string
+from utilities import list_to_string
+from logmodule import start_logging
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
 
 from osgeo import osr # GDAL libraries
-import logging
         
 class AIM:
 
@@ -112,30 +112,10 @@ class AIM:
         
         
         # Start logging to AIM log file
-        # Possible levels are
-        #logging.DEBUG
-        #logging.INFO
-        #logging.WARNING
-        #logging.ERROR
-        #logging.CRITICAL
         self.logfile = self.basepath + '_AIM.log'
-        
         start_logging(filename=self.logfile)
-        #logging.basicConfig(filename=self.logfile)
-        #logger = self.logger = logging.getLogger('AIM')
-        #logger.setLevel(logging.INFO)
-        
-        # From http://docs.python.org/library/logging.html - but doesn't work
-        #ch = logging.StreamHandler() # Control formatting of log messages
-        #ch.setLevel(logging.INFO)
-        #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        #ch.setFormatter(formatter)
-        #self.logger.addHandler(ch)
-        
-        #self.logger.critical('Logging to logfile %s' % self.logfile)
-        #self.logger.info('Info')        
-        #logging.critical('Info from singleton!')        
-        
+
+                        
         if verbose:
             header('Running AIM/Fall3d scenario %s' % self.scenario_name)
             print 'Writing to %s' % output_dir
@@ -971,29 +951,45 @@ class AIM:
         zlayers = self.params['wind_altitudes']
         nz=len(zlayers)
 
-        try:
-            infile = open(self.wind_profile)
-        except IOError:
-        
-            # Assume existence of Fall3d native <scenario_name>.profile
-            # and copy to work area
-        
-            native_profile = '%s.profile' % self.scenario_name
-            print('AIM wind profile %s could not be found.' % self.wind_profile)
-            print('Assuming existence of Fall3d profile named %s' % native_profile)
-            
-            s = 'cp %s %s' % (native_profile, self.output_dir)
-            print(s)
-            os.system(s)
+        # Look for native Fall3D profile first
+        native_profile = '%s.profile' % self.scenario_name        
+
+        if native_profile in os.listdir('.'):
+            print 'Using native Fall3d wind profile %s' % native_profile
+            s = 'cp %s %s' % (native_profile, self.output_dir)                
+            run(s)
             return
-            
-        lines = infile.readlines()
-        infile.close()
+        else:    
+            # Trying AIM wind profile
+            print 'Using AIM wind profile %s' % self.wind_profile
+            infile = open(self.wind_profile)
+            lines = infile.readlines()
+            infile.close()            
+        
+        #try:
+        #    infile = open(self.wind_profile)
+        #except IOError:
+        #
+        #    # Assume existence of Fall3d native <scenario_name>.profile
+        #    # and copy to work area
+        # 
+        #    native_profile = '%s.profile' % self.scenario_name
+        #    print('AIM wind profile %s could not be found.' % self.wind_profile)
+        #    print('Assuming existence of Fall3d profile named %s' % native_profile)
+        #    
+        #    s = 'cp %s %s' % (native_profile, self.output_dir)
+        #    print(s)
+        #    os.system(s)
+        #    return
+        #    
+        #lines = infile.readlines()
+        #infile.close()
 
         
         # Gather wind data for each time block
         timeblocks=[]
-        if lines[0].startswith('Constant'):
+        headline = lines[0].lower()
+        if headline.startswith('constant'):
             # Model will use these wind values throughout
             timeblock = []
             for line in lines[1:]:
