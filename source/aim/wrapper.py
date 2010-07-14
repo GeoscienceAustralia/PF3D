@@ -161,15 +161,15 @@ class AIM:
         try:
             infile = open(self.projection_file)        
         except:
-            msg = 'WARNING: Projection file %s could not be opened. '\
+            msg = 'Projection file %s could not be opened. '\
                 % self.projection_file
-            msg += 'This means that model results must be manually '
-            msg += 'georeferenced or the model run again with an '
+            msg += 'The topography file must have a projection file with '
+            msg += 'extension .prj to georeference the model outputs '
+            msg += 'correctly. The projection file is assumed to be '
             msg += 'ESRI WKT projection file '
             msg += 'named %s.' % self.projection_file
-            print msg
-            return
-            
+            raise Exception(msg)
+
         # Read in projection file
         self.WKT_projection = infile.read()
 
@@ -1133,7 +1133,7 @@ class AIM:
         
         #s = 'cp %s %s' % (self.topography_grid, audit_dir)
         #run(s, verbose=verbose)        
-        
+
         scenario_file = self.params['scenario_name'] + '.py'
         s = 'cp %s %s' % (scenario_file, audit_dir)
         run(s, verbose=verbose)                
