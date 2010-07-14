@@ -76,7 +76,7 @@ for x in [1,11,3,7]:
 
 import os, time
 
-from utilities import get_scenario_parameters, header
+from utilities import get_scenario_parameters, header, run, makedir
 from wrapper import AIM
 
         
@@ -205,3 +205,62 @@ def run_scenario(scenario, dircomment=None,
     # Return object in case user wants access to it 
     # (e.g. for further postprocessing)
     return aim
+
+    
+def run_multiple_windfields(scenario, 
+                            windfield_directory=None,
+                            dircomment=None,
+                            verbose=True):
+    """Run volcanic ash impact model for multiple wind fields.
+    
+    The wind fields are assumed to be in subfolder specified by windfield_directory, 
+    have the extension *.txt or *.profile and follow the format use with scenarios.
+    
+    """
+    
+    header('Hazard modelling usingc multiple wind fields from %s' % windfield_directory)    
+    
+    basename, _ = os.path.splitext(scenario)
+    aim_windfile = basename + '_wind.txt'    
+    fall3d_windfile = basename + '.profile'
+    
+    for file in os.listdir(windfield_directory):
+        
+        
+        
+        # Clean
+        s = '/bin/rm %s %s' % (aim_windfile, fall3d_windfile)
+        
+        # Determine format of windfile
+        if file.endswith('.txt'):
+            # Use AIM wind field
+            local_windfile = aim_windfile
+        elif file.endswith('.profile'):
+            # link Fall3d wind field to local file
+            local_windfile = fall3d_windfile
+        else:
+            # Do nothing
+            continue
+            
+        # Copy actual wind field to local file
+        windfield = '%s/%s' % (windfield_directory, file)
+        windname, _ = os.path.splitext(file)
+        header('Computing event using wind field: %s' % windfield)
+        s = 'cp %s %s' % (windfield, local_windfile)
+        run(s, verbose=False)             
+        print 
+        
+            
+        # Run scenario
+        aim = run_scenario(scenario,  
+                           timestamp_output=False,    
+                           dircomment=dircomment)
+
+        # Copy result file to output folder
+        hazard_output_folder = basename + '_hazard_outputs'
+        makedir(hazard_output_folder)
+        
+        result_file = aim.scenario_name + '.res.nc'    
+        newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
+        s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
+        run(s)
