@@ -179,6 +179,93 @@ def check_presence_of_required_parameters(params):
             msg += 'Consider updating "required_parameters.txt" or '
             msg += 'remove "%s" from scenario.' % parameter    
             raise Exception(msg)            
+
+            
+def get_layers_from_windfield(windfield):
+    """Get meteorological wind altitudes from Fall3d wind field
+    
+    Extension .profile assumed
+    Format is 
+    
+    
+    814924 9208168
+    20090101
+    0 9999999
+    17
+    64.0    3.50    0.20   26.65    3.51  266.73
+    751.0    7.00    1.70   22.05    7.20  256.35
+    1481.0   10.50    1.90   17.65   10.67  259.74
+    3119.0    8.90   -2.20   10.25    9.17  283.88
+    4383.0   10.50   -2.40    2.35   10.77  282.87
+    5837.0    7.00   -3.80   -5.15    7.96  298.50
+    7564.0    4.20    3.70  -14.75    5.60  228.62
+    9689.0    1.40    2.40  -27.65    2.78  210.26
+    10967.0   -4.10   -1.00  -39.65    4.22   76.29
+    12446.0   -5.90   -1.30  -54.35    6.04   77.57
+    14223.0  -13.20    1.40  -70.75   13.27   96.05
+    16566.0  -17.80   -5.40  -76.15   18.60   73.12
+    18575.0   -2.50    2.80  -78.35    3.75  138.24
+    20565.0    1.90    0.40  -65.25    1.94  258.11
+    23751.0    9.80   -0.10  -59.75    9.80  270.58
+    26306.0  -11.90    5.50  -55.75   13.11  114.81
+    30814.0  -28.10    2.20  -47.05   28.19   94.48
+
+    
+    """
+    
+    if not windfield.endswith('.profile'):
+        return
+        
+        
+    fid = open(windfield)
+    lines = fid.readlines()
+    fid.close()
+
+    altitudes = []
+    
+    for line in lines:
+        fields = line.split()
+        if len(fields) < 4:
+            continue
+        else:
+            altitudes.append(float(fields[0]))
+    
+    return altitudes
+
+            
+            
+def get_eruptiontime_from_windfield(windfield):
+    """Get eruption year, month and date from Fall3d wind field
+    
+    Extension .profile assumed
+    Format is 
+    
+    814924 9208168
+    20090101
+    0 9999999
+    17
+    71.0    1.50   -0.30   26.35    1.53  281.31
+    ....
+    
+    """
+    
+    if not windfield.endswith('.profile'):
+        return
+        
+        
+    fid = open(windfield)
+    lines = fid.readlines()
+    fid.close()
+
+    timestamp = lines[1]
+    
+    year = int(timestamp[:4])
+    month = int(timestamp[4:6])
+    date = int(timestamp[6:])
+    
+    return year, month, date
+    
+        
         
         
 def get_fall3d_home(verbose=True):

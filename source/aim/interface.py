@@ -76,7 +76,7 @@ for x in [1,11,3,7]:
 
 import os, time
 
-from utilities import get_scenario_parameters, header, run, makedir
+from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield
 from wrapper import AIM
 
         
@@ -251,8 +251,16 @@ def run_multiple_windfields(scenario,
         print 
         
             
-        # Run scenario
-        aim = run_scenario(scenario,  
+        # Get params from model script
+        params = get_scenario_parameters(scenario)    
+        
+        # Override or create parameters derived from native Fall3d wind field
+        params['wind_altitudes'] = get_layers_from_windfield(windfield)
+        params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)        
+        params['Meteorological_model'] = 'profile'
+
+        # Run scenario                        
+        aim = run_scenario(params,  
                            timestamp_output=False,    
                            dircomment=dircomment)
 
