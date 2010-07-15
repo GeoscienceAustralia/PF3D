@@ -96,8 +96,10 @@ class AIM:
                     s = 'chmod -R +w %s' % output_dir 
                     run(s, verbose=False)                    
                     s = '/bin/rm -rf %s' % output_dir
-                    run(s, verbose=False)        
-        
+                    try:
+                        run(s, verbose=False)        
+                    except e:
+                        print 'Could not clean up: %s ' % e
         
         
                                   
