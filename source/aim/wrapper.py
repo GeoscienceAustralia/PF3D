@@ -98,8 +98,8 @@ class AIM:
                     s = '/bin/rm -rf %s' % output_dir
                     try:
                         run(s, verbose=False)        
-                    except e:
-                        print 'Could not clean up: %s ' % e
+                    except:
+                        print 'Could not clean up'
         
         
                                   
