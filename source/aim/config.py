@@ -169,3 +169,14 @@ mod.objs = 'Fall3d.PUB.o runend.o setup.o inidat.o reagrn.o readat.PUB.o setpsi.
 modules['Sources_ser'] = mod
 
 
+#--------------------------------------------------------------------
+# Modules that are not part of the Fall3D distro, but included in AIM
+#--------------------------------------------------------------------
+
+# Post-processing
+mod = Module()
+mod.path = 'post-processing'
+mod.prog = 'nc2grd.exe'
+mod.mods = 'KindType.o Master.o InpOut.o Res_nc.o TimeFun.o'
+mod.objs = 'nc2grd.o runend.o openinp.o readat.o readres.o wrigrd.o'
+modules['nc2grd'] = mod
