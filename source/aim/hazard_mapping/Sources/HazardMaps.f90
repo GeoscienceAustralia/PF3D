@@ -214,8 +214,8 @@
 !
 !***  Reads and writes the points file
 !
-      call readpts
-      call wripts
+!      call readpts
+!      call wripts
 !
 !***  Ends the program
 !
