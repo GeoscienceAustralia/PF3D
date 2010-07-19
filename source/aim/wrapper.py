@@ -564,7 +564,7 @@ class AIM:
                     contours = self.params['Thickness_contours']                    
                     attribute_name = 'Thickness[%s]' % units                    
                 else:                 
-                    units = 'no unit'
+                    units = 'default' # Unit is implied by .inp file
                     contours = True # Default is fixed number of contours
                     
                 
@@ -887,25 +887,25 @@ class AIM:
         write_line(fid, 'UNITS = M                           (Possibilities: M)', indent=5)
         write_line(fid, 'MAP_TOTAL_LOAD = yes                (Possibilities: YES/NO)', indent=2)
         write_line(fid, 'UNITS = KG/M2                       (Possibilities: KG/M2)', indent=5)
-        write_line(fid, 'MAP_CLASS_LOAD = no                 (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_CLASS_LOAD = yes                (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = KG/M2                       (Possibilities: KG/M2)',  indent=5)
         write_line(fid, 'MAP_DEPOSIT_THICKNESS = yes         (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = %s                          (Possibilities: MM/CM/M)' % Thickness_units.upper(),  indent=5)
         write_line(fid, 'COMPACTATION_FACTOR = 0.7',  indent=5)
-        write_line(fid, 'MAP_COLUMN_MASS = no                (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_COLUMN_MASS = yes               (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M2                       (Possibilities: GR/M2)',  indent=5)
-        write_line(fid, 'MAP_FLIGHT_LEVEL = no               (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_FLIGHT_LEVEL = yes              (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
-        write_line(fid, 'MAP_CONCE_GROUND = no               (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_CONCE_GROUND = yes              (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
-        write_line(fid, 'MAP_PMxx_GROUND = no                (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_PMxx_GROUND = yes               (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
-        write_line(fid, 'MAP_PMxx_CUMMUL = no                (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_PMxx_CUMMUL = yes               (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M2                       (Possibilities: GR/M2)',  indent=5)
-        write_line(fid, 'MAP_TOTAL_CONCENTRATION = no        (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_TOTAL_CONCENTRATION = yes       (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
         write_line(fid, 'Z_CUTS_(M)       = 2000. 4000. 6000.',  indent=5)
-        write_line(fid, 'MAP_CLASS_CONCENTRATION = no        (Possibilities: YES/NO)',  indent=2)
+        write_line(fid, 'MAP_CLASS_CONCENTRATION = yes       (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M3                       (Possibilities: GR/M3)',  indent=5)
         
         
