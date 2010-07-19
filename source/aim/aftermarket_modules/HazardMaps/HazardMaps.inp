@@ -1,0 +1,27 @@
+!  This is input file for HazardMaps program
+!  It reads Fall3d netCDF outputs and computes the
+!  maps for diffetent variables of interest
+!
+! LOAD_VALUES               in kg/m2
+! FL_VALUES (concentration) in gr/m3
+! 
+COORDINATES
+  LON_VENT = 14.4 
+  LAT_VENT = 40.8 
+POSTPROCESS
+  ISOCHRONES = yes
+  LOAD  = yes
+  FL050 = no
+  FL100 = no
+  FL150 = no
+  FL200 = no
+  FL250 = no
+  FL300 = no
+VALUES
+  LOAD_VALUES = 0.1 1. 
+  FL_VALUES   = 0.0002 0.002
+FILES
+ '/Users/arnaufolch/Documents/Software/Fall3d-6.0/Utilities/HazardMaps/Test/Vesu-001.res.nc'
+ '/Users/arnaufolch/Documents/Software/Fall3d-6.0/Utilities/HazardMaps/Test/Vesu-002.res.nc'
+ '/Users/arnaufolch/Documents/Software/Fall3d-6.0/Utilities/HazardMaps/Test/Vesu-003.res.nc'
+END_FILES

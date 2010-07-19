@@ -1,0 +1,20 @@
+!  This is input file for nc2prof program
+!  It reads netCDF re-analysis fils and 
+!  extracts a profile at the specified location
+! 
+LOCATION
+  COORDINATES = UTM   (UTM or LON-LAT)
+  LON_VENT = 107.83
+  LAT_VENT = -7.13 
+  X_VENT = 812613
+  Y_VENT = 9210921
+EXTRACT_FROM
+  YEAR  = 2009
+  MONTH = 1
+  DAY   = 1
+  HOUR  = 0 
+EXTRACT_TO
+  YEAR  = 2009
+  MONTH = 12
+  DAY   = 31
+  HOUR  = 18
