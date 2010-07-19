@@ -564,6 +564,7 @@ class AIM:
                     contours = self.params['Thickness_contours']                    
                     attribute_name = 'Thickness[%s]' % units                    
                 else:                 
+                    attribute_name = 'Value'
                     units = 'default' # Unit is implied by .inp file
                     contours = True # Default is fixed number of contours
                     
