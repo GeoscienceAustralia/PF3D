@@ -315,38 +315,33 @@ if __name__ == '__main__':
         mod = modules[program]
         
         # Move sources into Fall3d structure
-        source_dir = os.path.join(cwd, program) 
-        target_dir = os.path.join(FALL3DHOME, fall3d_distro, 'Utilities', program, 'Sources')
-        makedir(target_dir)
-        run('mv %s/* %s' % (source_dir, target_dir), verbose=False)
+        origin_dir = os.path.join(cwd, program) 
+        target_dir = os.path.join(FALL3DHOME, fall3d_distro, 'Utilities', program)
+        source_dir = os.path.join(target_dir, 'Sources')
+        makedir(source_dir)
+        run('cp %s/* %s' % (origin_dir, source_dir), verbose=False)
             
         
         if mod.file is None:
             # Generate standard makefile
-            print os.getcwd(), cwd
-            fid = open(os.path.join(target_dir, 'Makefile'), 'w')
+            fid = open(os.path.join(source_dir, 'Makefile'), 'w')
             fid.write(makefile_content % (fall3dpath, make_configuration_filename, mod.mods, mod.objs, mod.prog))
             fid.close()
             
         sys.stdout.write('Compiling %s: ' % program)
-        run('cd %s; make' % target_dir, 
+        run('cd %s; make' % source_dir, 
             stdout=os.path.join(cwd, 'make_%s.stdout' % program), 
             stderr=os.path.join(cwd, 'make_%s.stderr' % program), 
-            verbose=False)
+            verbose=True)
             
             
         #-----------------------------
         # Test presence of executables
         #-----------------------------
         
-        p = mod.path.split(os.sep)
-        # Strip last dir off path as that is where makefiles put targets
-        if len(p) > 1:
-            p = os.path.join(*p[:-1])
-        else:
-            p = ''
-
-        f = os.path.join(fall3dpath, p, mod.prog)     
+        print 'Target', target_dir
+        f = os.path.join(target_dir, mod.prog)     
+        print 'F', f
         if os.path.isfile(f):
             res = 'OK'
         else:
