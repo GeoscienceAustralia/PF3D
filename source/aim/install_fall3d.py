@@ -310,12 +310,12 @@ if __name__ == '__main__':
     #----------------------------------------------------------------------------
     
     # Generate and run specific makefiles
-    for program in ['nc2grd']:
+    for program in ['nc2grd', 'nc2prof', 'HazardMaps']:
     
         mod = modules[program]
         
         # Move sources into Fall3d structure
-        origin_dir = os.path.join(cwd, program) 
+        origin_dir = os.path.join(cwd, mod.path) 
         target_dir = os.path.join(FALL3DHOME, fall3d_distro, 'Utilities', program)
         source_dir = os.path.join(target_dir, 'Sources')
         makedir(source_dir)
@@ -332,16 +332,13 @@ if __name__ == '__main__':
         run('cd %s; make' % source_dir, 
             stdout=os.path.join(cwd, 'make_%s.stdout' % program), 
             stderr=os.path.join(cwd, 'make_%s.stderr' % program), 
-            verbose=True)
+            verbose=False)
             
             
         #-----------------------------
         # Test presence of executables
         #-----------------------------
-        
-        print 'Target', target_dir
         f = os.path.join(target_dir, mod.prog)     
-        print 'F', f
         if os.path.isfile(f):
             res = 'OK'
         else:
@@ -349,80 +346,6 @@ if __name__ == '__main__':
             
         print('%s' % res)
 
-    
-    import sys; sys.exit()     
-            
-                
-      
-    ## Write new Makefile relative to install dir (CWD)
-    #post_proc_path = os.path.join(cwd, 'post-processing')
-    #print post_proc_path
-    #fid = open(os.path.join(post_proc_path, 'Makefile'), 'w')
-    #mods = 'KindType.o Master.o InpOut.o Res_nc.o TimeFun.o'
-    #objs = 'nc2grd.o runend.o openinp.o readat.o readres.o wrigrd.o'
-    #prog = 'nc2grd.exe'
-    #fid.write(makefile_content % (fall3dpath, make_configuration_filename, mods, objs, prog))
-    #fid.close()
-    #    
-    #sys.stdout.write('Compiling %s: ' % prog)        
-    #run('cd %s; make' % post_proc_path, 
-    #    stdout=os.path.join(cwd, 'make_%s.stdout' % prog), 
-    #    stderr=os.path.join(cwd, 'make_%s.stderr' % prog), 
-    #    verbose=False)
-    
-    #
-    #post_dir = os.path.join(os.path.join(FALL3DHOME, fall3d_distro, 'Utilities', 'nc2grd'))
-    #run('mkdir %s' % post_dir, verbose=False)
-    #run('mv %s %s' % (os.path.join(cwd, prog), post_dir), verbose=False)
-
-    f = os.path.join(post_dir, prog)     
-    if os.path.isfile(f):
-        res = 'OK'
-    else:
-        res = 'FAILED'
-        
-    print('%s' % res)
-
-    
-    
-    
-    
-    #--------------------------------------------------------------------
-    # Compile and install nc2prof source code which is not part of Fall3d
-    #--------------------------------------------------------------------
-    
-    
-    # Write new Makefile relative to install dir (CWD)
-    nc2prof_path = os.path.join(cwd, 'nc2prof')
-    print 'Profile path', nc2prof_path
-    fid = open(os.path.join(nc2prof_path, 'Makefile'), 'w')
-    mods = 'KindType.o Master.o InpOut.o TimeFun.o'
-    objs = 'nc2prof.o openinp.o runend.o readinp.o readres0.o readres.o wripro.o'
-    prog = 'nc2prof.exe'
-    fid.write(makefile_content % (fall3dpath, make_configuration_filename, mods, objs, prog))
-    fid.close()
-        
-    sys.stdout.write('Compiling %s: ' % prog)                
-    run('cd %s; make' % nc2prof_path, 
-        stdout=os.path.join(cwd, 'make_%s.stdout' % prog), 
-        stderr=os.path.join(cwd, 'make_%s.stderr' % prog), 
-        verbose=False)
-    
-    nc2prof_dir = os.path.join(os.path.join(FALL3DHOME, fall3d_distro, 'Utilities', 'nc2prof'))
-    run('mkdir %s' % nc2prof_dir)
-    run('mv %s %s' % (os.path.join(cwd, prog), nc2prof_dir))
-
-    f = os.path.join(nc2prof_dir, prog)     
-    if os.path.isfile(f):
-        res = 'OK'
-    else:
-        res = 'FAILED'
-        
-    print('%s' % res)
-    
-    
-
-    
     
     
     #--------------------------------------------------------

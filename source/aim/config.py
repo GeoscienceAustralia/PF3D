@@ -171,12 +171,32 @@ modules['Sources_ser'] = mod
 
 #--------------------------------------------------------------------
 # Modules that are not part of the Fall3D distro, but included in AIM
+# These modules are assumed to sit in the AIM directory
 #--------------------------------------------------------------------
 
-# Post-processing
+# NetCDF to Surfer Grid format
 mod = Module()
-mod.path = 'nc2grd'
+mod.path = 'aftermarket_modules/nc2grd'
 mod.prog = 'nc2grd.exe'
 mod.mods = 'KindType.o Master.o InpOut.o Res_nc.o TimeFun.o'
 mod.objs = 'nc2grd.o runend.o openinp.o readat.o readres.o wrigrd.o'
 modules['nc2grd'] = mod
+
+
+# Convert NCEP data to wind profile
+mod = Module()
+mod.path = 'aftermarket_modules/nc2prof'
+mod.prog = 'nc2prof.exe'
+mod.mods = 'KindType.o Master.o InpOut.o TimeFun.o'
+mod.objs = 'nc2prof.o openinp.o runend.o readinp.o readres0.o readres.o wripro.o'
+modules['nc2prof'] = mod
+
+
+# Hazard mapping module aggrating multiple result files
+mod = Module()
+mod.path = 'aftermarket_modules/HazardMaps'
+mod.prog = 'HazardMapping.exe'
+mod.mods = 'KindType.o InpOut.o Master.o Res_nc.o'
+mod.objs = 'HazardMaps.o runend.o openinp.o readinp.o readres.o wrires.o readpts.o wripts.o'
+modules['HazardMaps'] = mod
+
