@@ -303,20 +303,6 @@ if __name__ == '__main__':
             
         print('%s' % res)
 
-    #--------------------------------------------------------
-    # Patch the Fall3d scripts to remove hardwired references (FIXME: unnecessary)
-    #--------------------------------------------------------
-
-    os.chdir(os.path.join(FALL3DHOME, fall3d_distro, 'Scripts'))
-    for program in ['SetDbs', 'SetGrn', 'SetSrc', 'manager', 'Fall3d_Pub']:
-        
-        # Patch include statement
-        replace_string_in_file('Script-' + program, 
-                               'set HOME=/Users/arnaufolch/Documents/Software/Fall3d-6.0/PUB/Fall3d-6.2-PUB', 
-                               'set HOME=%s' % os.path.join(FALL3DHOME, fall3d_distro),
-                               verbose=False)
-
-        
 
         
     #----------------------------------------------------------------------------
@@ -328,14 +314,22 @@ if __name__ == '__main__':
     
         mod = modules[program]
         
+        # Move sources into Fall3d structure
+        source_dir = os.path.join(cwd, program) 
+        target_dir = os.path.join(FALL3DHOME, fall3d_distro, 'Utilities', program, 'Sources')
+        makedir(target_dir)
+        run('mv %s/* %s' % (source_dir, target_dir), verbose=False)
+            
+        
         if mod.file is None:
             # Generate standard makefile
-            fid = open(os.path.join(mod.path, 'Makefile'), 'w')
+            print os.getcwd(), cwd
+            fid = open(os.path.join(target_dir, 'Makefile'), 'w')
             fid.write(makefile_content % (fall3dpath, make_configuration_filename, mod.mods, mod.objs, mod.prog))
             fid.close()
             
         sys.stdout.write('Compiling %s: ' % program)
-        run('cd %s; make' % mod.path, 
+        run('cd %s; make' % target_dir, 
             stdout=os.path.join(cwd, 'make_%s.stdout' % program), 
             stderr=os.path.join(cwd, 'make_%s.stderr' % program), 
             verbose=False)
@@ -359,12 +353,6 @@ if __name__ == '__main__':
             res = 'FAILED'
             
         print('%s' % res)
-
-        # Move executable to Fall3d structure    
-        target_dir = os.path.join(os.path.join(FALL3DHOME, fall3d_distro, 'Utilities', program))
-        run('mkdir %s' % target_dir, verbose=False)
-        run('mv %s %s' % (os.path.join(cwd, prog), target_dir), verbose=False)
-            
 
     
     import sys; sys.exit()     
@@ -438,7 +426,25 @@ if __name__ == '__main__':
     print('%s' % res)
     
     
-                
+
+    
+    
+    
+    #--------------------------------------------------------
+    # Patch the Fall3d scripts to remove hardwired references (FIXME: unnecessary)
+    #--------------------------------------------------------
+
+    os.chdir(os.path.join(FALL3DHOME, fall3d_distro, 'Scripts'))
+    for program in ['SetDbs', 'SetGrn', 'SetSrc', 'manager', 'Fall3d_Pub']:
+        
+        # Patch include statement
+        replace_string_in_file('Script-' + program, 
+                               'set HOME=/Users/arnaufolch/Documents/Software/Fall3d-6.0/PUB/Fall3d-6.2-PUB', 
+                               'set HOME=%s' % os.path.join(FALL3DHOME, fall3d_distro),
+                               verbose=False)
+
+        
+                    
         
     #header('Test the installation and try the examples')
     #print 'To test the installation, go to %s and run' % os.path.join(AIMHOME, 

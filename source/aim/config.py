@@ -175,7 +175,7 @@ modules['Sources_ser'] = mod
 
 # Post-processing
 mod = Module()
-mod.path = 'post-processing'
+mod.path = 'nc2grd'
 mod.prog = 'nc2grd.exe'
 mod.mods = 'KindType.o Master.o InpOut.o Res_nc.o TimeFun.o'
 mod.objs = 'nc2grd.o runend.o openinp.o readat.o readres.o wrigrd.o'
