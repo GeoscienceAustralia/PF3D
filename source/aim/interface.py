@@ -190,9 +190,9 @@ def run_scenario(scenario, dircomment=None,
  
         try:
             target = os.readlink(aim.symlink)                      
-        except e:
-            header('WARNING: Shortcut %s does not appear to be working. Use real directory %s instead.' % (symlink, target))
-            print 'Error message was', e
+        except:
+            header('WARNING: Shortcut %s does not appear to be working. Use real directory %s instead.' % (aim.symlink, target))
+            #print 'Error message was', e
         else:    
             
             if target == aim.output_dir:              
