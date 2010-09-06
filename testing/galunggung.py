@@ -28,7 +28,17 @@ End_time_of_run = 5                             # Hours after 00
 X_coordinate_of_vent = 176267                   # UTM zone implied by topography projection 
 Y_coordinate_of_vent = 9197056                  # UTM zone implied by topography projection 
 
-Z_layers = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+# Vertical discretisation for model domain
+Z_min = 0.0
+Z_max = 10000
+Z_increment = 1000
+
+# Select meteorological input type
+#Meteorological_model = 'ncep'                 # profile, ncep, ...
+Meteorological_model = 'profile'                 # profile, ncep, ...
+
+wind_altitudes = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -86,10 +96,13 @@ Load_contours = 2000                            # True, False, number or list of
 
 # Run model using specified parameters
 if __name__ == '__main__':
+    import time, random
     from aim import run_scenario
-    run_scenario(__file__, 
-                 timestamp_output=True,    
-                 dircomment=Eruption_comment)
+    
+    for i in range(100):
+        run_scenario(__file__, 
+                     timestamp_output=True,    
+                     dircomment=Eruption_comment)
 
 
  

@@ -95,10 +95,18 @@ Load_contours = 2000                            # True, False, number or list of
 
 # Run model using specified parameters
 if __name__ == '__main__':
+
+    import time, random
     from aim import run_scenario
-    run_scenario(__file__, 
-                 timestamp_output=True,    
-                 dircomment=Eruption_comment)
+    
+    for i in range(100):
+        delay = random.randint(10,400)
+        print delay
+        time.sleep(delay)
+                
+        run_scenario(__file__, 
+                     timestamp_output=True,    
+                     dircomment=Eruption_comment)
 
 
  

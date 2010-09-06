@@ -28,7 +28,17 @@ End_time_of_run = 6                             # Hours after 00
 X_coordinate_of_vent = 609511                   # UTM zone implied by topography projection 
 Y_coordinate_of_vent = 9088892                  # UTM zone implied by topography projection 
 
-Z_layers = [0, 10000, 30000, 50000]             # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+# Vertical discretisation for model domain
+Z_min = 0.0
+Z_max = 50000
+Z_increment = 10000
+
+# Select meteorological input type
+#Meteorological_model = 'ncep'                 # profile, ncep, ...
+Meteorological_model = 'profile'                 # profile, ncep, ...
+
+wind_altitudes = [0, 10000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
