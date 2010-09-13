@@ -76,7 +76,8 @@ for x in [1,11,3,7]:
 
 import os, time
 
-from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield
+
+from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield, get_fall3d_home
 from wrapper import AIM
 
         
@@ -191,7 +192,7 @@ def run_scenario(scenario, dircomment=None,
         try:
             target = os.readlink(aim.symlink)                      
         except:
-            header('WARNING: Shortcut %s does not appear to be working. Use real directory %s instead.' % (aim.symlink, target))
+            header('WARNING: Shortcut %s does not appear to be working. Use real directory instead.' % aim.symlink)
             #print 'Error message was', e
         else:    
             
@@ -206,6 +207,81 @@ def run_scenario(scenario, dircomment=None,
     # (e.g. for further postprocessing)
     return aim
 
+
+    
+def run_nc2prof(verbose=True):
+    """Run nc2prof - extract wind profiles from NCEP data
+        
+    Requires 
+        - input file
+        - NCEP wind files 
+           TMP.nc
+           HGT.nc
+           UGRD.nc
+           VGRD.nc
+    """
+        
+    # FIXME: Perhaps include into AIM class (somehow)
+    
+    Fall3d_dir = get_fall3d_home()
+    utilities_dir = os.path.join(Fall3d_dir, 'Utilities')        
+    executable = os.path.join(utilities_dir, 'nc2prof', 'nc2prof.exe')
+        
+    if verbose:
+        header('Running nc2prof')
+
+               
+    cmd = '%s ' % executable
+    
+    logfile = 'nc2prof.log'
+    run(cmd, verbose=verbose)
+        
+    
+def generate_wind_profiles_from_ncep(scenario, verbose=True):
+    """Generate windprofiles from NCEP data.
+    
+    The results are stored in a temporary directory specified in the variable windfield_directory
+    Any previous data in that will be destroyed.
+    """
+    
+    # Get params from model script
+    params = get_scenario_parameters(scenario)    
+    
+    windfield_directory = params['windfield_directory']
+    
+    s = '/bin/rm -rf %s' % windfield_directory
+    run(s)
+    makedir(windfield_directory)
+    
+    # Link NCEP files to their original location        
+    NCEP_dir = params['NCEP_dir']
+    
+    for var in ['TMP', 'HGT', 'VGRD', 'UGRD']:
+        s = 'cd %s; ln -s %s/%s.nc' % (windfield_directory, NCEP_dir, var)
+        run(s, verbose=True)
+    
+    # Generate input file
+    fid = open('%s/nc2prof.inp' % windfield_directory, 'w')
+    fid.write('COORDINATES\n')
+    fid.write('  LON_VENT = %f\n' % params['vent_longitude'])
+    fid.write('  LAT_VENT = %f\n' % params['vent_latitude'])    
+    fid.write('EXTRACT_FROM\n')
+    fid.write('  YEAR = %i\n' % params['start_year'])    
+    fid.write('  MONTH = %i\n' % params['start_month'])        
+    fid.write('  DAY = %i\n' % params['start_day'])        
+    fid.write('  HOUR = %i\n' % params['start_hour'])            
+    fid.write('EXTRACT_TO\n')
+    fid.write('  YEAR = %i\n' % params['end_year'])    
+    fid.write('  MONTH = %i\n' % params['end_month'])        
+    fid.write('  DAY = %i\n' % params['end_day'])        
+    fid.write('  HOUR = %i\n' % params['end_hour'])                
+    fid.close()
+
+    # Run nc2prof to extract profiles
+    os.chdir(windfield_directory)
+    run_nc2prof(verbose=verbose)        
+    
+    print 'Wind fields generated in directory: %s' % windfield_directory
     
 def run_multiple_windfields(scenario, 
                             windfield_directory=None,
@@ -218,7 +294,7 @@ def run_multiple_windfields(scenario,
     
     """
     
-    header('Hazard modelling usingc multiple wind fields from %s' % windfield_directory)    
+    header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
     
     basename, _ = os.path.splitext(scenario)
     aim_windfile = basename + '_wind.txt'    
