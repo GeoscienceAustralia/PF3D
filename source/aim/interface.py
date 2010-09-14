@@ -75,10 +75,11 @@ for x in [1,11,3,7]:
 """
 
 import os, time
-
+import numpy
 
 from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield, get_fall3d_home
 from wrapper import AIM
+from coordinate_transforms import UTMtoLL, redfearn
 
         
 def run_scenario(scenario, dircomment=None,
@@ -300,6 +301,30 @@ def generate_wind_profiles_from_ncep(scenario, verbose=True):
     
     windfield_directory = params['windfield_directory']
     
+    
+    # Convert UTM to latitude and longitude
+    if params['vent_hemisphere'].upper() == 'S':
+        is_southern_hemisphere = True
+    elif params['vent_hemisphere'].upper() == 'N':        
+        is_southern_hemisphere = False
+    else:
+        msg = 'Parameter vent_hemisphere must be either N or S. I got %s' % params['vent_hemisphere']
+        raise Exception(msg)
+        
+    
+    lat, lon = UTMtoLL(params['vent_northing'],
+                       params['vent_easting'],
+                       params['vent_zone'],
+                       is_southern_hemisphere)
+    
+    #print 'Lat, Lon', lat, lon
+    #_, vent_location_easting, vent_location_northing = redfearn(lat, lon)
+    #print vent_location_easting, params['vent_easting']
+    #print vent_location_northing, params['vent_northing']    
+    
+    
+        
+    # Clean up
     s = '/bin/rm -rf %s' % windfield_directory
     run(s)
     makedir(windfield_directory)
@@ -314,8 +339,8 @@ def generate_wind_profiles_from_ncep(scenario, verbose=True):
     # Generate input file
     fid = open('%s/nc2prof.inp' % windfield_directory, 'w')
     fid.write('COORDINATES\n')
-    fid.write('  LON_VENT = %f\n' % params['vent_longitude'])
-    fid.write('  LAT_VENT = %f\n' % params['vent_latitude'])    
+    fid.write('  LON_VENT = %f\n' % lon)
+    fid.write('  LAT_VENT = %f\n' % lat)    
     fid.write('EXTRACT_FROM\n')
     fid.write('  YEAR = %i\n' % params['start_year'])    
     fid.write('  MONTH = %i\n' % params['start_month'])        
@@ -329,20 +354,20 @@ def generate_wind_profiles_from_ncep(scenario, verbose=True):
     fid.close()
 
     # Run nc2prof to extract profiles
-    print 'Generating windfields'
+    print 'Generating windfields for geographic vent location (%f, %f)' % (lon, lat)
     run_nc2prof(windfield_directory, verbose=False)        
     
     
     # Patch windprofiles to have the correct vent location in UTM coordinates
-    from coordinate_transforms import redfearn
-    _, vent_location_easting, vent_location_northing = redfearn(params['vent_latitude'], params['vent_longitude'])
-
-    print 'Patching windfields with location %i, %i' % (vent_location_easting, vent_location_northing)
+    #from coordinate_transforms import redfearn
+    #_, vent_location_easting, vent_location_northing = redfearn(lat, lon)
+    
+    print 'Patching windfields with UTM vent location (%i, %i)' % (params['vent_easting'], params['vent_northing']) 
     for x in os.listdir(windfield_directory):
         if x.endswith('profile'):
             set_vent_location_and_timeblocks_in_windfield(os.path.join(windfield_directory, x),
-                                                          vent_location_easting, 
-                                                          vent_location_northing,
+                                                          params['vent_easting'], 
+                                                          params['vent_northing'],
                                                           verbose=False)
 
     

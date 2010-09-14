@@ -2,8 +2,10 @@
 """
 
 # Vent location in geographic coordinates (decimal degrees)
-vent_longitude = 107.8510
-vent_latitude = -7.1547
+vent_easting = 814924
+vent_northing = 9208168
+vent_zone = 48
+vent_hemisphere = 'S'
 
 # Time to start extraction
 start_year = 2009
