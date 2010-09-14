@@ -1,7 +1,7 @@
 """Test script for aim to exctract wind profiles from NCEP1 data
 """
 
-# Vent location in geographic coordinates
+# Vent location in geographic coordinates (decimal degrees)
 vent_longitude = 107.83
 vent_latitude = -7.13
 
