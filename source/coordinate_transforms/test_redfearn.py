@@ -115,6 +115,16 @@ class TestCase(unittest.TestCase):
         assert num.allclose(easting, 308728.009)
         assert num.allclose(northing, 6180432.601)
 
+ def test_UTM_6(self):
+        # Test 6 (Guntur) data from Google Earth
+
+        zone, easting, northing = redfearn(-7.1547, 107.8510)
+
+        assert zone == 48
+        assert num.allclose(easting, 814917.82)
+        assert num.allclose(northing, 9208173.06)
+        
+               
     def test_UTM_6_nonstandard_projection(self):
         """test_UTM_6_nonstandard_projection
 

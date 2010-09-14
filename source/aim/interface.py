@@ -233,11 +233,11 @@ def run_nc2prof(windfield_directory, verbose=True):
                
     cmd = 'cd %s; %s ' % (windfield_directory, executable)
     
-    #logfile = 'nc2prof.log'
-    run(cmd, verbose=verbose)
+    logfile = 'run_nc2prof.log'
+    run(cmd, verbose=verbose, stdout=logfile, stderr='/dev/null')
         
         
-def set_vent_location_and_timeblocks_in_windfield(filename, vent_location_easting, vent_location_northing):
+def set_vent_location_and_timeblocks_in_windfield(filename, vent_location_easting, vent_location_northing, verbose=False):
     """Update vent location and time blocks in seconds based on hour number in filename:
 
     Vent location in UTM coordinates is set as specified in the arguments. UTM zone is implied by the context.
@@ -254,7 +254,8 @@ def set_vent_location_and_timeblocks_in_windfield(filename, vent_location_eastin
     
     """
     
-    print 'Patching', filename
+    if verbose:
+        print 'Patching', filename
     
     # Extract hour from filename
     basename, ext = os.path.splitext(filename)
@@ -263,9 +264,10 @@ def set_vent_location_and_timeblocks_in_windfield(filename, vent_location_eastin
     
     startsec = starthour * 3600
     endsec = endhour * 3600    
-    print '   Vent location: %s %s' % (vent_location_easting, vent_location_northing)
-    print '   Interval start: %i' % startsec  
-    print '   Interval end:   %i' % endsec      
+    if verbose:
+        print '   Vent location: %s %s' % (vent_location_easting, vent_location_northing)
+        print '   Interval start: %i' % startsec  
+        print '   Interval end:   %i' % endsec      
 
     # Read file
     fid = open(filename)
@@ -307,7 +309,7 @@ def generate_wind_profiles_from_ncep(scenario, verbose=True):
     
     for var in ['TMP', 'HGT', 'VGRD', 'UGRD']:
         s = 'cd %s; ln -s %s/%s.nc' % (windfield_directory, NCEP_dir, var)
-        run(s, verbose=True)
+        run(s, verbose=False)
     
     # Generate input file
     fid = open('%s/nc2prof.inp' % windfield_directory, 'w')
@@ -327,18 +329,21 @@ def generate_wind_profiles_from_ncep(scenario, verbose=True):
     fid.close()
 
     # Run nc2prof to extract profiles
-    run_nc2prof(windfield_directory, verbose=verbose)        
+    print 'Generating windfields'
+    run_nc2prof(windfield_directory, verbose=False)        
     
     
     # Patch windprofiles to have the correct vent location in UTM coordinates
     from coordinate_transforms import redfearn
     _, vent_location_easting, vent_location_northing = redfearn(params['vent_latitude'], params['vent_longitude'])
-    
+
+    print 'Patching windfields with location %i, %i' % (vent_location_easting, vent_location_northing)
     for x in os.listdir(windfield_directory):
         if x.endswith('profile'):
             set_vent_location_and_timeblocks_in_windfield(os.path.join(windfield_directory, x),
                                                           vent_location_easting, 
-                                                          vent_location_northing)
+                                                          vent_location_northing,
+                                                          verbose=False)
 
     
     print 'Wind fields generated in directory: %s' % windfield_directory
