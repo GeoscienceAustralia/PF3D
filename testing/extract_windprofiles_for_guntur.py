@@ -1,7 +1,7 @@
 """Test script for aim to exctract wind profiles from NCEP1 data
 """
 
-# Vent location in geographic coordinates (decimal degrees)
+# Vent location in geographic coordinates (decimal degrees) of the Guntur crater
 vent_easting = 814924
 vent_northing = 9208168
 vent_zone = 48
@@ -23,7 +23,7 @@ end_hour = 18
 NCEP_dir = '/model_area/tephra/3D_wind/NCEP1/hazardmap'
 
 # Location of generated windprofiles
-windfield_directory = 'windfields'
+windfield_directory = 'guntur_wind'
 
 #--------------------------------------
 if __name__ == '__main__':
