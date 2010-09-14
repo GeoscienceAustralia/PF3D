@@ -238,10 +238,29 @@ def run_nc2prof(windfield_directory, verbose=True):
     run(cmd, verbose=verbose, stdout=logfile, stderr='/dev/null')
         
         
-def set_vent_location_and_timeblocks_in_windfield(filename, vent_location_easting, vent_location_northing, verbose=False):
-    """Update vent location and time blocks in seconds based on hour number in filename:
+def set_vent_location_in_windfield(filename, vent_location_easting, vent_location_northing, verbose=False):
+    """Update vent location in UTM coordinates is set as specified in the arguments. UTM zone is implied by the context.
+    """
+    
+    if verbose:
+        print 'Patching', filename
+    
+    # Read file
+    fid = open(filename)
+    lines = fid.readlines()
+    fid.close()
+    
+    # Replace vent location header (line 1) in file        
+    lines[0] = '%s %s\n' % (vent_location_easting, vent_location_northing)
 
-    Vent location in UTM coordinates is set as specified in the arguments. UTM zone is implied by the context.
+    fid = open(filename, 'w')
+    for line in lines:
+        fid.write(line)
+    fid.close()
+        
+        
+def set_timeblocks_in_windfield(filename, verbose=False):
+    """Update time blocks in seconds based on hour number in filename:
 
 
     Time blocks are updated based on the filename:
@@ -266,7 +285,6 @@ def set_vent_location_and_timeblocks_in_windfield(filename, vent_location_eastin
     startsec = starthour * 3600
     endsec = endhour * 3600    
     if verbose:
-        print '   Vent location: %s %s' % (vent_location_easting, vent_location_northing)
         print '   Interval start: %i' % startsec  
         print '   Interval end:   %i' % endsec      
 
@@ -275,10 +293,6 @@ def set_vent_location_and_timeblocks_in_windfield(filename, vent_location_eastin
     lines = fid.readlines()
     fid.close()
     
-    # Replace vent location header (line 1) in file        
-    lines[0] = '%s %s\n' % (vent_location_easting, vent_location_northing)
-    
-        
     # Replace time block header (line 3) in file    
     lines[2] = '%i %i\n' % (startsec, endsec)
     fid = open(filename, 'w')
@@ -289,7 +303,7 @@ def set_vent_location_and_timeblocks_in_windfield(filename, vent_location_eastin
         
         
     
-def generate_wind_profiles_from_ncep(scenario, verbose=True):
+def generate_wind_profiles_from_ncep(scenario, update_timeblocks=False, verbose=True):
     """Generate windprofiles from NCEP data.
     
     The results are stored in a temporary directory specified in the variable windfield_directory
@@ -365,10 +379,14 @@ def generate_wind_profiles_from_ncep(scenario, verbose=True):
     print 'Patching windfields with UTM vent location (%i, %i)' % (params['vent_easting'], params['vent_northing']) 
     for x in os.listdir(windfield_directory):
         if x.endswith('profile'):
-            set_vent_location_and_timeblocks_in_windfield(os.path.join(windfield_directory, x),
-                                                          params['vent_easting'], 
-                                                          params['vent_northing'],
-                                                          verbose=False)
+            set_vent_location_in_windfield(os.path.join(windfield_directory, x),
+                                           params['vent_easting'], 
+                                           params['vent_northing'],
+                                           verbose=False)            
+            if update_timeblocks:
+                set_timeblocks_in_windfield(os.path.join(windfield_directory, x),
+                                            verbose=False)
+                                           
 
     
     print 'Wind fields generated in directory: %s' % windfield_directory
