@@ -8,6 +8,12 @@ Run number:1
 
 Eruption observation details: 
 
+To run in parallel you can do something like this
+
+mpirun -x FALL3DHOME -hostfile /etc/mpihosts -np 8 python guntur_multiple_wind.py
+or
+mpirun -x FALL3DHOME -hostfile /etc/mpihosts -host node17,node11 python guntur_multiple_wind.py
+
 """
 
 # Short eruption comment to appear in output directory.
