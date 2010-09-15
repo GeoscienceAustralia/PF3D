@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = ''
+Eruption_comment = 'parallel'
 
 # Time (Volcanological input file)
 Eruption_Year = 2009                            # YYYY  
@@ -95,10 +95,10 @@ Load_contours = 2000                            # True, False, number or list of
 
 # Run model using specified parameters
 if __name__ == '__main__':
-    from aim import run_multiple_windfields
-    run_multiple_windfields(__file__, 
-                            windfield_directory='guntur_wind',
-                            dircomment=Eruption_comment)
+    from aim import run_multiple_windfields_parallel
+    run_multiple_windfields_parallel(__file__, 
+                                     windfield_directory='guntur_wind',
+                                     dircomment=Eruption_comment)
 
 
 
