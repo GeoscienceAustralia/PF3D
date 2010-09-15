@@ -85,6 +85,7 @@ from coordinate_transforms import UTMtoLL, redfearn
 def run_scenario(scenario, dircomment=None,
                  store_locally=False, 
                  timestamp_output=True,
+                 echo=True,
                  verbose=True):
     """Run volcanic ash impact scenario
     
@@ -154,6 +155,7 @@ def run_scenario(scenario, dircomment=None,
               dircomment=dircomment,
               store_locally=store_locally,
               timestamp_output=timestamp_output,
+              echo=echo,
               verbose=verbose)    
 
     if not aim.postprocessing:
@@ -396,6 +398,7 @@ def generate_wind_profiles_from_ncep(scenario, update_timeblocks=False, verbose=
 def run_multiple_windfields(scenario, 
                             windfield_directory=None,
                             dircomment=None,
+                            echo=True,
                             verbose=True):
     """Run volcanic ash impact model for multiple wind fields.
     
@@ -432,7 +435,8 @@ def run_multiple_windfields(scenario,
         # Run scenario                        
         aim = run_scenario(params,  
                            timestamp_output=False,    
-                           dircomment=dircomment)
+                           dircomment=dircomment,
+                           echo=echo)
 
         # Copy result file to output folder
         makedir(hazard_output_folder)
@@ -446,6 +450,7 @@ def run_multiple_windfields(scenario,
 def run_multiple_windfields_parallel(scenario, 
                                      windfield_directory=None,
                                      dircomment=None,
+                                     echo=False,
                                      verbose=True):
     """Run volcanic ash impact model for multiple wind fields.
     
@@ -495,12 +500,14 @@ def run_multiple_windfields_parallel(scenario,
         params['Meteorological_model'] = 'profile'
 
         hazard_output_folder = basename + '_hazard_outputs'
-        print 'Storing multiple outputs in directory: %s' % hazard_output_folder
+        if p == 0:
+            print 'Storing multiple outputs in directory: %s' % hazard_output_folder
         
         # Run scenario                        
         aim = run_scenario(params,  
                            timestamp_output=False,    
-                           dircomment=dircomment + '_P%i' % p)
+                           dircomment=dircomment + '_P%i' % p,
+                           echo=echo)
 
         # Copy result file to output folder
         hazard_output_folder = basename + '_hazard_outputs'

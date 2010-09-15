@@ -23,6 +23,7 @@ class AIM:
                  timestamp_output=True, 
                  store_locally=False,
                  dircomment=None,
+                 echo=True,
                  verbose=True):
         """Create AIM instance, common file names and start logging
         
@@ -34,6 +35,7 @@ class AIM:
                                 are stored
                        If False, use environment variable TEPHRADATA for output.
         dircomment (string or None): Optional comment added to output dir
+        echo (True or False): Optionally print output to screen as well as log file. Default True.
         verbose: (True, False) determine if diagnostic output is to be printed
         """
         
@@ -112,16 +114,16 @@ class AIM:
         self.output_dir = output_dir
             
         
-        
         # Start logging to AIM log file
         self.logfile = self.basepath + '_AIM.log'
-        start_logging(filename=self.logfile)
+        start_logging(filename=self.logfile, echo=echo)
 
                         
         if verbose:
             header('Running AIM/Fall3d scenario %s' % self.scenario_name)
             print 'Writing to %s' % output_dir
-            
+
+        # FIXME (Ole): We should do exactly this for wind as well                
         if params['Topography_grid']:
             self.topography_grid = params['Topography_grid']
         else:
