@@ -36,6 +36,7 @@ Z_increment = 1000
 # Select meteorological input type
 #Meteorological_model = 'ncep'                 # profile, ncep, ...
 Meteorological_model = 'profile'                 # profile, ncep, ...
+wind_profile = 'guntur.profile'
 
 wind_altitudes = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 

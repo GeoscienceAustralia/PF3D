@@ -36,6 +36,7 @@ Z_increment = 1000
 # Select meteorological input type
 #Meteorological_model = 'ncep'                 # profile, ncep, ...
 Meteorological_model = 'profile'                 # profile, ncep, ...
+windprofile = 'mayon_wind.txt'
 
 wind_altitudes = [100, 250, 500, 5000, 1000, 5000, 7500, 12000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
