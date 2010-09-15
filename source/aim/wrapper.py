@@ -122,9 +122,6 @@ class AIM:
             header('Running AIM/Fall3d scenario %s' % self.scenario_name)
             print 'Writing to %s' % output_dir
             
-        # AIM input files
-        self.aim_wind_profile = scenario_name + '_wind.txt'
-        
         if params['Topography_grid']:
             self.topography_grid = params['Topography_grid']
         else:
@@ -204,6 +201,7 @@ class AIM:
 
 
             
+        # FIXME: The meteorological model should really be derived from the specified file type    
         if params['Meteorological_model'] == 'profile':    
             self.meteorological_model = 'profile'
         elif params['Meteorological_model'] == 'ncep':                
@@ -212,6 +210,38 @@ class AIM:
             msg = 'Meteorological_model should be either "profile" or "ncep1"'
             raise Exception(msg)
         
+        
+        # Default values for wind. FIXEM (Ole): This should be simplified and rationalised
+        # Vertical wind profile data generated from scenario_wind.txt
+        if self.meteorological_model == 'profile':
+            self.windprofile = self.basepath + '.profile'
+        else:    
+            self.windprofile = scenario_name + '.ncep1.nc'                    
+       
+        # AIM wind profile
+        self.aim_wind_profile = scenario_name + '_wind.txt'                
+                    
+                    
+        # Check for explicit nomination of wind profile
+        if 'windprofile' in params:
+            windprofile = params['windprofile']
+            if windprofile.endswith('.txt'):
+                self.aim_wind_profile = windprofile
+            elif windprofile.endswith('.profile'):
+                self.windprofile = windprofile
+            elif windprofile.endswith('.ncep'):
+                msg = 'Explicit nomination of ncep file not yet implemented: %' % windprofile
+                raise Exception(msg)
+            else:
+                msg = 'Unknown format for wind field: %' % windprofile
+                raise Exception(msg)            
+
+
+
+
+            
+        
+                        
         
         #--------------------------------------
         # Fall3d specific files and directories 
@@ -225,14 +255,6 @@ class AIM:
         self.inputfile = self.basepath + '.inp'
         self.grainfile = self.basepath + '.grn'
         self.sourcefile = self.basepath + '.src'
-        
-        # Vertical wind profile data generated from scenario_wind.txt
-        # FIXME: This is where the user should have been able to set it up
-        if self.meteorological_model == 'profile':
-            self.windprofile = self.basepath + '.profile'
-        else:    
-            self.windprofile = scenario_name + '.ncep1.nc'            
-            
         
         # Topographic surfer grid generated from scenario_topography.txt
         self.topography = self.basepath + '.top'
