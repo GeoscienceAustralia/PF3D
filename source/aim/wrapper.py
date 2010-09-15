@@ -982,7 +982,6 @@ class AIM:
         local_windprofile = self.scenario_name + '.profile'
         
         # Look for specified native Fall3D profile first
-        print 'looking for specified native Fall3d wind profile %s' % self.windprofile        
         if os.path.exists(self.windprofile):
             # Copy and return
             print 'Using native Fall3d wind profile %s' % self.windprofile
@@ -1144,11 +1143,12 @@ class AIM:
         makedir(audit_dir)
         
         # Store input files
-        s = 'cp %s %s' % (self.aim_wind_profile, audit_dir)
-        try:
-            run(s, verbose=verbose)
-        except:
-            pass
+        if os.path.exists(self.aim_wind_profile):
+            s = 'cp %s %s' % (self.aim_wind_profile, audit_dir)
+            try:
+                run(s, verbose=verbose)
+            except:
+                pass
         
         #s = 'cp %s %s' % (self.topography_grid, audit_dir)
         #run(s, verbose=verbose)        

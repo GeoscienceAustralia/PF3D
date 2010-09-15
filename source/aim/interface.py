@@ -393,8 +393,6 @@ def generate_wind_profiles_from_ncep(scenario, update_timeblocks=False, verbose=
     
     
 
-    
-    
 def run_multiple_windfields(scenario, 
                             windfield_directory=None,
                             dircomment=None,
@@ -409,48 +407,100 @@ def run_multiple_windfields(scenario,
     header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
     
     basename, _ = os.path.splitext(scenario)
-    aim_windfile = basename + '_wind.txt'    
-    fall3d_windfile = basename + '.profile'
     
     for file in os.listdir(windfield_directory):
-        
-        
-        
-        # Clean
-        s = '/bin/rm %s %s' % (aim_windfile, fall3d_windfile)
-        
-        # Determine format of windfile
-        if file.endswith('.txt'):
-            # Use AIM wind field
-            local_windfile = aim_windfile
-        elif file.endswith('.profile'):
-            # link Fall3d wind field to local file
-            local_windfile = fall3d_windfile
-        else:
-            # Do nothing
-            continue
+    
+        msg = 'AIM windfield file must either end with .txt or .profile. I got %s' % file
+        assert file.endswith('.txt') or file.endswith('.profile'), msg
             
-        # Copy actual wind field to local file
         windfield = '%s/%s' % (windfield_directory, file)
         windname, _ = os.path.splitext(file)
         header('Computing event using wind field: %s' % windfield)
-        s = 'cp %s %s' % (windfield, local_windfile)
-        run(s, verbose=False)             
-        print 
-        
             
         # Get params from model script
         params = get_scenario_parameters(scenario)    
         
-        # Override or create parameters derived from native Fall3d wind field
+        # Override or create parameters derived from wind field
+        params['windprofile'] = windfield
         params['wind_altitudes'] = get_layers_from_windfield(windfield)
         params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)        
-        params['Meteorological_model'] = 'profile'
+        params['Meteorological_model'] = 'profile' # FIXME (Ole): Should be derived from windfield file
+        
+        hazard_output_folder = basename + '_hazard_outputs'
+        print 'Storing multiple outputs in directory: %s' % hazard_output_folder
 
         # Run scenario                        
         aim = run_scenario(params,  
                            timestamp_output=False,    
                            dircomment=dircomment)
+
+        # Copy result file to output folder
+        makedir(hazard_output_folder)
+        
+        result_file = aim.scenario_name + '.res.nc'    
+        newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
+        s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
+        run(s)    
+        
+    
+def run_multiple_windfields_parallel(scenario, 
+                                     windfield_directory=None,
+                                     dircomment=None,
+                                     verbose=True):
+    """Run volcanic ash impact model for multiple wind fields.
+    
+    The wind fields are assumed to be in subfolder specified by windfield_directory, 
+    have the extension *.txt or *.profile and follow the format use with scenarios.
+
+    This function makes use of Open MPI and Pypar to execute in parallel        
+    """
+    
+    try: 
+        import pypar
+    except:
+        P = 1
+        p = 0
+        processor_name = os.uname()[1]
+        
+        print 'Pypar could not be imported. Running sequentially on node %s' % processor_name        
+    else:    
+        P = pypar.size()
+        p = pypar.rank()
+        processor_name = pypar.get_processor_name()
+
+        print 'Processor %d initialised on node %s' %(p, processor_name)
+    
+    if p == 0:
+        header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
+
+    
+    basename, _ = os.path.splitext(scenario)
+    
+    for file in os.listdir(windfield_directory):
+    
+        msg = 'AIM windfield file must either end with .txt or .profile. I got %s' % file
+        assert file.endswith('.txt') or file.endswith('.profile'), msg
+            
+        windfield = '%s/%s' % (windfield_directory, file)
+        windname, _ = os.path.splitext(file)
+        header('Computing event using wind field: %s' % windfield)
+            
+        # Get params from model script
+        params = get_scenario_parameters(scenario)    
+        
+        # Override or create parameters derived from native Fall3d wind field
+        params['windprofile'] = windfield        
+        params['wind_altitudes'] = get_layers_from_windfield(windfield)
+        params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)        
+        params['Meteorological_model'] = 'profile'
+
+        hazard_output_folder = basename + '_hazard_outputs'
+        print 'Storing multiple outputs in directory: %s' % hazard_output_folder
+        
+        # Run scenario                        
+        aim = run_scenario(params,  
+                           timestamp_output=False,    
+                           dircomment=dircomment + '_P%i' % p)
 
         # Copy result file to output folder
         hazard_output_folder = basename + '_hazard_outputs'
@@ -460,3 +510,6 @@ def run_multiple_windfields(scenario,
         newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
         s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
         run(s)
+
+
+
