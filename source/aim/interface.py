@@ -472,6 +472,7 @@ def OBSOLETE_run_multiple_windfields(scenario,
     
 def run_multiple_windfields(scenario, 
                             windfield_directory=None,
+                            hazard_output_folder=None,
                             dircomment=None,
                             echo=False,
                             verbose=True):
@@ -483,6 +484,7 @@ def run_multiple_windfields(scenario,
     This function makes use of Open MPI and Pypar to execute in parallel but can also run sequentially.
     """
 
+    
     try: 
         import pypar
     except:
@@ -528,7 +530,9 @@ def run_multiple_windfields(scenario,
             params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)        
             params['Meteorological_model'] = 'profile'
 
-            hazard_output_folder = basename + '_hazard_outputs'
+            if hazard_output_folder is None:
+                hazard_output_folder = basename + '_hazard_outputs'
+                
             if p == 0:
                 print 'Storing multiple outputs in directory: %s' % hazard_output_folder
         
