@@ -10,7 +10,6 @@ from utilities import get_fall3d_home, get_tephradata, get_username, get_timesta
 from utilities import convert_meteorological_winddirection_to_windfield
 from utilities import get_wind_direction, calculate_extrema, label_kml_contours
 from utilities import list_to_string
-from logmodule import start_logging
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
@@ -25,7 +24,7 @@ class AIM:
                  dircomment=None,
                  echo=True,
                  verbose=True):
-        """Create AIM instance, common file names and start logging
+        """Create AIM instance, common file names
         
         
         Optional arguments:
@@ -114,9 +113,10 @@ class AIM:
         self.output_dir = output_dir
             
         
+        # MOVED THIS TO OUTER LEVEL
         # Start logging to AIM log file
-        self.logfile = self.basepath + '_AIM.log'
-        start_logging(filename=self.logfile, echo=echo)
+        #self.logfile = self.basepath + '_AIM.log'
+        #start_logging(filename=self.logfile, echo=echo)
 
                         
         if verbose:
@@ -285,13 +285,14 @@ class AIM:
         check_parameter_ranges(params)
         self.params = params
 
+        # FIXME (Ole): Commented out due to parallelisation
         # Symbolic link to output directory
-        self.symlink = 'latest_output'
-        s = '/bin/rm -rf %s' % self.symlink    
-        run(s)
-    
-        s = 'ln -s %s %s' % (self.output_dir, self.symlink)
-        run(s)
+        #self.symlink = 'latest_output'
+        #s = '/bin/rm -rf %s' % self.symlink    
+        #run(s)
+        #
+        #s = 'ln -s %s %s' % (self.output_dir, self.symlink)
+        #run(s)
         
     #---------------------------
     # Fall3d script replacements
@@ -1197,15 +1198,16 @@ class AIM:
         
         """
         
+        # FIXME: I think it is better to place them in their final locations from the start.
         # Move log files away
-        logdir = os.path.join(self.output_dir, 'logfiles')
-        makedir(logdir)
-        for file in os.listdir(self.output_dir):
-            _, ext = os.path.splitext(file)
-            if ext in ['.log', '.stdout', '.stderr']:
-                filename = os.path.join(self.output_dir, file)
-                s = 'mv %s %s' % (filename, logdir) 
-                run(s, verbose=False)
+        #logdir = os.path.join(self.output_dir, 'logfiles')
+        #makedir(logdir)
+        #for file in os.listdir(self.output_dir):
+        #    _, ext = os.path.splitext(file)
+        #    if ext in ['.log', '.stdout', '.stderr']:
+        #        filename = os.path.join(self.output_dir, file)
+        #        s = 'mv %s %s' % (filename, logdir) 
+        #        run(s, verbose=False)
         
         
         # FIXME: This really needs to use a proper standard for time stamps

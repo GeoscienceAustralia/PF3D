@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = ''
+Eruption_comment = 'parallel'
 
 # Time (Volcanological input file)
 Eruption_Year = 2009                            # YYYY  

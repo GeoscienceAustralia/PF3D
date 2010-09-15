@@ -74,12 +74,34 @@ for x in [1,11,3,7]:
   
 """
 
-import os, time
+import os, sys, time
 import numpy
 
-from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield, get_fall3d_home
+from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield, get_fall3d_home, get_timestamp
 from wrapper import AIM
 from coordinate_transforms import UTMtoLL, redfearn
+from logmodule import start_logging
+
+
+# Start logging
+try: 
+    import pypar
+except:
+    P = 1
+    p = 0
+    processor_name = os.uname()[1]
+    
+    print 'Pypar could not be imported. Running sequentially on node %s.' % processor_name,        
+else:    
+    P = pypar.size()
+    p = pypar.rank()
+    processor_name = pypar.get_processor_name()
+
+    print 'Processor %d initialised on node %s.' % (p, processor_name),
+    
+AIM_logfile = 'AIM_P%i.log' % p
+#header('AIM output is logged to %s' % AIM_logfile)
+start_logging(filename=AIM_logfile, echo=False)
 
         
 def run_scenario(scenario, dircomment=None,
@@ -192,18 +214,19 @@ def run_scenario(scenario, dircomment=None,
                    % (time.time() - t_start,
                       aim.output_dir))
  
-        try:
-            target = os.readlink(aim.symlink)                      
-        except:
-            header('WARNING: Shortcut %s does not appear to be working. Use real directory instead.' % aim.symlink)
-            #print 'Error message was', e
-        else:    
-            
-            if target == aim.output_dir:              
-                header('Shortcut to output data is: %s -> %s' % (aim.symlink, target))
-            else:
-                header('WARNING: Shortcut %s has been changed by more recent run to: %s' % (aim.symlink, target))
-                        
+        # FIXME (Ole): Commented out due to parallelisation 
+        #try:
+        #    target = os.readlink(aim.symlink)                      
+        #except:
+        #    header('WARNING: Shortcut %s does not appear to be working. Use real directory instead.' % aim.symlink)
+        #    #print 'Error message was', e
+        #else:    
+        #    
+        #    if target == aim.output_dir:              
+        #        header('Shortcut to output data is: %s -> %s' % (aim.symlink, target))
+        #    else:
+        #        header('WARNING: Shortcut %s has been changed by more recent run to: %s' % (aim.symlink, target))
+        #                
         print
     
     # Return object in case user wants access to it 
@@ -395,7 +418,7 @@ def generate_wind_profiles_from_ncep(scenario, update_timeblocks=False, verbose=
     
     
 
-def run_multiple_windfields(scenario, 
+def OBSOLETE_run_multiple_windfields(scenario, 
                             windfield_directory=None,
                             dircomment=None,
                             echo=True,
@@ -447,19 +470,19 @@ def run_multiple_windfields(scenario,
         run(s)    
         
     
-def run_multiple_windfields_parallel(scenario, 
-                                     windfield_directory=None,
-                                     dircomment=None,
-                                     echo=False,
-                                     verbose=True):
+def run_multiple_windfields(scenario, 
+                            windfield_directory=None,
+                            dircomment=None,
+                            echo=False,
+                            verbose=True):
     """Run volcanic ash impact model for multiple wind fields.
     
     The wind fields are assumed to be in subfolder specified by windfield_directory, 
     have the extension *.txt or *.profile and follow the format use with scenarios.
 
-    This function makes use of Open MPI and Pypar to execute in parallel        
+    This function makes use of Open MPI and Pypar to execute in parallel but can also run sequentially.
     """
-    
+
     try: 
         import pypar
     except:
@@ -473,7 +496,9 @@ def run_multiple_windfields_parallel(scenario,
         p = pypar.rank()
         processor_name = pypar.get_processor_name()
 
-        print 'Processor %d initialised on node %s' %(p, processor_name)
+        print 'Processor %d initialised on node %s' % (p, processor_name)
+    
+    pypar.barrier()
     
     if p == 0:
         header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
@@ -481,42 +506,45 @@ def run_multiple_windfields_parallel(scenario,
     
     basename, _ = os.path.splitext(scenario)
     
-    for file in os.listdir(windfield_directory):
+    for i, file in enumerate(os.listdir(windfield_directory)):
+
+        
+        # Distribute jobs cyclically to processors
+        if i%P == p:
     
-        msg = 'AIM windfield file must either end with .txt or .profile. I got %s' % file
-        assert file.endswith('.txt') or file.endswith('.profile'), msg
+            if not (file.endswith('.txt') or file.endswith('.profile')):
+                continue
             
-        windfield = '%s/%s' % (windfield_directory, file)
-        windname, _ = os.path.splitext(file)
-        header('Computing event using wind field: %s' % windfield)
-            
-        # Get params from model script
-        params = get_scenario_parameters(scenario)    
+            windfield = '%s/%s' % (windfield_directory, file)
+            windname, _ = os.path.splitext(file)
+            header('Computing event %i on processor %i using wind field: %s' % (i, p, windfield))
+                
+            # Get params from model script
+            params = get_scenario_parameters(scenario)    
         
-        # Override or create parameters derived from native Fall3d wind field
-        params['windprofile'] = windfield        
-        params['wind_altitudes'] = get_layers_from_windfield(windfield)
-        params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)        
-        params['Meteorological_model'] = 'profile'
+            # Override or create parameters derived from native Fall3d wind field
+            params['windprofile'] = windfield        
+            params['wind_altitudes'] = get_layers_from_windfield(windfield)
+            params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)        
+            params['Meteorological_model'] = 'profile'
 
-        hazard_output_folder = basename + '_hazard_outputs'
-        if p == 0:
-            print 'Storing multiple outputs in directory: %s' % hazard_output_folder
+            hazard_output_folder = basename + '_hazard_outputs'
+            if p == 0:
+                print 'Storing multiple outputs in directory: %s' % hazard_output_folder
         
-        # Run scenario                        
-        aim = run_scenario(params,  
-                           timestamp_output=False,    
-                           dircomment=dircomment + '_P%i' % p,
-                           echo=echo)
+            # Run scenario                        
+            aim = run_scenario(params,  
+                               timestamp_output=True,    
+                               dircomment=dircomment + '_run%i_proc%i' % (i, p),
+                               echo=echo)
 
-        # Copy result file to output folder
-        hazard_output_folder = basename + '_hazard_outputs'
-        makedir(hazard_output_folder)
+            # Copy result file to output folder
+            makedir(hazard_output_folder)
         
-        result_file = aim.scenario_name + '.res.nc'    
-        newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
-        s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
-        run(s)
+            result_file = aim.scenario_name + '.res.nc'    
+            newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
+            s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
+            run(s)
 
 
 
