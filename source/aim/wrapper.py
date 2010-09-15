@@ -123,7 +123,7 @@ class AIM:
             print 'Writing to %s' % output_dir
             
         # AIM input files
-        self.wind_profile = scenario_name + '_wind.txt'
+        self.aim_wind_profile = scenario_name + '_wind.txt'
         
         if params['Topography_grid']:
             self.topography_grid = params['Topography_grid']
@@ -227,6 +227,7 @@ class AIM:
         self.sourcefile = self.basepath + '.src'
         
         # Vertical wind profile data generated from scenario_wind.txt
+        # FIXME: This is where the user should have been able to set it up
         if self.meteorological_model == 'profile':
             self.windprofile = self.basepath + '.profile'
         else:    
@@ -956,40 +957,31 @@ class AIM:
         zlayers = self.params['wind_altitudes']
         nz=len(zlayers)
 
-        # Look for native Fall3D profile first
-        native_profile = '%s.profile' % self.scenario_name        
-
-        if native_profile in os.listdir('.'):
-            print 'Using native Fall3d wind profile %s' % native_profile
-            s = 'cp %s %s' % (native_profile, self.output_dir)                
-            run(s)
-            return
-        else:    
-            # Trying AIM wind profile
-            print 'Using AIM wind profile %s' % self.wind_profile
-            infile = open(self.wind_profile)
-            lines = infile.readlines()
-            infile.close()            
+        local_windprofile = self.scenario_name + '.profile'
         
-        #try:
-        #    infile = open(self.wind_profile)
-        #except IOError:
-        #
-        #    # Assume existence of Fall3d native <scenario_name>.profile
-        #    # and copy to work area
-        # 
-        #    native_profile = '%s.profile' % self.scenario_name
-        #    print('AIM wind profile %s could not be found.' % self.wind_profile)
-        #    print('Assuming existence of Fall3d profile named %s' % native_profile)
-        #    
-        #    s = 'cp %s %s' % (native_profile, self.output_dir)
-        #    print(s)
-        #    os.system(s)
-        #    return
-        #    
-        #lines = infile.readlines()
-        #infile.close()
+        # Look for specified native Fall3D profile first
+        print 'looking for specified native Fall3d wind profile %s' % self.windprofile        
+        if os.path.exists(self.windprofile):
+            # Copy and return
+            print 'Using native Fall3d wind profile %s' % self.windprofile
+            s = 'cp %s %s' % (self.windprofile, self.output_dir)                
+            run(s)
+            return           
+        elif os.path.exists(local_windprofile):
+            # Look for local native profile
+            # Copy and return
+            print 'Using native Fall3d wind profile %s' % local_windprofile
+            s = 'cp %s %s' % (local_windprofile, self.windprofile)                
+            run(s)
+            return                       
 
+        
+        # Otherwise try to generate profile from AIM wind profile
+        print 'Using AIM wind profile %s' % self.aim_wind_profile
+        infile = open(self.aim_wind_profile)
+        lines = infile.readlines()
+        infile.close()            
+        
         # Skip blanks
         for i, line in enumerate(lines):
             if line.strip() != '': break
@@ -1041,7 +1033,7 @@ class AIM:
             if len(timeblock) != nz:
                 msg = 'Number of z layers in each time block much equal the number of specified Z layers.\n'
                 msg += 'You specfied %i Z layers ' % nz
-                msg += 'but timeblock in %s was %s, i.e. %i layers.' % (self.wind_profile, timeblock, len(timeblock))
+                msg += 'but timeblock in %s was %s, i.e. %i layers.' % (self.aim_wind_profile, timeblock, len(timeblock))
                 raise Exception(msg)
             
             itime1=hour*3600
@@ -1130,7 +1122,7 @@ class AIM:
         makedir(audit_dir)
         
         # Store input files
-        s = 'cp %s %s' % (self.wind_profile, audit_dir)
+        s = 'cp %s %s' % (self.aim_wind_profile, audit_dir)
         try:
             run(s, verbose=verbose)
         except:
