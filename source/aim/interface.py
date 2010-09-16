@@ -78,6 +78,7 @@ import os, sys, time
 import numpy
 
 from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield, get_fall3d_home, get_timestamp
+from utilities import list_to_string
 from wrapper import AIM
 from coordinate_transforms import UTMtoLL, redfearn
 from logmodule import start_logging
@@ -283,7 +284,30 @@ def run_nc2prof(windfield_directory, verbose=True):
     logfile = 'run_nc2prof.log'
     run(cmd, verbose=verbose, stdout=logfile, stderr='/dev/null')
         
+    
+def run_hazardmap(model_output_directory, verbose=True):
+    """Run HazardMapping.exe
         
+    Requires 
+        - input file
+        - Directory with FALL3D model outputs
+    """
+        
+    # FIXME: Perhaps include into AIM class (somehow)
+    
+    Fall3d_dir = get_fall3d_home()
+    utilities_dir = os.path.join(Fall3d_dir, 'Utilities')        
+    executable = os.path.join(utilities_dir, 'HazardMaps', 'HazardMapping.exe')
+        
+    if verbose:
+        header('Running hazard mapping in %s' % model_output_directory)
+
+    cmd = 'cd %s; %s ' % (model_output_directory, executable)
+    
+    logfile = 'run_hazardmapping.log'
+    run(cmd, verbose=verbose, stdout=logfile, stderr='/dev/null')
+
+                
 def set_vent_location_in_windfield(filename, vent_location_easting, vent_location_northing, verbose=False):
     """Update vent location in UTM coordinates is set as specified in the arguments. UTM zone is implied by the context.
     """
@@ -439,7 +463,10 @@ def generate_wind_profiles_from_ncep(scenario, update_timeblocks=False, verbose=
     
     
         
-    
+#-----------------------------------
+# Parallel computing and hazard maps    
+#-----------------------------------
+
 def run_multiple_windfields(scenario, 
                             windfield_directory=None,
                             hazard_output_folder=None,
@@ -537,3 +564,71 @@ def run_multiple_windfields(scenario,
     print 'Processor %i done %i windfields' % (p, count)        
     pypar.finalize()
 
+
+    
+def generate_hazardmap(scenario, verbose=True):
+    """Generate hazard map from Fall3d NetCDF outputs
+    """
+    
+    # Get params from model script
+    params = get_scenario_parameters(scenario)    
+    
+    model_output_directory = params['model_output_directory']
+    
+    # Clean up
+    s = 'cd %s; /bin/rm -rf HazardMaps.res.nc' % model_output_directory
+    run(s)
+
+        
+    # Convert UTM to latitude and longitude
+    if params['vent_hemisphere'].upper() == 'S':
+        is_southern_hemisphere = True
+    elif params['vent_hemisphere'].upper() == 'N':        
+        is_southern_hemisphere = False
+    else:
+        msg = 'Parameter vent_hemisphere must be either N or S. I got %s' % params['vent_hemisphere']
+        raise Exception(msg)
+        
+    
+    lat, lon = UTMtoLL(params['vent_northing'],
+                       params['vent_easting'],
+                       params['vent_zone'],
+                       is_southern_hemisphere)
+    
+    # Get all model output files
+    files = []
+    for file in os.listdir(model_output_directory):
+        if file.endswith('.nc'):
+            files.append(file)
+        
+    
+    # Generate input file
+    fid = open('%s/HazardMaps.inp' % model_output_directory, 'w')
+    fid.write('COORDINATES\n')
+    fid.write('  LON_VENT = %f\n' % lon)
+    fid.write('  LAT_VENT = %f\n' % lat)    
+    fid.write('POSTPROCESS\n')
+    fid.write('  ISOCHRONES = yes\n')
+    fid.write('  LOAD = yes\n')
+    fid.write('  FL050 = no\n')
+    fid.write('  FL100 = no\n')
+    fid.write('  FL150 = no\n')
+    fid.write('  FL200 = no\n')
+    fid.write('  FL250 = no\n')
+    fid.write('  FL300 = no\n')
+    fid.write('VALUES\n')
+    fid.write('  LOAD_VALUES = %s\n' % list_to_string(params['load_values']))
+    fid.write('  FL_VALUES = %s\n' % list_to_string(params['fl_values']))    
+    fid.write('FILES\n')
+    for file in files:
+        fid.write(' \'%s\'\n' % file)
+    fid.write('END_FILES\n')    
+        
+    fid.close()
+    
+    # Run hazard maps 
+    print 'Generating hazard map for geographic vent location (%f, %f)' % (lon, lat)
+    run_hazardmap(model_output_directory, verbose=False)        
+    
+    print 'Hazard map done in directory: %s' % model_output_directory
+    
