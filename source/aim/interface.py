@@ -481,19 +481,22 @@ def run_multiple_windfields(scenario,
     except:
         name = 'run'
         
-                
+    # Logging            
     AIM_logfile = 'AIM_%s_P%i.log' % (name, p)
     start_logging(filename=AIM_logfile, echo=False)
-        
-    basename, _ = os.path.splitext(scenario)
 
+    # Start processes staggered to avoid race conditions for disk access (otherwise it is slow to get started)
+    import time; time.sleep(2*p) 
+    
+    # Get cracking        
+    basename, _ = os.path.splitext(scenario)
     count = 0    
     for i, file in enumerate(os.listdir(windfield_directory)):
 
         
         # Distribute jobs cyclically to processors
         if i%P == p:
-    
+            
             if not (file.endswith('.txt') or file.endswith('.profile')):
                 continue
                 
