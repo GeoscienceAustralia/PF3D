@@ -104,7 +104,7 @@ if __name__ == '__main__':
     from aim import run_multiple_windfields
     run_multiple_windfields(__file__, 
                             windfield_directory='guntur_wind',
-                            hazard_output_folder='guntur_hazard_outputs',
+                            hazard_output_folder='guntur_hazard_outputs_seq',
                             dircomment=Eruption_comment)
 
 

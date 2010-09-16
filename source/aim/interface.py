@@ -109,8 +109,12 @@ def run_scenario(scenario,
       
     """
 
-    
-    AIM_logfile = 'AIM_%s.log' % os.path.splitext(scenario)[0]
+    try:
+        name = os.path.splitext(scenario)[0]
+    except:
+        name = 'run'
+        
+    AIM_logfile = 'AIM_%s.log' % name 
     start_logging(filename=AIM_logfile, echo=True)
         
     aim = _run_scenario(scenario,  
@@ -471,8 +475,14 @@ def run_multiple_windfields(scenario,
     if p == 0:
         header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
 
+
+    try:
+        name = os.path.splitext(scenario)[0]
+    except:
+        name = 'run'
         
-    AIM_logfile = 'AIM_%s_P%i.log' % (os.path.splitext(scenario)[0], p)
+                
+    AIM_logfile = 'AIM_%s_P%i.log' % (name, p)
     start_logging(filename=AIM_logfile, echo=False)
         
     basename, _ = os.path.splitext(scenario)
