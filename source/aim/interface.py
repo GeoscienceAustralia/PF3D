@@ -83,32 +83,50 @@ from coordinate_transforms import UTMtoLL, redfearn
 from logmodule import start_logging
 
 
-# Start logging
-try: 
-    import pypar
-except:
-    P = 1
-    p = 0
-    processor_name = os.uname()[1]
-    
-    print 'Pypar could not be imported. Running sequentially on node %s.' % processor_name,        
-else:    
-    P = pypar.size()
-    p = pypar.rank()
-    processor_name = pypar.get_processor_name()
-
-    print 'Processor %d initialised on node %s.' % (p, processor_name),
-    
-AIM_logfile = 'AIM_P%i.log' % p
-#header('AIM output is logged to %s' % AIM_logfile)
-start_logging(filename=AIM_logfile, echo=False)
-
-        
-def run_scenario(scenario, dircomment=None,
+def run_scenario(scenario, 
+                 dircomment=None,
                  store_locally=False, 
                  timestamp_output=True,
-                 echo=True,
                  verbose=True):
+    """Run volcanic ash impact scenario
+    
+    The argument scenario can be either
+    * A Python script
+    or
+    * A Dictionary 
+   
+    In any case scenario must specify all required 
+    volcanological parameters as stated in the file required_parameters.txt.
+    
+    If any parameters are missing or if additional parameters are
+    specified an exception will be raised.
+    
+    Optional parameters:
+      dircomment: will be added to output dir for easy identification.
+      store_locally: if True, don't use TEPHRAHOME for outputs
+      timestamp_output: If True, add timestamp to output dir
+                        If False overwrite previous output with same name 
+      
+    """
+
+    
+    AIM_logfile = 'AIM_%s.log' % os.path.splitext(scenario)[0]
+    start_logging(filename=AIM_logfile, echo=True)
+        
+    aim = _run_scenario(scenario,  
+                        dircomment=dircomment,    
+                        timestamp_output=timestamp_output,    
+                        store_locally=store_locally,
+
+                        verbose=verbose)
+    return aim                        
+
+
+        
+def _run_scenario(scenario, dircomment=None,
+                  store_locally=False, 
+                  timestamp_output=True,
+                  verbose=True):
     """Run volcanic ash impact scenario
     
     The argument scenario can be either
@@ -177,7 +195,6 @@ def run_scenario(scenario, dircomment=None,
               dircomment=dircomment,
               store_locally=store_locally,
               timestamp_output=timestamp_output,
-              echo=echo,
               verbose=verbose)    
 
     if not aim.postprocessing:
@@ -417,57 +434,6 @@ def generate_wind_profiles_from_ncep(scenario, update_timeblocks=False, verbose=
     print 'Wind fields generated in directory: %s' % windfield_directory
     
     
-
-def OBSOLETE_run_multiple_windfields(scenario, 
-                            windfield_directory=None,
-                            dircomment=None,
-                            echo=True,
-                            verbose=True):
-    """Run volcanic ash impact model for multiple wind fields.
-    
-    The wind fields are assumed to be in subfolder specified by windfield_directory, 
-    have the extension *.txt or *.profile and follow the format use with scenarios.
-    
-    """
-    
-    header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
-    
-    basename, _ = os.path.splitext(scenario)
-    
-    for file in os.listdir(windfield_directory):
-    
-        msg = 'AIM windfield file must either end with .txt or .profile. I got %s' % file
-        assert file.endswith('.txt') or file.endswith('.profile'), msg
-            
-        windfield = '%s/%s' % (windfield_directory, file)
-        windname, _ = os.path.splitext(file)
-        header('Computing event using wind field: %s' % windfield)
-            
-        # Get params from model script
-        params = get_scenario_parameters(scenario)    
-        
-        # Override or create parameters derived from wind field
-        params['windprofile'] = windfield
-        params['wind_altitudes'] = get_layers_from_windfield(windfield)
-        params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)        
-        params['Meteorological_model'] = 'profile' # FIXME (Ole): Should be derived from windfield file
-        
-        hazard_output_folder = basename + '_hazard_outputs'
-        print 'Storing multiple outputs in directory: %s' % hazard_output_folder
-
-        # Run scenario                        
-        aim = run_scenario(params,  
-                           timestamp_output=False,    
-                           dircomment=dircomment,
-                           echo=echo)
-
-        # Copy result file to output folder
-        makedir(hazard_output_folder)
-        
-        result_file = aim.scenario_name + '.res.nc'    
-        newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
-        s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
-        run(s)    
         
     
 def run_multiple_windfields(scenario, 
@@ -492,22 +458,26 @@ def run_multiple_windfields(scenario,
         p = 0
         processor_name = os.uname()[1]
         
-        print 'Pypar could not be imported. Running sequentially on node %s' % processor_name        
+        print 'Pypar could not be imported. Running sequentially on node %s' % processor_name,
     else:    
         P = pypar.size()
         p = pypar.rank()
         processor_name = pypar.get_processor_name()
 
-        print 'Processor %d initialised on node %s' % (p, processor_name)
+        print 'Processor %d initialised on node %s' % (p, processor_name),
     
     pypar.barrier()
     
     if p == 0:
         header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
 
-    
+        
+    AIM_logfile = 'AIM_%s_P%i.log' % (os.path.splitext(scenario)[0], p)
+    start_logging(filename=AIM_logfile, echo=False)
+        
     basename, _ = os.path.splitext(scenario)
-    
+
+    count = 0    
     for i, file in enumerate(os.listdir(windfield_directory)):
 
         
@@ -516,6 +486,8 @@ def run_multiple_windfields(scenario,
     
             if not (file.endswith('.txt') or file.endswith('.profile')):
                 continue
+                
+            count += 1
             
             windfield = '%s/%s' % (windfield_directory, file)
             windname, _ = os.path.splitext(file)
@@ -537,10 +509,9 @@ def run_multiple_windfields(scenario,
                 print 'Storing multiple outputs in directory: %s' % hazard_output_folder
         
             # Run scenario                        
-            aim = run_scenario(params,  
-                               timestamp_output=True,    
-                               dircomment=dircomment + '_run%i_proc%i' % (i, p),
-                               echo=echo)
+            aim = _run_scenario(params,  
+                                timestamp_output=True,    
+                                dircomment=dircomment + '_run%i_proc%i' % (i, p))
 
             # Copy result file to output folder
             makedir(hazard_output_folder)
@@ -550,6 +521,6 @@ def run_multiple_windfields(scenario,
             s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
             run(s)
 
-    print 'Processor %i done' % p        
+    print 'Processor %i done %i windfields' % (p, count)        
     pypar.finalize()
 
