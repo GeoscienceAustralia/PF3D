@@ -501,7 +501,7 @@ def run_multiple_windfields(scenario,
     
     if p == 0:
         header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
-
+        t_start = time.time()
 
     try:
         name = os.path.splitext(scenario)[0]
@@ -513,21 +513,23 @@ def run_multiple_windfields(scenario,
     start_logging(filename=AIM_logfile, echo=False)
 
     # Start processes staggered to avoid race conditions for disk access (otherwise it is slow to get started)
-    import time; time.sleep(2*p) 
+    time.sleep(2*p) 
     
     # Get cracking        
     basename, _ = os.path.splitext(scenario)
-    count = 0    
+    count_local = 0    
+    count_all = 0
     for i, file in enumerate(os.listdir(windfield_directory)):
 
-        
+        count_all += 1
+                    
         # Distribute jobs cyclically to processors
         if i%P == p:
             
             if not (file.endswith('.txt') or file.endswith('.profile')):
                 continue
                 
-            count += 1
+            count_local += 1
             
             windfield = '%s/%s' % (windfield_directory, file)
             windname, _ = os.path.splitext(file)
@@ -561,10 +563,18 @@ def run_multiple_windfields(scenario,
             s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
             run(s)
 
-    print 'Processor %i done %i windfields' % (p, count)        
+    print 'Processor %i done %i windfields' % (p, count_local)        
+    print 'Outputs available in directory: %s' % hazard_output_folder    
+    
+    pypar.barrier()
+    if p == 0:
+        print 'Parallel simulation finished %i windfields in %i seconds' % (count_all, time.time() - t_start)
+
+    
     pypar.finalize()
 
-
+    
+    
     
 def generate_hazardmap(scenario, verbose=True):
     """Generate hazard map from Fall3d NetCDF outputs
