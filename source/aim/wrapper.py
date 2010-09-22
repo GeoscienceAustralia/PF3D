@@ -9,7 +9,8 @@ from utilities import check_presence_of_required_parameters, grd2asc
 from utilities import get_fall3d_home, get_tephradata, get_username, get_timestamp
 from utilities import convert_meteorological_winddirection_to_windfield
 from utilities import get_wind_direction, calculate_extrema, label_kml_contours
-from utilities import list_to_string
+from utilities import list_to_string, run_with_errorcheck
+from utilities import generate_contours as _generate_contours
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
@@ -326,23 +327,6 @@ class AIM:
             raise Exception(msg)
 
 
-    def run_with_errorcheck(self, cmd, name, verbose=False):
-        """Run general command with logging and errorchecking
-        """
-        
-        stdout = '%s.stdout' % name    
-        stderr = '%s.stderr' % name    
-        err = run(cmd,
-                  stdout=stdout,
-                  stderr=stderr,
-                  verbose=verbose)        
-        if err:
-            msg = 'Command "%s" ended abnormally. Log files are:\n' % cmd
-            msg += '  %s\n' % stdout            
-            msg += '  %s\n' % stderr                        
-            raise Exception(msg)
-            
-                            
     def set_granum(self, verbose=True):
         """Create grainsize profile
 
@@ -597,140 +581,12 @@ class AIM:
                     contours = True # Default is fixed number of contours
                     
                 
-                
-                pathname = os.path.join(self.output_dir, filename)
-                basename, ext = os.path.splitext(pathname)
-                
-                tiffile = basename + '.tif'
-                shpfile = basename + '.shp'
-                kmlfile = basename + '.kml'
-                prjfile = basename + '.prj'
-                
-                # Get range of data
-                min, max = calculate_extrema(pathname)
-                
-                # Establish if interval is constant
-                if contours is False:
-                    if verbose: print '  No contouring requested'
-                    continue
-                elif contours is True:
-                    interval = (max-min)/8 # Calculate interval automatically
-                else:
-                    # The variable 'contours' is either a list or a number
-                    try: 
-                        interval = float(contours) # Constant interval specified
-                    except:
-                        # The variable 'contours' must be a list
-                        if type(contours) != type([]):
-                            msg = 'Expected list of contours. Must be either True, False, a number or a list of numbers.'
-                            raise Exception(msg)
-                        
-                        interval = -1 # Indicate interval is not fixed
+                _generate_contours(filename, contours, units, attribute_name, 
+                                   output_dir=self.output_dir, 
+                                   meteorological_model=self.meteorological_model, 
+                                   WKT_projection=self.WKT_projection,
+                                   verbose=verbose)
 
-                        
-                # Check for degenerate interval values        
-                if 0 < interval < 1.0e-6: 
-                    msg = '  WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
-                    print msg
-                    continue
-                        
-                if min + interval >= max:
-                    msg = '  WARNING (generate_contours): No contours generated for range=[%f, %f], interval=%f' % (min, max, interval) 
-                    print msg
-                    continue
-
-                
-                # Generate list of contours from input
-                contour_list = []                
-                if interval < 0:
-                    # A list was specified
-                    for c in contours:
-                        msg = 'Value in contour list %s was not a number. I got %s' % (contours, c)
-                        
-                        if c is True or c is False:
-                            # Just catching situation where someone puts boolean values in list.
-                            # The problem is that float(c) below will convert it to 1 or 0
-                            raise Exception(msg)
-                            
-                        try:
-                            val = float(c)
-                        except:
-                            raise Exception(msg)
-                        else:
-                            contour_list.append(val)
-                else:
-                    # A constant interval was given. Build list (exclude both min and max themselves)
-                    level = min + interval    
-                    while level < max:
-                        contour_list.append(level)
-                        level += interval                         
-                       
-
-
-                        
-                # Generate GeoTIFF raster
-                s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
-                self.run_with_errorcheck(s, tiffile, 
-                                         verbose=False)                                
-
-
-                # Clear the way for contours.
-                s = '/bin/rm -rf %s' % shpfile # 
-                run(s, verbose=False)
-                
-                
-                # Convert contours into GDAL argument
-                u = units.lower()                     
-                fixed_levels = ''
-                
-                for c in contour_list:
-                    fixed_levels += ' %.6f' % c                                                 
-                    #if u == 'mm':
-                    #    fixed_levels += ' %.0f' % c
-                    #elif u == 'cm':     
-                    #    fixed_levels += ' %.2f' % c                            
-                    #elif u == 'm':     
-                    #    fixed_levels += ' %.6f' % c                                 
-                    #else:
-                    #    # E.g. kg/m^2 for ash load
-                    #    fixed_levels += ' %.4f' % c                                                     
-
-                        
-                if verbose: 
-                    print '  Units: %s' % units
-                    print '  Range in data: [%f, %f]' % (min, max) 
-                    print '  Contour levels: %s' % fixed_levels
-                        
-                
-                # Check that all contour levels are within range
-                for c in contour_list:
-                    if not min < c < max:
-                        print '  WARNING: Requested contour %f is outside range and will not be shown.' % c
-                
-                
-                # Run contouring algorithm 
-                s = 'gdal_contour -a %s -fl %s %s %s' % (attribute_name, fixed_levels, tiffile, shpfile)
-                self.run_with_errorcheck(s, shpfile, 
-                                         verbose=False)                               
-                
-                
-                # Generate KML
-                if self.meteorological_model == 'ncep1':
-                    # FIXME: Test should be about coordinate system rather than meteo model
-                    # Such as self.params['Coordinates'] == 'UTM' or 'LON-LAT'
-                    s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)      
-                else:                              
-                    if self.WKT_projection:
-                        s = 'ogr2ogr -f KML -t_srs EPSG:4623 -s_srs %s %s %s' % (prjfile, kmlfile, shpfile)
-                    else: 
-                        print 'WARNING (generate_contours): Model did not have a projection file'
-                        s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)                
-                
-                self.run_with_errorcheck(s, kmlfile, 
-                                         verbose=False)
-                    
-                # Label KML file with contour intervals
-                #label_kml_contours(kmlfile, contours, units)
                                                 
 
     def Xgenerate_contours(self, interval=1, verbose=True):
@@ -759,8 +615,8 @@ class AIM:
                 # Generate GeoTIFF raster
                 netcdf_subdata = 'NETCDF:"%s":THICKNESS' % pathname
                 s = 'gdal_translate -of GTiff -b 1 %s %s' % (netcdf_subdata, tiffile) # FIXME: Band is hardwired
-                self.run_with_errorcheck(s, tiffile, 
-                                         verbose=verbose)                               
+                run_with_errorcheck(s, tiffile, 
+                                    verbose=verbose)                               
 	
 	
                 # Generate contours as shapefiles
@@ -768,8 +624,8 @@ class AIM:
                 run(s, verbose=False)
 	               
                 s = 'gdal_contour -i %f %s %s' % (interval, tiffile, shpfile)
-                self.run_with_errorcheck(s, shpfile, 
-                                         verbose=verbose)               
+                run_with_errorcheck(s, shpfile, 
+                                    verbose=verbose)               
 	               
 	               
 	        # Generate KML
@@ -783,8 +639,8 @@ class AIM:
                 else:   
                     s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)               
 	               
-                self.run_with_errorcheck(s, kmlfile, 
-                                         verbose=verbose)                                
+                run_with_errorcheck(s, kmlfile, 
+                                    verbose=verbose)                                
                                                 
                 
     def write_input_file(self, verbose=False):
