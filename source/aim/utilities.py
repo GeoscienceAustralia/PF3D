@@ -593,12 +593,19 @@ def nc2asc(ncfilename,
         
         
         # Now replace the header which GDAL gets wrong
+        f = NetCDFFile(ncfilename)
+        print f.variables.keys
+        
+        
+        
         if ascii_header_file:
         
             # Read replacement
             f = open(ascii_header_file)
             new_header = f.readlines()[:6]
             f.close()
+            
+            print 'Supplied newheader:', newheader
             
             # Read ASCII file
             f = open(output_filename)

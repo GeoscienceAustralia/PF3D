@@ -79,6 +79,7 @@ import numpy
 
 from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield, get_fall3d_home, get_timestamp
 from utilities import list_to_string
+from utilities import generate_contours as _generate_contours
 from wrapper import AIM
 from coordinate_transforms import UTMtoLL, redfearn
 from logmodule import start_logging
@@ -639,6 +640,84 @@ def generate_hazardmap(scenario, verbose=True):
     # Run hazard maps 
     print 'Generating hazard map for geographic vent location (%f, %f)' % (lon, lat)
     run_hazardmap(model_output_directory, verbose=False)        
-    
+
     print 'Hazard map done in directory: %s' % model_output_directory
+    
+    
+def contour_hazardmap(scenario, verbose=True):
+    """Contouring hazard map from Fall3d NetCDF outputs located in directory given by the variable
+    model_output_directory specified in scenario.
+    
+    The name of the hazard map is assumed to be HazardMaps.res.nc as per Fall3d
+    
+    """
+    
+    
+    filename = 'HazardMaps.res.nc'
+    
+    from Scientific.IO.NetCDF import NetCDFFile
+    
+    # Get params from model script
+    params = get_scenario_parameters(scenario)    
+    
+    model_output_directory = params['model_output_directory']
+    absolutefilename = os.path.join(model_output_directory, filename)
+    
+    print 'Contouring hazard map %s' % absolutefilename
+
+    
+    # Converting NetCDF to ASCII files
+    
+    
+    # Get variables
+    fid = NetCDFFile(absolutefilename)
+    variables = fid.variables.keys()
+    print 'Contouring variables %s' % str(variables)
+   
+    for var in variables:
+        if var.startswith('PLOAD'):
+            contours = params['PLOAD_contours']
+            units = params['PLOAD_units']
+            attribute_name = var
+        elif var.startswith('ISOCHRO'):
+            contours = params['ISOCHRON_contours']
+            units = params['ISOCHRON_units']
+            attribute_name = var    
+        else:
+            print 'Undefined variable %s' % var
+            continue
+
+        # Look for projection file
+        basename, _ = os.path.splitext(absolutefilename)
+        prjfilename = basename + '.prj'
+        if not os.path.exists(prjfilename):
+            msg = 'Projection file %s must be present for contouring to work.\n' % prjfilename
+            msg += 'You can copy the projection file from one of the individual scenarios used to produce the hazard map'
+            raise Exception(msg)
+                
+                
+
+        for subdataset in variables:
+            nc2asc(absolutefilename), 
+            subdataset=subdataset,
+            
+            #XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            #ascii_header_file=self.topography_grid,                           
+            #projection=self.WKT_projection)
+                           
+
+    
+    
+                
+                
+                
+        # Convert
+        _generate_contours(filename, contours, units, attribute_name, 
+                           output_dir=model_output_directory, 
+                           WKT_projection=True,
+                           verbose=verbose)
+
+    
+    
+    print 'Contouring of hazard map done in directory: %s' % model_output_directory
     
