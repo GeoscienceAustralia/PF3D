@@ -3,7 +3,7 @@
 import os, string
 import unittest
 
-from aim.interface import run_scenario
+from aim.interface import run_scenario, contour_hazardmap
 from aim.wrapper import AIM
 from aim.utilities import *
 
@@ -374,6 +374,25 @@ class Test_AIM(unittest.TestCase):
         label_kml_contours('test_contour_with_labels.kml', 78.4866, 5, 'cm')
         
         
+    def test_hazardmap_contouring(self):
+        """Test that hazard maps can be contoured
+        """
+        
+        # Parameters for Guntur
+        scenario = {'vent_easting': 814924,
+                    'vent_northing': 9208168,
+                    'vent_zone': 48,
+                    'vent_hemisphere': 'S',
+                    'load_values': [1, 10, 100],
+                    'fl_values': [0.0002, 0.002],
+                    'model_output_directory': 'test_data',
+                    'PLOAD_contours': True,
+                    'PLOAD_units': 'pct',
+                    'ISOCHRON_contours': True,
+                    'ISOCHRON_units': 'h'}
+
+
+        contour_hazardmap(scenario, verbose=True)
 
 ################################################################################
 

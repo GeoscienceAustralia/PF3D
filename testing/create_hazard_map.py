@@ -13,7 +13,13 @@ vent_hemisphere = 'S'
 load_values = [1, 10, 100] 
 fl_values = [0.0002, 0.002]
 
-# Location of generated windprofiles
+# Contours
+ISOCHRON_contours = True
+ISOCHRON_units = 'h'
+PLOAD_contours = True
+PLOAD_units = 'pct'
+
+# Location of generated windprofiles, hazard map and contours
 model_output_directory = 'guntur_hazard_outputs'
 
 #--------------------------------------

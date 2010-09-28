@@ -78,7 +78,7 @@ import os, sys, time
 import numpy
 
 from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield, get_fall3d_home, get_timestamp
-from utilities import list_to_string
+from utilities import list_to_string, nc2asc
 from utilities import generate_contours as _generate_contours
 from wrapper import AIM
 from coordinate_transforms import UTMtoLL, redfearn
@@ -699,7 +699,7 @@ def contour_hazardmap(scenario, verbose=True):
             raise Exception(msg)
                 
         fid = open(prjfilename)        
-        WKH_projection = fid.read()
+        WKT_projection = fid.read()
         fid.close()
         
 

@@ -116,13 +116,19 @@ def makedir(newdir):
 
 
     
-def get_scenario_parameters(scenario_file):
+def get_scenario_parameters(scenario):
     """Extract dictionary of parameters from scenario file
+    If scenario is already a dictionary it is returned as is.
     """
+    
+    # Return if already dictionary
+    if type(scenario) == type({}):
+        return scenario
+        
     
     # Get all variables from scenario name space
     # Get copy so that the original __dict__ isn't modified
-    scenario_name = scenario_file.split('.')[0]
+    scenario_name = scenario.split('.')[0]
     
     exec('import %s as scenario_module' % scenario_name)
     params = scenario_module.__dict__.copy() 
@@ -468,7 +474,34 @@ def calculate_extrema(filename, verbose=False):
 
     return min_val, max_val    
         
+
+def _write_ascii(header, data, asciifilename, projection):
+    """Internal function to write ASCII data from NetCDF. Used by nc2asc.
+    """
+    
+    rows = data.shape[0]
+    cols = data.shape[1]
+    
+    prjfilename = asciifilename[:-4] + '.prj'
         
+    outfile = open(asciifilename, 'w')
+    outfile.write(header)
+        
+    for j in range(rows)[::-1]: # Rows are upside down
+        for i in range(cols):
+            outfile.write('%f ' % data[j, i])
+        outfile.write('\n')    
+            
+    outfile.close()    
+        
+    if projection:
+        # Create associated projection file
+        fid = open(prjfilename, 'w')
+        fid.write(projection)
+        fid.close()
+
+    
+                
 def nc2asc(ncfilename,
            subdataset,
            projection=None,
@@ -499,18 +532,20 @@ def nc2asc(ncfilename,
     msg = 'Subdataset %s was not found in file %s. Options are %s.' % (subdataset, ncfilename, layers)
     assert subdataset in layers, msg
     
-    
-    
-    units = infile.variables['time'].units
-    msg = 'Time units must be "h". I got %s' % units
-    assert units == 'h', msg
 
     A = infile.variables[subdataset].getValue()            
     msg = 'Data must have 3 dimensions: Time, X and Y. I got shape: %s' % str(A.shape)
     assert len(A.shape) == 3, msg 
+    
+        
+    if 'time' in infile.variables:
+        units = infile.variables['time'].units
+        msg = 'Time units must be "h". I got %s' % units
+        assert units == 'h', msg
+        
+        times = infile.variables['time'].getValue()
+        assert A.shape[0] == len(times)
 
-    times = infile.variables['time'].getValue()
-    assert A.shape[0] == len(times)
     
     cols = infile.dimensions['x']
     rows = infile.dimensions['y']    
@@ -524,11 +559,8 @@ def nc2asc(ncfilename,
     ymin = float(infile.YMIN)
     ymax = float(infile.YMAX)  
     
-    #print xmin, xmax
-    #print ymin, ymax
+    # Check that cells are square
     cellsize = (xmax-xmin)/cols  
-    #print cellsize
-    #print (ymax-ymin)/rows      
     assert numpy.allclose(cellsize, (ymax-ymin)/rows)
         
     header = 'ncols %i\n' % cols
@@ -538,29 +570,17 @@ def nc2asc(ncfilename,
     header += 'cellsize %.1f\n' % cellsize
     header += 'NODATA_value -9999\n'
     
-    # Loop through time slices and name files by hour.
-    for k, t in enumerate(times):
-        hour = str(int(t)).zfill(2) + 'h'
+    if 'time' in infile.variables:    
+        # Loop through time slices and name files by hour.
+        for k, t in enumerate(times):
+            hour = str(int(t)).zfill(2) + 'h'
 
-        asciifilename = basename + '.' + hour + '.' + subdataset.lower() + '.asc'
-        prjfilename = asciifilename[:-4] + '.prj'
-        
-        outfile = open(asciifilename, 'w')
-        outfile.write(header)
-        
-        for j in range(rows)[::-1]: # Rows are upside down
-            for i in range(cols):
-                outfile.write('%f ' % A[k, j, i])
-            outfile.write('\n')    
-            
-        outfile.close()    
-        
-        if projection:
-            # Create associated projection file
-            fid = open(prjfilename, 'w')
-            fid.write(projection)
-            fid.close()
-        
+            asciifilename = basename + '.' + hour + '.' + subdataset.lower() + '.asc'
+            _write_ascii(header, A[k,:,:], asciifilename, projection)
+    else:
+        # Write the one ASCII file
+        asciifilename = basename + '.' + subdataset.lower() + '.asc'
+        _write_ascii(header, A[0,:,:], asciifilename, projection)        
         
     
     infile.close()
