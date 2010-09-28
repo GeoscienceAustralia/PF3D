@@ -666,7 +666,8 @@ def contour_hazardmap(scenario, verbose=True):
     model_output_directory = params['model_output_directory']
     absolutefilename = os.path.join(model_output_directory, filename)
     
-    print 'Contouring hazard map %s' % absolutefilename
+    if verbose:
+        print 'Contouring hazard map %s' % absolutefilename
 
     
     # Converting NetCDF to ASCII files
@@ -675,9 +676,16 @@ def contour_hazardmap(scenario, verbose=True):
     # Get variables
     fid = NetCDFFile(absolutefilename)
     variables = fid.variables.keys()
-    print 'Contouring variables %s' % str(variables)
+    if verbose:
+        print 'Contouring variables %s' % str(variables)
    
     for var in variables:
+    
+        # Ignore x, y and time variables.
+        if var in ['x', 'y', 'time']:
+            continue
+
+        # Look for data
         if var.startswith('PLOAD'):
             contours = params['PLOAD_contours']
             units = params['PLOAD_units']
@@ -687,7 +695,7 @@ def contour_hazardmap(scenario, verbose=True):
             units = params['ISOCHRON_units']
             attribute_name = var    
         else:
-            print 'Undefined variable %s' % var
+            if verbose: print 'WARNING: Undefined variable %s' % var
             continue
 
         # Look for projection file
@@ -711,6 +719,7 @@ def contour_hazardmap(scenario, verbose=True):
         
             if filename.endswith('%s.asc' % attribute_name.lower()):
                 # Contour all generated ASCII files 
+
                 _generate_contours(filename, contours, units, attribute_name, 
                                    output_dir=model_output_directory, 
                                    WKT_projection=True,
@@ -718,5 +727,6 @@ def contour_hazardmap(scenario, verbose=True):
 
     
     
-    print 'Contouring of hazard map done in directory: %s' % model_output_directory
+    if verbose:
+        print 'Contouring of hazard map done in directory: %s' % model_output_directory
     

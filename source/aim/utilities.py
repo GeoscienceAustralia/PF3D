@@ -546,7 +546,6 @@ def nc2asc(ncfilename,
         times = infile.variables['time'].getValue()
         assert A.shape[0] == len(times)
 
-    
     cols = infile.dimensions['x']
     rows = infile.dimensions['y']    
     
@@ -1163,7 +1162,6 @@ def generate_contours(filename, contours, units, attribute_name,
     
     # Get range of data
     min, max = calculate_extrema(pathname)
-    
     # Establish if interval is constant
     if contours is False:
         if verbose: print '  No contouring requested'
@@ -1186,12 +1184,12 @@ def generate_contours(filename, contours, units, attribute_name,
     # Check for degenerate interval values        
     if 0 < interval < 1.0e-6: 
         msg = '  WARNING (generate_contours): Range in file %s is too small to contour: %f' % (pathname, interval)
-        print msg
+        if verbose: print msg
         return
             
     if min + interval >= max:
         msg = '  WARNING (generate_contours): No contours generated for range=[%f, %f], interval=%f' % (min, max, interval) 
-        print msg
+        if verbose: print msg
         return
 
     
@@ -1226,7 +1224,7 @@ def generate_contours(filename, contours, units, attribute_name,
     # Generate GeoTIFF raster
     s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
     run_with_errorcheck(s, tiffile, 
-                             verbose=False)                                
+                        verbose=False)                                
 
 
     # Clear the way for contours.
@@ -1268,7 +1266,6 @@ def generate_contours(filename, contours, units, attribute_name,
     run_with_errorcheck(s, shpfile, 
                         verbose=False)                               
     
-    
     # Generate KML
     if meteorological_model == 'ncep1':
         # FIXME: Test should be about coordinate system rather than meteo model
@@ -1280,11 +1277,8 @@ def generate_contours(filename, contours, units, attribute_name,
         else: 
             print 'WARNING (generate_contours): Model did not have a projection file'
             s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)                
-    
+
     run_with_errorcheck(s, kmlfile, 
                         verbose=False)
-        
-    # Label KML file with contour intervals
-    #label_kml_contours(kmlfile, contours, units)
                                                 
     

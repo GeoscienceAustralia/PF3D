@@ -391,8 +391,25 @@ class Test_AIM(unittest.TestCase):
                     'ISOCHRON_contours': True,
                     'ISOCHRON_units': 'h'}
 
+        contour_hazardmap(scenario, verbose=False)
+        
+        # Assert that kml files are there
+        # FIXME: Should also check the contents
+        found = False
+        for filename in os.listdir('test_data'):
+            if filename == 'HazardMaps.pload_1.kml':
+                found = True
+        assert found
 
-        contour_hazardmap(scenario, verbose=True)
+        fid = open('test_data/HazardMaps.pload_1.kml')
+        lines = fid.readlines()
+        fid.close()
+        
+        assert len(lines) > 20  
+
+        assert lines[1].startswith('<kml')
+            
+              
 
 ################################################################################
 
