@@ -524,8 +524,12 @@ def nc2asc(ncfilename,
     ymin = float(infile.YMIN)
     ymax = float(infile.YMAX)  
     
-    cellsize = (xmax-xmin)/(cols-1)  
-    assert cellsize == (ymax-ymin)/(rows-1)      
+    #print xmin, xmax
+    #print ymin, ymax
+    cellsize = (xmax-xmin)/cols  
+    #print cellsize
+    #print (ymax-ymin)/rows      
+    assert numpy.allclose(cellsize, (ymax-ymin)/rows)
         
     header = 'ncols %i\n' % cols
     header += 'nrows %i\n' % rows 
