@@ -498,7 +498,8 @@ def run_multiple_windfields(scenario,
 
         print 'Processor %d initialised on node %s' % (p, processor_name),
     
-    pypar.barrier()
+        pypar.barrier()
+        
     
     if p == 0:
         header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
@@ -642,6 +643,8 @@ def generate_hazardmap(scenario, verbose=True):
     run_hazardmap(model_output_directory, verbose=False)        
 
     print 'Hazard map done in directory: %s' % model_output_directory
+
+    contour_hazardmap(scenario, verbose=verbose)
     
     
 def contour_hazardmap(scenario, verbose=True):
@@ -653,7 +656,7 @@ def contour_hazardmap(scenario, verbose=True):
     """
     
     
-    filename = 'HazardMaps.res.nc'
+    filename = 'HazardMaps.res.nc' # Hardwired name as per Fall3d
     
     from Scientific.IO.NetCDF import NetCDFFile
     
@@ -695,27 +698,23 @@ def contour_hazardmap(scenario, verbose=True):
             msg += 'You can copy the projection file from one of the individual scenarios used to produce the hazard map'
             raise Exception(msg)
                 
-                
+        fid = open(prjfilename)        
+        WKH_projection = fid.read()
+        fid.close()
+        
 
-        for subdataset in variables:
-            nc2asc(absolutefilename), 
-            subdataset=subdataset,
-            
-            #XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            #ascii_header_file=self.topography_grid,                           
-            #projection=self.WKT_projection)
+        ascii_filename=nc2asc(absolutefilename, 
+                              subdataset=attribute_name,
+                              projection=WKT_projection)
                            
-
-    
-    
-                
-                
-                
-        # Convert
-        _generate_contours(filename, contours, units, attribute_name, 
-                           output_dir=model_output_directory, 
-                           WKT_projection=True,
-                           verbose=verbose)
+        for filename in os.listdir(model_output_directory):
+        
+            if filename.endswith('%s.asc' % attribute_name.lower()):
+                # Contour all generated ASCII files 
+                _generate_contours(filename, contours, units, attribute_name, 
+                                   output_dir=model_output_directory, 
+                                   WKT_projection=True,
+                                   verbose=verbose)
 
     
     
