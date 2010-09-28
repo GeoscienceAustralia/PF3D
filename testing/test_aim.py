@@ -101,7 +101,7 @@ class Test_AIM(unittest.TestCase):
         pass
 
 
-    def test_Fall3d_files(self):
+    def XXtest_Fall3d_files(self):
         """test_Fall3d_files - Characterisation test of generated files
         Exclude final output for space reasons
         """
@@ -153,7 +153,7 @@ class Test_AIM(unittest.TestCase):
             #aim.run_fall3d()
             #aim.process_model_results()            
             
-    def test_full_simulation(self):            
+    def XXtest_full_simulation(self):            
         """test_full_simulation - Characterisation test of end to end scenario.
         """
             
@@ -191,7 +191,7 @@ class Test_AIM(unittest.TestCase):
         grdfilename = 'tmpxkshkoek.grd'
         
         s = 'cp test_data.grd %s' % grdfilename
-        run(s)
+        run(s, verbose=False)
         
         # Run conversion from grd to asc
         grd2asc(grdfilename)
@@ -239,7 +239,7 @@ class Test_AIM(unittest.TestCase):
         ascfilename = 'yfeauhkrc.asc'
         
         s = 'cp test_data.asc %s' % ascfilename
-        run(s)
+        run(s, verbose=False)
         
         # Run conversion from asc to grd
         asc2grd(ascfilename)
@@ -247,7 +247,7 @@ class Test_AIM(unittest.TestCase):
         # Check that result is good
         # FIXME: Refactor compare_to_reference_file to accommodate the more general case
         
-        print 'Open', ascfilename[:-4] + '.grd'
+        #print 'Open', ascfilename[:-4] + '.grd'
 
         fid1 = open(ascfilename[:-4] + '.grd')
         data1 = fid1.readlines()
@@ -359,7 +359,8 @@ class Test_AIM(unittest.TestCase):
         assert num.allclose([min, max], [3.163064e-27, 5648.979])
         
 
-    def test_label_kml_contours(self):
+    # FIXME: Obsolete now
+    def XXtest_label_kml_contours(self):
         """test labeling of kml contours.
         
         This is really not testing the validity of the KML, but generates one that
