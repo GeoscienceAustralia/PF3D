@@ -96,7 +96,15 @@ if __name__ == '__main__':
         msg += 'On Ubuntu/Debian systems this can be done as follows\n'
         msg += 'sudo apt-get install libnetcdf-dev'
         raise Exception(msg)                                
+
+    err = os.system('python -c "import Scientific.IO.NetCDF" 2> /dev/null')
+    if err != 0:
+        msg = 'Python module python-scientific must be present\n'
+        msg += 'On Ubuntu/Debian systems this can be done as follows\n'
+        msg += 'sudo apt-get install python-scientific'
+        raise Exception(msg)                
         
+                
         
     
     #--------------------------------------------------------------------

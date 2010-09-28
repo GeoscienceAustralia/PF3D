@@ -9,6 +9,7 @@ from config import update_marker, tephra_output_dir, fall3d_distro
 import numpy
 import logging
 import time
+from Scientific.IO.NetCDF import NetCDFFile
 
 
 def run(cmd, 
@@ -166,7 +167,7 @@ def check_presence_of_required_parameters(params):
     
         entry = line.strip()
         
-        # Skip commens and blank lines
+        # Skip comments and blank lines
         if entry == '': continue                
         if entry.startswith('#'): continue
        
@@ -468,8 +469,103 @@ def calculate_extrema(filename, verbose=False):
     return min_val, max_val    
         
         
-        
 def nc2asc(ncfilename,
+           subdataset,
+           projection=None,
+           verbose=False):
+    """Extract given subdataset from ncfile name and create one ASCII file for each band.
+    
+    This function is reading the NetCDF file using the Python Library Scientific.IO.NetCDF
+    
+    Time is assumed to be in whole hours.
+    """
+
+    
+    basename, _ = os.path.splitext(ncfilename) # Get rid of .nc
+    basename, _ = os.path.splitext(basename)   # Get rid of .res
+        
+    if verbose:
+        print 'Converting layer %s in file %s to ASCII files' % (subdataset, 
+                                                                 ncfilename)
+          
+    
+    infile = NetCDFFile(ncfilename)
+
+    layers = infile.variables.keys()
+
+    
+    
+    
+    msg = 'Subdataset %s was not found in file %s. Options are %s.' % (subdataset, ncfilename, layers)
+    assert subdataset in layers, msg
+    
+    
+    
+    units = infile.variables['time'].units
+    msg = 'Time units must be "h". I got %s' % units
+    assert units == 'h', msg
+
+    A = infile.variables[subdataset].getValue()            
+    msg = 'Data must have 3 dimensions: Time, X and Y. I got shape: %s' % str(A.shape)
+    assert len(A.shape) == 3, msg 
+
+    times = infile.variables['time'].getValue()
+    assert A.shape[0] == len(times)
+    
+    cols = infile.dimensions['x']
+    rows = infile.dimensions['y']    
+    
+    assert A.shape[1] == rows
+    assert A.shape[2] == cols
+    
+    # Header information
+    xmin = float(infile.XMIN)
+    xmax = float(infile.XMAX)
+    ymin = float(infile.YMIN)
+    ymax = float(infile.YMAX)  
+    
+    cellsize = (xmax-xmin)/(cols-1)  
+    assert cellsize == (ymax-ymin)/(rows-1)      
+        
+    header = 'ncols %i\n' % cols
+    header += 'nrows %i\n' % rows 
+    header += 'xllcorner %.1f\n' % xmin      
+    header += 'yllcorner %.1f\n' % ymin          
+    header += 'cellsize %.1f\n' % cellsize
+    header += 'NODATA_value -9999\n'
+    
+    # Loop through time slices and name files by hour.
+    for k, t in enumerate(times):
+        hour = str(int(t)).zfill(2) + 'h'
+
+        asciifilename = basename + '.' + hour + '.' + subdataset.lower() + '.asc'
+        prjfilename = asciifilename[:-4] + '.prj'
+        
+        outfile = open(asciifilename, 'w')
+        outfile.write(header)
+        
+        for j in range(rows)[::-1]: # Rows are upside down
+            for i in range(cols):
+                outfile.write('%f ' % A[k, j, i])
+            outfile.write('\n')    
+            
+        outfile.close()    
+        
+        if projection:
+            # Create associated projection file
+            fid = open(prjfilename, 'w')
+            fid.write(projection)
+            fid.close()
+        
+        
+    
+    infile.close()
+
+    
+    
+    
+        
+def OBSOLETE_nc2asc(ncfilename,
            subdataset,
            ascii_header_file=None, # If ASCII header is known it can be supplied
            projection=None,
@@ -481,6 +577,9 @@ def nc2asc(ncfilename,
     
     """
        
+       
+    print 'NC', ncfilename
+    
     # First assert that this is a valid NetCDF file and that requested subdataset exists
     s = 'gdalinfo %s' % ncfilename
     
@@ -492,6 +591,7 @@ def nc2asc(ncfilename,
     else:
         lines = p.stdout.readlines()
         expected_header = 'Driver: netCDF/Network Common Data Format'
+        print lines
         header = lines[0].strip()
         if header != expected_header:
             msg = 'File %s does not look like a valid NetCDF file.\n' % ncfilename
@@ -593,19 +693,20 @@ def nc2asc(ncfilename,
         
         
         # Now replace the header which GDAL gets wrong
-        f = NetCDFFile(ncfilename)
-        print f.variables.keys
+        #f = NetCDFFile(ncfilename)
+        #print f.variables.keys
         
         
         
         if ascii_header_file:
+        #if False:
         
             # Read replacement
             f = open(ascii_header_file)
             new_header = f.readlines()[:6]
             f.close()
             
-            print 'Supplied newheader:', newheader
+            print 'Supplied newheader:', new_header
             
             # Read ASCII file
             f = open(output_filename)

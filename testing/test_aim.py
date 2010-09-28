@@ -9,7 +9,7 @@ from aim.utilities import *
 
 import numpy as num
 
-def lines_numerically_close(s1, s2):
+def lines_numerically_close(s1, s2, rtol=1.0e-5, atol=1.0e-8):
     """Compare two strings but allow floats to be within a tolerance
     """
     
@@ -39,7 +39,7 @@ def lines_numerically_close(s1, s2):
             
             
             # Compare floats
-            if not num.allclose(x, y):
+            if not num.allclose(x, y, rtol=rtol, atol=atol):
                 # Floats are not close enough to match
                 return False
             
@@ -283,34 +283,30 @@ class Test_AIM(unittest.TestCase):
         This test relies on files
         merapi.res.nc
         merapi.003h.depothick.asc
-        merapi.003h.depothick.prj        
-        
         
         """
         
+        ref_data = 'test_data/merapi.03h.depthick.asc'
+        
         # Run conversion from grd to asc
-        nc2asc('merapi.res.nc', 'THICKNESS', 
-               ascii_header_file='merapi_topography.txt',
+        nc2asc('test_data/merapi.res.nc', 'THICKNESS', 
                verbose=False)
         
         # Check that result is good
         # FIXME: Refactor compare_to_reference_file to accommodate the more general case
         
-        fid1 = open('merapi.003h.thickness.asc')
+        fid1 = open('test_data/merapi.03h.thickness.asc')
         data1 = fid1.readlines()
         fid1.close()        
         
-        fid2 = open('merapi.003h.depothick_reference.asc')
+        fid2 = open(ref_data)
         data2 = fid2.readlines()
         fid2.close()        
-        
-        # FIXME: Not yet sure about reference data
-        return
         
         
         for i in range(len(data1)):
             msg = 'ASC file does not match '
-            msg += 'reference test_data.asc in line %i.\n' % i
+            msg += 'reference %s in line %i.\n' % (ref_data, i)
             msg += data1[i]
             msg += data2[i]
             
@@ -319,8 +315,9 @@ class Test_AIM(unittest.TestCase):
                 # Try to see if they are close enough 
                 # in a numerical sense
                 
-                if not lines_numerically_close(data1[i], data2[i]):
+                if not lines_numerically_close(data1[i], data2[i], atol=1.e-6):
                     raise Exception(msg)
+                    
             
     def test_pipe(self):
         """test_pipe

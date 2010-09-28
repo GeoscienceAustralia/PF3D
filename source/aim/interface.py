@@ -222,11 +222,11 @@ def _run_scenario(scenario, dircomment=None,
         aim.run_fall3d(verbose=verbose)
 
     # Fall3d postprocessing nc2grd
-    aim.nc2grd()
+    #aim.nc2grd()
     
     # AIM post processing
-    #aim.convert_ncgrids_to_asciigrids(verbose=verbose)
-    aim.convert_surfergrids_to_asciigrids()
+    aim.convert_ncgrids_to_asciigrids(verbose=verbose)
+    #aim.convert_surfergrids_to_asciigrids()
     aim.generate_contours(verbose=True)
 
     aim.organise_output()
