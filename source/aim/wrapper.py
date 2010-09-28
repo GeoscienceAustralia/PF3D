@@ -217,26 +217,26 @@ class AIM:
         # Default values for wind. FIXEM (Ole): This should be simplified and rationalised
         # Vertical wind profile data generated from scenario_wind.txt
         if self.meteorological_model == 'profile':
-            self.windprofile = self.basepath + '.profile'
+            self.wind_profile = self.basepath + '.profile'
         else:    
-            self.windprofile = scenario_name + '.ncep1.nc'                    
+            self.wind_profile = scenario_name + '.ncep1.nc'                    
        
         # AIM wind profile
         self.aim_wind_profile = scenario_name + '_wind.txt'                
                     
                     
         # Check for explicit nomination of wind profile
-        if 'windprofile' in params:
-            windprofile = params['windprofile']
-            if windprofile.endswith('.txt'):
-                self.aim_wind_profile = windprofile
-            elif windprofile.endswith('.profile'):
-                self.windprofile = windprofile
-            elif windprofile.endswith('.ncep'):
-                msg = 'Explicit nomination of ncep file not yet implemented: %' % windprofile
+        if 'wind_profile' in params:
+            wind_profile = params['wind_profile']
+            if wind_profile.endswith('.txt'):
+                self.aim_wind_profile = wind_profile
+            elif wind_profile.endswith('.profile'):
+                self.wind_profile = wind_profile
+            elif wind_profile.endswith('.ncep'):
+                msg = 'Explicit nomination of ncep file not yet implemented: %' % wind_profile
                 raise Exception(msg)
             else:
-                msg = 'Unknown format for wind field: %' % windprofile
+                msg = 'Unknown format for wind field: %' % wind_profile
                 raise Exception(msg)            
 
 
@@ -363,7 +363,7 @@ class AIM:
         Requires 
         - input file
         - topography
-        - windprofile
+        - wind profile
         """
         
 
@@ -385,7 +385,7 @@ class AIM:
 
             
         cmd = '%s '*7 % (executable, logfile, 
-                         self.inputfile, self.windprofile, 
+                         self.inputfile, self.wind_profile, 
                          self.databasefile, 
                          self.topography, self.meteorological_model)
 
@@ -797,7 +797,7 @@ class AIM:
     # AIM conversion routines
     #------------------------    
         
-    def generate_windprofile(self, verbose=False):
+    def generate_wind_profile(self, verbose=False):
         """Read wind profile data in the format 
     
                Hour 1
@@ -837,20 +837,20 @@ class AIM:
         zlayers = self.params['wind_altitudes']
         nz=len(zlayers)
 
-        local_windprofile = self.scenario_name + '.profile'
+        local_wind_profile = self.scenario_name + '.profile'
         
         # Look for specified native Fall3D profile first
-        if os.path.exists(self.windprofile):
+        if os.path.exists(self.wind_profile):
             # Copy and return
-            print 'Using native Fall3d wind profile %s' % self.windprofile
-            s = 'cp %s %s' % (self.windprofile, self.output_dir)                
+            print 'Using native Fall3d wind profile %s' % self.wind_profile
+            s = 'cp %s %s' % (self.wind_profile, self.output_dir)                
             run(s)
             return           
-        elif os.path.exists(local_windprofile):
+        elif os.path.exists(local_wind_profile):
             # Look for local native profile
             # Copy and return
-            print 'Using native Fall3d wind profile %s' % local_windprofile
-            s = 'cp %s %s' % (local_windprofile, self.windprofile)                
+            print 'Using native Fall3d wind profile %s' % local_wind_profile
+            s = 'cp %s %s' % (local_wind_profile, self.wind_profile)                
             run(s)
             return                       
 
@@ -897,7 +897,7 @@ class AIM:
 
 
         # Write Fall3D wind profile
-        outfile=open(self.windprofile, 'w')
+        outfile=open(self.wind_profile, 'w')
 
         vent_location_x = self.params['X_coordinate_of_vent']
         vent_location_y = self.params['Y_coordinate_of_vent']        
@@ -924,7 +924,7 @@ class AIM:
                 s = float(fields[0]) # Speed (m/s)
                 
                 d = get_wind_direction(fields[1], 
-                                       filename=self.windprofile)
+                                       filename=self.wind_profile)
                 
                 ux, uy = convert_meteorological_winddirection_to_windfield(s, d)
                 

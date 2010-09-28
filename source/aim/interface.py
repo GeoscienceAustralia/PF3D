@@ -212,7 +212,7 @@ def _run_scenario(scenario, dircomment=None,
         aim.write_input_file(verbose=verbose)
 
         # Generate input data files in Fall3D format
-        aim.generate_windprofile(verbose=verbose)    
+        aim.generate_wind_profile(verbose=verbose)    
         aim.generate_topography(verbose=verbose)
     
         # Run scripts for Fall3d
@@ -375,7 +375,7 @@ def set_timeblocks_in_windfield(filename, verbose=False):
         
     
 def generate_wind_profiles_from_ncep(scenario, update_timeblocks=False, verbose=True):
-    """Generate windprofiles from NCEP data.
+    """Generate wind profiles from NCEP data.
     
     The results are stored in a temporary directory specified in the variable windfield_directory
     Any previous data in that will be destroyed.
@@ -443,7 +443,7 @@ def generate_wind_profiles_from_ncep(scenario, update_timeblocks=False, verbose=
     run_nc2prof(windfield_directory, verbose=False)        
     
     
-    # Patch windprofiles to have the correct vent location in UTM coordinates
+    # Patch wind profiles to have the correct vent location in UTM coordinates
     #from coordinate_transforms import redfearn
     #_, vent_location_easting, vent_location_northing = redfearn(lat, lon)
     
@@ -541,7 +541,7 @@ def run_multiple_windfields(scenario,
             params = get_scenario_parameters(scenario)    
         
             # Override or create parameters derived from native Fall3d wind field
-            params['windprofile'] = windfield        
+            params['wind_profile'] = windfield        
             params['wind_altitudes'] = get_layers_from_windfield(windfield)
             params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)
             params['Meteorological_model'] = 'profile'
