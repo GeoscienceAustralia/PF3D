@@ -205,21 +205,26 @@ class AIM:
 
             
         # FIXME: The meteorological model should really be derived from the specified file type    
-        if params['Meteorological_model'] == 'profile':    
-            self.meteorological_model = 'profile'
-        elif params['Meteorological_model'] == 'ncep':                
-            self.meteorological_model = 'ncep1'
+        if 'Meteorological_model' in params:
+            if params['Meteorological_model'] == 'profile':    
+                self.meteorological_model = 'profile'
+            elif params['Meteorological_model'] == 'ncep':                
+                self.meteorological_model = 'ncep1'
+            else:
+                msg = 'Meteorological_model should be either "profile" or "ncep1"'
+                raise Exception(msg)
         else:
-            msg = 'Meteorological_model should be either "profile" or "ncep1"'
-            raise Exception(msg)
+            # Default - FIXME (Ole): My God this is getting horrible. Need to clean out and remove obsolete options
+            params['Meteorological_model'] = 'profile'
+            self.meteorological_model = 'profile'            
         
         
-        # Default values for wind. FIXEM (Ole): This should be simplified and rationalised
+        # Default values for wind. FIXME (Ole): This should be simplified and rationalised
         # Vertical wind profile data generated from scenario_wind.txt
         if self.meteorological_model == 'profile':
             self.wind_profile = self.basepath + '.profile'
         else:    
-            self.wind_profile = scenario_name + '.ncep1.nc'                    
+            self.wind_profile = scenario_name + '.ncep1.nc'                  
        
         # AIM wind profile
         self.aim_wind_profile = scenario_name + '_wind.txt'                
