@@ -571,11 +571,11 @@ class AIM:
                 if verbose: print 'Processing %s:\t' % filename
                 fields = filename.split('.')
                 
-                if fields[-2] == 'depload': 
+                if fields[-2] == 'load': 
                     units = 'kg/m^2'
                     contours = self.params['Load_contours']
                     attribute_name = 'Load[%s]' % units
-                elif fields[-2] == 'depthick': 
+                elif fields[-2] == 'thickness': 
                     units = self.params['Thickness_units'].lower()
                     contours = self.params['Thickness_contours']                    
                     attribute_name = 'Thickness[%s]' % units                    
