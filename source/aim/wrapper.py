@@ -113,18 +113,12 @@ class AIM:
         makedir(output_dir)
         self.output_dir = output_dir
             
-        
-        # MOVED THIS TO OUTER LEVEL
-        # Start logging to AIM log file
-        #self.logfile = self.basepath + '_AIM.log'
-        #start_logging(filename=self.logfile, echo=echo)
-
                         
         if verbose:
             header('Running AIM/Fall3d scenario %s' % self.scenario_name)
             print 'Writing to %s' % output_dir
 
-        # FIXME (Ole): We should do exactly this for wind as well                
+        # FIXME (Ole): We should do always ask for explicit grid files
         if params['Topography_grid']:
             self.topography_grid = params['Topography_grid']
         else:
@@ -202,53 +196,18 @@ class AIM:
             fid.close()
             self.native_AIM_topo = True
 
-
-            
-        # FIXME: The meteorological model should really be derived from the specified file type    
-        if 'Meteorological_model' in params:
-            if params['Meteorological_model'] == 'profile':    
-                self.meteorological_model = 'profile'
-            elif params['Meteorological_model'] == 'ncep':                
-                self.meteorological_model = 'ncep1'
-            else:
-                msg = 'Meteorological_model should be either "profile" or "ncep1"'
-                raise Exception(msg)
-        else:
-            # Default - FIXME (Ole): My God this is getting horrible. Need to clean out and remove obsolete options
-            params['Meteorological_model'] = 'profile'
-            self.meteorological_model = 'profile'            
-        
-        
-        # Default values for wind. FIXME (Ole): This should be simplified and rationalised
-        # Vertical wind profile data generated from scenario_wind.txt
-        if self.meteorological_model == 'profile':
-            self.wind_profile = self.basepath + '.profile'
-        else:    
-            self.wind_profile = scenario_name + '.ncep1.nc'                  
-       
-        # AIM wind profile
-        self.aim_wind_profile = scenario_name + '_wind.txt'                
                     
-                    
-        # Check for explicit nomination of wind profile
-        if 'wind_profile' in params:
-            wind_profile = params['wind_profile']
-            if wind_profile.endswith('.txt'):
-                self.aim_wind_profile = wind_profile
-            elif wind_profile.endswith('.profile'):
-                self.wind_profile = wind_profile
-            elif wind_profile.endswith('.ncep'):
-                msg = 'Explicit nomination of ncep file not yet implemented: %' % wind_profile
-                raise Exception(msg)
-            else:
-                msg = 'Unknown format for wind field: %' % wind_profile
-                raise Exception(msg)            
-
-
-
-
-            
+        # Check wind profile
+        msg = 'Keyword wind_profile must be present in AIM script and point to file containing wind data'
+        assert 'wind_profile' in params, msg
         
+        wind_basename, wind_ext = os.path.splitext(params['wind_profile'])
+        
+        msg = 'Unknown format for wind field: %s. Allowed are .txt (native AIM) or .profile (native FALL3D)' % params['wind_profile']
+        assert wind_ext in ['.txt', '.profile'], msg
+        
+        self.wind_profile = wind_basename + '.profile' # Native FALL3D wind profile
+        self.meteorological_model = params['Meteorological_model'] = 'profile' # Do NCEP later if needed                        
                         
         
         #--------------------------------------
@@ -835,110 +794,97 @@ class AIM:
            in which case values will be reused for the simulation duration   
         """
         
-        
-        if self.meteorological_model == 'ncep1':
-            return
-        
-        local_wind_profile = self.scenario_name + '.profile'
-        
-        # Look for specified native Fall3D profile first
-        if os.path.exists(self.wind_profile):
-            # Copy and return
-            print 'Using native Fall3d wind profile %s' % self.wind_profile
-            s = 'cp %s %s' % (self.wind_profile, self.output_dir)                
-            run(s)
-            return           
-        elif os.path.exists(local_wind_profile):
-            # Look for local native profile
-            # Copy and return
-            print 'Using native Fall3d wind profile %s' % local_wind_profile
-            s = 'cp %s %s' % (local_wind_profile, self.wind_profile)                
-            run(s)
-            return                       
+        # Convert Native AIM wind profile to FALL3D profile
+        if self.params['wind_profile'].endswith('.txt'):
+            
+            self.aim_wind_profile = self.params['wind_profile']
 
+            # Get values for Z layers from script
+            zlayers = self.params['wind_altitudes']
+            nz=len(zlayers)
 
-        # Get values for Z layers from script
-        zlayers = self.params['wind_altitudes']
-        nz=len(zlayers)
-
+                        
+            # Otherwise try to generate profile from AIM wind profile
+            print 'Using AIM wind profile %s' % self.aim_wind_profile
+            infile = open(self.aim_wind_profile)
+            lines = infile.readlines()
+            infile.close()            
+        
+            # Skip blanks
+            for i, line in enumerate(lines):
+                if line.strip() != '': break
+            lines = lines[i:]
+        
+            # Gather wind data for each time block
+            timeblocks=[]
+            headline = lines[0].lower()
+            if headline.startswith('constant'):
+                # Model will use these wind values throughout
+                timeblock = []
+                for line in lines[1:]:
+                    if line.strip()=='': continue # Skip blank lines
+                    timeblock.append(line.strip())                
+                
+                # Repeat timeblock for duration of eruption (rounded up)
+                t_stop = self.params['End_time_of_run']
+                try:
+                    t_start = float(self.params['Start_time_of_eruption'])
+                except:
+                    t_start = float(self.params['Start_time_of_eruption'][0]) 
                     
-        # Otherwise try to generate profile from AIM wind profile
-        print 'Using AIM wind profile %s' % self.aim_wind_profile
-        infile = open(self.aim_wind_profile)
-        lines = infile.readlines()
-        infile.close()            
-        
-        # Skip blanks
-        for i, line in enumerate(lines):
-            if line.strip() != '': break
-        lines = lines[i:]
-        
-        # Gather wind data for each time block
-        timeblocks=[]
-        headline = lines[0].lower()
-        if headline.startswith('constant'):
-            # Model will use these wind values throughout
-            timeblock = []
-            for line in lines[1:]:
-                if line.strip()=='': continue # Skip blank lines
-                timeblock.append(line.strip())                
-            
-            # Repeat timeblock for duration of eruption (rounded up)
-            t_stop = self.params['End_time_of_run']
-            try:
-                t_start = float(self.params['Start_time_of_eruption'])
-            except:
-                t_start = float(self.params['Start_time_of_eruption'][0]) 
-                
-            for i in range(int(t_stop-t_start+1)):
-                timeblocks.append(timeblock)
-        else:    
-            # Model will use same timeblock for each hour
-            for line in lines:
-                if line.strip()=='': continue # Skip blank lines
-                if line.startswith('Hour'):
-                    timeblock=[]
+                for i in range(int(t_stop-t_start+1)):
                     timeblocks.append(timeblock)
-                else:
-                    timeblock.append(line.strip())
+            else:    
+                # Model will use same timeblock for each hour
+                for line in lines:
+                    if line.strip()=='': continue # Skip blank lines
+                    if line.startswith('Hour'):
+                        timeblock=[]
+                        timeblocks.append(timeblock)
+                    else:
+                        timeblock.append(line.strip())
 
 
-        # Write Fall3D wind profile
-        outfile=open(self.wind_profile, 'w')
+            # Write Fall3D wind profile
+            outfile=open(self.wind_profile, 'w')
 
-        vent_location_x = self.params['X_coordinate_of_vent']
-        vent_location_y = self.params['Y_coordinate_of_vent']        
-        outfile.write('%.0f. %.0f.\n' % (vent_location_x, vent_location_y))
-                
-        eruption_year = self.params['Eruption_Year']
-        eruption_month = self.params['Eruption_Month']                
-        eruption_day = self.params['Eruption_Day']
-        outfile.write('%s%s%s\n' % (str(eruption_year), string.zfill(eruption_month, 2), string.zfill(eruption_day, 2)))        
+            vent_location_x = self.params['X_coordinate_of_vent']
+            vent_location_y = self.params['Y_coordinate_of_vent']        
+            outfile.write('%.0f. %.0f.\n' % (vent_location_x, vent_location_y))
+                    
+            eruption_year = self.params['Eruption_Year']
+            eruption_month = self.params['Eruption_Month']                
+            eruption_day = self.params['Eruption_Day']
+            outfile.write('%s%s%s\n' % (str(eruption_year), string.zfill(eruption_month, 2), string.zfill(eruption_day, 2)))        
         
-        for hour, timeblock in enumerate(timeblocks):
-            if len(timeblock) != nz:
-                msg = 'Number of z layers in each time block much equal the number of specified Z layers.\n'
-                msg += 'You specfied %i Z layers ' % nz
-                msg += 'but timeblock in %s was %s, i.e. %i layers.' % (self.aim_wind_profile, timeblock, len(timeblock))
-                raise Exception(msg)
-            
-            itime1=hour*3600
-            itime2=itime1+3600
-            outfile.write('%i %i\n' % (itime1, itime2))
-            outfile.write('%i\n' % nz)
-            for i, zlayer in enumerate(zlayers):
-                fields = timeblock[i].strip().split()
-                s = float(fields[0]) # Speed (m/s)
+            for hour, timeblock in enumerate(timeblocks):
+                if len(timeblock) != nz:
+                    msg = 'Number of z layers in each time block much equal the number of specified Z layers.\n'
+                    msg += 'You specfied %i Z layers ' % nz
+                    msg += 'but timeblock in %s was %s, i.e. %i layers.' % (self.aim_wind_profile, timeblock, len(timeblock))
+                    raise Exception(msg)
                 
-                d = get_wind_direction(fields[1], 
-                                       filename=self.wind_profile)
-                
-                ux, uy = convert_meteorological_winddirection_to_windfield(s, d)
-                
-                T = float(fields[2])
-                outfile.write('%f %f %f %f\n' % (zlayer, ux, uy, T))
+                itime1=hour*3600
+                itime2=itime1+3600
+                outfile.write('%i %i\n' % (itime1, itime2))
+                outfile.write('%i\n' % nz)
+                for i, zlayer in enumerate(zlayers):
+                    fields = timeblock[i].strip().split()
+                    s = float(fields[0]) # Speed (m/s)
+                    
+                    d = get_wind_direction(fields[1], 
+                                           filename=self.aim_wind_profile)
+                    
+                    ux, uy = convert_meteorological_winddirection_to_windfield(s, d)
+                    
+                    T = float(fields[2])
+                    outfile.write('%f %f %f %f\n' % (zlayer, ux, uy, T))
 
-        outfile.close()
+            outfile.close()
+
+        # Copy and return
+        s = 'cp %s %s' % (self.wind_profile, self.output_dir)                
+        run(s)
 
         
 
@@ -1008,8 +954,8 @@ class AIM:
         makedir(audit_dir)
         
         # Store input files
-        if os.path.exists(self.aim_wind_profile):
-            s = 'cp %s %s' % (self.aim_wind_profile, audit_dir)
+        if os.path.exists(self.params['wind_profile']):
+            s = 'cp %s %s' % (self.params['wind_profile'], audit_dir)
             try:
                 run(s, verbose=verbose)
             except:

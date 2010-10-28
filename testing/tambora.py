@@ -34,9 +34,7 @@ Z_max = 50000
 Z_increment = 10000
 
 # Select meteorological input type
-#Meteorological_model = 'ncep'                 # profile, ncep, ...
-Meteorological_model = 'profile'                 # profile, ncep, ...
-
+wind_profile = 'tambora_wind.txt'
 wind_altitudes = [0, 10000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 

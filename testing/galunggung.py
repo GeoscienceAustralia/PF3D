@@ -33,8 +33,8 @@ Z_min = 0.0
 Z_max = 10000
 Z_increment = 1000
 
-# Select meteorological parameters
-wind_profile = 'galunggung.profile'
+# Select meteorological input
+wind_profile = 'galunggung_wind.txt'
 wind_altitudes = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)

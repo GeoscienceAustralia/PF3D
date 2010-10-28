@@ -33,11 +33,8 @@ Z_min = 0.0
 Z_max = 40000
 Z_increment = 10000
 
-
-# Select meteorological input type
-#Meteorological_model = 'ncep'                 # profile, ncep, ...
-Meteorological_model = 'profile'                 # profile, ncep, ...
-
+# Select meteorological input
+wind_profile = 'pinatubo_wind.txt'
 wind_altitudes = [100, 2000, 1000, 5000, 7500, 40000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
