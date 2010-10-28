@@ -118,12 +118,8 @@ class AIM:
             header('Running AIM/Fall3d scenario %s' % self.scenario_name)
             print 'Writing to %s' % output_dir
 
-        # FIXME (Ole): We should do always ask for explicit grid files
-        if params['Topography_grid']:
-            self.topography_grid = params['Topography_grid']
-        else:
-            # If Topography grid is not specified, look for one named as scenario
-            self.topography_grid = scenario_name + '_topography.txt'
+        # Get name of topographic grid    
+        self.topography_grid = params['Topography_grid']
                         
         # Derive projection file name               
         basename, ext = os.path.splitext(self.topography_grid) 

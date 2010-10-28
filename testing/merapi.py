@@ -54,8 +54,8 @@ Vent_height = 2968
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 Mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
 Height_above_vent = [40000, 30000, 20000, 10000, 5000, 2000, 1000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
-A = [3,4]                                           # (suzuki only)            
-L = [1,5]                                           # (suzuki only)
+A = [3,4]                                       # (suzuki only)            
+L = [1,5]                                       # (suzuki only)
 Height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 
