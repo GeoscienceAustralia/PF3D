@@ -839,9 +839,6 @@ class AIM:
         if self.meteorological_model == 'ncep1':
             return
         
-        zlayers = self.params['wind_altitudes']
-        nz=len(zlayers)
-
         local_wind_profile = self.scenario_name + '.profile'
         
         # Look for specified native Fall3D profile first
@@ -859,7 +856,12 @@ class AIM:
             run(s)
             return                       
 
-        
+
+        # Get values for Z layers from script
+        zlayers = self.params['wind_altitudes']
+        nz=len(zlayers)
+
+                    
         # Otherwise try to generate profile from AIM wind profile
         print 'Using AIM wind profile %s' % self.aim_wind_profile
         infile = open(self.aim_wind_profile)
