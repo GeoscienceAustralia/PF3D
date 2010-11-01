@@ -11,18 +11,18 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = '2cl_contours_variable'
+Eruption_comment = 'merged wind test'
 
 # Time (Volcanological input file)
-Eruption_Year = 2010                            # YYYY  
-Eruption_Month = 5                              # MM  
-Eruption_Day = 18                               # DD 
-Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 60                            # Mins       
-End_time_of_meteo_data = 3                      # Hours after 00
-Start_time_of_eruption = [0, 1, 2]              # Hours after 00
-End_time_of_eruption = 3                        # Hours after 00 
-End_time_of_run = 3                             # Hours after 00  
+Eruption_Year = 2009                            # YYYY  
+Eruption_Month = 1                              # MM  
+Eruption_Day = 31                               # DD 
+Start_time_of_meteo_data = 6                    # Hours after 00
+Meteo_time_step = 360                            # Mins       
+End_time_of_meteo_data = 36                      # Hours after 00
+Start_time_of_eruption = 12              # Hours after 00
+End_time_of_eruption = 30                        # Hours after 00 
+End_time_of_run = 36                             # Hours after 00  
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
@@ -34,8 +34,8 @@ Z_max = 50000
 Z_increment = 10000
 
 # Select meteorological input type
-wind_profile = 'merapi_wind.txt'
-wind_altitudes = [0, 100, 500, 1000, 5000, 10000, 20000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+wind_profile = 'merapi_wind_013100-020218.profile'
+#wind_altitudes = [0, 100, 500, 1000, 5000, 10000, 20000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -54,8 +54,8 @@ Vent_height = 2968
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 Mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
 Height_above_vent = [40000, 30000, 20000, 10000, 5000, 2000, 1000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
-A = [3,4]                                       # (suzuki only)            
-L = [1,5]                                       # (suzuki only)
+A = 3                                       # (suzuki only)            
+L = 1                                       # (suzuki only)
 Height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 

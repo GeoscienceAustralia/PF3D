@@ -11,18 +11,18 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'version_6_test'
+Eruption_comment = 'merged wind test'
 
 # Time (Volcanological input file)
-Eruption_Year = 1982                            # YYYY  
-Eruption_Month = 5                              # MM  
-Eruption_Day = 17                               # DD 
-Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 60                            # Mins       
-End_time_of_meteo_data = 5                      # Hours after 00
-Start_time_of_eruption = 0                      # Hours after 00
-End_time_of_eruption = 5                        # Hours after 00 
-End_time_of_run = 5                             # Hours after 00  
+Eruption_Year = 2009                            # YYYY  
+Eruption_Month = 1                              # MM  
+Eruption_Day = 31                               # DD 
+Start_time_of_meteo_data = 6                    # Hours after 00
+Meteo_time_step = 360                            # Mins       
+End_time_of_meteo_data = 36                      # Hours after 00
+Start_time_of_eruption = 12                      # Hours after 00
+End_time_of_eruption = 30                        # Hours after 00 
+End_time_of_run = 36                             # Hours after 00  
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 176267                   # UTM zone implied by topography projection 
@@ -34,8 +34,8 @@ Z_max = 10000
 Z_increment = 1000
 
 # Select meteorological input
-wind_profile = 'galunggung_wind.txt'
-wind_altitudes = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+wind_profile = 'galunggung_wind_013100-020218.profile'
+#wind_altitudes = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN

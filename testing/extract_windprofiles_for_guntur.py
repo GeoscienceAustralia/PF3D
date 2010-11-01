@@ -1,4 +1,4 @@
-"""Test script for aim to exctract wind profiles from NCEP1 data
+"""Test script for aim to extract wind profiles from NCEP1 data
 """
 
 # Vent location in geographic coordinates (decimal degrees) of the Guntur crater
@@ -23,7 +23,7 @@ end_hour = 18
 NCEP_dir = '/model_area/tephra/3D_wind/NCEP1/hazardmap'
 
 # Location of generated windprofiles
-windfield_directory = 'guntur_wind'
+windfield_directory = 'guntur_multiple_wind_test'
 
 # Determine if generated wind profile should be used for hazard modelling 
 # Options are 

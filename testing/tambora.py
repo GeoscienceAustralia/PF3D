@@ -11,18 +11,18 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'version_6_test'
+Eruption_comment = 'merged'
 
 # Time (Volcanological input file)
-Eruption_Year = 1815                            # YYYY  
-Eruption_Month = 4                              # MM  
-Eruption_Day = 5                                # DD 
-Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 60                            # Mins       
-End_time_of_meteo_data = 6                      # Hours after 00
-Start_time_of_eruption = 0                      # Hours after 00
-End_time_of_eruption = 3                        # Hours after 00 
-End_time_of_run = 6                             # Hours after 00  
+Eruption_Year = 2009                            # YYYY  
+Eruption_Month = 1                              # MM  
+Eruption_Day = 31                                # DD 
+Start_time_of_meteo_data = 6                    # Hours after 00
+Meteo_time_step = 360                            # Mins       
+End_time_of_meteo_data = 36                      # Hours after 00
+Start_time_of_eruption = 12                      # Hours after 00
+End_time_of_eruption = 30                        # Hours after 00 
+End_time_of_run = 36                             # Hours after 00  
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 609511                   # UTM zone implied by topography projection 
@@ -34,8 +34,8 @@ Z_max = 50000
 Z_increment = 10000
 
 # Select meteorological input type
-wind_profile = 'tambora_wind.txt'
-wind_altitudes = [0, 10000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+wind_profile = 'tambora_wind_013100-020218.profile'
+#wind_altitudes = [0, 10000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 
 # Granulometry (Volcanological input file)
