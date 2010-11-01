@@ -422,7 +422,6 @@ def join_wind_profiles(windfield_directory):
     The parameter update_timeblocks *must* have been set to True in the generation
     """
         
-    # Collect all files averaged files and sort them by date
     wind_data_files = {}
     seconds = []
     for x in os.listdir(windfield_directory):
