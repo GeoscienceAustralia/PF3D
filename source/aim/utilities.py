@@ -1068,7 +1068,7 @@ def convert_windfield_to_meteorological_winddirection(u, v):
     if speed > 0:
         theta = acos(u/speed)
     else:
-        theta = 0 # Set wind direction to arbitrarily in case speed is zero
+        theta = 0 # Set wind direction arbitrarily in case speed is zero
     
     # Correct for quadrant 3 and 4
     if v < 0:
