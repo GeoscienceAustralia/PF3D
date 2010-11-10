@@ -260,7 +260,55 @@ def get_layers_from_windfield(windfield):
     
     return altitudes
 
-            
+
+def get_temporal_parameters_from_windfield(windfield):
+    """Get eruption year, month and date from Fall3d wind field
+    
+    Extension .profile assumed
+    Format is 
+    
+    458662 9129502
+    20101109
+    43200 54000
+    13
+    90.5 -0.05 1.23 25.36
+    1013.2 -3.33 1.77 20.47  
+    
+    
+    Return year, month, date, start_time, end_time, time_step 
+    times are in seconds UTC after midnight.    
+    
+    """
+    
+    if not windfield.endswith('.profile'):
+        msg = 'Windfield %s must be native Fall3d to work' % windfield
+        raise Exception(msg)
+        
+        
+    fid = open(windfield)
+    lines = fid.readlines()
+    fid.close()
+
+    timestamp = lines[1]
+    
+    year = int(timestamp[:4])
+    month = int(timestamp[4:6])
+    date = int(timestamp[6:])
+
+    start_time = int(lines[2].split()[0])
+    
+    # Search backwards for end time and also get time interval for the last step
+    for line in lines[::-1]:
+        fields = line.split()
+        if len(fields) == 2:
+            end_time = int(fields[1])
+            step = end_time - int(fields[0])
+            break
+        
+    return year, month, date, start_time, end_time, step    
+                
+                
+                
             
 def get_eruptiontime_from_windfield(windfield):
     """Get eruption year, month and date from Fall3d wind field
@@ -276,6 +324,8 @@ def get_eruptiontime_from_windfield(windfield):
     ....
     
     """
+    
+    # FIXME: This should really be superseded by get_temporal_parameters_from_windfield(windfield):
     
     if not windfield.endswith('.profile'):
         return

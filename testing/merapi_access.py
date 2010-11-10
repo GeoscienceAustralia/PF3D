@@ -14,15 +14,20 @@ Eruption observation details:
 Eruption_comment = 'using ACCESS-T data'
 
 # Time (Volcanological input file)
-Eruption_Year = 2010                            # YYYY  
-Eruption_Month = 11                             # MM  
-Eruption_Day = 9                               # DD 
-Start_time_of_meteo_data = 12                    # Hours after 00 UTC
-Meteo_time_step = 360                            # Mins       
-End_time_of_meteo_data = 24                      # Hours after 00
-Start_time_of_eruption = 14              # Hours after 00
-End_time_of_eruption = 16                        # Hours after 00 
-End_time_of_run = 24                             # Hours after 00  
+#Eruption_Year = 2010                            # YYYY  
+#Eruption_Month = 11                             # MM  
+#Eruption_Day = 9                               # DD 
+#Start_time_of_meteo_data = 12                    # Hours after 00 UTC
+#Meteo_time_step = 180                            # Mins       
+#End_time_of_meteo_data = 24                      # Hours after 00
+#Start_time_of_eruption = 14              # Hours after 00
+#End_time_of_eruption = 16                        # Hours after 00 
+#End_time_of_run = 24                             # Hours after 00  
+
+# When specified alone, these are in hours relative to the start of meteo data
+Start_time_of_eruption = 2              
+End_time_of_eruption = 4                
+End_time_of_run = 8
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 

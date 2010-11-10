@@ -629,7 +629,7 @@ def run_multiple_windfields(scenario,
         
             # Override or create parameters derived from native Fall3d wind field
             params['wind_profile'] = windfield        
-            params['wind_altitudes'] = get_layers_from_windfield(windfield)
+            params['wind_altitudes'] = get_layers_from_windfield(windfield) # FIXME: Try to comment this out.
             params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)
             params['Meteorological_model'] = 'profile'
 

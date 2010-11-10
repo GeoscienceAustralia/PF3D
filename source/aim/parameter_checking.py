@@ -6,7 +6,7 @@ and adds AIM specific methods.
 """
 
 from math import ceil
-from utilities import list_to_string, get_scenario_parameters
+from utilities import list_to_string, get_scenario_parameters, get_temporal_parameters_from_windfield
 
 def check_parameter_ranges(params):    
     """Catch unphysical situations and raise appropriate error messages
@@ -128,7 +128,9 @@ def derive_implied_parameters(topography_grid, projection, params):
     """
     
     derive_spatial_parameters(topography_grid, projection, params)
+    derive_temporal_parameters(params)    
     derive_modelling_parameters(params)
+
    
             
         
@@ -254,7 +256,75 @@ def derive_spatial_parameters(topography_grid, projection, params):
         
     params['UTMZONE'] = '%s%s' % (projection['zone'], projection['hemisphere'])   # E.g. 51S
     
+
+def derive_temporal_parameters(params):
+    """Derive temporal parameters from wind profile if necessary and possible
+       Input:
+           params: dictionary with model parameters
+    """
     
+    scenario_name = params['scenario_name']
+    
+    wind_profile = params['wind_profile']
+    if wind_profile.endswith('.profile'):        
+        params['Meteorological_model'] = 'profile'    
+    else:
+        # Only derive from native Fall3d profile
+        return
+
+            
+
+    temporal_parameters = ['Eruption_Year', 'Eruption_Month', 'Eruption_Day',
+                           'Start_time_of_meteo_data', 'Meteo_time_step', 
+                           'End_time_of_meteo_data', 
+                           #'Start_time_of_eruption',
+                           #'End_time_of_eruption',
+                           #'End_time_of_run'
+                           ]
+                           
+    # If all are there do nothing
+    some_missing = False
+    for p in temporal_parameters:
+        if p not in params:
+            some_missing = True
+            
+    if some_missing:
+    
+        # Assert that all are missing
+        for p in temporal_parameters:
+            if p in params:
+                msg = 'You omitted one or more of the time parameters. '
+                msg = 'Either specify all or omit all in which case AIM will to derive values for them from the wind profile. '
+                msg += 'The time parameters are: %s' % str(temporal_parameters)
+                raise Exception(msg)
+    
+    
+        # Try to derive everything from the native Fall3d profile
+
+        year, month, day, start_time, end_time, time_step = get_temporal_parameters_from_windfield(wind_profile)
+        
+        # Assign date
+        params['Eruption_Year'] = year
+        params['Eruption_Month'] = month
+        params['Eruption_Day'] = day        
+                
+        # Convert times to hours
+        params['Start_time_of_meteo_data'] = start_time/3600.
+        params['End_time_of_meteo_data'] = end_time/3600.
+        
+        # Convert step times to minutes FIXME: Why the heck is this?
+        params['Meteo_time_step'] = time_step/60.         
+
+        # Redefine meaning of eruption start and end time so that user specifies them relative to start of meteo data
+        params['Start_time_of_eruption'] += params['Start_time_of_meteo_data']
+        params['End_time_of_eruption'] += params['Start_time_of_meteo_data']  
+        params['End_time_of_run'] += params['Start_time_of_meteo_data']
+              
+                 
+
+
+     
+        
             
 def derive_modelling_parameters(params):
     """Compute modelling parameters that can be derived from scenario parameters
@@ -266,7 +336,7 @@ def derive_modelling_parameters(params):
     #FIXME CHECK MORE
 
 
-    params['meteo_time_step'] = params['Meteo_time_step'] * 60 # Convert timestep in 'hours' to 'minutes' (FIXME: Naming?)
+    params['meteo_time_step'] = params['Meteo_time_step'] * 60 # Convert timestep in 'hours' to 'minutes' (FIXME: Naming?) FIXME: Why? Maybe it is minutes to seconds
     #params['source_type'] = 'plume'                       # only relevant source type
     params['load_units'] = 'kg/m2'                        # only relevant unit 
     params['class_load_units'] = 'kg/m2'                  # only relevant unit
@@ -275,3 +345,5 @@ def derive_modelling_parameters(params):
     params['z_maximum_concentration_units'] = 'kg/m3'     # only relevant unit
 
 
+
+    
