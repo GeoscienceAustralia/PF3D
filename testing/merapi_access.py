@@ -11,18 +11,18 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'merged wind test'
+Eruption_comment = 'using ACCESS-T data'
 
 # Time (Volcanological input file)
-Eruption_Year = 2009                            # YYYY  
-Eruption_Month = 1                              # MM  
-Eruption_Day = 31                               # DD 
-Start_time_of_meteo_data = 6                    # Hours after 00
+Eruption_Year = 2010                            # YYYY  
+Eruption_Month = 11                             # MM  
+Eruption_Day = 9                               # DD 
+Start_time_of_meteo_data = 12                    # Hours after 00 UTC
 Meteo_time_step = 360                            # Mins       
-End_time_of_meteo_data = 36                      # Hours after 00
-Start_time_of_eruption = 12              # Hours after 00
-End_time_of_eruption = 30                        # Hours after 00 
-End_time_of_run = 36                             # Hours after 00  
+End_time_of_meteo_data = 24                      # Hours after 00
+Start_time_of_eruption = 14              # Hours after 00
+End_time_of_eruption = 16                        # Hours after 00 
+End_time_of_run = 24                             # Hours after 00  
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
@@ -34,8 +34,7 @@ Z_max = 50000
 Z_increment = 10000
 
 # Select meteorological parameters
-wind_profile = 'merapi_wind_013100-020218.profile'
-#wind_altitudes = [0, 100, 500, 1000, 5000, 10000, 20000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+wind_profile = 'IDY25100_2010110912_24h_merapi.profile'
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
