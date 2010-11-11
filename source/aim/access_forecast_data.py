@@ -80,10 +80,20 @@ def download_wind_data(url, verbose=True):
     if len(files) == 0:
         msg = 'Did not get any suitable ACCESS wind files from %s' % url
         raise Exception(msg)
-
-    # Download them if not already there
+        
     makedir(work_area)
-    
+
+    # Clear out files different from this batch (i.e. older) 
+    current_timestamp = files[0].split()[3]
+    for filename in os.listdir(work_area):
+        timestamp = filename[0].split()[3]
+        
+        if timestamp != current_timestamp:
+            if verbose: print 'Moving %s to /tmp' % filename
+            cmd = 'cd %s; /bin/mv -f %s /tmp' % (work_area, filename)
+            run(cmd, verbose=verbose)
+
+    # Download them if not already there        
     for filename in files:
         if verbose: header('Downloading %s from %s' % (filename, url))
         cmd = 'cd %s; wget -c %s/%s' % (work_area, url, filename) # -c option requests wget to continue partial downloads
