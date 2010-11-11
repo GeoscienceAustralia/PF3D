@@ -54,7 +54,10 @@ def get_profile_from_web(url, vent_coordinates, verbose=True):
 def download_wind_data(url, verbose=True):
     """Download data files
     """
-    
+
+    # Make sure work area exists
+    makedir(work_area)
+        
     # Get available files
     fid = urllib2.urlopen(url)
     print dir(fid)
@@ -96,12 +99,8 @@ def download_wind_data(url, verbose=True):
             current_timestamp = timestamp
             cur_t = t
 
-    makedir(work_area)
-
     # Clear out files different from this batch (i.e. older) 
-
     if verbose: print 'Selecting files with timestamp: %s' % current_timestamp
-    
     for filename in os.listdir(work_area):
     
         if filename.endswith('.pressure.nc'):
@@ -110,7 +109,7 @@ def download_wind_data(url, verbose=True):
             if timestamp != current_timestamp:
                 if verbose: print 'Moving %s to /tmp' % filename
                 cmd = 'cd %s; /bin/mv -f %s /tmp' % (work_area, filename)
-                run(cmd, verbose=verbose)
+                run(cmd, verbose=False)
 
     # Download them if not already there        
     for filename in files:
