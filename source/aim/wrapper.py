@@ -15,6 +15,9 @@ from utilities import generate_contours as _generate_contours
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
 
+from access_forecast_data import get_profile_from_web
+
+
 from osgeo import osr # GDAL libraries
         
 class AIM:
@@ -194,9 +197,20 @@ class AIM:
 
                     
         # Check wind profile
-        msg = 'Keyword wind_profile must be present in AIM script and point to file containing wind data'
+        msg = 'Keyword wind_profile must be present in AIM script and point to file containing wind data or to an ACCESS web site'
         assert 'wind_profile' in params, msg
         
+        # If wind profile is an ACCESS web site: download, generate profile and point AIM to it
+        if params['wind_profile'].index('://') > -1:
+            # This looks like a web address - get the file list, generate profile and redefine 'wind_profile'
+
+            vent_location = (params['X_coordinate_of_vent'], 
+                             params['Y_coordinate_of_vent'], 
+                             zone, hemisphere)
+            params['wind_profile'] = get_profile_from_web(params['wind_profile'], vent_location, verbose=verbose)
+
+        
+        # Register wind profile
         wind_basename, wind_ext = os.path.splitext(params['wind_profile'])
         
         msg = 'Unknown format for wind field: %s. Allowed are .txt (native AIM) or .profile (native FALL3D)' % params['wind_profile']

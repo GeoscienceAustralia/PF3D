@@ -1,8 +1,4 @@
-"""Run all AIM executables
-
-This script replaces the scripts provided by Fall3D
-and adds AIM specific methods.
-
+"""Check AIM parameters and derive values where possible
 """
 
 from math import ceil
