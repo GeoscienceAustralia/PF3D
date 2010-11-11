@@ -86,12 +86,14 @@ def download_wind_data(url, verbose=True):
     # Clear out files different from this batch (i.e. older) 
     current_timestamp = files[0].split('.')[3]
     for filename in os.listdir(work_area):
-        timestamp = filename[0].split('.')[3]
+    
+        if filename.endswith('.pressure.nc'):
+            timestamp = filename.split('.')[3]
         
-        if timestamp != current_timestamp:
-            if verbose: print 'Moving %s to /tmp' % filename
-            cmd = 'cd %s; /bin/mv -f %s /tmp' % (work_area, filename)
-            run(cmd, verbose=verbose)
+            if timestamp != current_timestamp:
+                if verbose: print 'Moving %s to /tmp' % filename
+                cmd = 'cd %s; /bin/mv -f %s /tmp' % (work_area, filename)
+                run(cmd, verbose=verbose)
 
     # Download them if not already there        
     for filename in files:
