@@ -111,11 +111,14 @@ def download_wind_data(url, verbose=True):
                 cmd = 'cd %s; /bin/mv -f %s /tmp' % (work_area, filename)
                 run(cmd, verbose=False)
 
-    # Download them if not already there        
+    # Download the latest files (if they already exist it won't take any bandwidth)
     for filename in files:
-        if verbose: header('Downloading %s from %s' % (filename, url))
-        cmd = 'cd %s; wget -c %s/%s' % (work_area, url, filename) # -c option requests wget to continue partial downloads
-        run(cmd, verbose=verbose)
+    
+        timestamp = filename.split('.')[3]
+        if timestamp == current_timestamp:        
+            if verbose: header('Downloading %s from %s' % (filename, url))
+            cmd = 'cd %s; wget -c %s/%s' % (work_area, url, filename) # -c option requests wget to continue partial downloads
+            run(cmd, verbose=verbose)
 
 
 
