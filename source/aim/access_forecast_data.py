@@ -84,9 +84,9 @@ def download_wind_data(url, verbose=True):
     makedir(work_area)
 
     # Clear out files different from this batch (i.e. older) 
-    current_timestamp = files[0].split()[3]
+    current_timestamp = files[0].split('.')[3]
     for filename in os.listdir(work_area):
-        timestamp = filename[0].split()[3]
+        timestamp = filename[0].split('.')[3]
         
         if timestamp != current_timestamp:
             if verbose: print 'Moving %s to /tmp' % filename
