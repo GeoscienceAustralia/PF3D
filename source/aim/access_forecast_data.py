@@ -14,7 +14,7 @@ http://www.bom.gov.au/nwp/doc/bulletins/apob83.pdf
 
 """
 
-import numpy, os
+import numpy, os, time
 from Scientific.IO import NetCDF
 from coordinate_transforms import UTMtoLL, redfearn  # FIXME: from aim.coord......
     
@@ -61,6 +61,7 @@ def download_wind_data(url, verbose=True):
 
     # Select files to download
     files = []
+    timestamps = {}
     for line in fid.readlines():
         fields = line.split()
         filename = fields[-1]
@@ -70,6 +71,10 @@ def download_wind_data(url, verbose=True):
         if fields[0] == 'IDY25100':
             msg = 'File %s obtained from %s does not look like an ACCESS file. I expected suffix .pressure.nc' % (filename, url)
             assert filename.endswith('.pressure.nc'), msg            
+
+            # Record each unique timestamp
+            current_timestamp = fields[3]
+            timestamps[current_timestamp] = None
             
             if fields[1] == 'pop-flds' and fields[2] == 'pop-lvls':
                 hour = int(fields[4])
@@ -81,10 +86,22 @@ def download_wind_data(url, verbose=True):
         msg = 'Did not get any suitable ACCESS wind files from %s' % url
         raise Exception(msg)
         
+        
+    # Keep only those with the latest timestamp - in cases where more than one exist
+    cur_t = time.mktime(time.strptime(current_timestamp, '%Y%m%d%H'))
+    for timestamp in timestamps.keys():
+        t = time.mktime(time.strptime(timestamp, '%Y%m%d%H'))    
+        
+        if t > cur_t:
+            current_timestamp = timestamp
+            cur_t = t
+
     makedir(work_area)
 
     # Clear out files different from this batch (i.e. older) 
-    current_timestamp = files[0].split('.')[3]
+
+    if verbose: print 'Selecting files with timestamp: %s' % current_timestamp
+    
     for filename in os.listdir(work_area):
     
         if filename.endswith('.pressure.nc'):
