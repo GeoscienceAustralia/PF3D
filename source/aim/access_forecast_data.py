@@ -85,10 +85,9 @@ def download_wind_data(url, verbose=True):
     makedir(work_area)
     
     for filename in files:
-        if filename not in os.listdir(work_area):
-            if verbose: header('Downloading %s from %s' % (filename, url))
-            cmd = 'cd %s; wget %s/%s' % (work_area, url, filename)
-            run(cmd, verbose=verbose)
+        if verbose: header('Downloading %s from %s' % (filename, url))
+        cmd = 'cd %s; wget -c %s/%s' % (work_area, url, filename) # -c option requests wget to continue partial downloads
+        run(cmd, verbose=verbose)
 
 
 
@@ -285,6 +284,9 @@ def extract_access_windprofile(access_dir,
             fid.write('%.1f %.2f %.2f %.2f\n' % (altitude, u_wind, v_wind, temperature))
     
     fid.close()
+    
+    if verbose:
+        print 'Generated new wind profile: %s' % output_filename
     return output_filename
     
     
