@@ -43,7 +43,7 @@ def get_profile_from_web(url, vent_coordinates, verbose=True):
 
     
     # Convert downloaded data to FALL3D wind profile at 
-    fn = extract_access_windprofile(access_dir=work_dir,
+    fn = extract_access_windprofile(access_dir=work_area,
                                     utm_vent_coordinates=vent_coordinates,
                                     verbose=verbose)
                         
