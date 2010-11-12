@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'using ACCESS-T data from web'
+Eruption_comment = 'ACCESS-T wind data'
 
 # Time (Volcanological input file)
 #Eruption_Year = 2010                            # YYYY  
@@ -90,7 +90,7 @@ Topography_grid = 'merapi_topography.txt'       # Specify ASCII topography grid 
 #   True: Provide a fixed number of contours covering entire range
 #   Number: Fixed (vertical) interval between contours
 #   List of numbers: Exact contour levels
-Thickness_contours = [1, 2, 5, 50, 100]         # True, False, number or list of numbers
+Thickness_contours = [1, 2, 5, 10, 20, 50, 100]         # True, False, number or list of numbers
 Thickness_units = 'cm'                          # mm/cm/m
 
 Load_contours = 2000                            # True, False, number or list of numbers    

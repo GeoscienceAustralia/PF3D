@@ -112,7 +112,8 @@ def run_scenario(scenario,
     """
 
     try:
-        name = os.path.splitext(scenario)[0]
+        x = os.path.split(scenario)[-1]
+        name = os.path.splitext(x)[0]
     except:
         name = 'run'
         
