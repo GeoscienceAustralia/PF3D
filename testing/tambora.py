@@ -17,12 +17,12 @@ Eruption_comment = 'merged'
 Eruption_Year = 2009                            # YYYY  
 Eruption_Month = 1                              # MM  
 Eruption_Day = 31                                # DD 
-Start_time_of_meteo_data = 6                    # Hours after 00
-Meteo_time_step = 360                            # Mins       
-End_time_of_meteo_data = 36                      # Hours after 00
+Start_time_of_meteo_data = 0                    # Hours after 00
+Meteo_time_step = 3600                            # Mins       
+End_time_of_meteo_data = 72                      # Hours after 00
 Start_time_of_eruption = 12                      # Hours after 00
-End_time_of_eruption = 30                        # Hours after 00 
-End_time_of_run = 36                             # Hours after 00  
+End_time_of_eruption = 18                        # Hours after 00 
+End_time_of_run = 24                             # Hours after 00  
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 609511                   # UTM zone implied by topography projection 
@@ -53,8 +53,8 @@ Sphericity_maximum = 0.9
 # Source (Volcanological input file)
 Vent_height = 1554.6
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
-Mass_eruption_rate = 1e9                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
-Height_above_vent = [40000, 30000, 20000, 10000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
+Mass_eruption_rate = 'estimate'                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
+Height_above_vent = 40000			# m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
 Height_or_MFR = 'MFR'                           # plume only

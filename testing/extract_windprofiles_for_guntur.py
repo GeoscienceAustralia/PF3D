@@ -2,28 +2,28 @@
 """
 
 # Vent location in geographic coordinates (decimal degrees) of the Guntur crater
-vent_easting = 814924
-vent_northing = 9208168
-vent_zone = 48
+vent_easting = 439423
+vent_northing = 9167213
+vent_zone = 49
 vent_hemisphere = 'S'
 
 # Time to start extraction
-start_year = 2009
-start_month = 1
-start_day = 1
-start_hour = 0
+start_year = 2003
+start_month = 10
+start_day = 29
+start_hour = 18
 
 # Time to end extraction
-end_year = 2009
-end_month = 2
-end_day = 27
-end_hour = 18
+end_year = 2003
+end_month = 10
+end_day = 30
+end_hour = 12
 
 # Location of NCEP files
-NCEP_dir = '/model_area/tephra/3D_wind/NCEP1/hazardmap'
+NCEP_dir = '/model_area/tephra/3D_wind/NCEP1/indonesia/2003'
 
 # Location of generated windprofiles
-windfield_directory = 'guntur_multiple_wind_test'
+windfield_directory = '/model_area/tephra/3D_wind/NCEP1/merapi_single_scenario_2003'
 
 # Determine if generated wind profile should be used for hazard modelling 
 # Options are 

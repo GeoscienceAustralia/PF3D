@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'version_6_test'
+Eruption_comment = 'vertical wind test'
 
 # Time (Volcanological input file)
 Eruption_Year = 1991                            # YYYY  

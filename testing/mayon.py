@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = '3D wind test'
+Eruption_comment = 'vertical wind test'
 
 # Time (Volcanological input file)
 Eruption_Year = 2000                            # YYYY  
@@ -19,10 +19,10 @@ Eruption_Month = 2                              # MM
 Eruption_Day = 24                               # DD 
 Start_time_of_meteo_data = 0                    # Hours after 00
 Meteo_time_step = 60                            # Mins       
-End_time_of_meteo_data = 12                      # Hours after 00
+End_time_of_meteo_data = 10                      # Hours after 00
 Start_time_of_eruption = [0.5, 1.75, 2, 2.20]                  # Hours after 00
 End_time_of_eruption = 2.5                        # Hours after 00 
-End_time_of_run = 12                             # Hours after 00  
+End_time_of_run = 10                             # Hours after 00  
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 574207                   # UTM zone implied by topography projection 

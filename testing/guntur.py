@@ -11,18 +11,18 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'merged wind test'
+Eruption_comment = 'extracted wind test'
 
 # Time (Volcanological input file)
 Eruption_Year = 2009                            # YYYY  
 Eruption_Month = 1                              # MM  
 Eruption_Day = 31                               # DD 
-Start_time_of_meteo_data = 6                    # Hours after 00
-Meteo_time_step = 360                            # Mins       
-End_time_of_meteo_data = 36                       # Hours after 00
+Start_time_of_meteo_data = 0                    # Hours after 00
+Meteo_time_step = 3600                            # Mins       
+End_time_of_meteo_data = 96                       # Hours after 00
 Start_time_of_eruption = 12                      # Hours after 00
-End_time_of_eruption = 30                        # Hours after 00 
-End_time_of_run = 36                              # Hours after 00  
+End_time_of_eruption = 18                        # Hours after 00 
+End_time_of_run = 24                              # Hours after 00  
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
@@ -52,8 +52,8 @@ Sphericity_maximum = 0.9
 # Source (Volcanological input file)
 Vent_height = 2249 
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
-Mass_eruption_rate = 1e4                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
-Height_above_vent = [9000, 7000, 5000, 2000, 1000, 500] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
+Mass_eruption_rate = 'estimate'                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
+Height_above_vent = 9000			# m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
 Height_or_MFR = 'MFR'                           # plume only
@@ -88,7 +88,7 @@ Topography_grid = 'guntur_topography.txt'       # Specify ASCII topography grid 
 Thickness_contours = True                       # True, False, number or list of numbers
 Thickness_units = 'cm'                          # mm/cm/m
 
-Load_contours = 2000                            # True, False, number or list of numbers                                                 
+Load_contours = True                            # True, False, number or list of numbers                                                 
 
 # Run model using specified parameters
 if __name__ == '__main__':
