@@ -201,7 +201,7 @@ class AIM:
         assert 'wind_profile' in params, msg
         
         # If wind profile is an ACCESS web site: download, generate profile and point AIM to it
-        if params['wind_profile'].index('://') > -1:
+        if params['wind_profile'].find('://') > -1:
             # This looks like a web address - get the file list, generate profile and redefine 'wind_profile'
 
             vent_location = (params['X_coordinate_of_vent'], 
