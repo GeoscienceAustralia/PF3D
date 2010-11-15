@@ -14,15 +14,6 @@ Eruption observation details:
 Eruption_comment = 'ACCESS-T wind data'
 
 # Time (Volcanological input file)
-#Eruption_Year = 2010                            # YYYY  
-#Eruption_Month = 11                             # MM  
-#Eruption_Day = 9                               # DD 
-#Start_time_of_meteo_data = 12                    # Hours after 00 UTC
-#Meteo_time_step = 180                            # Mins       
-#End_time_of_meteo_data = 24                      # Hours after 00
-#Start_time_of_eruption = 14              # Hours after 00
-#End_time_of_eruption = 16                        # Hours after 00 
-#End_time_of_run = 24                             # Hours after 00  
 
 # When specified alone, these are in hours relative to the start of meteo data
 Start_time_of_eruption = 2              
@@ -46,8 +37,8 @@ Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGA
 Number_of_grainsize_classes = 6
 Mean_grainsize = 2.5                            # phi
 Sorting = 1.5
-Minimum_grainsize = 0                           # phi
-Maximum_grainsize = 5                           # phi
+Minimum_grainsize = 4                           # phi
+Maximum_grainsize = -4                           # phi
 Density_minimum = 1200                          # kg/m3
 Density_maximum = 2300                          # kg/m3
 Sphericity_minimum = 0.9
@@ -57,7 +48,7 @@ Sphericity_maximum = 0.9
 Vent_height = 2968
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 Mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
-Height_above_vent = [40000, 30000, 20000, 10000, 5000, 2000, 1000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
+Height_above_vent = [20000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 3                                       # (suzuki only)            
 L = 1                                       # (suzuki only)
 Height_or_MFR = 'MFR'                           # plume only
@@ -93,7 +84,7 @@ Topography_grid = 'merapi_topography.txt'       # Specify ASCII topography grid 
 Thickness_contours = [1, 2, 5, 10, 20, 50, 100]         # True, False, number or list of numbers
 Thickness_units = 'cm'                          # mm/cm/m
 
-Load_contours = 2000                            # True, False, number or list of numbers    
+Load_contours = [0.1, 90, 150, 300]                      # True, False, number or list of numbers    
 
 # Run model using specified parameters
 if __name__ == '__main__':
