@@ -20,7 +20,7 @@ PLOAD_contours = True
 PLOAD_units = 'pct'
 
 # Location of generated windprofiles, hazard map and contours
-model_output_directory = '/model_area/tephra/3D_wind/NCEP1/merapi_multiple_wind_2000_2009_VEI3_outputs'
+model_output_directory = '/model_area/tephra/3D_wind/NCEP1/VEI2_9km_outputs'
 
 #--------------------------------------
 if __name__ == '__main__':
