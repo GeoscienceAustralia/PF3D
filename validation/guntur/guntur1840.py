@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'ole_1840_DEM150_final'
+Eruption_comment = 'guntur_1840_validation'
 
 # Time (Volcanological input file)
 Eruption_Year = 1840                            # YYYY  
@@ -21,7 +21,7 @@ Start_time_of_meteo_data = 0                    # Hours after 00
 Meteo_time_step = 60                            # Mins       
 End_time_of_meteo_data = 5                      # Hours after 00
 Start_time_of_eruption = 0                      # Hours after 00
-End_time_of_eruption = 5                      # Hours after 00 
+End_time_of_eruption = 5                      	# Hours after 00 
 End_time_of_run = 5                             # Hours after 00  
 
 # Location (Volcanological input file)
@@ -33,9 +33,8 @@ Z_min = 0.0
 Z_max = 10000
 Z_increment = 1000
 
-# Select meteorological input type
-Meteorological_model = 'profile'                 # profile, ncep, ...
-
+# Select meteorological parameter
+wind_profile = 'guntur1840_wind.txt'
 wind_altitudes = [500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
 
 # Granulometry (Volcanological input file)
@@ -43,8 +42,8 @@ Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGA
 Number_of_grainsize_classes = 8
 Mean_grainsize = -1.5                           # phi
 Sorting = 2
-Minimum_grainsize = -4                           # phi
-Maximum_grainsize = 3                          # phi
+Minimum_grainsize = -4                          # phi
+Maximum_grainsize = 3                        	# phi
 Density_minimum = 1200                          # kg/m3
 Density_maximum = 2500                          # kg/m3
 Sphericity_minimum = 0.9
