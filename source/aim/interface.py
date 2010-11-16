@@ -117,6 +117,8 @@ def run_scenario(scenario,
     except:
         name = 'run'
         
+    # FIXME: Refactor so that output_dir can be computed here (through a library call) and put log file there.
+    #        Must therefore also refactor output_dir in AIM constructor!
     AIM_logfile = 'AIM_%s.log' % name 
     start_logging(filename=AIM_logfile, echo=True)
         
