@@ -1328,7 +1328,12 @@ def generate_contours(filename, contours, units, attribute_name,
             print 'WARNING (generate_contours): Model did not have a projection file'
             s = 'ogr2ogr -f KML -t_srs EPSG:4623 %s %s' % (kmlfile, shpfile)                
 
-    run_with_errorcheck(s, kmlfile, 
-                        verbose=False)
-                                                
+    try:
+        run_with_errorcheck(s, kmlfile, 
+                            verbose=False)
+    except Exception, e:
+        msg = 'Contour algorithm failed: Error message was %s.\n' % e
+        msg += 'This error could for example be the result of a missing /usr/lib/libproj.so file, '
+        msg += 'but it can be fixed by doing something like sudo ln -s /usr/lib/libproj.so.0.6.6 /usr/lib/libproj.so'
+        raise Exception(msg)
     
