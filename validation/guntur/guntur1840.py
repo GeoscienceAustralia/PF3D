@@ -95,7 +95,7 @@ Load_contours = 2000                            # True, False, number or list of
 if __name__ == '__main__':
     from aim import run_scenario
     run_scenario(__file__, 
-                 timestamp_output=True,    
+                 timestamp_output=False,    
                  dircomment=Eruption_comment)
 
 
