@@ -312,8 +312,6 @@ def derive_temporal_parameters(params):
     params['End_time_of_eruption'] = t0 + t_es + t_ed
     params['End_time_of_run'] = end_runtime
     
-                 
-        
             
 def derive_modelling_parameters(params):
     """Compute modelling parameters that can be derived from scenario parameters
