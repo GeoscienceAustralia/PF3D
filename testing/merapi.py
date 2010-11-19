@@ -40,7 +40,7 @@ Z_max = 15000
 Z_increment = 1000
 
 # Meteorological input: Either pathway to profile (single file or directory with multiple files in case of hazard maps) or web site with forecast data)
-wind_profile = 'merapi_wind_021100-021400.profile'
+wind_profile = 'merapi_wind_102700-102918.profile'
 
 # Terrain model for model domain (pathway to topography data)
 Topography_grid = 'merapi_topography.txt'   # Specify ASCII topography grid to use. 
