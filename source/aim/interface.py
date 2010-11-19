@@ -215,7 +215,6 @@ def _run_scenario(scenario, dircomment=None,
         aim.write_input_file(verbose=verbose)
 
         # Generate input data files in Fall3D format
-        aim.generate_wind_profile(verbose=verbose)    
         aim.generate_topography(verbose=verbose)
     
         # Run scripts for Fall3d

@@ -1,28 +1,40 @@
 """Configuration file for eruption scenario
 
-Tephra modelling validation worksheet                 
+Scenario Name: Mount Guntur 1840 (Validation scenario)                                                                    
 
-Scenario Name: Mount Merapi 2010 (Predictive_scenario)                                                                    
-Run Date: 2010_05_18           
-Run number:1                                                                                   
+This scenario was developed in July 2010 to validate AIM/Fall3d-6.2 against observed ash thicknesses from the Guntur 1840 eruption by
 
-Eruption observation details: 
+Adele Bear-Crozier
+Anjar Heriwaseso
+Nugraha Kartadinata
+Antonio Costa
+Arnau Folch
+Ole Nielsen
+Kristy Vanputten
+
+at a workshop held at the Ausralia-Indonesia Facility for Disaster Reduction, Jakarta.
+
+The ash thickness observations were collected by N. Kartadinata and published internally at PVMBG. 
+
+Running the scenario and comparing model outputs produced with the stored model outputs serves to verify that the installation of AIM/FALL3D-6.2 works as intended.
+To run:
+
+python guntur1840.py
 
 """
 
 # Short eruption comment to appear in output directory.
 Eruption_comment = 'guntur_1840_validation'
 
-# Time (Volcanological input file)
-Eruption_Year = 1840                            # YYYY  
-Eruption_Month = 5                              # MM  
-Eruption_Day = 24                               # DD 
-Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 60                            # Mins       
-End_time_of_meteo_data = 5                      # Hours after 00
+# Temporal parameters
 Start_time_of_eruption = 0                      # Hours after 00
 End_time_of_eruption = 5                      	# Hours after 00 
 End_time_of_run = 5                             # Hours after 00  
+
+# Proposal
+#eruption_start = 0
+#eruption_duration = 5 
+#post_eruptive_settling_duration = 0
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
@@ -33,9 +45,17 @@ Z_min = 0.0
 Z_max = 10000
 Z_increment = 1000
 
-# Select meteorological parameter
-wind_profile = 'guntur1840_wind.txt'
-wind_altitudes = [500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+# Meteorological input: Either pathway to profile (single file or directory with multiple files in case of hazard maps) or web site with forecast data)
+wind_profile = 'guntur1840_wind.profile'
+
+# Terrain model for model domain (pathway to topography data)
+Topography_grid = 'guntur1840_topography.txt'   # Specify ASCII topography grid to use. 
+
+                                                # FIXME: GET RID OF THIS OPTION - BUT MAKE SURE TOP FILE IS STILL CORRECTLY GENERATED
+                                                # If empty, AIM will look for a topography grid named
+                                                # <scenario_name>.top (surfer GRD format)         
+                                                
+
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -53,7 +73,7 @@ Sphericity_maximum = 0.9
 Vent_height = 2250
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 Mass_eruption_rate = 3e6                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
-Height_above_vent = [8000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
+Height_above_vent = 8000                        # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 1                                           # (suzuki only)
 Height_or_MFR = 'MFR'                           # plume only
@@ -65,31 +85,24 @@ Exit_volatile_fraction = 0                      # % (plume only)
 
 # Fall3D (Volcanological input file)
 Terminal_velocity_model = 'ganser'              # Possibilites are ARASTOOPOR/GANSER/WILSON/DELLINO
-Vertical_turbulence_model = 'constant'        # Possibilites are CONSTANT/SIMILARITY
-Horizontal_turbulence_model = 'constant'            # Possbilities are CONSTANT/RAMS
+Vertical_turbulence_model = 'constant'          # Possibilites are CONSTANT/SIMILARITY
+Horizontal_turbulence_model = 'constant'        # Possbilities are CONSTANT/RAMS
 Vertical_diffusion_coefficient = 100            # m2/s
 Horizontal_diffusion_coefficient = 1000         # m2/s
 Value_of_CS = 0.1                               # RAMS only
 
 # Output (Volcanological input file)
-Postprocess_time_interval = 1                   # Hours
-Postprocess_3D_variables = 'No'                 # Yes/No
-Postprocess_classes = 'No'                      # Yes/No
-Track_points = 'No'                             # Yes/No
+Postprocess_time_interval = 1                   # Hours    # FIXME: GET RID
+Postprocess_3D_variables = 'No'                 # Yes/No   # GET RID
+Postprocess_classes = 'No'                      # Yes/No   # GET RID
+Track_points = 'No'                             # Yes/No   # GET RID
 
-Topography_grid = 'guntur1840_topography.txt'       # Specify ASCII topography grid to use. 
-                                                # If empty, AIM will look for a topography grid named
-                                                # <scenario_name>.top (surfer GRD format)         
-                                                
-# Contouring:
-#   False: Disabled
-#   True: Provide a fixed number of contours covering entire range
-#   Number: Fixed (vertical) interval between contours
-#   List of numbers: Exact contour levels
-Thickness_contours = [1, 2, 5, 10, 25, 50, 75, 100]         # True, False, number or list of numbers
+# Contouring: True, False, number or list of numbers    
+Thickness_contours = [1, 2, 5, 10, 25, 50, 75, 100]  
+Load_contours = True                            
+
 Thickness_units = 'cm'                          # mm/cm/m
 
-Load_contours = 2000                            # True, False, number or list of numbers    
 
 # Run model using specified parameters
 if __name__ == '__main__':
@@ -101,6 +114,10 @@ if __name__ == '__main__':
 
 
  
+#   False: Disabled
+#   True: Provide a fixed number of contours covering entire range
+#   Number: Fixed (vertical) interval between contours
+#   List of numbers: Exact contour levels
 
 
 
