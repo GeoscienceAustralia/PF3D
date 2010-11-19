@@ -256,87 +256,59 @@ def derive_spatial_parameters(topography_grid, projection, params):
     
 
 def derive_temporal_parameters(params):
-    """Derive temporal parameters from wind profile if necessary and possible
+    """Derive temporal parameters from wind profile
+    
+       Fall3d parameters derived are 
+           'Eruption_Year'
+           'Eruption_Month' 
+           'Eruption_Day' 
+           'Start_time_of_meteo_data' 
+           'Meteo_time_step'
+           'End_time_of_meteo_data'
+    
        Input:
            params: dictionary with model parameters
     """
     
-    scenario_name = params['scenario_name']
-    
     wind_profile = params['wind_profile']
-    if wind_profile.endswith('.profile'):        
-        params['Meteorological_model'] = 'profile'    
-    else:
-        # Only derive from native Fall3d profile
-        return
-
-            
-
-    temporal_parameters = ['Eruption_Year', 'Eruption_Month', 'Eruption_Day',
-                           'Start_time_of_meteo_data', 'Meteo_time_step', 
-                           'End_time_of_meteo_data', 
-                           #'Start_time_of_eruption',
-                           #'End_time_of_eruption',
-                           #'End_time_of_run'
-                           ]
-                           
-    # If all are there do nothing
-    some_missing = False
-    for p in temporal_parameters:
-        if p not in params:
-            print 'Did not find', p
-            some_missing = True
-            
-    if some_missing:
-    
-        # Assert that all are missing
-        for p in temporal_parameters:
-            if p in params:
-                msg = 'You omitted one or more of the time parameters. '
-                msg = 'Either specify all or omit all in which case AIM will to derive values for them from the wind profile. '
-                msg += 'The time parameters are: %s' % str(temporal_parameters)
-                raise Exception(msg)
-    
-    
-        # Try to derive everything from the native Fall3d profile
-        year, month, day, start_time, end_time, time_step = get_temporal_parameters_from_windfield(wind_profile)
+    year, month, day, start_time, end_time, time_step = get_temporal_parameters_from_windfield(wind_profile)
         
-        # Assign date
-        params['Eruption_Year'] = year
-        params['Eruption_Month'] = month
-        params['Eruption_Day'] = day        
+    # Assign date
+    params['Eruption_Year'] = year
+    params['Eruption_Month'] = month
+    params['Eruption_Day'] = day        
                 
-        # Convert times to hours
-        params['Start_time_of_meteo_data'] = start_time/3600.
-        params['End_time_of_meteo_data'] = end_time/3600.
+    # Convert times to hours
+    params['Start_time_of_meteo_data'] = start_time/3600.
+    params['End_time_of_meteo_data'] = end_time/3600.
         
-        # Convert step times to minutes FIXME: Why the heck is this?
-        params['Meteo_time_step'] = time_step/60.         
+    # Convert step times to minutes FIXME: Why the heck is this?
+    params['Meteo_time_step'] = time_step/60.         
 
-        t0 = params['Start_time_of_meteo_data']
-        t_es = params['eruption_start']
-        t_ed = params['eruption_duration']        
-        t_pesd = params['post_eruptive_settling_duration']                
+    t0 = params['Start_time_of_meteo_data']
+    t_es = params['eruption_start']
+    t_ed = params['eruption_duration']        
+    t_pesd = params['post_eruptive_settling_duration']                
 
-        msg = 'Parameter eruption_start must be greater than or equal to 0'
-        assert t_es >= 0, msg
+    msg = 'Parameter eruption_start must be greater than or equal to 0'
+    assert t_es >= 0, msg
         
-        msg = 'Parameter eruption_duration must be greater than 0'
-        assert t_ed > 0, msg        
+    msg = 'Parameter eruption_duration must be greater than 0'
+    assert t_ed > 0, msg        
         
-        msg = 'Parameter post_eruptive_settling_duration must be greater or equal than 0'
-        assert t_es >= 0, msg
+    msg = 'Parameter post_eruptive_settling_duration must be greater or equal than 0'
+    assert t_es >= 0, msg
                 
-        end_runtime = t0 + t_es + t_ed + t_pesd
-        msg = 'The sum of parameters eruption_start, eruption_duration and post_eruptive_settling_duration must not cause the end of'
-        msg += ' meteorological data to be exceeded. The sum is %f' % end_runtime
-        assert end_runtime <= end_time, msg        
+    end_runtime = t0 + t_es + t_ed + t_pesd
+    msg = 'The sum of parameters eruption_start, eruption_duration and post_eruptive_settling_duration must not cause the end of'
+    msg += ' meteorological data to be exceeded. The sum is %f' % end_runtime
+    assert end_runtime <= end_time, msg        
                 
-        # Establish Fall3d eruption time parameters in terms of relative variables (hours)
-        params['Start_time_of_eruption'] = t0 + t_es
-        params['End_time_of_eruption'] = t0 + t_es + t_ed
-        params['End_time_of_run'] = end_runtime
-              
+    # Establish Fall3d eruption time parameters in terms of relative variables (hours)
+    params['Start_time_of_eruption'] = t0 + t_es
+    params['End_time_of_eruption'] = t0 + t_es + t_ed
+    params['End_time_of_run'] = end_runtime
+    
                  
 
 
