@@ -142,6 +142,9 @@ def derive_spatial_parameters(topography_grid, projection, params):
     try:    
         fid = open(topography_grid)
     except IOError:
+        # FIXME (Ole): I think we should get rid of this eventuality.        
+        # FIXME: Yes deprecate this possibility. See also wrapper.py
+    
      
         # Assume existence of native Fall3d (surfer) topogrid named
         # <scenario_name>.top
@@ -152,7 +155,6 @@ def derive_spatial_parameters(topography_grid, projection, params):
         #4100000.0 4270000.0
         #0.0    3129.5
 
-        # FIXME (Ole): I think we should get rid of this eventuality.        
         native_grid = '%s.top' % scenario_name
         print('AIM topography grid %s could not be found.' % topography_grid)
         print('Assuming existence of Fall3d grid named %s'% native_grid)

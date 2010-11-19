@@ -187,6 +187,8 @@ class AIM:
         msg = 'AIM topography grid %s must have extension .txt' % self.topography_grid
         assert ext == '.txt', msg
         
+        
+        # FIXME: Deprecate native_AIM_topo option
         try:
             fid = open(self.topography_grid)
         except:
@@ -906,6 +908,7 @@ class AIM:
         and record georeference.
         """
 
+        # FIXME: Deprecate native_AIM_topo option
         if not self.native_AIM_topo:
             # Assume existence of Fall3d native <scenario_name>.top
             # and copy to work area

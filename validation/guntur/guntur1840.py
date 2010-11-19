@@ -27,9 +27,6 @@ python guntur1840.py
 Eruption_comment = 'guntur_1840_validation'
 
 # Temporal parameters (hours)
-#Start_time_of_eruption = 0                      # Hours after 00
-#End_time_of_eruption = 5                      	# Hours after 00 
-#End_time_of_run = 5                             # Hours after 00  
 eruption_start = 0
 eruption_duration = 5 
 post_eruptive_settling_duration = 0

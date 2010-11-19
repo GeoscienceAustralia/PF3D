@@ -11,14 +11,17 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'ACCESS-T wind data'
+Eruption_comment = 'ACCESS-T based forecast'
 
-# Time (Volcanological input file)
+# Temporal parameters (hours)
+eruption_start = 2
+eruption_duration = 2 
+post_eruptive_settling_duration = 4
 
 # When specified alone, these are in hours relative to the start of meteo data
-Start_time_of_eruption = 2              
-End_time_of_eruption = 4                
-End_time_of_run = 8
+#Start_time_of_eruption = 2              
+#End_time_of_eruption = 4                
+#End_time_of_run = 8
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
