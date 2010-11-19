@@ -1,17 +1,12 @@
-"""Configuration file for eruption scenario
+"""Configuration file for eruption scenario                 
 
-Tephra modelling validation worksheet                 
-
-Scenario Name: Mount Galunggung 1982                                                                    
-Run Date: 2010_11_15           
-Run number:1                                                                                   
-
-Eruption observation details: 
+Scenario Name: Mount Galunggung                                        
+This scenario is based on the observed eruptive characteristics of the 1982 Mount Galunggung eruption in West Java, Indonesia. The eruption date is present day and the wind profile is extracted from NCEP global meterological data Jan 31 2009 - Feb 2 2009.     
 
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'extracted wind test'
+Eruption_comment = 'galunggung test temporal'
 
 
 # Time (Volcanological input file)

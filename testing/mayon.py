@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'vertical wind test'
+Eruption_comment = 'mayon test temporal'
 
 # Time (Volcanological input file)
 #Eruption_Year = 2000                            # YYYY  
@@ -39,8 +39,13 @@ Z_min = 0.0
 Z_max = 10000
 Z_increment = 1000
 
-# Select meteorological input
+# Meteorological input: Either pathway to profile (single file or directory with multiple files in case of hazard maps) or web site with forecast data)
 wind_profile = 'mayon_wind.profile'
+
+# Terrain model for model domain (pathway to topography data)
+Topography_grid = 'mayon_topography.txt'   # Specify ASCII topography grid to use. 
+                                                # If empty, AIM will look for a topography grid named
+                                                # <scenario_name>.top (surfer GRD format)     
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -57,10 +62,10 @@ Sphericity_maximum = 0.9
 # Source (Volcanological input file)
 Vent_height = 2462
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
-Mass_eruption_rate = 'estimate'                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
-Height_above_vent = [3000, 7000, 2000, 7000] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
+Mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
+Height_above_vent = 7000 			# m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
-L = 5                                           # (suzuki only)
+L = 1                                           # (suzuki only)
 Height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 
@@ -82,20 +87,11 @@ Postprocess_3D_variables = 'No'                 # Yes/No
 Postprocess_classes = 'No'                      # Yes/No
 Track_points = 'No'                             # Yes/No
 
-Topography_grid = 'mayon_topography.txt'        # Specify ASCII topography grid to use. 
-                                                # If empty, AIM will look for a topography grid named
-                                                # <scenario_name>.top (surfer GRD format)         
+# Contouring: True, False, number or list of numbers    
+Thickness_contours = True                       
+Load_contours = True                            
 
-# Contouring:
-#   False: Disabled
-#   True: Provide a fixed number of contours covering entire range
-#   Number: Fixed (vertical) interval between contours
-#   List of numbers: Exact contour levels
-Thickness_contours = True   # True, False, number or list of numbers
 Thickness_units = 'cm'                          # mm/cm/m
-
-Load_contours = True                            # True, False, number or list of numbers                                                 
-
 
                                                 
 # Run model using specified parameters

@@ -12,7 +12,7 @@ This is to simulate a VEI 2 eruption of Mount Merapi using a strong easterly win
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'VEI2_9km_nov_dec'
+Eruption_comment = 'merapi test temporal'
 
 # Time (Volcanological input file)
 #Eruption_Year = 2010                            # YYYY  
@@ -39,9 +39,13 @@ Z_min = 0.0
 Z_max = 15000
 Z_increment = 1000
 
-# Select meteorological parameters
-wind_profile = '/model_area/tephra/3D_wind/NCEP1/merapi_single_scenario/merapi_single_scenario_021100-021400.profile'
-#wind_altitudes = [0, 100, 500, 1000, 5000, 10000, 20000, 30000, 50000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+# Meteorological input: Either pathway to profile (single file or directory with multiple files in case of hazard maps) or web site with forecast data)
+wind_profile = 'merapi_wind_021100-021400.profile'
+
+# Terrain model for model domain (pathway to topography data)
+Topography_grid = 'merapi_topography.txt'   # Specify ASCII topography grid to use. 
+                                                # If empty, AIM will look for a topography grid named
+                                                # <scenario_name>.top (surfer GRD format)       
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -77,32 +81,19 @@ Vertical_diffusion_coefficient = 100            # m2/s
 Horizontal_diffusion_coefficient = 1000         # m2/s
 Value_of_CS = 0.1                               # RAMS only
 
-# Output (Volcanological input file)
-Postprocess_time_interval = 1                   # Hours
-Postprocess_3D_variables = 'No'                 # Yes/No
-Postprocess_classes = 'No'                      # Yes/No
-Track_points = 'No'                             # Yes/No
-
-Topography_grid = 'merapi_topography.txt'       # Specify ASCII topography grid to use. 
-                                                # If empty, AIM will look for a topography grid named
-                                                # <scenario_name>.top (surfer GRD format)         
-             
-             
-# Contouring: True, False, number or list of numbers                                                    
-Thickness_contours = True         
-Load_contours = True
+# Contouring: True, False, number or list of numbers    
+Thickness_contours = True                       
+Load_contours = True                            
 
 Thickness_units = 'cm'                          # mm/cm/m
 
-
-                                                
 # Run model using specified parameters
 if __name__ == '__main__':
-    from aim import run_multiple_windfields
-    run_multiple_windfields(__file__, 
-                            windfield_directory='/model_area/tephra/3D_wind/NCEP1/merapi_multiple_wind_2000_2009_VEI2_Nov_Dec',
-                            hazard_output_folder='/model_area/tephra/3D_wind/NCEP1/VEI2_9km_outputs',
-                            dircomment=Eruption_comment)
+    from aim import run_scenario
+    
+    run_scenario(__file__, 
+                 timestamp_output=True,    
+                 dircomment=Eruption_comment)
 
 
 

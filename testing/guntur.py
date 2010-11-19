@@ -11,18 +11,23 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-Eruption_comment = 'extracted wind test'
+Eruption_comment = 'guntur test temporal'
 
 # Time (Volcanological input file)
-Eruption_Year = 2009                            # YYYY  
-Eruption_Month = 1                              # MM  
-Eruption_Day = 31                               # DD 
-Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 3600                            # Mins       
-End_time_of_meteo_data = 96                       # Hours after 00
-Start_time_of_eruption = 12                      # Hours after 00
-End_time_of_eruption = 18                        # Hours after 00 
-End_time_of_run = 24                              # Hours after 00  
+#Eruption_Year = 2009                            # YYYY  
+#Eruption_Month = 1                              # MM  
+#Eruption_Day = 31                               # DD 
+#Start_time_of_meteo_data = 0                    # Hours after 00
+#Meteo_time_step = 3600                            # Mins       
+#End_time_of_meteo_data = 96                       # Hours after 00
+#Start_time_of_eruption = 12                      # Hours after 00
+#End_time_of_eruption = 18                        # Hours after 00 
+#End_time_of_run = 24                              # Hours after 00  
+
+# Temporal parameters (hours)
+eruption_start = 12
+eruption_duration = 6 
+post_eruptive_settling_duration = 6
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
@@ -33,9 +38,13 @@ Z_min = 0.0
 Z_max = 10000
 Z_increment = 1000
 
-# Select meteorological parameters
+# Meteorological input: Either pathway to profile (single file or directory with multiple files in case of hazard maps) or web site with forecast data)
 wind_profile = 'guntur_wind_013000-020218.profile'
-#wind_altitudes = [100, 250, 500, 1000, 2500, 5000, 10000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+
+# Terrain model for model domain (pathway to topography data)
+Topography_grid = 'guntur_topography.txt'   # Specify ASCII topography grid to use. 
+                                                # If empty, AIM will look for a topography grid named
+                                                # <scenario_name>.top (surfer GRD format) 
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -71,24 +80,11 @@ Vertical_diffusion_coefficient = 100            # m2/s
 Horizontal_diffusion_coefficient = 1000         # m2/s
 Value_of_CS = 0.1                               # RAMS only
 
-# Output (Volcanological input file)
-Postprocess_time_interval = 1                   # Hours
-Postprocess_3D_variables = 'No'                 # Yes/No
-Postprocess_classes = 'No'                      # Yes/No
-Track_points = 'No'                             # Yes/No
+# Contouring: True, False, number or list of numbers    
+Thickness_contours = True                       
+Load_contours = True                            
 
-Topography_grid = 'guntur_topography.txt'       # Specify ASCII topography grid to use. 
-                                                # If empty, AIM will look for a topography grid named
-                                                # <scenario_name>.top (surfer GRD format)         
-# Contouring:
-#   False: Disabled
-#   True: Provide a fixed number of contours covering entire range
-#   Number: Fixed (vertical) interval between contours
-#   List of numbers: Exact contour levels
-Thickness_contours = True                       # True, False, number or list of numbers
 Thickness_units = 'cm'                          # mm/cm/m
-
-Load_contours = True                            # True, False, number or list of numbers                                                 
 
 # Run model using specified parameters
 if __name__ == '__main__':
