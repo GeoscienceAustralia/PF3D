@@ -20,15 +20,22 @@ mpirun -x FALL3DHOME -hostfile /etc/mpihosts -host node17,node11 python guntur_m
 Eruption_comment = 'multiple wind test'
 
 # Time (Volcanological input file)
-Eruption_Year = 2009                            # YYYY  
-Eruption_Month = 1                              # MM  
-Eruption_Day = 31                               # DD 
-Start_time_of_meteo_data = 6                    # Hours after 00
-Meteo_time_step = 360                            # Mins       
-End_time_of_meteo_data = 36                       # Hours after 00
-Start_time_of_eruption = 12                      # Hours after 00
-End_time_of_eruption = 30                        # Hours after 00 
-End_time_of_run = 36                              # Hours after 00  
+#Eruption_Year = 2009                            # YYYY  
+#Eruption_Month = 1                              # MM  
+#Eruption_Day = 31                               # DD 
+#Start_time_of_meteo_data = 6                    # Hours after 00
+#Meteo_time_step = 360                            # Mins       
+#End_time_of_meteo_data = 36                       # Hours after 00
+#Start_time_of_eruption = 12                      # Hours after 00
+#End_time_of_eruption = 30                        # Hours after 00 
+#End_time_of_run = 36                              # Hours after 00  
+
+# Temporal parameters (hours)
+eruption_start = 12
+eruption_duration = 18 
+post_eruptive_settling_duration = 6
+
+
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
@@ -100,7 +107,7 @@ Load_contours = 2000                            # True, False, number or list of
 if __name__ == '__main__':
     from aim import run_multiple_windfields
     run_multiple_windfields(__file__, 
-                            windfield_directory='guntur_multiple_wind_test',
+                            windfield_directory='/model_area/tephra/3D_wind/NCEP1/guntur_multiple_wind/2000-2009',
                             hazard_output_folder='guntur_mutliple_wind_hazard_outputs',
                             dircomment=Eruption_comment)
 
