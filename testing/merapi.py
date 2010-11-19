@@ -36,8 +36,8 @@ Y_coordinate_of_vent = 9167213                  # UTM zone implied by topography
 
 # Vertical discretisation for model domain
 Z_min = 0.0
-Z_max = 15000
-Z_increment = 1000
+Z_max = 20000
+Z_increment = 5000
 
 # Meteorological input: Either pathway to profile (single file or directory with multiple files in case of hazard maps) or web site with forecast data)
 wind_profile = 'merapi_wind_102700-102918.profile'
@@ -63,7 +63,7 @@ Sphericity_maximum = 0.9
 Vent_height = 2968
 Source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 Mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
-Height_above_vent = 9000			 # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
+Height_above_vent = 15000			 # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                       # (suzuki only)            
 L = 1                                       # (suzuki only)
 Height_or_MFR = 'MFR'                           # plume only
