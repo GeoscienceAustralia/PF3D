@@ -26,15 +26,13 @@ python guntur1840.py
 # Short eruption comment to appear in output directory.
 Eruption_comment = 'guntur_1840_validation'
 
-# Temporal parameters
-Start_time_of_eruption = 0                      # Hours after 00
-End_time_of_eruption = 5                      	# Hours after 00 
-End_time_of_run = 5                             # Hours after 00  
-
-# Proposal
-#eruption_start = 0
-#eruption_duration = 5 
-#post_eruptive_settling_duration = 0
+# Temporal parameters (hours)
+#Start_time_of_eruption = 0                      # Hours after 00
+#End_time_of_eruption = 5                      	# Hours after 00 
+#End_time_of_run = 5                             # Hours after 00  
+eruption_start = 0
+eruption_duration = 5 
+post_eruptive_settling_duration = 0
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
@@ -90,12 +88,6 @@ Horizontal_turbulence_model = 'constant'        # Possbilities are CONSTANT/RAMS
 Vertical_diffusion_coefficient = 100            # m2/s
 Horizontal_diffusion_coefficient = 1000         # m2/s
 Value_of_CS = 0.1                               # RAMS only
-
-# Output (Volcanological input file)
-Postprocess_time_interval = 1                   # Hours    # FIXME: GET RID
-Postprocess_3D_variables = 'No'                 # Yes/No   # GET RID
-Postprocess_classes = 'No'                      # Yes/No   # GET RID
-Track_points = 'No'                             # Yes/No   # GET RID
 
 # Contouring: True, False, number or list of numbers    
 Thickness_contours = [1, 2, 5, 10, 25, 50, 75, 100]  

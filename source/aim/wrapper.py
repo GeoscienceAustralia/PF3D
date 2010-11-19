@@ -213,8 +213,8 @@ class AIM:
         # Register wind profile
         wind_basename, wind_ext = os.path.splitext(params['wind_profile'])
         
-        msg = 'Unknown format for wind field: %s. Allowed are .txt (native AIM) or .profile (native FALL3D)' % params['wind_profile']
-        assert wind_ext in ['.txt', '.profile'], msg
+        msg = 'Unknown format for wind field: %s. Allowed is .profile (the native FALL3D wind profile format)' % params['wind_profile']
+        assert wind_ext == '.profile', msg
         
         self.wind_profile = wind_basename + '.profile' # Native FALL3D wind profile
         self.meteorological_model = params['Meteorological_model'] = 'profile' # Do NCEP later if needed                        

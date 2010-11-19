@@ -15,15 +15,20 @@ This is to simulate a VEI 2 eruption of Mount Merapi using a strong easterly win
 Eruption_comment = 'VEI2_9km_nov_dec'
 
 # Time (Volcanological input file)
-Eruption_Year = 2010                            # YYYY  
-Eruption_Month = 11                             # MM  
-Eruption_Day = 1                               # DD 
-Start_time_of_meteo_data = 6                    # Hours after 00
-Meteo_time_step = 360                            # Mins       
-End_time_of_meteo_data = 36                      # Hours after 00
-Start_time_of_eruption = 12              # Hours after 00
-End_time_of_eruption = 18                        # Hours after 00 
-End_time_of_run = 30                             # Hours after 00  
+#Eruption_Year = 2010                            # YYYY  
+#Eruption_Month = 11                             # MM  
+#Eruption_Day = 1                               # DD 
+#Start_time_of_meteo_data = 6                    # Hours after 00
+#Meteo_time_step = 360                            # Mins       
+#End_time_of_meteo_data = 36                      # Hours after 00
+#Start_time_of_eruption = 12              # Hours after 00
+#End_time_of_eruption = 18                        # Hours after 00 
+#End_time_of_run = 30                             # Hours after 00  
+
+# Temporal parameters (hours)
+eruption_start = 12
+eruption_duration = 6 
+post_eruptive_settling_duration = 12
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
@@ -81,16 +86,15 @@ Track_points = 'No'                             # Yes/No
 Topography_grid = 'merapi_topography.txt'       # Specify ASCII topography grid to use. 
                                                 # If empty, AIM will look for a topography grid named
                                                 # <scenario_name>.top (surfer GRD format)         
-                                                
-# Contouring:
-#   False: Disabled
-#   True: Provide a fixed number of contours covering entire range
-#   Number: Fixed (vertical) interval between contours
-#   List of numbers: Exact contour levels
-Thickness_contours = True         # True, False, number or list of numbers
+             
+             
+# Contouring: True, False, number or list of numbers                                                    
+Thickness_contours = True         
+Load_contours = True
+
 Thickness_units = 'cm'                          # mm/cm/m
 
-Load_contours = True                            # True, False, number or list of numbers    
+
                                                 
 # Run model using specified parameters
 if __name__ == '__main__':

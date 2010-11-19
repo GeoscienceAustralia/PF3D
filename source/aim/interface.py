@@ -566,7 +566,7 @@ def run_multiple_windfields(scenario,
     """Run volcanic ash impact model for multiple wind fields.
     
     The wind fields are assumed to be in subfolder specified by windfield_directory, 
-    have the extension *.txt or *.profile and follow the format use with scenarios.
+    have the extension *.profile and follow the format use with scenarios.
 
     This function makes use of Open MPI and Pypar to execute in parallel but can also run sequentially.
     """
@@ -617,7 +617,7 @@ def run_multiple_windfields(scenario,
         # Distribute jobs cyclically to processors
         if i%P == p:
             
-            if not (file.endswith('.txt') or file.endswith('.profile')):
+            if not file.endswith('.profile'):
                 continue
                 
             count_local += 1
@@ -632,7 +632,6 @@ def run_multiple_windfields(scenario,
             # Override or create parameters derived from native Fall3d wind field
             params['wind_profile'] = windfield        
             params['wind_altitudes'] = get_layers_from_windfield(windfield) # FIXME: Try to comment this out.
-            params['Eruption_Year'], params['Eruption_Month'], params['Eruption_Day'] = get_eruptiontime_from_windfield(windfield)
             params['Meteorological_model'] = 'profile'
 
             if hazard_output_folder is None:

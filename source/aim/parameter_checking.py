@@ -282,6 +282,7 @@ def derive_temporal_parameters(params):
     some_missing = False
     for p in temporal_parameters:
         if p not in params:
+            print 'Did not find', p
             some_missing = True
             
     if some_missing:
@@ -296,7 +297,6 @@ def derive_temporal_parameters(params):
     
     
         # Try to derive everything from the native Fall3d profile
-
         year, month, day, start_time, end_time, time_step = get_temporal_parameters_from_windfield(wind_profile)
         
         # Assign date
@@ -311,10 +311,29 @@ def derive_temporal_parameters(params):
         # Convert step times to minutes FIXME: Why the heck is this?
         params['Meteo_time_step'] = time_step/60.         
 
-        # Redefine meaning of eruption start and end time so that user specifies them relative to start of meteo data
-        params['Start_time_of_eruption'] += params['Start_time_of_meteo_data']
-        params['End_time_of_eruption'] += params['Start_time_of_meteo_data']  
-        params['End_time_of_run'] += params['Start_time_of_meteo_data']
+        t0 = params['Start_time_of_meteo_data']
+        t_es = params['eruption_start']
+        t_ed = params['eruption_duration']        
+        t_pesd = params['post_eruptive_settling_duration']                
+
+        msg = 'Parameter eruption_start must be greater than or equal to 0'
+        assert t_es >= 0, msg
+        
+        msg = 'Parameter eruption_duration must be greater than 0'
+        assert t_ed > 0, msg        
+        
+        msg = 'Parameter post_eruptive_settling_duration must be greater or equal than 0'
+        assert t_es >= 0, msg
+                
+        end_runtime = t0 + t_es + t_ed + t_pesd
+        msg = 'The sum of parameters eruption_start, eruption_duration and post_eruptive_settling_duration must not cause the end of'
+        msg += ' meteorological data to be exceeded. The sum is %f' % end_runtime
+        assert end_runtime <= end_time, msg        
+                
+        # Establish Fall3d eruption time parameters in terms of relative variables (hours)
+        params['Start_time_of_eruption'] = t0 + t_es
+        params['End_time_of_eruption'] = t0 + t_es + t_ed
+        params['End_time_of_run'] = end_runtime
               
                  
 
@@ -342,4 +361,9 @@ def derive_modelling_parameters(params):
 
 
 
-    
+    # Output (Volcanological input file). Hardwired to standard values
+    params['Postprocess_time_interval'] = 1                   # Hours
+    params['Postprocess_3D_variables'] = 'No'                 # Yes/No
+    params['Postprocess_classes'] = 'No'                      # Yes/No
+    params['Track_points'] = 'No'                             # Yes/No
+
