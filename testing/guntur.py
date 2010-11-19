@@ -13,17 +13,6 @@ Eruption observation details:
 # Short eruption comment to appear in output directory.
 Eruption_comment = 'guntur test temporal'
 
-# Time (Volcanological input file)
-#Eruption_Year = 2009                            # YYYY  
-#Eruption_Month = 1                              # MM  
-#Eruption_Day = 31                               # DD 
-#Start_time_of_meteo_data = 0                    # Hours after 00
-#Meteo_time_step = 3600                            # Mins       
-#End_time_of_meteo_data = 96                       # Hours after 00
-#Start_time_of_eruption = 12                      # Hours after 00
-#End_time_of_eruption = 18                        # Hours after 00 
-#End_time_of_run = 24                              # Hours after 00  
-
 # Temporal parameters (hours)
 eruption_start = 12
 eruption_duration = 6 

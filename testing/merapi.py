@@ -82,7 +82,7 @@ Horizontal_diffusion_coefficient = 1000         # m2/s
 Value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers    
-Thickness_contours = True                       
+Thickness_contours = [1, 2, 5, 10, 30, 50, 80, 100]                       
 Load_contours = True                            
 
 Thickness_units = 'cm'                          # mm/cm/m
