@@ -24,7 +24,7 @@ def check_parameter_ranges(params):
     # list of numbers
     
     
-    
+    # FIXME: Deprecate ability to have list of eruption rates and related parameters.
     try:
         float(params['Mass_eruption_rate'])
     except:
@@ -213,7 +213,7 @@ def derive_spatial_parameters(topography_grid, projection, params):
             params['Cell_size'] = float(val)/1000  # Convert to km
 
     # Calculate upper bounds (rounded downwards to nearest integer to avoid error: read_PRO_grid: xmax of the domain is outside the DEM file)
-    # FIXME (Ole): Ask Arnaut and Antonio about this
+    # FIXME (Ole): Ask Arnau and Antonio about this
     xmax = params['X_coordinate_minimum'] + params['Cell_size']*1000*params['Number_cells_X_direction']
     params['X_coordinate_maximum'] = int(xmax)
     
@@ -222,10 +222,9 @@ def derive_spatial_parameters(topography_grid, projection, params):
 
     # Get UTMZONE from projection file.
     if params['Meteorological_model'].lower() == 'profile':
-        params['Coordinates'] = projection['proj'].upper()                           # UTM
+        params['Coordinates'] = projection['proj'].upper()        # UTM
         
-        
-        # FIXME (Ole): Disable geographic coordinates for the time being.
+        # Always disable geographic coordinates for the time being.
         params['Longitude_minimum'] = 0                           # LON-LAT only 
         params['Longitude_maximum'] = 0                           # LON-LAT only
         params['Latitude_minimum'] = 0                            # LON-LAT only
@@ -282,9 +281,12 @@ def derive_temporal_parameters(params):
     params['Start_time_of_meteo_data'] = start_time/3600.
     params['End_time_of_meteo_data'] = end_time/3600.
         
-    # Convert step times to minutes FIXME: Why the heck is this?
+
+    # Convert step times from seconds to minutes as required by Fall3d
     params['Meteo_time_step'] = time_step/60.         
 
+
+    # Check user specified temporal eruption parameters (hours)
     t0 = params['Start_time_of_meteo_data']
     t_es = params['eruption_start']
     t_ed = params['eruption_duration']        
@@ -299,10 +301,11 @@ def derive_temporal_parameters(params):
     msg = 'Parameter post_eruptive_settling_duration must be greater or equal than 0'
     assert t_es >= 0, msg
                 
+
     end_runtime = t0 + t_es + t_ed + t_pesd
     msg = 'The sum of parameters eruption_start, eruption_duration and post_eruptive_settling_duration must not cause the end of'
-    msg += ' meteorological data to be exceeded. The sum is %f' % end_runtime
-    assert end_runtime <= end_time, msg        
+    msg += ' meteorological data to be exceeded. It is %f' % end_runtime
+    assert end_runtime <= params['End_time_of_meteo_data'], msg        
                 
     # Establish Fall3d eruption time parameters in terms of relative variables (hours)
     params['Start_time_of_eruption'] = t0 + t_es
@@ -310,9 +313,6 @@ def derive_temporal_parameters(params):
     params['End_time_of_run'] = end_runtime
     
                  
-
-
-     
         
             
 def derive_modelling_parameters(params):
@@ -322,10 +322,6 @@ def derive_modelling_parameters(params):
     # Assume the lowest atmospheric layer starts at zero
     #params['Z_min'] = 0
     
-    #FIXME CHECK MORE
-
-
-    params['meteo_time_step'] = params['Meteo_time_step'] * 60 # Convert timestep in 'hours' to 'minutes' (FIXME: Naming?) FIXME: Why? Maybe it is minutes to seconds
     #params['source_type'] = 'plume'                       # only relevant source type
     params['load_units'] = 'kg/m2'                        # only relevant unit 
     params['class_load_units'] = 'kg/m2'                  # only relevant unit
