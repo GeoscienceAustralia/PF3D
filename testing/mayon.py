@@ -14,15 +14,21 @@ Eruption observation details:
 Eruption_comment = 'vertical wind test'
 
 # Time (Volcanological input file)
-Eruption_Year = 2000                            # YYYY  
-Eruption_Month = 2                              # MM  
-Eruption_Day = 24                               # DD 
-Start_time_of_meteo_data = 0                    # Hours after 00
-Meteo_time_step = 60                            # Mins       
-End_time_of_meteo_data = 10                      # Hours after 00
-Start_time_of_eruption = [0.5, 1.75, 2, 2.20]                  # Hours after 00
-End_time_of_eruption = 2.5                        # Hours after 00 
-End_time_of_run = 10                             # Hours after 00  
+#Eruption_Year = 2000                            # YYYY  
+#Eruption_Month = 2                              # MM  
+#Eruption_Day = 24                               # DD 
+#Start_time_of_meteo_data = 0                    # Hours after 00
+#Meteo_time_step = 60                            # Mins       
+#End_time_of_meteo_data = 10                      # Hours after 00
+#Start_time_of_eruption = [0.5, 1.75, 2, 2.20]                  # Hours after 00
+#End_time_of_eruption = 2.5                        # Hours after 00 
+#End_time_of_run = 10                             # Hours after 00  
+
+# Temporal parameters (hours)
+eruption_start = 0.5
+eruption_duration = 2 
+post_eruptive_settling_duration = 7.5
+
 
 # Location (Volcanological input file)
 X_coordinate_of_vent = 574207                   # UTM zone implied by topography projection 
@@ -34,8 +40,7 @@ Z_max = 10000
 Z_increment = 1000
 
 # Select meteorological input
-wind_profile = 'mayon_wind.txt'
-wind_altitudes = [100, 250, 500, 5000, 1000, 5000, 7500, 12000] # List Z layers in increasing height order (meters; i.e.[100, 500, 1000, 5000, etc])
+wind_profile = 'mayon_wind.profile'
 
 # Granulometry (Volcanological input file)
 Grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
