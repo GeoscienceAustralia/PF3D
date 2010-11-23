@@ -122,7 +122,7 @@ class AIM:
             print 'Writing to %s' % output_dir
 
         # Get name of topographic grid    
-        self.topography_grid = params['Topography_grid']
+        self.topography_grid = params['topography_grid']
                         
         # Derive projection file name               
         basename, ext = os.path.splitext(self.topography_grid) 
@@ -544,11 +544,11 @@ class AIM:
                 
                 if fields[-2] == 'load': 
                     units = 'kg/m^2'
-                    contours = self.params['Load_contours']
+                    contours = self.params['load_contours']
                     attribute_name = 'Load[%s]' % units
                 elif fields[-2] == 'thickness': 
-                    units = self.params['Thickness_units'].lower()
-                    contours = self.params['Thickness_contours']                    
+                    units = self.params['thickness_units'].lower()
+                    contours = self.params['thickness_contours']                    
                     attribute_name = 'Thickness[%s]' % units                    
                 else:                 
                     attribute_name = 'Value'
@@ -671,64 +671,64 @@ class AIM:
 	write_line(fid, 'XMAX = %f' % X_coordinate_maximum, indent=5)
 	write_line(fid, 'YMIN = %f' % Y_coordinate_minimum, indent=5)
 	write_line(fid, 'YMAX = %f' % Y_coordinate_maximum, indent=5)
-	write_line(fid, 'X_VENT = %f' % X_coordinate_of_vent, indent=5)
-	write_line(fid, 'Y_VENT = %f' % Y_coordinate_of_vent, indent=5)
+	write_line(fid, 'X_VENT = %f' % x_coordinate_of_vent, indent=5)
+	write_line(fid, 'Y_VENT = %f' % y_coordinate_of_vent, indent=5)
 	write_line(fid, 'NX = %i' % Number_cells_X_direction, indent=2)
         write_line(fid, 'NY = %i' % Number_cells_Y_direction, indent=2)
- 	write_line(fid, 'ZLAYER_(M) FROM %f TO %f INCREMENT %f' % (Z_min, 
-                                                                   Z_max,
-                                                                   Z_increment), indent=2)
+ 	write_line(fid, 'ZLAYER_(M) FROM %f TO %f INCREMENT %f' % (z_min, 
+                                                                   z_max,
+                                                                   z_increment), indent=2)
 	write_line(fid, '')
 	
 	write_line(fid, 'GRANULOMETRY')
-	write_line(fid, 'DISTRIBUTION = %s' % Grainsize_distribution, indent=2)
-        write_line(fid, 'NUMBER_OF_CLASSES = %i' % Number_of_grainsize_classes, indent=2)
-        write_line(fid, 'FI_MEAN = %f' % Mean_grainsize, indent=2)
-        write_line(fid, 'FI_DISP = %f' % Sorting, indent=2)
-        write_line(fid, 'FI_RANGE = %f %f' % (Minimum_grainsize,
-                                              Maximum_grainsize), indent=2)
-        write_line(fid, 'DENSITY_RANGE = %f %f' % (Density_minimum,
-                                                   Density_maximum), indent=2)
-        write_line(fid, 'SPHERICITY_RANGE = %f %f' % (Sphericity_minimum,
-                                                      Sphericity_maximum), indent=2)
+	write_line(fid, 'DISTRIBUTION = %s' % grainsize_distribution, indent=2)
+        write_line(fid, 'NUMBER_OF_CLASSES = %i' % number_of_grainsize_classes, indent=2)
+        write_line(fid, 'FI_MEAN = %f' % mean_grainsize, indent=2)
+        write_line(fid, 'FI_DISP = %f' % sorting, indent=2)
+        write_line(fid, 'FI_RANGE = %f %f' % (minimum_grainsize,
+                                              maximum_grainsize), indent=2)
+        write_line(fid, 'DENSITY_RANGE = %f %f' % (density_minimum,
+                                                   density_maximum), indent=2)
+        write_line(fid, 'SPHERICITY_RANGE = %f %f' % (sphericity_minimum,
+                                                      sphericity_maximum), indent=2)
 	write_line(fid, '')
 	write_line(fid, 'SOURCE')
-	write_line(fid, 'VENT_HEIGHT_(M) = %f' % Vent_height, indent=2)
-        write_line(fid, 'SOURCE_TYPE = %s' % Source_type, indent=2) 
+	write_line(fid, 'VENT_HEIGHT_(M) = %f' % vent_height, indent=2)
+        write_line(fid, 'SOURCE_TYPE = %s' % source_type, indent=2) 
         write_line(fid, 'POINT_SOURCE', indent=2)
         
-        write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
+        write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % mass_eruption_rate, indent=5)
 
 
-        Height_above_vent_string = list_to_string(Height_above_vent)
+        Height_above_vent_string = list_to_string(height_above_vent)
 
         
         write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5)
         write_line(fid, 'SUZUKI_SOURCE', indent=2)
-	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
+	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % mass_eruption_rate, indent=5)
         write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5) # FIXME: Why?
         write_line(fid, 'A = %s' % list_to_string(A), indent=5)
         write_line(fid, 'L = %s' % list_to_string(L), indent=5)
         write_line(fid, 'PLUME_SOURCE', indent=2)
-	write_line(fid, 'SOLVE_PLUME_FOR = %s' % Height_or_MFR, indent =5)
+	write_line(fid, 'SOLVE_PLUME_FOR = %s' % height_or_MFR, indent =5)
 	write_line(fid, 'MFR_SEARCH_RANGE = %f %f' % (MFR_minimum, 
 						      MFR_maximum), indent=5)
 	write_line(fid, 'HEIGHT_ABOVE_VENT_(M) = %s' % Height_above_vent_string, indent=5) # FIXME: Why?
-	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % Mass_eruption_rate, indent=5)
-        write_line(fid, 'EXIT_VELOCIY_(MS) = %f' % Exit_velocity, indent=5)
-        write_line(fid, 'EXIT_TEMPERATURE_(K) = %f' % Exit_temperature, indent=5)
-        write_line(fid, 'EXIT_VOLATILE_FRACTION_(IN%%) = %f' % Exit_volatile_fraction, indent=5)
+	write_line(fid, 'MASS_FLOW_RATE_(KGS) = %s' % mass_eruption_rate, indent=5)
+        write_line(fid, 'EXIT_VELOCIY_(MS) = %f' % exit_velocity, indent=5)
+        write_line(fid, 'EXIT_TEMPERATURE_(K) = %f' % exit_temperature, indent=5)
+        write_line(fid, 'EXIT_VOLATILE_FRACTION_(IN%%) = %f' % exit_volatile_fraction, indent=5)
         write_line(fid, '')
 
         write_line(fid, 'FALL3D')
-        write_line(fid, 'TERMINAL_VELOCITY_MODEL = %s' % Terminal_velocity_model, indent=2)
-        write_line(fid, 'VERTICAL_TURBULENCE_MODEL = %s' % Vertical_turbulence_model, indent=2) 
-        write_line(fid, 'VERTICAL_DIFFUSION_COEFFICIENT = %f' % Vertical_diffusion_coefficient, indent=2) 
-        write_line(fid, 'VERTICAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % Vertical_diffusion_coefficient, indent=2) 
-        write_line(fid, 'HORIZONTAL_TURBULENCE_MODEL = %s' % Horizontal_turbulence_model, indent=2) 
-        write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT = %f' % Horizontal_diffusion_coefficient, indent=2) 
-	write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % Horizontal_diffusion_coefficient, indent=2)
-	write_line(fid, 'RAMS_CS = %f' % Value_of_CS, indent=2)
+        write_line(fid, 'TERMINAL_VELOCITY_MODEL = %s' % terminal_velocity_model, indent=2)
+        write_line(fid, 'VERTICAL_TURBULENCE_MODEL = %s' % vertical_turbulence_model, indent=2) 
+        write_line(fid, 'VERTICAL_DIFFUSION_COEFFICIENT = %f' % vertical_diffusion_coefficient, indent=2) 
+        write_line(fid, 'VERTICAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % vertical_diffusion_coefficient, indent=2) 
+        write_line(fid, 'HORIZONTAL_TURBULENCE_MODEL = %s' % horizontal_turbulence_model, indent=2) 
+        write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT = %f' % horizontal_diffusion_coefficient, indent=2) 
+	write_line(fid, 'HORIZONTAL_DIFFUSION_COEFFICIENT_(M2/S) = %f' % horizontal_diffusion_coefficient, indent=2)
+	write_line(fid, 'RAMS_CS = %f' % value_of_CS, indent=2)
         write_line(fid, '') 
 
         write_line(fid,'')
@@ -750,7 +750,7 @@ class AIM:
         write_line(fid, 'MAP_CLASS_LOAD = yes                (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = KG/M2                       (Possibilities: KG/M2)',  indent=5)
         write_line(fid, 'MAP_DEPOSIT_THICKNESS = yes         (Possibilities: YES/NO)',  indent=2)
-        write_line(fid, 'UNITS = %s                          (Possibilities: MM/CM/M)' % Thickness_units.upper(),  indent=5)
+        write_line(fid, 'UNITS = %s                          (Possibilities: MM/CM/M)' % thickness_units.upper(),  indent=5)
         write_line(fid, 'COMPACTATION_FACTOR = 0.7',  indent=5)
         write_line(fid, 'MAP_COLUMN_MASS = yes               (Possibilities: YES/NO)',  indent=2)
         write_line(fid, 'UNITS = GR/M2                       (Possibilities: GR/M2)',  indent=5)

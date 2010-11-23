@@ -28,17 +28,17 @@ def check_parameter_ranges(params):
     try:
         float(params['Mass_eruption_rate'])
     except:
-        if isinstance(params['Mass_eruption_rate'], basestring):
-            msg = 'Mass_eruption_rate must be either a number, a list or the word "estimate"'
-            assert params['Mass_eruption_rate'].lower() == 'estimate', msg
+        if isinstance(params['mass_eruption_rate'], basestring):
+            msg = 'The variable mass_eruption_rate must be either a number, a list or the word "estimate"'
+            assert params['mass_eruption_rate'].lower() == 'estimate', msg
         else:    
             # Must be a list - convert
-            params['Mass_eruption_rate'] = list_to_string(params['Mass_eruption_rate'])
+            params['mass_eruption_rate'] = list_to_string(params['mass_eruption_rate'])
         
     else:    
-        if params['Mass_eruption_rate'] <= 0:
+        if params['mass_eruption_rate'] <= 0:
             msg = 'Mass eruption rate must be greater than zero.\n'
-            msg += 'A value of %e was specified' % params['Mass_eruption_rate']
+            msg += 'A value of %e was specified' % params['mass_eruption_rate']
             raise Exception(msg)
 
 
@@ -90,12 +90,12 @@ def check_parameter_ranges(params):
     lo = X_coordinate_minimum
     hi = X_coordinate_maximum
     msg = 'Vent location not within easting range [%i, %i]' % (lo, hi)
-    assert lo <= X_coordinate_of_vent <= hi, msg
+    assert lo <= x_coordinate_of_vent <= hi, msg
 
     lo = Y_coordinate_minimum
     hi = Y_coordinate_maximum    
     msg = 'Vent location not within northing range [%i, %i]' % (lo, hi)
-    assert lo <= Y_coordinate_of_vent <= hi, msg
+    assert lo <= y_coordinate_of_vent <= hi, msg
       
 
 #    if Number_cells_X_direction > 150 or Number_cells_Y_direction > 150:
