@@ -304,7 +304,7 @@ def derive_temporal_parameters(params):
 
     end_runtime = t0 + t_es + t_ed + t_pesd
     msg = 'The sum of parameters eruption_start, eruption_duration and post_eruptive_settling_duration must not cause the end of'
-    msg += ' meteorological data to be exceeded. It is %f' % end_runtime
+    msg += ' meteorological data to be exceeded. The sum is %f, but the met data ends at %f' % (end_runtime, params['End_time_of_meteo_data'])
     assert end_runtime <= params['End_time_of_meteo_data'], msg        
                 
     # Establish Fall3d eruption time parameters in terms of relative variables (hours)
