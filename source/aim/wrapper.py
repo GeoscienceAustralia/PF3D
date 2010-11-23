@@ -206,8 +206,8 @@ class AIM:
         if params['wind_profile'].find('://') > -1:
             # This looks like a web address - get the file list, generate profile and redefine 'wind_profile'
 
-            vent_location = (params['X_coordinate_of_vent'], 
-                             params['Y_coordinate_of_vent'], 
+            vent_location = (params['x_coordinate_of_vent'], 
+                             params['y_coordinate_of_vent'], 
                              zone, hemisphere)
             params['wind_profile'] = get_profile_from_web(params['wind_profile'], vent_location, verbose=verbose)
 
