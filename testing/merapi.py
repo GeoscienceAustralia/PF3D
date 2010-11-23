@@ -50,9 +50,9 @@ sphericity_maximum = 0.9
 vent_height = 2968
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
-height_above_vent = 15000			 # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
-A = 4                                       # (suzuki only)            
-L = 1                                       # (suzuki only)
+height_above_vent = 15000	     	        # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
+A = 4                                           # (suzuki only)            
+L = 1                                           # (suzuki only)
 height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 
