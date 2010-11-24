@@ -70,13 +70,18 @@ class AIM:
                 output_dir = get_tephradata()
         
             # Build output datastructure like    
-            # $TEPHRADATA/<scenario>/<scenario>_user_timestamp
+            # $TEPHRADATA/<scenario>/<user>/<scenario>_user_timestamp
             output_dir = os.path.join(output_dir, 'scenarios')        
             output_dir = os.path.join(output_dir, scenario_name)
         
-            scenario_dir = get_username()            
+            user = get_username()            
+            output_dir = os.path.join(output_dir, user)            
+            print 'Got', output_dir                        
+            
             if timestamp_output:
-                scenario_dir += '_' + get_timestamp()        
+                scenario_dir = os.path.join(output_dir, 'D' + get_timestamp())        
+            else:
+                scenario_dir = os.path.join(output_dir, 'run')
 
                 
             if dircomment is not None:
@@ -87,8 +92,14 @@ class AIM:
                     raise Exception(msg)                
                 
                 scenario_dir += '_' + dircomment
+                
+
         
             output_dir = os.path.join(output_dir, scenario_dir)
+            print 'Got', output_dir            
+
+            import sys; sys.exit() 
+            
             if not timestamp_output:
                 try:
                     os.listdir(output_dir)
