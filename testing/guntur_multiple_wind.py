@@ -86,8 +86,7 @@ if __name__ == '__main__':
     from aim import run_multiple_windfields
     run_multiple_windfields(__file__, 
                             windfield_directory='/model_area/tephra/3D_wind/NCEP1/guntur_multiple_wind/2000-2009',
-                            hazard_output_folder='guntur_mutliple_wind_hazard_outputs',
-                            dircomment=eruption_comment)
+                            hazard_output_folder='guntur_mutliple_wind_hazard_outputs')
 
 
 
