@@ -91,7 +91,7 @@ thickness_units = 'cm'                          # mm/cm/m
 if __name__ == '__main__':
     from aim import run_scenario
     run_scenario(__file__, 
-                 timestamp_output=False,    
+                 timestamp_output=False,
                  store_locally=True)
 
 

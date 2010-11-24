@@ -76,7 +76,6 @@ class AIM:
         
             user = get_username()            
             output_dir = os.path.join(output_dir, user)            
-            print 'Got', output_dir                        
             
             if timestamp_output:
                 scenario_dir = os.path.join(output_dir, 'D' + get_timestamp())        
@@ -93,12 +92,8 @@ class AIM:
                 
                 scenario_dir += '_' + dircomment
                 
-
         
             output_dir = os.path.join(output_dir, scenario_dir)
-            print 'Got', output_dir            
-
-            import sys; sys.exit() 
             
             if not timestamp_output:
                 try:
