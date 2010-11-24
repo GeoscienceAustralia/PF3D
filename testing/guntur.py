@@ -31,7 +31,7 @@ z_increment = 1000
 wind_profile = 'guntur_wind_013000-020218.profile'
 
 # Terrain model for model domain (pathway to topography data)
-topography_grid = 'guntur_topography.txt'   # Specify ASCII topography grid to use. 
+topography_grid = 'guntur_topography.txt'       # Specify ASCII topography grid to use. 
 
 # Granulometry (Volcanological input file)
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -48,7 +48,7 @@ sphericity_maximum = 0.9
 # Source (Volcanological input file)
 vent_height = 2249 
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
-mass_eruption_rate = 'estimate'                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
+mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
 height_above_vent = 9000			# m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
@@ -76,9 +76,7 @@ thickness_units = 'cm'                          # mm/cm/m
 # Run model using specified parameters
 if __name__ == '__main__':
     from aim import run_scenario
-    run_scenario(__file__, 
-                 timestamp_output=True,    
-                 dircomment=eruption_comment)
+    run_scenario(__file__)
 
 
 
