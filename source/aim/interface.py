@@ -85,6 +85,7 @@ from utilities import generate_contours as _generate_contours
 from wrapper import AIM
 from coordinate_transforms import UTMtoLL, redfearn
 from logmodule import start_logging
+logdir = 'AIM_logfiles'
 
 
 def run_scenario(scenario, 
@@ -121,14 +122,15 @@ def run_scenario(scenario,
         
     # FIXME: Refactor so that output_dir can be computed here (through a library call) and put log file there.
     #        Must therefore also refactor output_dir in AIM constructor!
-    AIM_logfile = 'AIM_%s.log' % name 
+    makedir(logdir)
+    run('cd %s; /bin/rm -rf *.log' % logdir, verbose=False)        
+    AIM_logfile = os.path.join(logdir, 'AIM_%s.log' % name)
     start_logging(filename=AIM_logfile, echo=True)
         
     aim = _run_scenario(scenario,  
                         dircomment=dircomment,    
                         timestamp_output=timestamp_output,    
                         store_locally=store_locally,
-
                         verbose=verbose)
     return aim                        
 
@@ -587,11 +589,12 @@ def run_multiple_windfields(scenario,
         
         print 'Pypar could not be imported. Running sequentially on node %s' % processor_name,
     else:    
+        time.sleep(1)     
         P = pypar.size()
         p = pypar.rank()
         processor_name = pypar.get_processor_name()
 
-        print 'Processor %d initialised on node %s' % (p, processor_name),
+        print 'Processor %d initialised on node %s' % (p, processor_name)
     
         pypar.barrier()
         
@@ -599,14 +602,27 @@ def run_multiple_windfields(scenario,
     if p == 0:
         header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
         t_start = time.time()
+        
+        makedir(logdir)
+        run('cd %s; /bin/rm -rf *.log' % logdir, verbose=False)    
+
 
     try:
         name = os.path.splitext(scenario)[0]
     except:
         name = 'run'
         
-    # Logging            
-    AIM_logfile = 'AIM_%s_P%i.log' % (name, p)
+    
+    # Wait until log dir has been created and/or cleared    
+    pypar.barrier()        
+    
+    
+    # Logging
+    
+    # FIXME: Refactor so that output_dir can be computed here (through a library call) and put log file there.
+    #        Must therefore also refactor output_dir in AIM constructor!
+    print 'Processor %d -' % p,
+    AIM_logfile = os.path.join(logdir, 'AIM_%s_P%i.log' % (name, p))
     start_logging(filename=AIM_logfile, echo=False)
 
     # Start processes staggered to avoid race conditions for disk access (otherwise it is slow to get started)
