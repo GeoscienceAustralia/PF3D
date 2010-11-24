@@ -11,6 +11,7 @@ from utilities import convert_meteorological_winddirection_to_windfield
 from utilities import get_wind_direction, calculate_extrema, label_kml_contours
 from utilities import list_to_string, run_with_errorcheck
 from utilities import generate_contours as _generate_contours
+from utilities import build_output_dir
 
 from parameter_checking import derive_implied_parameters
 from parameter_checking import check_parameter_ranges
@@ -26,6 +27,7 @@ class AIM:
                  timestamp_output=True, 
                  store_locally=False,
                  dircomment=None,
+                 output_dir=None,
                  echo=True,
                  verbose=True):
         """Create AIM instance, common file names
@@ -63,51 +65,14 @@ class AIM:
         
             self.postprocessing = False        
             
-            if store_locally:
-                # FIXME (Obsolete?)
-                output_dir = os.path.join(os.getcwd(), tephra_output_dir)
-            else:
-                output_dir = get_tephradata()
-        
-            # Build output datastructure like    
-            # $TEPHRADATA/<scenario>/<user>/<scenario>_user_timestamp
-            output_dir = os.path.join(output_dir, 'scenarios')        
-            output_dir = os.path.join(output_dir, scenario_name)
-        
-            user = get_username()            
-            output_dir = os.path.join(output_dir, user)            
-            
-            if timestamp_output:
-                scenario_dir = os.path.join(output_dir, 'D' + get_timestamp())        
-            else:
-                scenario_dir = os.path.join(output_dir, 'run')
 
-                
-            if dircomment is not None:
-                try:
-                    dircomment = string.replace(dircomment, ' ', '_')
-                except:
-                    msg = 'Dircomment %s could not be appended to output dir' % str(dircomment)
-                    raise Exception(msg)                
-                
-                scenario_dir += '_' + dircomment
-                
-        
-            output_dir = os.path.join(output_dir, scenario_dir)
-            
-            if not timestamp_output:
-                try:
-                    os.listdir(output_dir)
-                except:
-                    # OK if it doesn't exist
-                    pass
-                else:
-                    # Clean out any previous files
-                    s = '/bin/rm -rf %s' % output_dir
-                    try:
-                        run(s, verbose=False)        
-                    except:
-                        print 'Could not clean up'
+            if output_dir is not None:
+                output_dir = build_output_dir(tephra_output_dir=tephra_output_dir, 
+                                              type_name='scenarios', 
+                                              scenario_name=scenario_name, 
+                                              dircomment=dircomment, 
+                                              store_locally=store_locally, 
+                                              timestamp_output=timestamp_output)
         
         
                                   

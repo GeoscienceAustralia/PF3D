@@ -76,16 +76,17 @@ if dircomment is omitted, it will look for a
 variable 'eruption_comment' and use that.      
 """
 
-import os, sys, time
+import os, sys, time, string
 import numpy
 
+from config import tephra_output_dir
 from utilities import get_scenario_parameters, header, run, makedir, get_eruptiontime_from_windfield, get_layers_from_windfield, get_fall3d_home, get_timestamp
 from utilities import list_to_string, nc2asc
 from utilities import generate_contours as _generate_contours
+from utilities import build_output_dir
 from wrapper import AIM
 from coordinate_transforms import UTMtoLL, redfearn
 from logmodule import start_logging
-logdir = 'AIM_logfiles'
 
 
 def run_scenario(scenario, 
@@ -114,31 +115,71 @@ def run_scenario(scenario,
       
     """
 
+    
+    # Try to establish name of scenario in case it is a file
     try:
         x = os.path.split(scenario)[-1]
         name = os.path.splitext(x)[0]
     except:
         name = 'run'
+    
+    # Get parameters from scenario    
+    params = get_scenario_parameters(scenario)    
+    
+    # Establish whether there is multiple wind profiles
+    wind_profile = params['wind_profile']
+    if os.path.isdir(wind_profile):
+        # Wind profile is a directory - transfer control to multiple windfield code
         
-    # FIXME: Refactor so that output_dir can be computed here (through a library call) and put log file there.
-    #        Must therefore also refactor output_dir in AIM constructor!
-    makedir(logdir)
-    run('cd %s; /bin/rm -rf *.log' % logdir, verbose=False)        
-    AIM_logfile = os.path.join(logdir, 'AIM_%s.log' % name)
-    start_logging(filename=AIM_logfile, echo=True)
+        # Create output area for multiple scenarios
+        multiple_output_dir = build_output_dir(tephra_output_dir=tephra_output_dir, 
+                                               type_name='hazard_mapping', 
+                                               scenario_name=name, 
+                                               dircomment=dircomment, 
+                                               store_locally=store_locally, 
+                                               timestamp_output=timestamp_output)
         
-    aim = _run_scenario(scenario,  
-                        dircomment=dircomment,    
-                        timestamp_output=timestamp_output,    
-                        store_locally=store_locally,
-                        verbose=verbose)
-    return aim                        
+        # Run scenario for each wind field
+        run_multiple_windfields(scenario, 
+                                windfield_directory=wind_profile,
+                                hazard_output_folder=multiple_output_dir) 
+                                
+        return None
+        
+    else:
+        
+        # Create output area for single scenario
+        if dircomment is None:
+            dircomment = params['eruption_comment']                             
+            
+        output_dir = build_output_dir(tephra_output_dir=tephra_output_dir, 
+                                      type_name='scenarios', 
+                                      scenario_name=name, 
+                                      dircomment=dircomment, 
+                                      store_locally=store_locally, 
+                                      timestamp_output=timestamp_output)
+        
+        logdir = os.path.join(output_dir, 'logs')        
+        makedir(logdir)
+        AIM_logfile = os.path.join(logdir, 'AIM_%s.log' % name)
+        start_logging(filename=AIM_logfile, echo=True)
+            
+        aim = _run_scenario(scenario,  
+                            dircomment=dircomment,    
+                            timestamp_output=timestamp_output,    
+                            store_locally=store_locally,
+                            output_dir=output_dir,
+                            verbose=verbose)
+                            
+        # Return aim object in case further processing is needed
+        return aim                        
 
 
         
 def _run_scenario(scenario, dircomment=None,
                   store_locally=False, 
                   timestamp_output=True,
+                  output_dir=None,
                   verbose=True):
     """Run volcanic ash impact scenario
     
@@ -165,27 +206,8 @@ def _run_scenario(scenario, dircomment=None,
 
     t_start = time.time()
     
-    # Determine if scenario is a Python script or 
-    # a parameter dictionary
-    try:
-        # Get parameters specified in scenario_file
-        params = get_scenario_parameters(scenario)
-    except:
-        # This is not a valid Python script. 
-        # See if it behaves like a dictionary
-        try:
-             scenario.keys()
-        except:
-             # Not a dictionary either. Raise exception
-             msg = 'Argument scenario must be either the name of a '
-             msg += 'Python script or a dictionary'
-             raise Exception(msg)
-        else:
-             # The scenario argument is the parameters dictionary
-             params = scenario
-             
+    params = get_scenario_parameters(scenario)    
 
-    #          
     if dircomment is None:
         dircomment = params['eruption_comment']                     
              
@@ -212,6 +234,7 @@ def _run_scenario(scenario, dircomment=None,
               dircomment=dircomment,
               store_locally=store_locally,
               timestamp_output=timestamp_output,
+              output_dir=output_dir,
               verbose=verbose)    
 
     if not aim.postprocessing:
@@ -578,7 +601,6 @@ def run_multiple_windfields(scenario,
 
     This function makes use of Open MPI and Pypar to execute in parallel but can also run sequentially.
     """
-
     
     try: 
         import pypar
@@ -600,11 +622,25 @@ def run_multiple_windfields(scenario,
         
     
     if p == 0:
-        header('Hazard modelling using multiple wind fields from %s' % windfield_directory)    
-        t_start = time.time()
-        
+    
+        # Put logs along with the results
+        logdir = os.path.join(hazard_output_folder, 'logs')
         makedir(logdir)
-        run('cd %s; /bin/rm -rf *.log' % logdir, verbose=False)    
+            
+        header('Hazard modelling using multiple wind fields')
+        print '*  Wind profiles obtained from: %s' % windfield_directory
+        print '*  Scenario results stored in:  %s' %  hazard_output_folder
+        print '*  Log files:'
+        
+        t_start = time.time()
+
+        # Communicate hazard output directory name to all nodes to ensure they have exactly the same time stamp.
+        for i in range(P):
+            pypar.send((hazard_output_folder), i)
+    else:
+        # Receive correctly timestamped output directory names
+        hazard_output_folder = pypar.receive(0)
+        logdir = os.path.join(hazard_output_folder, 'logs')        
 
 
     try:
@@ -613,21 +649,20 @@ def run_multiple_windfields(scenario,
         name = 'run'
         
     
-    # Wait until log dir has been created and/or cleared    
-    pypar.barrier()        
+    # Wait until log dir has been created
+    pypar.barrier()       
     
-    
-    # Logging
-    
-    # FIXME: Refactor so that output_dir can be computed here (through a library call) and put log file there.
-    #        Must therefore also refactor output_dir in AIM constructor!
-    print 'Processor %d -' % p,
-    AIM_logfile = os.path.join(logdir, 'AIM_%s_P%i.log' % (name, p))
-    start_logging(filename=AIM_logfile, echo=False)
-
+    params = get_scenario_parameters(scenario)    
+        
     # Start processes staggered to avoid race conditions for disk access (otherwise it is slow to get started)
     time.sleep(2*p) 
-    
+
+    # Logging
+    s = 'Proc %i' % p
+    print '     %s -' % string.ljust(s, 8),
+    AIM_logfile = os.path.join(logdir, 'P%i.log' % p)
+    start_logging(filename=AIM_logfile, echo=False)
+        
     # Get cracking        
     basename, _ = os.path.splitext(scenario)
     count_local = 0    
@@ -648,8 +683,7 @@ def run_multiple_windfields(scenario,
             windname, _ = os.path.splitext(file)
             header('Computing event %i on processor %i using wind field: %s' % (i, p, windfield))
                 
-            # Get params from model script
-            params = get_scenario_parameters(scenario)    
+
        
             if dircomment is None:
                 dircomment = params['eruption_comment']        

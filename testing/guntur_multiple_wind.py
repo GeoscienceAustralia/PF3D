@@ -21,8 +21,8 @@ eruption_comment = 'multiple wind test'
 
 # Temporal parameters (hours)
 eruption_start = 12
-eruption_duration = 18 
-post_eruptive_settling_duration = 6
+eruption_duration = 2 
+post_eruptive_settling_duration = 1
 
 # Location (Volcanological input file)
 x_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
@@ -34,7 +34,7 @@ z_max = 10000
 z_increment = 1000
 
 # Select meteorological parameters
-wind_profile = 'guntur_wind_013000-020218.profile'
+wind_profile = 'guntur_wind'
 
 # Terrain model for model domain (path to topography data)
 topography_grid = 'guntur_topography.txt'      
@@ -80,13 +80,11 @@ load_contours = 2000
 thickness_units = 'cm'                          # mm/cm/m
 
 
-
 # Run model using specified parameters
 if __name__ == '__main__':
-    from aim import run_multiple_windfields
-    run_multiple_windfields(__file__, 
-                            windfield_directory='/model_area/tephra/3D_wind/NCEP1/guntur_multiple_wind/2000-2009',
-                            hazard_output_folder='guntur_mutliple_wind_hazard_outputs')
+    from aim import run_scenario
+    run_scenario(__file__)
+
 
 
 

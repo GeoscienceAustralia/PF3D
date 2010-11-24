@@ -9,6 +9,7 @@ from config import update_marker, tephra_output_dir, fall3d_distro
 import numpy
 import logging
 import time
+import string
 from Scientific.IO.NetCDF import NetCDFFile
 
 
@@ -132,7 +133,14 @@ def get_scenario_parameters(scenario):
     # Get copy so that the original __dict__ isn't modified
     scenario_name = scenario.split('.')[0]
     
-    exec('import %s as scenario_module' % scenario_name)
+    try:
+        exec('import %s as scenario_module' % scenario_name)
+    except Exception, e:
+        msg = 'Argument scenario must be either the name of a '
+        msg += 'Python script or a dictionary.'
+        msg += 'Error message was %s' % str(e)
+        raise Exception(msg)
+        
     params = scenario_module.__dict__.copy() 
     
     # Remove built-in entries
@@ -210,6 +218,63 @@ def check_presence_of_required_parameters(params):
             msg += 'remove "%s" from scenario.' % parameter    
             raise Exception(msg)            
 
+            
+            
+            
+            
+            
+def build_output_dir(tephra_output_dir='tephra', type_name='scenarios', scenario_name='none', dircomment='', store_locally=True, timestamp_output=True):
+    """Build output datastructure like    
+         $TEPHRADATA/<scenario>/<user>/<scenario>_user_timestamp
+    """
+            
+    if store_locally:
+        output_dir = os.path.join(os.getcwd(), tephra_output_dir)
+    else:
+        output_dir = get_tephradata()
+        
+
+    output_dir = os.path.join(output_dir, type_name)        
+    output_dir = os.path.join(output_dir, scenario_name)
+        
+    user = get_username()            
+    output_dir = os.path.join(output_dir, user)            
+            
+    if timestamp_output:
+        scenario_dir = os.path.join(output_dir, 'D' + get_timestamp())        
+    else:
+        scenario_dir = os.path.join(output_dir, 'run')
+
+                
+    if dircomment is not None:
+        try:
+            dircomment = string.replace(dircomment, ' ', '_')
+        except:
+            msg = 'Dircomment %s could not be appended to output dir' % str(dircomment)
+            raise Exception(msg)                
+                
+        scenario_dir += '_' + dircomment
+                
+        
+    output_dir = os.path.join(output_dir, scenario_dir)
+    
+    if not timestamp_output:
+        try:
+            os.listdir(output_dir)
+        except:
+            # OK if it doesn't exist
+            pass
+        else:
+            # Clean out any previous files
+            s = '/bin/rm -rf %s' % output_dir
+            try:
+                run(s, verbose=False)        
+            except:
+                print 'Could not clean up'
+    
+    
+    return output_dir
+            
             
 def get_layers_from_windfield(windfield):
     """Get meteorological wind altitudes from Fall3d wind field
@@ -1343,4 +1408,9 @@ def generate_contours(filename, contours, units, attribute_name,
         msg += 'This error could for example be the result of a missing /usr/lib/libproj.so file, '
         msg += 'but it can be fixed by doing something like sudo ln -s /usr/lib/libproj.so.0.6.6 /usr/lib/libproj.so'
         raise Exception(msg)
+    
+
+    
+    
+    
     

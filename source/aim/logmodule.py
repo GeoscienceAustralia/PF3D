@@ -35,7 +35,7 @@ def start_logging(filename, echo=True):
         echo: Determine if out should also be written to stdout. Default True.
     """
 
-    print 'Logging to AIM logfile: %s' % filename
+    print 'AIM logfile: %s' % filename
                             
     
     log = logging.getLogger('AIM')
