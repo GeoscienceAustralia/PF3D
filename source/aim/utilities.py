@@ -36,12 +36,14 @@ def run(cmd,
     return err
 
     
-def run_with_errorcheck(cmd, name, verbose=False):
+def run_with_errorcheck(cmd, name, logdir='.', verbose=False):
     """Run general command with logging and errorchecking
     """
         
-    stdout = '%s.stdout' % name    
-    stderr = '%s.stderr' % name    
+    base = os.path.split(name)[-1]    
+    stdout = os.path.join(logdir, '%s.stdout' % base)
+    stderr = os.path.join(logdir, '%s.stderr' % base)    
+
     err = run(cmd,
               stdout=stdout,
               stderr=stderr,
@@ -1201,6 +1203,8 @@ def generate_contours(filename, contours, units, attribute_name,
 
     if verbose: print 'Processing %s:\t' % filename
     
+    logdir = os.path.join(output_dir, 'logs') # Should use same name as log dir in wrapper.py
+    makedir(logdir)
     
     pathname = os.path.join(output_dir, filename)
     basename, ext = os.path.splitext(pathname)
@@ -1274,6 +1278,7 @@ def generate_contours(filename, contours, units, attribute_name,
     # Generate GeoTIFF raster
     s = 'gdal_translate -of GTiff %s %s' % (pathname, tiffile)
     run_with_errorcheck(s, tiffile, 
+                        logdir=logdir,
                         verbose=False)                                
 
 
@@ -1314,6 +1319,7 @@ def generate_contours(filename, contours, units, attribute_name,
     # Run contouring algorithm 
     s = 'gdal_contour -a %s -fl %s %s %s' % (attribute_name, fixed_levels, tiffile, shpfile)
     run_with_errorcheck(s, shpfile, 
+                        logdir=logdir,
                         verbose=False)                               
     
     # Generate KML
@@ -1330,6 +1336,7 @@ def generate_contours(filename, contours, units, attribute_name,
 
     try:
         run_with_errorcheck(s, kmlfile, 
+                            logdir=logdir,        
                             verbose=False)
     except Exception, e:
         msg = 'Contour algorithm failed: Error message was %s.\n' % e

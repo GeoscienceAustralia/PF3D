@@ -64,7 +64,7 @@ class AIM:
             self.postprocessing = False        
             
             if store_locally:
-                # FIXME (Obsolete)
+                # FIXME (Obsolete?)
                 output_dir = os.path.join(os.getcwd(), tephra_output_dir)
             else:
                 output_dir = get_tephradata()
@@ -103,8 +103,6 @@ class AIM:
                     pass
                 else:
                     # Clean out any previous files
-                    #s = 'chmod -R +w %s' % output_dir 
-                    #run(s, verbose=False)                    
                     s = '/bin/rm -rf %s' % output_dir
                     try:
                         run(s, verbose=False)        
@@ -114,13 +112,16 @@ class AIM:
         
                                   
         # Base filename for all files in this scenario 
-        self.basepath = os.path.join(output_dir, scenario_name)
+        logpath = os.path.join(output_dir, 'logs')
         
-        
-        # Create output dir
-        makedir(output_dir)
+        # Create dirs        
+        makedir(output_dir)        
+        makedir(logpath)
+
+        # Record dirs and basefilenames
         self.output_dir = output_dir
-            
+        self.logbasepath =  os.path.join(logpath, scenario_name)
+        self.basepath = os.path.join(output_dir, scenario_name)
                         
         if verbose:
             header('Running AIM/Fall3d scenario %s' % self.scenario_name)
@@ -216,6 +217,7 @@ class AIM:
                              zone, hemisphere)
             params['wind_profile'] = get_profile_from_web(params['wind_profile'], vent_location, verbose=verbose)
 
+        # FIXME (Ole): This is where we can look at using multiple wind profiles for hazard mapping
         
         # Register wind profile
         wind_basename, wind_ext = os.path.splitext(params['wind_profile'])
@@ -288,8 +290,8 @@ class AIM:
             #print 'Shortcut: %s' % os.path.join(self.symlink, os.path.split(logfile)[-1]) 
 
         
-        stdout = self.basepath + '.%s.stdout' % name
-        stderr = self.basepath + '.%s.stderr' % name
+        stdout = self.logbasepath + '.%s.stdout' % name
+        stderr = self.logbasepath + '.%s.stderr' % name
         err=run(cmd, 
                 stdout=stdout,
                 stderr=stderr,
@@ -326,7 +328,7 @@ class AIM:
         executable = os.path.join(self.utilities_dir, 
                                   'SetGrn', 'SetGrn.PUB.exe')
         
-        logfile = self.basepath + '.SetGrn.log'
+        logfile = self.logbasepath + '.SetGrn.log'
 
         if verbose:
             header('Setting grain size (SetGrn)')
@@ -359,7 +361,7 @@ class AIM:
         executable = os.path.join(self.utilities_dir, 
                                   'SetDbs', 'SetDbs.PUB.exe')
         
-        logfile = self.basepath + '.SetDbs.log'
+        logfile = self.logbasepath + '.SetDbs.log'
         
         if verbose:
             header('Building meteorological database (SetDbs)')
@@ -387,7 +389,7 @@ class AIM:
         executable = os.path.join(self.utilities_dir, 
                                   'SetSrc', 'SetSrc.PUB.exe')
         
-        logfile = self.basepath + '.SetSrc.log'
+        logfile = self.logbasepath + '.SetSrc.log'
 
         if verbose:
             header('Creating eruptive source file (SetSrc)')
@@ -418,7 +420,7 @@ class AIM:
     
         executable = os.path.join(self.Fall3d_dir, 'Fall3d_ser.PUB.exe')
         
-        logfile = self.basepath + '.Fall3d.log'
+        logfile = self.logbasepath + '.Fall3d.log'
         
         if verbose:
             header('Running ash model (Fall3d)')
@@ -448,7 +450,7 @@ class AIM:
         
         executable = os.path.join(self.utilities_dir, 'nc2grd', 'nc2grd.exe')
         
-        logfile = self.basepath + '.nc2grd.log'
+        logfile = self.logbasepath + '.nc2grd.log'
         
         if verbose:
             header('Running nc2grd')
