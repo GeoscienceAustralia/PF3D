@@ -66,14 +66,13 @@ class AIM:
             self.postprocessing = False        
             
 
-            if output_dir is not None:
+            if output_dir is None:
                 output_dir = build_output_dir(tephra_output_dir=tephra_output_dir, 
                                               type_name='scenarios', 
                                               scenario_name=scenario_name, 
                                               dircomment=dircomment, 
                                               store_locally=store_locally, 
                                               timestamp_output=timestamp_output)
-        
         
                                   
         # Base filename for all files in this scenario 
