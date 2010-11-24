@@ -52,7 +52,6 @@ class AIM:
         self.scenario_name = scenario_name = params['scenario_name']
         
         
-        
         import sys
         if len(sys.argv) > 1:
             # Assume that only postprocessing is requested using data in provided directory.

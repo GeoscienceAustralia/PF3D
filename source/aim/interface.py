@@ -71,7 +71,9 @@ e.g.
 for x in [1,11,3,7]:
     params['x'] = x
     run_scenario(params, dircomment='x=%d' % x) 
-  
+
+if dircomment is omitted, it will look for a 
+variable 'eruption_comment' and use that.      
 """
 
 import os, sys, time
@@ -181,6 +183,10 @@ def _run_scenario(scenario, dircomment=None,
              params = scenario
              
 
+    #          
+    if dircomment is None:
+        dircomment = params['eruption_comment']                     
+             
     # Determine if any of the parameters provide are a tuple
     # in which case each combination is run separately
     for name in params:
@@ -628,6 +634,9 @@ def run_multiple_windfields(scenario,
                 
             # Get params from model script
             params = get_scenario_parameters(scenario)    
+       
+            if dircomment is None:
+                dircomment = params['eruption_comment']        
         
             # Override or create parameters derived from native Fall3d wind field
             params['wind_profile'] = windfield        
