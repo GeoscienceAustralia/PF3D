@@ -24,7 +24,7 @@ eruption_start = 12
 eruption_duration = 2 
 post_eruptive_settling_duration = 1
 
-# Location (Volcanological input file)
+# Location
 x_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
 y_coordinate_of_vent = 9208168                  # UTM zone implied by topography projection 
 
@@ -33,13 +33,13 @@ z_min = 0.0
 z_max = 10000
 z_increment = 1000
 
-# Select meteorological parameters
+# Meteorological data
 wind_profile = 'guntur_wind'
 
-# Terrain model for model domain (path to topography data)
+# Terrain model
 topography_grid = 'guntur_topography.txt'      
 
-# Granulometry (Volcanological input file)
+# Granulometry
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
 number_of_grainsize_classes = 6
 mean_grainsize = 2.5                            # phi
@@ -51,11 +51,11 @@ density_maximum = 2500                          # kg/m3
 sphericity_minimum = 0.9
 sphericity_maximum = 0.9
 
-# Source (Volcanological input file)
+# Source
 vent_height = 2249 
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 mass_eruption_rate = 1e4                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
-height_above_vent = [9000, 7000, 5000, 2000, 1000, 500] # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
+height_above_vent = 9000                        # m (if point, if suzuki or if plume where Height_or_MFR = Height)            
 A = 4                                           # (suzuki only)            
 L = 5                                           # (suzuki only)
 height_or_MFR = 'MFR'                           # plume only
@@ -65,7 +65,7 @@ exit_velocity = 100                             # m/s (plume only)
 exit_temperature = 1073                         # K (plume only)
 exit_volatile_fraction = 0                      # % (plume only)
 
-# Fall3D (Volcanological input file)
+# Fall3D
 terminal_velocity_model = 'ganser'              # Possibilites are ARASTOOPOR/GANSER/WILSON/DELLINO
 vertical_turbulence_model = 'similarity'        # Possibilites are CONSTANT/SIMILARITY
 horizontal_turbulence_model = 'rams'            # Possbilities are CONSTANT/RAMS

@@ -31,7 +31,7 @@ eruption_start = 0
 eruption_duration = 5 
 post_eruptive_settling_duration = 0
 
-# Location (Volcanological input file)
+# Location
 x_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
 y_coordinate_of_vent = 9208168                  # UTM zone implied by topography projection
 
@@ -40,13 +40,13 @@ z_min = 0.0
 z_max = 10000
 z_increment = 1000
 
-# Meteorological input: Either path to profile or web site with forecast data
+# Meteorological input
 wind_profile = 'guntur1840_wind.profile'
 
-# Terrain model for model domain (pathway to topography data)
+# Terrain model
 topography_grid = 'guntur1840_topography.txt'   # Specify ASCII topography grid to use. 
 
-# Granulometry (Volcanological input file)
+# Granulometry
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
 number_of_grainsize_classes = 8
 mean_grainsize = -1.5                           # phi
@@ -58,7 +58,7 @@ density_maximum = 2500                          # kg/m3
 sphericity_minimum = 0.9
 sphericity_maximum = 0.9
 
-# Source (Volcanological input file)
+# Source
 vent_height = 2250
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 mass_eruption_rate = 3e6                        # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
@@ -72,7 +72,7 @@ exit_velocity = 100                             # m/s (plume only)
 exit_temperature = 1073                         # K (plume only)
 exit_volatile_fraction = 0                      # % (plume only)
 
-# Fall3D (Volcanological input file)
+# Fall3D
 terminal_velocity_model = 'ganser'              # Possibilites are ARASTOOPOR/GANSER/WILSON/DELLINO
 vertical_turbulence_model = 'constant'          # Possibilites are CONSTANT/SIMILARITY
 horizontal_turbulence_model = 'constant'        # Possbilities are CONSTANT/RAMS
