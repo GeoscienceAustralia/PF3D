@@ -491,7 +491,7 @@ class AIM:
         for filename in os.listdir(self.output_dir):
             if filename.endswith('.res.nc'):
                 if verbose: print '  ', filename
-                for subdataset in ['LOAD', 'THICKNESS']:
+                for subdataset in ['LOAD', 'THICKNESS', 'C_FL050', 'C_FL100', 'C_FL150', 'C_FL200', 'C_FL250', 'C_FL300']:
                     nc2asc(os.path.join(self.output_dir, filename), 
                            subdataset=subdataset,
                            projection=self.WKT_projection)
@@ -522,7 +522,7 @@ class AIM:
                     contours = self.params['thickness_contours']                    
                     attribute_name = 'Thickness[%s]' % units                    
                 else:                 
-                    attribute_name = 'Value'
+                    attribute_name = fields[-2] #'Value'
                     units = 'default' # Unit is implied by .inp file
                     contours = True # Default is fixed number of contours
                     

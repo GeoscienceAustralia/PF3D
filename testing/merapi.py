@@ -16,8 +16,8 @@ eruption_comment = 'merapi test temporal'
 
 # Temporal parameters (hours)
 eruption_start = 12
-eruption_duration = 6 
-post_eruptive_settling_duration = 12
+eruption_duration = 2 
+post_eruptive_settling_duration = 1
 
 # Location (Volcanological input file)
 x_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
@@ -70,9 +70,15 @@ value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers    
 thickness_contours = [1, 2, 5, 10, 30, 50, 80, 100]                       
+thickness_units = 'cm'                         
+
 load_contours = True                            
 
-thickness_units = 'cm'                          # mm/cm/m
+# FIXME: Not yet implemented, but this is what we want
+flightlevel_contours = True
+
+
+
 
 # Run model using specified parameters
 if __name__ == '__main__':

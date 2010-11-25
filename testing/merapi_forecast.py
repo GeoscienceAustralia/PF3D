@@ -15,8 +15,8 @@ eruption_comment = 'ACCESS-T based forecast'
 
 # Temporal parameters (hours)
 eruption_start = 2
-eruption_duration = 2 
-post_eruptive_settling_duration = 4
+eruption_duration = 3
+post_eruptive_settling_duration = 3
 
 # Location
 x_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
@@ -24,8 +24,8 @@ y_coordinate_of_vent = 9167213                  # UTM zone implied by topography
 
 # Vertical discretisation for model domain
 z_min = 0.0
-z_max = 50000
-z_increment = 10000
+z_max = 10000
+z_increment = 1000
 
 # Meteorological data
 wind_profile = 'ftp://ftp-newb.bom.gov.au/register/sample/access/netcdf/ACCESS-T/pressure/'
@@ -49,7 +49,7 @@ sphericity_maximum = 0.9
 vent_height = 2968
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where height_or_mfr = mfr)
-height_above_vent = 20000                       # m (if point, if suzuki or if plume where height_or_MFR = Height)            
+height_above_vent = 5000                       # m (if point, if suzuki or if plume where height_or_MFR = Height)            
 A = 3                                           # (suzuki only)            
 L = 1                                           # (suzuki only)
 height_or_MFR = 'MFR'                           # plume only

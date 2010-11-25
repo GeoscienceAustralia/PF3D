@@ -82,9 +82,12 @@ value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers    
 thickness_contours = [1, 2, 5, 10, 25, 50, 75, 100]  
+thickness_units = 'cm'                          # mm/cm/m
+
 load_contours = True                            
 
-thickness_units = 'cm'                          # mm/cm/m
+
+
 
 
 # Run model using specified parameters

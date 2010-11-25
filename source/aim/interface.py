@@ -711,6 +711,11 @@ def run_multiple_windfields(scenario,
             newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
             s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
             run(s)
+            
+            # Clean up outputs from this scenario
+            print 'P%i: Cleaning up %s' % (p, aim.output_dir)
+            s = '/bin/rm -rf %s' % aim.output_dir
+            run(s)
 
     print 'Processor %i done %i windfields' % (p, count_local)        
     print 'Outputs available in directory: %s' % hazard_output_folder    
