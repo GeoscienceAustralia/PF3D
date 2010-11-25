@@ -126,6 +126,12 @@ def run_scenario(scenario,
     # Get parameters from scenario    
     params = get_scenario_parameters(scenario)    
     
+        
+    # Create output area for single scenario
+    if dircomment is None:
+        dircomment = params['eruption_comment']                             
+    
+    
     # Establish whether there is multiple wind profiles
     wind_profile = params['wind_profile']
     if os.path.isdir(wind_profile):
@@ -147,10 +153,6 @@ def run_scenario(scenario,
         return None
         
     else:
-        
-        # Create output area for single scenario
-        if dircomment is None:
-            dircomment = params['eruption_comment']                             
             
         output_dir = build_output_dir(tephra_output_dir=tephra_output_dir, 
                                       type_name='scenarios', 
