@@ -715,6 +715,11 @@ def run_multiple_windfields(scenario,
             s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
             run(s)
             
+            # Create projectionfile in hazard output
+            if i == 0:
+                s = 'cp %s %s/%s' % (aim.projection_file, hazard_output_folder, 'HazardMaps.res.prj')
+                run(s)                
+            
             # Clean up outputs from this scenario
             print 'P%i: Cleaning up %s' % (p, aim.output_dir)
             s = '/bin/rm -rf %s' % aim.output_dir
