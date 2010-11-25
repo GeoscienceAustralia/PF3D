@@ -181,7 +181,7 @@ class AIM:
                              zone, hemisphere)
             params['wind_profile'] = get_profile_from_web(params['wind_profile'], vent_location, verbose=verbose)
 
-        # FIXME (Ole): This is where we can look at using multiple wind profiles for hazard mapping
+
         
         # Register wind profile
         wind_basename, wind_ext = os.path.splitext(params['wind_profile'])

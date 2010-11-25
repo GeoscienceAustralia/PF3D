@@ -704,9 +704,12 @@ def run_multiple_windfields(scenario,
                                 timestamp_output=True,    
                                 dircomment=dircomment + '_run%i_proc%i' % (i, p))
 
-            # Copy result file to output folder
+            # Make sure folder is present and can be shared by group            
             makedir(hazard_output_folder)
-        
+            s = 'chmod -R g+w %s' % multiple_output_dir
+            run(s)
+
+            # Copy result file to output folder
             result_file = aim.scenario_name + '.res.nc'    
             newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
             s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
