@@ -10,9 +10,9 @@ Eruption observation details:
 
 To run in parallel you can do something like this
 
-mpirun -x FALL3DHOME -hostfile /etc/mpihosts -np 8 python guntur_multiple_wind.py
+mpirun -x FALL3DHOME -x TEPHRADATA -x PYTHONPATH -hostfile /etc/mpihosts -np 8 python guntur_multiple_wind.py
 or
-mpirun -x FALL3DHOME -hostfile /etc/mpihosts -host node17,node11 python guntur_multiple_wind.py
+mpirun -x FALL3DHOME -x TEPHRADATA -x PYTHONPATH -hostfile /etc/mpihosts -host node17,node11 python guntur_multiple_wind.py
 
 """
 
