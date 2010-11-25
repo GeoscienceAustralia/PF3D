@@ -706,7 +706,7 @@ def run_multiple_windfields(scenario,
 
             # Make sure folder is present and can be shared by group            
             makedir(hazard_output_folder)
-            s = 'chmod -R g+w %s' % multiple_output_dir
+            s = 'chmod -R g+w %s' % hazard_output_folder
             run(s)
 
             # Copy result file to output folder
