@@ -1,6 +1,10 @@
 """Script for aim to generate hazard map from multiple Fall3D output files
 
-This template is for generating a volcanic ash hazard map using multiple FALL3D output files. The contours represent proabability (%) of exceeding a particular ash load threshold (i.e 1kg/m2). One hazard is produed for eah load threshold specified.
+This template is for generating a volcanic ash hazard map using multiple FALL3D output files. The contours represent proabability (%) of exceeding a particular ash load threshold (i.e 1kg/m2). One hazard is produced for eah load threshold specified.
+
+To run:
+
+python create_hazard_maps.py
     
 """
 
