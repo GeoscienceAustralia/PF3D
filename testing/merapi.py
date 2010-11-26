@@ -12,12 +12,12 @@ This is to simulate a VEI 2 eruption of Mount Merapi using a strong easterly win
 """
 
 # Short eruption comment to appear in output directory.
-eruption_comment = 'merapi test temporal'
+eruption_comment = 'merapi test'
 
 # Temporal parameters (hours)
 eruption_start = 12
-eruption_duration = 2 
-post_eruptive_settling_duration = 1
+eruption_duration = 6 
+post_eruptive_settling_duration = 12
 
 # Location (Volcanological input file)
 x_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
@@ -34,7 +34,7 @@ wind_profile = 'merapi_wind_102700-102918.profile'
 # Terrain model for model domain (path to topography data)
 topography_grid = 'merapi_topography.txt'   # Specify ASCII topography grid to use. 
 
-# Granulometry (Volcanological input file)
+# Granulometry
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
 number_of_grainsize_classes = 6
 mean_grainsize = -2                            # phi
@@ -46,7 +46,7 @@ density_maximum = 2300                          # kg/m3
 sphericity_minimum = 0.9
 sphericity_maximum = 0.9
 
-# Source (Volcanological input file)
+# Source
 vent_height = 2968
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where Height_or_MFR = MFR)
@@ -75,7 +75,7 @@ thickness_units = 'cm'
 load_contours = True                            
 
 # FIXME: Not yet implemented, but this is what we want
-flightlevel_contours = True
+#flightlevel_contours = True
 
 
 
