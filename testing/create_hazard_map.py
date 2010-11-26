@@ -20,8 +20,7 @@ PLOAD_contours = True
 PLOAD_units = 'pct'
 
 # Location of generated windprofiles, hazard map and contours
-model_output_directory = '/model_area/sandpits/bearad/aim/testing/guntur_multiple_wind_template_outputs'
-
+model_output_directory = '/model_area/tephra/hazard_mapping/guntur_multiple_wind/nielso/D2010-11-25T130440_multiple_wind_test'
 #--------------------------------------
 if __name__ == '__main__':
     from aim import generate_hazardmap

@@ -1357,7 +1357,11 @@ def generate_contours(filename, contours, units, attribute_name,
     fixed_levels = ''
     
     for c in contour_list:
-        fixed_levels += ' %.6f' % c                                                 
+        if c == 0:
+            # Hack - working around gdal_contour's inability to understand values like 0.0000
+            fixed_levels += ' 0'
+        else:                
+            fixed_levels += ' %.6f' % c                                                 
         #if u == 'mm':
         #    fixed_levels += ' %.0f' % c
         #elif u == 'cm':     
