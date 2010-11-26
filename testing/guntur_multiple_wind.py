@@ -34,7 +34,7 @@ z_max = 10000
 z_increment = 1000
 
 # Meteorological data
-wind_profile = 'guntur_wind'
+wind_profile = '/model_area/sandpits/bearad/aim/testing/multiple_wind_test_files/guntur'
 
 # Terrain model
 topography_grid = 'guntur_topography.txt'      
@@ -75,7 +75,7 @@ value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers    
 thickness_contours = True
-load_contours = 2000
+load_contours = True
 
 thickness_units = 'cm'                          # mm/cm/m
 

@@ -2,9 +2,9 @@
 """
 
 # Vent location in geographic coordinates (decimal degrees) of the Guntur crater
-vent_easting = 439423
-vent_northing = 9167213
-vent_zone = 49
+vent_easting = 814924
+vent_northing = 9208168
+vent_zone = 48
 vent_hemisphere = 'S'
 
 # Question for ADELE - should we do all possible variables or specify them here as in the inp file?
@@ -20,7 +20,8 @@ PLOAD_contours = True
 PLOAD_units = 'pct'
 
 # Location of generated windprofiles, hazard map and contours
-model_output_directory = '/model_area/tephra/hazard_mapping/guntur_multiple_wind/nielso/D2010-11-25T130440_multiple_wind_test'
+model_output_directory = '/model_area/tephra/hazard_mapping/guntur_multiple_wind/bearad/D2010-11-25T130111'
+
 #--------------------------------------
 if __name__ == '__main__':
     from aim import generate_hazardmap

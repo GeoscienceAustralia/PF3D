@@ -1,15 +1,14 @@
 """Script for aim to generate hazard map from multiple Fall3D output files
 
-This script is a template for  
+This template is for generating a volcanic ash hazard map using multiple FALL3D output files. The contours represent proabability (%) of exceeding a particular ash load threshold (i.e 1kg/m2). One hazard is produed for eah load threshold specified.
+    
 """
 
-# Vent location in geographic coordinates (decimal degrees) of the Guntur crater
+# Vent location in geographic coordinates (decimal degrees)
 vent_easting = 439423
 vent_northing = 9167213
 vent_zone = 49
 vent_hemisphere = 'S'
-
-# Question for ADELE - should we do all possible variables or specify them here as in the inp file?
 
 # Values
 load_values = [0.1, 10, 20, 50, 90, 150, 300] 

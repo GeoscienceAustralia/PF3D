@@ -93,9 +93,7 @@ load_contours = True
 # Run model using specified parameters
 if __name__ == '__main__':
     from aim import run_scenario
-    run_scenario(__file__, 
-                 timestamp_output=False,
-                 store_locally=True)
+    run_scenario(__file__)
 
 
 
