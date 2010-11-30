@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document><Folder><name>tavurvur.26h.load</name>
+<Schema name="tavurvur.26h.load" id="tavurvur.26h.load">
+	<SimpleField name="Name" type="string"></SimpleField>
+	<SimpleField name="Description" type="string"></SimpleField>
+	<SimpleField name="ID" type="int"></SimpleField>
+	<SimpleField name="Load[kg/m^" type="float"></SimpleField>
+</Schema>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">0</SimpleData>
+		<SimpleData name="Load[kg/m^">5383.652</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.206996744550253,-4.239673132352293,513.410440782085061 152.205241631342915,-4.237957899890198,513.418294622562826 152.207000336810239,-4.236148431163532,513.419243802316487 152.208771543823161,-4.237961525733711,513.411112807691097 152.206996744550253,-4.239673132352293,513.410440782085061</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">1</SimpleData>
+		<SimpleData name="Load[kg/m^">5383.652</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.210618846854601,-4.239599568414597,513.403264074586332 152.208860503958448,-4.237961616902989,513.410931799560785 152.210622253379029,-4.236241778915561,513.411650232039392 152.212248670832651,-4.237965081578397,513.404037420637906 152.210618846854601,-4.239599568414597,513.403264074586332</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">2</SimpleData>
+		<SimpleData name="Load[kg/m^">10767.304</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.206996994114462,-4.239428357236994,513.411052166484296 152.205492611275417,-4.237958158223869,513.417784019373357 152.207000073199566,-4.236407184789987,513.418597616255283 152.208518250543477,-4.237961266094269,513.411628178320825 152.206996994114462,-4.239428357236994,513.411052166484296</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">3</SimpleData>
+		<SimpleData name="Load[kg/m^">10767.304</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.210619167995191,-4.239283136752976,513.404054436832666 152.209200888800666,-4.237961965645948,513.410239210352302 152.210621915702603,-4.236574744306742,513.41081871278584 152.211933783641825,-4.237964760207432,513.404678203165531 152.210619167995191,-4.239283136752976,513.404054436832666</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">4</SimpleData>
+		<SimpleData name="Load[kg/m^">16150.956</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.206997243664119,-4.23918358212011,513.411663543432951 152.205743591223325,-4.237958416475967,513.417273414321244 152.206999809572579,-4.236665938414762,513.417951421812177 152.208264957279397,-4.237961006371743,513.412143547087908 152.206997243664119,-4.23918358212011,513.411663543432951</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">5</SimpleData>
+		<SimpleData name="Load[kg/m^">16150.956</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.210619489111565,-4.238966705088728,513.404844780452549 152.209541273671249,-4.237962314238867,513.409546612761915 152.210621577999405,-4.236907709695175,513.409987173043191 152.211618896475045,-4.237964438708063,513.405318978242576 152.210619489111565,-4.238966705088728,513.404844780452549</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">6</SimpleData>
+		<SimpleData name="Load[kg/m^">21534.607</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.206997493199225,-4.238938807001749,513.412274916656315 152.205994571186665,-4.237958674646491,513.416762806475163 152.206999545929449,-4.236924692037795,513.417305216193199 152.208011664031062,-4.237960746566134,513.412658910267055 152.206997493199225,-4.238938807001749,513.412274916656315</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">7</SimpleData>
+		<SimpleData name="Load[kg/m^">21534.607</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.210619810203752,-4.238650273421984,513.405635116621852 152.209881658570026,-4.237962662681746,513.408854005858302 152.210621240269461,-4.237240675080689,513.40915562491864 152.211304009332423,-4.237964117080291,513.40595974586904 152.210619810203752,-4.238650273421984,513.405635116621852</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">8</SimpleData>
+		<SimpleData name="Load[kg/m^">26918.259</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.206997742719778,-4.238694031881802,513.412886275909841 152.206245551165495,-4.237958932735446,513.416252188384533 152.206999282270004,-4.237183445659165,513.416659002192318 152.207758370798331,-4.237960486677443,513.413174267858267 152.206997742719778,-4.238694031881802,513.412886275909841</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">9</SimpleData>
+		<SimpleData name="Load[kg/m^">26918.259</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.210620131271753,-4.238333841752612,513.406425435096025 152.210222043497083,-4.237963010974584,513.408161391504109 152.210620902512716,-4.237573640463435,513.408324059098959 152.210989122213846,-4.237963795324116,513.406600507907569 152.210620131271753,-4.238333841752612,513.406425435096025</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">10</SimpleData>
+		<SimpleData name="Load[kg/m^">32301.911</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.20699799222578,-4.238449256760373,513.413497629575431 152.206496531159615,-4.237959190742826,513.41574156563729 152.20699901859436,-4.237442199278754,513.416012780740857 152.207505077581317,-4.237960226705668,513.413689620792866 152.20699799222578,-4.238449256760373,513.413497629575431</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">11</SimpleData>
+		<SimpleData name="Load[kg/m^">32301.911</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.210620452315624,-4.238017410080749,513.407215741463006 152.210562428452278,-4.237963359117384,513.407468766905367 152.210620564729169,-4.237906605843282,513.407492478378117 152.210674235119512,-4.237963473439538,513.40724125970155 152.210620452315624,-4.238017410080749,513.407215741463006</coordinates></LineString>
+  </Placemark>
+  <Placemark>
+  <Style><LineStyle><color>ff0000ff</color></LineStyle>  <PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#tavurvur.26h.load">
+		<SimpleData name="ID">12</SimpleData>
+		<SimpleData name="Load[kg/m^">37685.563</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>152.206747511169311,-4.237959448668634,513.415230941958725 152.206998754902401,-4.2377009528967,513.415366550907493 152.207251784379906,-4.23795996665081,513.414204968139529 152.206998241717315,-4.238204481637363,513.414108973927796 152.206747511169311,-4.237959448668634,513.415230941958725</coordinates></LineString>
+  </Placemark>
+</Folder></Document></kml>
