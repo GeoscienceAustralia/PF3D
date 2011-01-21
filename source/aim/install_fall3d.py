@@ -235,7 +235,7 @@ if __name__ == '__main__':
     s = '/bin/rm -rf %s' % fall3d_distro
     run(s, verbose=False)
 
-    print 'Unpacking tarball'
+    print 'Unpacking tarball: %s/%s' % (FALL3DHOME, tarball)
     print
     # Unpack FALL3D using tar:
     #
@@ -244,7 +244,7 @@ if __name__ == '__main__':
     # f: Filename coming up
     # z: Uncompress as well
     #
-    err = run('tar xvfz %s > /dev/null' % tarball, verbose=False)
+    err = run('tar xvfz %s > /dev/null' % tarball, verbose=True)
     if err != 0:
         msg = 'Could not unpack %s' % tarball
         raise Exception(msg)

@@ -9,8 +9,8 @@ make_configuration_filename = 'make_configuration.txt'
 fall3d_distro = 'Fall3d-6.2-PUB' # Name of subdir where Fall3d lives
 tarball = 'Fall3d-PUB.tar.gz' # Name of compressed distro file
 #url = 'http://www.bsc.es/projects/earthscience/fall3d/Downloads' # Original 
-#url = 'http://www.aifdr.org/projects/aim/raw-attachment/wiki/WikiStart' # AIFDR mirror (to keep things stable!)
-url = 'http://datasim.ov.ingv.it/Downloads' # Location as of late May 2010
+url = 'http://www.aifdr.org/projects/aim/raw-attachment/wiki/WikiStart' # AIFDR mirror (to keep things stable!)
+#url = 'http://datasim.ov.ingv.it/Downloads' # Location as of late May 2010 - could not connect on 21 January
 
 
 
