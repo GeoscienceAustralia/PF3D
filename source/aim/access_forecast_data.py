@@ -107,8 +107,8 @@ def download_wind_data(url, verbose=True):
             timestamp = filename.split('.')[3]
         
             if timestamp != current_timestamp:
-                if verbose: print 'Moving %s to /tmp' % filename
-                cmd = 'cd %s; /bin/mv -f %s /tmp' % (work_area, filename)
+                if verbose: print 'Deleting %s' % filename
+                cmd = 'cd %s; /bin/rm -f %s' % (work_area, filename)
                 run(cmd, verbose=False)
 
     # Download the latest files (if they already exist it won't take any bandwidth)
