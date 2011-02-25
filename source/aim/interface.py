@@ -715,15 +715,7 @@ def run_multiple_windfields(scenario,
             result_file = aim.scenario_name + '.res.nc'    
             newname = aim.scenario_name + '.%s.res.nc' % windname # Name after wind file    
             s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
-            try:
-                run(s)
-            except:
-                # Workaround in the weird case where Fall3D produced file names with the trailing c missing
-                result_file = aim.scenario_name + '.res.n'
-                s = 'cp %s/%s %s/%s' % (aim.output_dir, result_file, hazard_output_folder, newname) 
-                run(s)                
-                                    
-                
+            run(s)
             
             # Create projectionfile in hazard output
             if i == 0:
