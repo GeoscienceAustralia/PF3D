@@ -40,7 +40,7 @@ end_hour = 12
 NCEP_dir = '/model_area/tephra/3D_wind/NCEP1/indonesia/2003'
 
 # Path to directory of generated wind profiles
-windfield_directory = '/model_area/tephra/3D_wind/NCEP1/merapi_single_scenario_2003'
+windfield_directory = 'merapi_single_scenario_2003'
 
 # Wind field type options are 'multiple' (hazard modelling) or 'merged' (scenario modelling)
 wind_field_type = 'merged' 

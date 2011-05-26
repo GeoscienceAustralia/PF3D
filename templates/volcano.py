@@ -12,16 +12,16 @@ python volcano.py
 """
 
 # Short eruption comment to appear in output directory.
-eruption_comment = 'single wind template'
+eruption_comment = 'multiple wind template'
 
 # Temporal parameters (hours)
-eruption_start = 12
+eruption_start = 0
 eruption_duration = 6 
-post_eruptive_settling_duration = 6
+post_eruptive_settling_duration = 0
 
 # Location (Volcanological input file)
-x_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
-y_coordinate_of_vent = 9208168                  # UTM zone implied by topography projection 
+x_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
+y_coordinate_of_vent = 9167213                  # UTM zone implied by topography projection 
 
 # Vertical discretisation for model domain
 z_min = 0.0
@@ -29,10 +29,10 @@ z_max = 10000
 z_increment = 1000
 
 # Meteorological input
-wind_profile = 'volcano_wind.profile'		# Path to wind data or online forecasts  
+wind_profile = 'ftp://ftp-newb.bom.gov.au/register/sample/access/netcdf/ACCESS-T/pressure/'		# Path to wind data or online forecasts  
 
 # Terrain model 
-topography_grid = 'volcano_topography.txt'      # Path to topography file 
+topography_grid = '/model_area/tephra/dems/merapi/usgs_srtm_merapi_50_671.txt'      # Path to topography file 
 
 # Granulometry 
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN

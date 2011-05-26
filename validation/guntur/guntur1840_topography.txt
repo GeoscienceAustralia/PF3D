@@ -1,6 +1,6 @@
 ncols         151
 nrows         151
-xllcorner     714418.52549157
+xllcorner     714418
 yllcorner     9106086.7932112
 cellsize      1342
 NODATA_value  -9999

@@ -25,7 +25,7 @@ PLOAD_contours = True
 PLOAD_units = 'pct'
 
 # Location of generated windprofiles, hazard map and contours
-model_output_directory = '/model_area/sandpits/bearad/aim/testing/guntur_multiple_wind_template_outputs'
+model_output_directory = '/model_area/sandpits/bearad/aim/templates/tephra/hazard_mapping/volcano/bearad/D2010-12-07T114308_multiple_wind_template'
 
 #--------------------------------------
 if __name__ == '__main__':

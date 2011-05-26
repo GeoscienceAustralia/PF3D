@@ -26,8 +26,8 @@ eruption_duration = 18
 post_eruptive_settling_duration = 6
 
 # Location (Volcanological input file)
-x_coordinate_of_vent = 814924                   # UTM zone implied by topography projection 
-y_coordinate_of_vent = 9208168                  # UTM zone implied by topography projection 
+x_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
+y_coordinate_of_vent = 9167213                  # UTM zone implied by topography projection 
 
 # Vertical discretisation for model domain
 z_min = 0.0
@@ -35,10 +35,10 @@ z_max = 10000
 z_increment = 1000
 
 # Meteorological input
-wind_profile = ''				# FIXME: currently specified at bottom of script
+wind_profile = '/model_area/tephra/3D_wind/NCEP1/merapi_multiple_wind/2007_nov_dec'				# FIXME: currently specified at bottom of script
 
 # Terrain model 
-topography_grid = 'volcano_topography.txt'      # Path to topography file   
+topography_grid = '/model_area/tephra/dems/merapi/usgs_srtm_merapi_100_1342.txt'      # Path to topography file   
 
 # Granulometry (Volcanological input file)
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
