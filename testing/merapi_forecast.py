@@ -1,12 +1,12 @@
 """Configuration file for eruption scenario
 
-Tephra modelling validation worksheet                 
+Tephra modelling validation worksheet
 
-Scenario Name: Mount Merapi 2010 (Predictive_scenario)                                                                    
-Run Date: 2010_05_18           
-Run number:1                                                                                   
+Scenario Name: Mount Merapi 2010 (Predictive_scenario)
+Run Date: 2010_05_18
+Run number:1
 
-Eruption observation details: 
+Eruption observation details:
 
 """
 
@@ -14,12 +14,12 @@ Eruption observation details:
 eruption_comment = 'ACCESS-T based forecast 20121126024 24'
 
 # Temporal parameters (hours)
-eruption_start = 24
-eruption_duration = 24
-post_eruptive_settling_duration = 12
+eruption_start = 0
+eruption_duration = 4
+post_eruptive_settling_duration = 2
 
 # Location
-x_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
+x_coordinate_of_vent = 439423                   # UTM zone implied by topography projection
 y_coordinate_of_vent = 9167213                  # UTM zone implied by topography projection
 
 # Vertical discretisation for model domain
@@ -49,12 +49,12 @@ sphericity_maximum = 0.9
 vent_height = 2968
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where height_or_mfr = mfr)
-height_above_vent = 15000                       # m (if point, if suzuki or if plume where height_or_MFR = Height)            
-A = 4                                           # (suzuki only)            
+height_above_vent = 15000                       # m (if point, if suzuki or if plume where height_or_MFR = Height)
+A = 4                                           # (suzuki only)
 L = 1                                           # (suzuki only)
 height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
-MFR_maximum = 1e9                               # kg/s (plume only) 
+MFR_maximum = 1e9                               # kg/s (plume only)
 exit_velocity = 100                             # m/s (plume only)
 exit_temperature = 1073                         # K (plume only)
 exit_volatile_fraction = 0                      # % (plume only)
@@ -67,9 +67,9 @@ vertical_diffusion_coefficient = 250            # m2/s
 horizontal_diffusion_coefficient = 100000         # m2/s
 value_of_CS = 0.1                               # RAMS only
 
-# Contouring: True, False, number or list of numbers    
-thickness_contours = True         
-load_contours = True                     
+# Contouring: True, False, number or list of numbers
+thickness_contours = True
+load_contours = True
 
 thickness_units = 'cm'                          # mm/cm/m
 
@@ -77,11 +77,11 @@ thickness_units = 'cm'                          # mm/cm/m
 # Run model using specified parameters
 if __name__ == '__main__':
     from aim import run_scenario
-    run_scenario(__file__)    
+    run_scenario(__file__)
 
 
 
- 
+
 
 
 

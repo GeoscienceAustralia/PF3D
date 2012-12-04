@@ -16,13 +16,13 @@ http://www.bom.gov.au/nwp/doc/bulletins/apob83.pdf
 
 import numpy, os, time
 from Scientific.IO import NetCDF
-from coordinate_transforms import UTMtoLL, redfearn  # FIXME: from aim.coord......
+from coordinate_transforms import UTMtoLL, LLtoUTM, redfearn  # FIXME: from aim.coord......
 
 import urllib2, os
 from utilities import makedir, run, header
 
 # Parameters
-last_hour = 72 # Limit the number of downloaded forecast. Max is 72.
+last_hour = 6 # Limit the number of downloaded forecast. Max is 72.
 work_area = 'access_wind_data_downloads'
 
 
@@ -121,11 +121,6 @@ def download_wind_data(url, verbose=True):
             run(cmd, verbose=verbose)
 
 
-
-
-
-
-
 def find_nearest_point(latitudes, longitudes, location):
     """Return nearest point to specified location
 
@@ -138,6 +133,7 @@ def find_nearest_point(latitudes, longitudes, location):
     """
 
     lat, lon = location
+    #print 'Location', lat, lon
 
     # Very quick and dirty search. It'll get one of the four closest points
     # We can narrow this down a little more if needed.
@@ -154,6 +150,8 @@ def find_nearest_point(latitudes, longitudes, location):
     assert numpy.allclose(latitudes[j], y)
     assert numpy.allclose(longitudes[i], x)
 
+    #print 'Nearest location to vent found to be:', y, x
+    #print 'In UTM coordinates:', LLtoUTM(y, x)
     return (y, x), (j, i)
 
 
@@ -175,9 +173,6 @@ def read_access_file(filename, location=None):
         raise Exception(msg)
 
     fid = NetCDF.NetCDFFile(filename)
-
-    #for var in fid.variables:
-    #    print var
 
     # Get nearest point to vent
     point, indices = find_nearest_point(latitudes=fid.variables['lat'][:],
@@ -231,19 +226,23 @@ def extract_access_windprofile(access_dir,
     Note - wind data is assumed to be from the same analysis date. If not an exception will be raised.
     """
 
-    msg = 'utm_vent_coordinates must have the form (easting, northing, zone, hemispher)'
+    msg = 'utm_vent_coordinates must have the form (easting, northing, zone, hemisphere)'
     assert len(utm_vent_coordinates) == 4, msg
 
-    msg = 'hemisphere must be either N or S'
+    msg = 'hemisphere must be either N or S',
     assert utm_vent_coordinates[3].upper() in ['N', 'S'], msg
 
+    # Boolean variable south will be True if character is 'S' otherwise False
+    south = utm_vent_coordinates[3].upper() == 'S'
+
+    if verbose:
+        print 'Converting vent coordinates from UTM to geographic coordinates:'
+        print utm_vent_coordinates, 'Southern=', south
 
     vent_latitude, vent_longitude = UTMtoLL(utm_vent_coordinates[1],
                                             utm_vent_coordinates[0],
                                             utm_vent_coordinates[2],
-                                            isSouthernHemisphere=True)
-
-
+                                            isSouthernHemisphere=south)
     files = []
     forecast_hours = []
     ref_analysis_time = ''
