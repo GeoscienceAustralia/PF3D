@@ -11,12 +11,12 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-eruption_comment = 'ACCESS-T based forecast'
+eruption_comment = 'ACCESS-T based forecast 20121126024 24'
 
 # Temporal parameters (hours)
-eruption_start = 2
-eruption_duration = 3
-post_eruptive_settling_duration = 3
+eruption_start = 24
+eruption_duration = 24
+post_eruptive_settling_duration = 12
 
 # Location
 x_coordinate_of_vent = 439423                   # UTM zone implied by topography projection 
@@ -61,15 +61,15 @@ exit_volatile_fraction = 0                      # % (plume only)
 
 # Fall3D
 terminal_velocity_model = 'ganser'              # Possibilites are ARASTOOPOR/GANSER/WILSON/DELLINO
-vertical_turbulence_model = 'similarity'        # Possibilites are CONSTANT/SIMILARITY
-horizontal_turbulence_model = 'rams'            # Possbilities are CONSTANT/RAMS
-vertical_diffusion_coefficient = 100            # m2/s
-horizontal_diffusion_coefficient = 1000         # m2/s
+vertical_turbulence_model = 'constant'        # Possibilites are CONSTANT/SIMILARITY
+horizontal_turbulence_model = 'constant'            # Possbilities are CONSTANT/RAMS
+vertical_diffusion_coefficient = 250            # m2/s
+horizontal_diffusion_coefficient = 100000         # m2/s
 value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers    
-thickness_contours = [1, 2, 5, 10, 20, 50, 100]         
-load_contours = [0.1, 90, 150, 300]                     
+thickness_contours = True         
+load_contours = True                     
 
 thickness_units = 'cm'                          # mm/cm/m
 
