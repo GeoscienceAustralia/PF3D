@@ -22,9 +22,8 @@ import urllib2, os
 from utilities import makedir, run, header
 
 # Parameters
-last_hour = 6 # Limit the number of downloaded forecast. Max is 72.
+last_hour = 72 # Limit the number of downloaded forecast. Max is 72.
 work_area = 'access_wind_data_downloads'
-
 
 
 def get_profile_from_web(url, vent_coordinates, verbose=True):
