@@ -122,7 +122,7 @@ def run_scenario(scenario,
     # Try to establish name of scenario in case it is a file
     try:
         x = os.path.split(scenario)[-1]
-        name = os.path.splitext(x)[0]
+        scenario_name = os.path.splitext(x)[0]
     except:
         # Default name
         scenario['scenario_name'] = scenario_name = DEFAULT_SCENARIO_NAME
