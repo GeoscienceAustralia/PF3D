@@ -227,7 +227,10 @@ class Test_AIM(unittest.TestCase):
                            verbose=False)
 
 
-        # FIXME: Check output
+        # Check output (by traversing output dir)
+        #for d in os.walk('.'):
+        #    print d
+
         # In this case we also generate grd files
 
         #for hour in ['001h', '002h', '003h']:

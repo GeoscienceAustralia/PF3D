@@ -135,14 +135,31 @@ def find_nearest_point(latitudes, longitudes, location):
     #print 'Location', lat, lon
 
     # Very quick and dirty search. It'll get one of the four closest points
+    # In fact the nearet to the south-east.
     # We can narrow this down a little more if needed.
 
     for j, y in enumerate(latitudes):
-         if y < lat:
+        if y < lat:
+            # Check that we don't cross hemisheres
+            if y < 0 and lat > 0:
+                j = j - 1
+                y = latitudes[j]
             break
 
     for i, x in enumerate(longitudes):
         if x > lon:
+            # Check that new point is in same UTM zone as vent location
+            # Otherwise keep searching.
+            zone_vent, _, _ = LLtoUTM(lat, lon)
+            zone_wind, _, _ = LLtoUTM(y, x)
+
+            if zone_vent != zone_wind:
+                msg = ('Wind location is in a different UTM zone from vent, but '
+                       'they are not as expected (wind zone to the east of vent zone by 1)')
+                assert zone_vent == zone_wind - 1, msg
+
+                i = i - 1
+                x = longitudes[i]
             break
 
     # Check
@@ -151,6 +168,7 @@ def find_nearest_point(latitudes, longitudes, location):
 
     #print 'Nearest location to vent found to be:', y, x
     #print 'In UTM coordinates:', LLtoUTM(y, x)
+    #import sys; sys.exit()
     return (y, x), (j, i)
 
 
