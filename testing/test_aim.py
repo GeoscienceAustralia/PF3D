@@ -154,7 +154,7 @@ class Test_AIM(unittest.TestCase):
             #aim.process_model_results()
 
     def test_full_simulation(self):
-        """test_full_simulation - Characterisation test of end to end scenario.
+        """test_full_simulation - Characterisation test of end to end scenario for southern hemishere.
         """
 
         merapi = dict(
@@ -176,7 +176,7 @@ class Test_AIM(unittest.TestCase):
             z_increment=5000,
 
             # Meteorological data
-            wind_profile='IDY25100_2012120412_6h.profile',
+            wind_profile='merapi_test_wind.profile',
 
             # Terrain model
             topography_grid='merapi_topography.txt',
@@ -223,7 +223,9 @@ class Test_AIM(unittest.TestCase):
 
         aim = run_scenario(merapi,
                            timestamp_output=False,
+                           store_locally=True,
                            verbose=False)
+
 
         # FIXME: Check output
         # In this case we also generate grd files
@@ -477,6 +479,6 @@ class Test_AIM(unittest.TestCase):
 ################################################################################
 
 if __name__ == '__main__':
-    suite = unittest.makeSuite(Test_AIM, 'test')
+    suite = unittest.makeSuite(Test_AIM, 'test_full')
     runner = unittest.TextTestRunner()
     runner.run(suite)
