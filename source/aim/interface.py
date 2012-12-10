@@ -117,25 +117,28 @@ def run_scenario(scenario,
     """
 
     if isinstance(scenario, dict):
-        scenario_name = DEFAULT_SCENARIO_NAME
-
-    # Try to establish name of scenario in case it is a file
-    try:
-        x = os.path.split(scenario)[-1]
-        scenario_name = os.path.splitext(x)[0]
-    except:
-        # Default name
-        scenario['scenario_name'] = scenario_name = DEFAULT_SCENARIO_NAME
+        # Establish scenario name is it is given as a dictionary
+        if 'scenario_name' in scenario:
+            scenario_name = scenario['scenario_name']
+        else:
+            # Default name
+            scenario_name = scenario['scenario_name'] = DEFAULT_SCENARIO_NAME
+    else:
+        # Establish name of scenario in case it is a file
+        try:
+            x = os.path.split(scenario)[-1]
+            scenario_name = os.path.splitext(x)[0]
+        except:
+            # Default name
+            scenario_name = scenario['scenario_name'] = DEFAULT_SCENARIO_NAME
 
 
     # Get parameters from scenario
     params = get_scenario_parameters(scenario)
 
-
     # Create output area for single scenario
     if dircomment is None:
         dircomment = params['eruption_comment']
-
 
     # Establish whether there is multiple wind profiles
     wind_profile = params['wind_profile']

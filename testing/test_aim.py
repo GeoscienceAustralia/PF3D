@@ -159,6 +159,7 @@ class Test_AIM(unittest.TestCase):
 
         merapi = dict(
             # Short eruption comment to appear in output directory.
+            scenario_name='merapi_test',
             eruption_comment='Test of full simulation for southern hemisphere using Merapi as example',
 
             # Temporal parameters (hours)
@@ -227,23 +228,196 @@ class Test_AIM(unittest.TestCase):
                            verbose=False)
 
 
-        # Check output (by traversing output dir)
-        #for d in os.walk('.'):
-        #    print d
+        tephra_output_dir = 'tephra'
+        eruption_comment='Test of full simulation for southern hemisphere using Merapi as example'.replace(' ', '_')
 
-        # In this case we also generate grd files
+        output_root_path = None
+        input_dir = None
+        result_dir = None
+        logs_dir = None
 
-        #for hour in ['001h', '002h', '003h']:
-        #    for ext in ['grd', 'asc', 'kml']:
-        #        grd_filename = '%s/%s.%s.depothick.%s' % (hour,
-        #                                                  scenario_name,
-        #                                                  hour,
-        #                                                  ext)
-        #        compare_to_reference_file(os.path.join(aim.output_dir,
-        #                                               grd_filename),
-        #                                  scenario_name,
-        #                                  subdir=hour)
 
+        for dirpath, dirnames, filenames in os.walk(tephra_output_dir):
+
+            # Record root dir for this simulation
+            if output_root_path is None and dirpath.endswith(eruption_comment):
+                output_root_path = dirpath
+
+            # Select output dir for this test
+            if eruption_comment in dirpath:
+
+                if dirpath.endswith('16h'):
+                    result_dir = dirpath
+
+                if dirpath.endswith('logs'):
+                    logs_dir = dirpath
+
+                if dirpath.endswith('input_data'):
+                    input_dir = dirpath
+
+        # Check that expected directories actually exist
+        msg = 'Did not find expected output path for merapi test'
+        assert output_root_path is not None, msg
+
+        msg = 'Did not find directory "input_data" in "%s"' % output_root_path
+        assert input_dir is not None, msg
+
+        msg = 'Dit not find directory "16h" in "%s"' % output_root_path
+        assert result_dir is not None, msg
+
+        msg = 'Did not find directory "logs" in "%s"' % output_root_path
+        assert logs_dir is not None, msg
+
+        # Check generated data
+        msg = 'Did not find expected file "actual_parameters.py" in "%s"' % input_dir
+        param_filename = os.path.join(input_dir, 'actual_parameters.py')
+        assert os.path.isfile(param_filename), msg
+
+        # Import parameters and check validity.
+        # This has to be done in the current working directory so cd to it first
+
+        # Check that exception is raised if full path is used
+        try:
+            parms = get_scenario_parameters(param_filename)
+        except Exception, e:
+            assert 'must reside in current working directory' in str(e)
+        else:
+            msg = 'Full path to scenario file should have raised exception'
+            raise Exception(msg)
+
+        tempfile = 'aoeu%s.py' % str(int(time.time()))
+        os.system('cp %s %s' % (param_filename, tempfile))
+        parms = get_scenario_parameters(tempfile)
+        os.remove(tempfile)
+
+        #-----------------------------------------
+        # Check that stored parameters are correct
+        #-----------------------------------------
+        for key in merapi:
+            if key == 'scenario_name':
+                # This will have changed to whatever the filename was, so OK not to match
+                continue
+
+            msg = 'Parameter mismatch for key (%s): %s != %s' % (key, parms[key], merapi[key])
+            assert parms[key] == merapi[key], msg
+
+        # Check that wind profile was stored
+        msg = 'Expected wind profile was not stored'
+        assert os.path.isfile(os.path.join(input_dir, 'merapi_test_wind.profile')), msg
+
+        #-----------------------------------------
+        # Check log files
+        #-----------------------------------------
+        for filename in os.listdir(logs_dir):
+            basename, ext = os.path.splitext(filename)
+            fid = open(os.path.join(logs_dir, filename))
+            res = fid.read()
+
+            if ext == '.stderr':
+                # Check that there were no errors
+
+                msg = 'Expected empty error log: %s. Got %s' % (filename, res)
+
+                # FIXME: Comment out when contour label error has been fixed
+                #---------------------------
+                if basename.endswith('shp'):
+                    continue
+                #---------------------------
+
+                # Check that there are no errors
+                if (basename.endswith('SetSrc') or
+                    basename.endswith('SetGrn') or
+                    basename.endswith('SetDbs') or
+                    basename.endswith('Fall3d')):
+                    assert 'STOP 0' in res
+                    continue
+
+                assert len(res) == 0, msg
+            elif ext == '.log':
+                # Check that log files report succes
+
+                if (basename.endswith('SetSrc') or
+                    basename.endswith('SetGrn') or
+                    basename.endswith('SetDbs')):
+                    assert 'ends normally' in res
+
+                if basename.endswith('Fall3d'):
+                    assert 'NORMAL TERMINATION' in res
+
+            else:
+                assert ext == '.stdout'
+
+        #-----------------------------------------
+        # Check model output
+        #-----------------------------------------
+
+        # Some of the key outputs
+        expected_outputs = ['merapi_test.16h.thickness.asc',
+                            'merapi_test.16h.thickness.shp',
+                            'merapi_test.16h.load.asc',
+                            'merapi_test.16h.load.shp',
+                            'merapi_test.16h.c_fl050.asc',
+                            'merapi_test.16h.c_fl050.shp',
+                            'merapi_test.16h.c_fl100.asc',
+                            'merapi_test.16h.c_fl100.shp',
+                            'merapi_test.16h.c_fl150.asc',
+                            'merapi_test.16h.c_fl150.shp',
+                            'merapi_test.16h.c_fl200.asc',
+                            'merapi_test.16h.c_fl200.shp',
+                            'merapi_test.16h.c_fl250.asc',
+                            'merapi_test.16h.c_fl250.shp',
+                            'merapi_test.16h.c_fl300.asc',
+                            'merapi_test.16h.c_fl300.shp']
+
+        for filename in expected_outputs:
+            msg = 'Expected output file %s was not found' % filename
+            assert os.path.isfile(os.path.join(result_dir, filename)), msg
+
+            basename, ext = os.path.splitext(filename)
+            assert ext in ['.shp', '.asc']
+
+            # Check existence of accompanying files
+            msg = 'No projection file found for %s' % filename
+            assert os.path.isfile(os.path.join(result_dir, basename + '.prj')), msg
+
+            if ext == 'shp':
+                assert os.path.isfile(os.path.join(result_dir, basename + '.kml'))
+
+            if ext == 'asc':
+                assert os.path.isfile(os.path.join(result_dir, basename + '.tif'))
+
+
+        # Check some values (verified visually with QGIS)
+        # This is a characterisation test
+        fid = open(os.path.join(result_dir, 'merapi_test.16h.thickness.asc'))
+        lines = fid.readlines()
+        fid.close()
+        assert lines[0].strip() == 'ncols 150'
+        assert lines[1].strip() == 'nrows 150'
+        assert lines[2].strip() == 'xllcorner 338150.0'
+        assert lines[3].strip() == 'yllcorner 9064985.0'
+        assert lines[4].strip() == 'cellsize 1342.0'
+        assert lines[5].strip() == 'NODATA_value -9999'
+        for i, line in enumerate(lines[6:]):
+            fields = line.split()
+            for j, val in enumerate(fields):
+                if i == 76 and j == 73:
+                    assert float(val) == 1.548787
+
+                if i == 76 and j == 74:
+                    assert float(val) == 6.651969
+
+                if i == 76 and j == 75:
+                    assert float(val) == 2.133020
+
+                if i == 79 and j == 76:
+                    assert float(val) == 0.002683
+
+        # Check one of the contour files
+        fid = open(os.path.join(result_dir, 'merapi_test.16h.load.kml'))
+        text = fid.read()
+
+        assert '<LineString><coordinates>110.440000994956335,-7.556205574248948 110.436212667404064,-7.55249565570394 110.43162498341924,-7.540351741564117 110.440033611475457,-7.530844536662436 110.448721534757027,-7.540373621177523 110.443930643043757,-7.552505550239089 110.440000994956335,-7.556205574248948</coordinates></LineString>' in text
 
     def test_grd2asc(self):
         """test_grd2asc - Test conversion from grd to asc files

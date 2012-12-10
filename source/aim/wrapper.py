@@ -973,7 +973,10 @@ class AIM:
 
         for param in self.params:
             value = self.params[param]
-            fid.write('%s = %s\n' % (param, value))
+            if isinstance(value, basestring):
+                fid.write('%s = \'%s\'\n' % (param, value))
+            else:
+                fid.write('%s = %s\n' % (param, value))
 
         fid.close()
 

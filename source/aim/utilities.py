@@ -122,6 +122,8 @@ def makedir(newdir):
 def get_scenario_parameters(scenario):
     """Extract dictionary of parameters from scenario file
     If scenario is already a dictionary it is returned as is.
+
+    The file must be in the current working directory.
     """
 
     # Return if already dictionary
@@ -132,12 +134,16 @@ def get_scenario_parameters(scenario):
     # Get copy so that the original __dict__ isn't modified
     scenario_name = scenario.split('.')[0]
 
+    if os.path.sep in scenario:
+        msg = 'Scenario file must reside in current working directory'
+        raise Exception(msg)
+
     try:
         exec('import %s as scenario_module' % scenario_name)
     except Exception, e:
         msg = 'Argument scenario must be either the name of a '
-        msg += 'Python script or a dictionary.'
-        msg += 'Error message was %s' % str(e)
+        msg += 'Python script or a dictionary. '
+        msg += 'Error message was "%s"' % str(e)
         raise Exception(msg)
 
     params = scenario_module.__dict__.copy()
