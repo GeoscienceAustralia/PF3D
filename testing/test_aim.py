@@ -319,6 +319,7 @@ class Test_AIM(unittest.TestCase):
                 msg = 'Expected empty error log: %s. Got %s' % (filename, res)
 
                 # FIXME: Comment out when contour label error has been fixed
+                # See http://www.aifdr.org/projects/aim/ticket/11
                 #---------------------------
                 if basename.endswith('shp'):
                     continue
