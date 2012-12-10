@@ -656,6 +656,6 @@ class Test_AIM(unittest.TestCase):
 ################################################################################
 
 if __name__ == '__main__':
-    suite = unittest.makeSuite(Test_AIM, 'test_full')
+    suite = unittest.makeSuite(Test_AIM, 'test')
     runner = unittest.TextTestRunner()
     runner.run(suite)
