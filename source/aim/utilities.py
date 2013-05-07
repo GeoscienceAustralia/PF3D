@@ -1394,7 +1394,7 @@ def generate_contours(filename, contours, units, attribute_name,
     s = 'gdal_contour -a %s -fl %s %s %s' % (attribute_name, fixed_levels, tiffile, shpfile)
     run_with_errorcheck(s, shpfile,
                         logdir=logdir,
-                        verbose=False)
+                        verbose=True)
 
     # Generate KML
     if meteorological_model == 'ncep1':

@@ -516,11 +516,14 @@ class AIM:
                 if fields[-2] == 'load':
                     units = 'kg/m^2'
                     contours = self.params['load_contours']
-                    attribute_name = 'Load[%s]' % units
+                    # NOTE: gdal_contour no longer supports special characters in labels. This used to work in around 2011.
+                    #attribute_name = 'Load[%s]' % units
+		    attribute_name = 'Load'
                 elif fields[-2] == 'thickness':
                     units = self.params['thickness_units'].lower()
                     contours = self.params['thickness_contours']
-                    attribute_name = 'Thickness[%s]' % units
+                    #attribute_name = 'Thickness[%s]' % units
+		    attribute_name = 'Thickness'
                 else:
                     attribute_name = fields[-2] #'Value'
                     units = 'default' # Unit is implied by .inp file
