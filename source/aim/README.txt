@@ -10,3 +10,6 @@ install_fall3d.py:
     AIM area.
     
     
+The following packagse must be installed first (syntax assuming ubuntu):
+
+sudo apt-get install python-numpy python-scientific gfortran python-gdal gdal-bin libnetcdf-dev
