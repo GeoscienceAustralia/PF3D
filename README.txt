@@ -1,16 +1,26 @@
 =====================================
-PythonFALL3D - Volcanic Ash Modelling
+PF3D - Volcanic Ash Modelling
 =====================================
 
-PythonFALL3D is a Python module that facilitates 
-volcanic ash impact modelling using the Fall3d package http://bsccase02.bsc.es/projects/fall3d
+PF3D is a Python module that facilitates volcanic ash hazard modelling using the Fall3D package http://bsccase02.bsc.es/projects/fall3d
 
-PythonFALL3D was developed as part of the 
-Australia-Indonesia Facility for Disaster Reduction (AIFDR) in Jakarta to build capacity for this type of modelling in the region.
+PF3D (python-FALL3D) was developed jointly between Geoscience Australia (GA) and the Australia-
+Indonesia Facility for Disaster Reduction (AIFDR) and modifies the modelling procedure of
+FALL3D to simplify its use for those with no background in computational modelling. Three
+modelling procedures are available through a unified interface: scenario-based modelling (single
+event), hazard mapping (probabilistic wind) and forecasting (predictive). 
+
+PF3D outputs are geospatially referenced in a standard format and can be viewed alongside other datasets
+important for impact and risk analysis such as: population density, exposure of the built environment
+and crop extents. The hazard maps produced contour connecting points of equal volcanic ash
+thicknesses (or ash load: mass per unit area; or ash concentration: volume per unit area). Each map
+may contain contours of volcanic ash thicknesses/load that vary in appearance according to the
+volcanological and meteorological conditions during the eruption. Collectively these hazard maps
+are intended for use by government agencies to assess the risk of volcanic ash for communities.
 
 See README.txt in the source and testing directories for more details.
 
-The homepage for PythonFALL3D is at http://www.aifdr.org/projects/aim
+The homepage for PF3D is at http://www.aifdr.org/projects/aim
 See installation instructions at http://www.aifdr.org/projects/aim/wiki/InstallationGuide
 
 
@@ -23,7 +33,7 @@ System Requirements
 Licensing
 =========
 
-PythonFALL3D is free software: you can redistribute it and/or modify it
+PF3D is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License version 3 (GPLv3) as
 published by the Free Software Foundation.
 
