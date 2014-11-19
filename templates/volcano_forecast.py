@@ -2,8 +2,12 @@
 
 volcano (foreast) template                                                                    
                                                                                    
-This template is for running single scenarios using online forecasted wind data. Copy this template script into the modelling area, rename and edit as needed. 
-The user must point to a website for the online forecast. The script will download a 24h forecast automatically and run the eruptive scenario. 
+This template is for running single scenarios using wind profiles converted from the Australian Bureau of Meteorology's ACCESS-R regional wind data model. Copy this template script into the modelling area, rename and edit as needed. 
+
+Important: BEFORE RUNNING THIS SCRIPT YOU MUST:
+
+	1. Manually download ACCESS-R data (in netCDF4 format) for the forecast period required (up to 72 hours). Refer to manual for instructions. 
+	2. Convert ACCESS-R data (from netCDF4) to fall3d wind profile using /pf3d/fall3d_v6/source/auxilliary_scripts/convert_access_2_windprofile.py. Refer 		to manual for instructions.    
 
 To run:
 
@@ -29,10 +33,10 @@ z_max = 50000
 z_increment = 10000
 
 # Meteorological input
-wind_profile = 'ftp://ftp-newb.bom.gov.au/register/sample/access/netcdf/ACCESS-T/pressure/'	# Path to wind data or online forecasts
+wind_profile = '/path/to/forecast/wind/profile'	# Path to forecast wind profile (e.g. /tephra/wind/IDY25300.YYYYMMDD.HHH.proifle)
 
 # Terrain model 
-topography_grid = 'volcano_topography.txt'	# Path to topography file
+topography_grid = '/path/to/topography'		# Path to topography file (e.g. /tephra/dems/guntur_topography.txt)
 
 # Granulometry (Volcanological input file)
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -50,9 +54,9 @@ sphericity_maximum = 0.9
 vent_height = 2968
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where height_or_mfr = mfr)
-height_above_vent = [20000] # m (if point, if suzuki or if plume where height_or_MFR = Height)            
-A = 3                                       # (suzuki only)            
-L = 1                                       # (suzuki only)
+height_above_vent = [20000] 			# m (if point, if suzuki or if plume where height_or_MFR = Height)            
+A = 3                                       	# (suzuki only)            
+L = 1                                       	# (suzuki only)
 height_or_MFR = 'MFR'                           # plume only
 MFR_minimum = 1e7                               # kg/s (plume only)
 MFR_maximum = 1e9                               # kg/s (plume only) 
@@ -69,8 +73,8 @@ horizontal_diffusion_coefficient = 1000         # m2/s
 value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers    
-thickness_contours = [1, 2, 5, 10, 20, 50, 100]         
-load_contours = [0.1, 90, 150, 300]                     
+thickness_contours = [1, 2, 5, 10, 20, 50, 100] # Options: 'True', 'False' or [1, 2] (a list of contour values)         
+load_contours = [0.1, 90, 150, 300]             # Options: 'True', 'False' or [1, 2] (a list of contour values)         
 
 thickness_units = 'cm'                          # mm/cm/m
 
