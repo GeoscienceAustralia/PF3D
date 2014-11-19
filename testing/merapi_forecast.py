@@ -2,7 +2,7 @@
 
 Tephra modelling validation worksheet
 
-Scenario Name: Mount Merapi 2010 (Predictive_scenario)
+Scenario Name: ACCESS-R Test Scenario (Mount Merapi 2010)
 Run Date: 2010_05_18
 Run number:1
 
@@ -11,7 +11,7 @@ Eruption observation details:
 """
 
 # Short eruption comment to appear in output directory.
-eruption_comment = 'ACCESS-T based forecast 20121126024 24'
+eruption_comment = 'ACCESS-R IDY25300.APS1.allflds.alllvls test'
 
 # Temporal parameters (hours)
 eruption_start = 0
@@ -24,11 +24,11 @@ y_coordinate_of_vent = 9167213                  # UTM zone implied by topography
 
 # Vertical discretisation for model domain
 z_min = 0.0
-z_max = 20000
+z_max = 30000
 z_increment = 5000
 
 # Meteorological data
-wind_profile = 'ftp://ftp-newb.bom.gov.au/register/sample/access/netcdf/ACCESS-T/pressure/'
+wind_profile = '/home/drabc/pf3d/fall3d_v6/testing/IDY25300_2014041612_72h.profile'
 
 # Terrain model
 topography_grid = 'merapi_topography.txt'
@@ -49,7 +49,7 @@ sphericity_maximum = 0.9
 vent_height = 2968
 source_type = 'suzuki'                          # Possibilities are 'plume', 'suzuki', 'point'
 mass_eruption_rate = 'estimate'                 # kg/s (if point, if suzuki or if plume where height_or_mfr = mfr)
-height_above_vent = 15000                       # m (if point, if suzuki or if plume where height_or_MFR = Height)
+height_above_vent = 25000                       # m (if point, if suzuki or if plume where height_or_MFR = Height)
 A = 4                                           # (suzuki only)
 L = 1                                           # (suzuki only)
 height_or_MFR = 'MFR'                           # plume only
@@ -68,8 +68,8 @@ horizontal_diffusion_coefficient = 100000         # m2/s
 value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers
-thickness_contours = True
-load_contours = True
+thickness_contours = [1, 2, 5, 10, 20, 50, 100]
+load_contours = [0.1, 3, 5, 10, 20, 100, 300]
 
 thickness_units = 'cm'                          # mm/cm/m
 
