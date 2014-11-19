@@ -1,22 +1,23 @@
-"""Functionality to use wind data from the web.
-It is assumed that data is in the format used by ACCESS
+"""Functionality to use wind data from the Australian Bureau of Meteorology.
+It is assumed that data is in the format used by ACCESS-R
 
-Read wind data in ACCESS-T format
+Read wind data in ACCESS-R format
 Extract altitudes, time, velocity at given point and create FALL3D wind profiles.
 
 
 Example data is located at
-ftp://ftp-newb.bom.gov.au/register/sample/access/netcdf/ACCESS-T/pressure/
+ftp://ftp.bom.gov.au/register/sample/access/netcdf4/ACCESS-R/pressure/
 
 The formats are documented at
-http://www.bom.gov.au/nwp/doc/access/NWPData.shtml
-http://www.bom.gov.au/nwp/doc/bulletins/apob83.pdf
+http://www.bom.gov.au/nwp/doc/access/docs/ACCESS-R.all-flds.all-lvls.pressure.shtml
+http://www.bom.gov.au/nwp/doc/access/docs/ACCESS-R.all-flds.all-lvls.pressure.pdf
 
 """
 
 import numpy, os, time
-from Scientific.IO import NetCDF
-from coordinate_transforms import UTMtoLL, LLtoUTM, redfearn  # FIXME: from aim.coord......
+# from Scientific.IO import NetCDF
+from netCDF4 import Dataset
+from coordinate_transforms import UTMtoLL, LLtoUTM, redfearn
 
 import urllib2, os
 from utilities import makedir, run, header
@@ -70,16 +71,16 @@ def download_wind_data(url, verbose=True):
 
         fields = filename.split('.')
 
-        if fields[0] == 'IDY25100':
+        if fields[0] == 'IDY25300':
             msg = 'File %s obtained from %s does not look like an ACCESS file. I expected suffix .pressure.nc' % (filename, url)
-            assert filename.endswith('.pressure.nc'), msg
+            assert filename.endswith('.pressure.nc4'), msg
 
             # Record each unique timestamp
-            current_timestamp = fields[3]
+            current_timestamp = fields[4]
             timestamps[current_timestamp] = None
 
-            if fields[1] == 'pop-flds' and fields[2] == '1000':
-                hour = int(fields[4])
+            if fields[2] == 'all-flds' and fields[3] == 'all_lvls':
+                hour = int(fields[5])
                 if hour <= last_hour:
                     files.append(filename)
 
@@ -102,7 +103,7 @@ def download_wind_data(url, verbose=True):
     if verbose: print 'Selecting files with timestamp: %s' % current_timestamp
     for filename in os.listdir(work_area):
 
-        if filename.endswith('.pressure.nc'):
+        if filename.endswith('.pressure.nc4'):
             timestamp = filename.split('.')[3]
 
             if timestamp != current_timestamp:
@@ -113,7 +114,7 @@ def download_wind_data(url, verbose=True):
     # Download the latest files (if they already exist it won't take any bandwidth)
     for filename in files:
 
-        timestamp = filename.split('.')[3]
+        timestamp = filename.split('.')[4]
         if timestamp == current_timestamp:
             if verbose: header('Downloading %s from %s' % (filename, url))
             cmd = 'cd %s; wget -c %s/%s' % (work_area, url, filename) # -c option requests wget to continue partial downloads
@@ -176,7 +177,7 @@ def read_access_file(filename, location=None):
     """Read ACCESS NetCDF file
 
     Input:
-        filename: NetCDF file in ACCESS format
+        filename: NetCDF file in ACCESS-R netCDF4 format
         location: (latitude, longitude) of location where wind profile is sought. Return values from point nearest specified location
 
     Output:
@@ -189,7 +190,7 @@ def read_access_file(filename, location=None):
         msg = 'You must specify a location where wind profile is sought.'
         raise Exception(msg)
 
-    fid = NetCDF.NetCDFFile(filename)
+    fid = Dataset(filename)
 
     # Get nearest point to vent
     point, indices = find_nearest_point(latitudes=fid.variables['lat'][:],
@@ -199,10 +200,9 @@ def read_access_file(filename, location=None):
     m, n = indices
 
     # Get time slices
-    # FIXME: What does time mean here?
     time = fid.variables['time'][:]
     lvl = fid.variables['lvl'][:] # Pressure levels
-    msg = 'Time vector in ACCESS-T files is assumed to contain one and only one element'
+    msg = 'Time vector in ACCESS-R files is assumed to contain one and only one element'
     assert len(time) == 1, msg
 
     # Extract wind data at that point (for each time step and each level)
@@ -233,7 +233,7 @@ def extract_access_windprofile(access_dir,
     """Extract wind data from
 
     Input:
-       access_dir: Directory with ACCESS-T forecast files.
+       access_dir: Directory with ACCESS-R forecast files.
        utm_vent_coordinates: Coordinates of vent location in UTM: (easting, northing, zone, hemisphere)
 
     Output:
@@ -266,14 +266,14 @@ def extract_access_windprofile(access_dir,
     max_hour = 0
     for filename in os.listdir(access_dir):
 
-        if filename.endswith('.pressure.nc'):
+        if filename.endswith('.pressure.nc4'):
             fields = filename.split('.')
+            print filename
+            msg = 'ACCESS-R filename expected to have product id: IDY23500'
+            assert fields[0] == 'IDY25300', msg
 
-            msg = 'ACCESS-T filename expected to have product id: IDY25100'
-            assert fields[0] == 'IDY25100', msg
-
-            analysis_time = fields[3]
-            h = int(fields[4])
+            analysis_time = fields[4]
+            h = int(fields[5])
             if h > max_hour: max_hour = h
             forecast_hours.append(h)
 
@@ -291,8 +291,9 @@ def extract_access_windprofile(access_dir,
     entries.sort()
 
     # Extract and store wind data
+    print ref_analysis_time
     time_offset = int(ref_analysis_time[-2:])*3600  # Keep track of start time (seconds)
-    output_filename = 'IDY25100_%s_%ih.profile' % (analysis_time, max_hour)
+    output_filename = 'IDY25300_%s_%ih.profile' % (analysis_time, max_hour)
     fid = open(output_filename, 'w')
 
     for i, (forecast_hour, filename) in enumerate(entries):
