@@ -12,7 +12,7 @@ python volcano.py
 """
 
 # Short eruption comment to appear in output directory.
-eruption_comment = 'multiple wind template'
+eruption_comment = 'single wind template'
 
 # Temporal parameters (hours)
 eruption_start = 0
@@ -29,10 +29,10 @@ z_max = 10000
 z_increment = 1000
 
 # Meteorological input
-wind_profile = 'ftp://ftp-newb.bom.gov.au/register/sample/access/netcdf/ACCESS-T/pressure/'		# Path to wind data or online forecasts  
+wind_profile = '/path/to/wind/profile'		# Path to wind profile (e.g. /tephra/wind/guntur_2014/guntur.profile)
 
 # Terrain model 
-topography_grid = '/model_area/tephra/dems/merapi/usgs_srtm_merapi_50_671.txt'      # Path to topography file 
+topography_grid = '/path/to/topography'      	# Path to topography file (e.g. /tephra/dems/guntur/guntur_topography.txt)  
 
 # Granulometry 
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -69,8 +69,8 @@ horizontal_diffusion_coefficient = 1000         # m2/s
 value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers    
-thickness_contours = True                       
-load_contours = True                            
+thickness_contours = True                       # Options: 'True', 'False' or [1, 2] (a list of contour values)  
+load_contours = True                            # Options: 'True', 'False' or [1, 2] (a list of contour values)
 
 thickness_units = 'cm'                          # mm/cm/m
 
