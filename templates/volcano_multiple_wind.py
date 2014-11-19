@@ -2,18 +2,17 @@
 
 volcano (multiple wind) template                                                                    
 
-This template is for running multiple wind scnearios typically in parallel. Copy this template script into the modelling area, rename and edit as needed. 
-The user must point to the location of the directory of multiple wind fields (i.e. 'guntur_wind_013000-020218.profile'). The user must also designate a name and location for the model outputs. 
+This template is for running multiple wind scenarios (typically in parallel). 
+Copy this template script into the modelling area, rename and edit as needed. 
+The user must point to the location of the directory of multiple wind fields (i.e.'guntur_wind_013000-020218.profile'). The user must also designate a name and location for the model outputs. 
 
-To run:
+To run in serial (1 processor):
 
 python volcano_multiple_wind.py
 
-To run in parallel:
+To run in parallel (e.g. 4 nodes, 4 processors):
 
-mpirun -x FALL3DHOME -x PYTHONPATH -hostfile /etc/mpihosts -np 8 python volcano_multiple_wind.py
-or
-mpirun -x FALL3DHOME -x PYTHONPATH -hostfile /etc/mpihosts -host node17,node11 python volcano_multiple_wind.py
+mpirun -x FALL3DHOME -x PYTHONPATH -npernode 4 -host node1,node2,node3,node4 python volcano_multiple_wind.py
 
 """
 
@@ -35,10 +34,10 @@ z_max = 10000
 z_increment = 1000
 
 # Meteorological input
-wind_profile = '/model_area/tephra/3D_wind/NCEP1/merapi_multiple_wind/2007_nov_dec'				# FIXME: currently specified at bottom of script
+wind_profile = '/path/to/wind/directory'	# Path to directory of wind profiles (e.g. /tephra/wind/guntur_2014)
 
 # Terrain model 
-topography_grid = '/model_area/tephra/dems/merapi/usgs_srtm_merapi_100_1342.txt'      # Path to topography file   
+topography_grid = '/path/to/topography'      	# Path to topography file (e.g. /tephra/dems/guntur/guntur_topography.txt)  
 
 # Granulometry (Volcanological input file)
 grainsize_distribution = 'GAUSSIAN'             # Possibilites are GAUSSIAN/BIGAUSSIAN
@@ -75,19 +74,17 @@ horizontal_diffusion_coefficient = 1000         # m2/s
 value_of_CS = 0.1                               # RAMS only
 
 # Contouring: True, False, number or list of numbers    
-thickness_contours = True
-load_contours = 2000
+thickness_contours = True			# Options: 'True', 'False' or [1, 2] (a list of contour values) 
+load_contours = True				# Options: 'True', 'False' or [1, 2] (a list of contour values)
 
 thickness_units = 'cm'                          # mm/cm/m
-
-
 
 # Run model using specified parameters
 if __name__ == '__main__':
     from aim import run_multiple_windfields
     run_multiple_windfields(__file__, 
-                            windfield_directory='/model_area/tephra/3D_wind/NCEP1/guntur_multiple_wind/2000-2009',
-                            hazard_output_folder='guntur_mutliple_wind_hazard_outputs')
+                            windfield_directory='/path/to/wind', 					# e.g. /tephra/wind/guntur_2014
+                            hazard_output_folder='/path/to/and/name/of/hazard/output/direcrory')	# e.g. /tephra/guntur_hazard/outputs
 
 
 
