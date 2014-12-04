@@ -15,7 +15,7 @@
 **Quick install**
 * Download PF3D-v1.0.tar.gz
 * tar zxvf PF3D-v1.0.tar.gz
-* cd pf3d/source/aim
+* cd pf3d-1.0/source/aim
 * python install_fall3d.py
 
 ##Project Description
