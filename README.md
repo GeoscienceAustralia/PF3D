@@ -1,4 +1,23 @@
 #PF3D
+**System requirements**
+* A standard PC with at least 4GB RAM running Ubuntu Linux
+
+**Dependancies**
+* HDF5
+* netCDF4
+* netCDF4-python
+* python-numpy
+* python-scientific
+* gfortran
+* gdal-bin
+* libnetcdf-dev
+
+**Quick install**
+* Download PF3D-v1.0.tar.gz
+* tar zxvf PF3D-v1.0.tar.gz
+* cd pf3d/source/aim
+* python install_fall3d.py
+
 ##Project Description
 Volcanic ash is the most widespread of all volcanic hazards and has the potential to affect hundreds of thousands, or even millions, of people across the Asia-Pacific region. Undertaking volcanic ash fallout hazard assessments is an important scientific, economic and political exercise and of great importance to public safety. One-third of the worlds largest volcanic eruptions that have occurred since 1800 have taken place within the Asia-Pacific. There is limited information available for this region on the hazard posed by volcanic ash, particularly from volcanoes that have not erupted in recent times. The potential impacts of volcanic ash fallout are widespread, varying and highly dependant on the scale of the eruption and the distance from source.
 
