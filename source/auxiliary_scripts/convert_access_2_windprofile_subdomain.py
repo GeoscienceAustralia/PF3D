@@ -1,6 +1,6 @@
 """Read wind data in Australian Bureau of Meteorology ACCESS-R format
 
-Read wind data in netCDF4 format from the ACCESS-Regional model [ACCESS-R]
+Read wind data in netCDF4 format from the ACCESS-Regional model [ACCESS-R] for Indonesia sub-domain
 Extract altitudes, time, velocity at given point and create FALL3D wind profiles.
 
 Example data is located at:

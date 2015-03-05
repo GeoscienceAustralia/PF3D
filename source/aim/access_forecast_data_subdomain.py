@@ -1,5 +1,5 @@
 """Functionality to use wind data from the Australian Bureau of Meteorology.
-It is assumed that data is in the format used by ACCESS-R
+It is assumed that data is in the format used by ACCESS-R clipped to an Indonesian subdomain coordinates -30S to 16.95N and 80E to 160E
 
 Read wind data in ACCESS-R format
 Extract altitudes, time, velocity at given point and create FALL3D wind profiles.
